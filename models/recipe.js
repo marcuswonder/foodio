@@ -33,10 +33,11 @@ const recipeSchema = new Schema({
     },
     author: {
         type: Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        required: true,
     },
     ingredients: [{
-            name: { type: String },
+            ingredient: { type: String },
             qty: { type: Number },
             unit: { type: String }
         }],

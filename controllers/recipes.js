@@ -18,20 +18,25 @@ function newRecipe(req, res) {
 }
 
 function create(req, res) {
-    const recipe = new Recipe(req.body);
-    recipe.save(function(err) {
-    if (err) return res.redirect('/recipes/new');
-    console.log(recipe);
+    // not pushing user info to author property on Recipe - check
+    req.body.user = req.user._id; 
+    req.body.userName = req.user.name;
+    req.body.userAvatar = req.user.avatar;
+
     // Need to figure out how to separate tags and push them to the tags array on recipe object.
     // Need to figure out how to combine ingredient form elements and push them to ingredients array on recipe object.
     // Need to figure out how to combine instruction form elements and push them to instructions array on recipe object.
+    const recipe = new Recipe(req.body);
+    recipe.save(function(err) {
+    if (err) return res.redirect('/recipes/new', { title: "Add Recipe"})
+    console.log(recipe);
     res.redirect('/recipes')
     })
 }
 
 function show(req, res) {
     Recipe.findById(req.params.id, function(err, recipe) {
-        res.render('recipes/show', { recipe })
+        res.render('recipes/show', {title: "Recipe", recipe })
     })
 }
     
