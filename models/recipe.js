@@ -16,9 +16,6 @@ const recipeSchema = new Schema({
         type: [String],
         required: true
     },
-    nationality: {
-        type: [String]
-    },
     prepTime: {
         type: Number,
         min: 0,

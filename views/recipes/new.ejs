@@ -1,0 +1,352 @@
+<%- include('../partials/header') %>
+
+<h1>New Recipe</h1>
+<form id="add-recipe" method="POST" action="/recipes">
+    Name: <input type="text" name="name"></input><br>
+    Description: <input type="text" name="description"></input><br>
+    Category: <select name="category">
+        <option disabled selected value> -- Select a Category -- </option>
+        <option value="starter">Snack</option>
+        <option value="starter">Starter</option>
+        <option value="main">Main Course</option>
+        <option value="desert">Desert</option>
+        <option value="starter">Cocktail</option>
+    </select><br>
+    Tags (separated by comma): <input type="text" name="tags"></input><br>
+    <i>Consider using the type of cuisine, or dish or any other relevant tag e.g. 'italian' 'pizza' or 'summer'.</i>
+    <br>
+    <br>
+    Prep Time (mins): <input type="number" name="prepTime"></input><br>
+    Cook Time (mins): <input type="number" name="cookTime"></input><br>
+    # Adult Servings: <input type="number" name="servings"></input><br>
+    <br>
+    
+    <!-- <h3>Ingredients</h3>
+    <form action="/recipes/new" id="ingredient-form" method="POST">
+        Ingredient: <input type="text" name="ingredient-1"></input> Qty: <input type="number" name="quantity-1"></input> Unit: <select name="unit-1">
+            <option disabled selected value> -- Select a Unit -- </option>
+            <option value="ml">ml</option>
+            <option value="l">l</option>
+            <option value="Oz">Oz</option>
+            <option value="lb">lb</option>
+            <option value="g">g</option>
+            <option value="kg">kg</option>
+            <option value="tsp">tsp</option>
+            <option value="tbsp">tbsp</option>
+            <option value="flOz">flOz</option>
+            <option value="piece">piece</option>
+        </select>
+        <button type="submit">Add Ingredient</button>
+    </form> -->
+
+    
+    <h3>Ingredients</h3>
+    1. Ingredient: <input type="text" name="ingredient1"></input> Qty: <input type="number" name="quantity1"></input> Unit: <select name="unit1">
+        <option disabled selected value> -- Select a Unit -- </option>
+        <option value="ml">ml</option>
+        <option value="l">l</option>
+        <option value="Oz">Oz</option>
+        <option value="lb">lb</option>
+        <option value="g">g</option>
+        <option value="kg">kg</option>
+        <option value="tsp">tsp</option>
+        <option value="tbsp">tbsp</option>
+        <option value="flOz">flOz</option>
+        <option value="piece">piece</option>
+    </select>
+    <br>
+    2. Ingredient: <input type="text" name="ingredient-2"></input> Qty: <input type="number" name="quantity-2"></input> Unit: <select name="unit-2">
+        <option disabled selected value> -- Select a Unit -- </option>
+        <option value="ml">ml</option>
+        <option value="l">l</option>
+        <option value="Oz">Oz</option>
+        <option value="lb">lb</option>
+        <option value="g">g</option>
+        <option value="kg">kg</option>
+        <option value="tsp">tsp</option>
+        <option value="tbsp">tbsp</option>
+        <option value="flOz">flOz</option>
+        <option value="piece">piece</option>
+    </select>
+    <br>
+    3. Ingredient: <input type="text" name="ingredient-3"></input> Qty: <input type="number" name="quantity-3"></input> Unit: <select name="unit-3">
+        <option disabled selected value> -- Select a Unit -- </option>
+        <option value="ml">ml</option>
+        <option value="l">l</option>
+        <option value="Oz">Oz</option>
+        <option value="lb">lb</option>
+        <option value="g">g</option>
+        <option value="kg">kg</option>
+        <option value="tsp">tsp</option>
+        <option value="tbsp">tbsp</option>
+        <option value="flOz">flOz</option>
+        <option value="piece">piece</option>
+    </select>
+    <br>
+    4. Ingredient: <input type="text" name="ingredient-4"></input> Qty: <input type="number" name="quantity-4"></input> Unit: <select name="unit-4">
+        <option disabled selected value> -- Select a Unit -- </option>
+        <option value="ml">ml</option>
+        <option value="l">l</option>
+        <option value="Oz">Oz</option>
+        <option value="lb">lb</option>
+        <option value="g">g</option>
+        <option value="kg">kg</option>
+        <option value="tsp">tsp</option>
+        <option value="tbsp">tbsp</option>
+        <option value="flOz">flOz</option>
+        <option value="piece">piece</option>
+    </select>
+    <br>
+    5. Ingredient: <input type="text" name="ingredient-5"></input> Qty: <input type="number" name="quantity-5"></input> Unit: <select name="unit-5">
+        <option disabled selected value> -- Select a Unit -- </option>
+        <option value="ml">ml</option>
+        <option value="l">l</option>
+        <option value="Oz">Oz</option>
+        <option value="lb">lb</option>
+        <option value="g">g</option>
+        <option value="kg">kg</option>
+        <option value="tsp">tsp</option>
+        <option value="tbsp">tbsp</option>
+        <option value="flOz">flOz</option>
+        <option value="piece">piece</option>
+    </select>
+    <br>
+    6. Ingredient: <input type="text" name="ingredient-6"></input> Qty: <input type="number" name="quantity-6"></input> Unit: <select name="unit-6">
+        <option disabled selected value> -- Select a Unit -- </option>
+        <option value="ml">ml</option>
+        <option value="l">l</option>
+        <option value="Oz">Oz</option>
+        <option value="lb">lb</option>
+        <option value="g">g</option>
+        <option value="kg">kg</option>
+        <option value="tsp">tsp</option>
+        <option value="tbsp">tbsp</option>
+        <option value="flOz">flOz</option>
+        <option value="piece">piece</option>
+    </select>
+    <br>
+    7. Ingredient: <input type="text" name="ingredient-7"></input> Qty: <input type="number" name="quantity-7"></input> Unit: <select name="unit-7">
+        <option disabled selected value> -- Select a Unit -- </option>
+        <option value="ml">ml</option>
+        <option value="l">l</option>
+        <option value="Oz">Oz</option>
+        <option value="lb">lb</option>
+        <option value="g">g</option>
+        <option value="kg">kg</option>
+        <option value="tsp">tsp</option>
+        <option value="tbsp">tbsp</option>
+        <option value="flOz">flOz</option>
+        <option value="piece">piece</option>
+    </select>
+    <br>
+    8. Ingredient: <input type="text" name="ingredient-8"></input> Qty: <input type="number" name="quantity-8"></input> Unit: <select name="unit-8">
+        <option disabled selected value> -- Select a Unit -- </option>
+        <option value="ml">ml</option>
+        <option value="l">l</option>
+        <option value="Oz">Oz</option>
+        <option value="lb">lb</option>
+        <option value="g">g</option>
+        <option value="kg">kg</option>
+        <option value="tsp">tsp</option>
+        <option value="tbsp">tbsp</option>
+        <option value="flOz">flOz</option>
+        <option value="piece">piece</option>
+    </select>
+    <br>
+    9. Ingredient: <input type="text" name="ingredient-9"></input> Qty: <input type="number" name="quantity-9"></input> Unit: <select name="unit-9">
+        <option disabled selected value> -- Select a Unit -- </option>
+        <option value="ml">ml</option>
+        <option value="l">l</option>
+        <option value="Oz">Oz</option>
+        <option value="lb">lb</option>
+        <option value="g">g</option>
+        <option value="kg">kg</option>
+        <option value="tsp">tsp</option>
+        <option value="tbsp">tbsp</option>
+        <option value="flOz">flOz</option>
+        <option value="piece">piece</option>
+    </select>
+    <br>
+    10. Ingredient: <input type="text" name="ingredient-10"></input> Qty: <input type="number" name="quantity-10"></input> Unit: <select name="unit-10">
+        <option disabled selected value> -- Select a Unit -- </option>
+        <option value="ml">ml</option>
+        <option value="l">l</option>
+        <option value="Oz">Oz</option>
+        <option value="lb">lb</option>
+        <option value="g">g</option>
+        <option value="kg">kg</option>
+        <option value="tsp">tsp</option>
+        <option value="tbsp">tbsp</option>
+        <option value="flOz">flOz</option>
+        <option value="piece">piece</option>
+    </select>
+    <br>
+    11. Ingredient: <input type="text" name="ingredient-11"></input> Qty: <input type="number" name="quantity-11"></input> Unit: <select name="unit-11">
+        <option disabled selected value> -- Select a Unit -- </option>
+        <option value="ml">ml</option>
+        <option value="l">l</option>
+        <option value="Oz">Oz</option>
+        <option value="lb">lb</option>
+        <option value="g">g</option>
+        <option value="kg">kg</option>
+        <option value="tsp">tsp</option>
+        <option value="tbsp">tbsp</option>
+        <option value="flOz">flOz</option>
+        <option value="piece">piece</option>
+        </select>
+    <br>
+    12. Ingredient: <input type="text" name="ingredient-12"></input> Qty: <input type="number" name="quantity-12"></input> Unit: <select name="unit-12">
+        <option disabled selected value> -- Select a Unit -- </option>
+        <option value="ml">ml</option>
+        <option value="l">l</option>
+        <option value="Oz">Oz</option>
+        <option value="lb">lb</option>
+        <option value="g">g</option>
+        <option value="kg">kg</option>
+        <option value="tsp">tsp</option>
+        <option value="tbsp">tbsp</option>
+        <option value="flOz">flOz</option>
+        <option value="piece">piece</option>
+    </select>
+    <br>
+    13. Ingredient: <input type="text" name="ingredient-13"></input> Qty: <input type="number" name="quantity-13"></input> Unit: <select name="unit-13">
+        <option disabled selected value> -- Select a Unit -- </option>
+        <option value="ml">ml</option>
+        <option value="l">l</option>
+        <option value="Oz">Oz</option>
+        <option value="lb">lb</option>
+        <option value="g">g</option>
+        <option value="kg">kg</option>
+        <option value="tsp">tsp</option>
+        <option value="tbsp">tbsp</option>
+        <option value="flOz">flOz</option>
+        <option value="piece">piece</option>
+    </select>
+    <br>
+    14. Ingredient: <input type="text" name="ingredient-14"></input> Qty: <input type="number" name="quantity-14"></input> Unit: <select name="unit-14">
+        <option disabled selected value> -- Select a Unit -- </option>
+        <option value="ml">ml</option>
+        <option value="l">l</option>
+        <option value="Oz">Oz</option>
+        <option value="lb">lb</option>
+        <option value="g">g</option>
+        <option value="kg">kg</option>
+        <option value="tsp">tsp</option>
+        <option value="tbsp">tbsp</option>
+        <option value="flOz">flOz</option>
+        <option value="piece">piece</option>
+    </select>
+    <br>
+    15. Ingredient: <input type="text" name="ingredient-15"></input> Qty: <input type="number" name="quantity-15"></input> Unit: <select name="unit-15">
+        <option disabled selected value> -- Select a Unit -- </option>
+        <option value="ml">ml</option>
+        <option value="l">l</option>
+        <option value="Oz">Oz</option>
+        <option value="lb">lb</option>
+        <option value="g">g</option>
+        <option value="kg">kg</option>
+        <option value="tsp">tsp</option>
+        <option value="tbsp">tbsp</option>
+        <option value="flOz">flOz</option>
+        <option value="piece">piece</option>
+    </select>
+    <br>
+    16. Ingredient: <input type="text" name="ingredient-16"></input> Qty: <input type="number" name="quantity-16"></input> Unit: <select name="unit-16">
+        <option disabled selected value> -- Select a Unit -- </option>
+        <option value="ml">ml</option>
+        <option value="l">l</option>
+        <option value="Oz">Oz</option>
+        <option value="lb">lb</option>
+        <option value="g">g</option>
+        <option value="kg">kg</option>
+        <option value="tsp">tsp</option>
+        <option value="tbsp">tbsp</option>
+        <option value="flOz">flOz</option>
+        <option value="piece">piece</option>
+    </select>
+    <br>
+    17. Ingredient: <input type="text" name="ingredient-17"></input> Qty: <input type="number" name="quantity-17"></input> Unit: <select name="unit-17">
+        <option disabled selected value> -- Select a Unit -- </option>
+        <option value="ml">ml</option>
+        <option value="l">l</option>
+        <option value="Oz">Oz</option>
+        <option value="lb">lb</option>
+        <option value="g">g</option>
+        <option value="kg">kg</option>
+        <option value="tsp">tsp</option>
+        <option value="tbsp">tbsp</option>
+        <option value="flOz">flOz</option>
+        <option value="piece">piece</option>
+    </select>
+    <br>
+    18. Ingredient: <input type="text" name="ingredient-18"></input> Qty: <input type="number" name="quantity-18"></input> Unit: <select name="unit-18">
+        <option disabled selected value> -- Select a Unit -- </option>
+        <option value="ml">ml</option>
+        <option value="l">l</option>
+        <option value="Oz">Oz</option>
+        <option value="lb">lb</option>
+        <option value="g">g</option>
+        <option value="kg">kg</option>
+        <option value="tsp">tsp</option>
+        <option value="tbsp">tbsp</option>
+        <option value="flOz">flOz</option>
+        <option value="piece">piece</option>
+    </select>
+    <br>
+    19. Ingredient: <input type="text" name="ingredient-19"></input> Qty: <input type="number" name="quantity-19"></input> Unit: <select name="unit-19">
+        <option disabled selected value> -- Select a Unit -- </option>
+        <option value="ml">ml</option>
+        <option value="l">l</option>
+        <option value="Oz">Oz</option>
+        <option value="lb">lb</option>
+        <option value="g">g</option>
+        <option value="kg">kg</option>
+        <option value="tsp">tsp</option>
+        <option value="tbsp">tbsp</option>
+        <option value="flOz">flOz</option>
+        <option value="piece">piece</option>
+    </select>
+    <br>
+    20. Ingredient: <input type="text" name="ingredient-20"></input> Qty: <input type="number" name="quantity-20"></input> Unit: <select name="unit-20">
+        <option disabled selected value> -- Select a Unit -- </option>
+        <option value="ml">ml</option>
+        <option value="l">l</option>
+        <option value="Oz">Oz</option>
+        <option value="lb">lb</option>
+        <option value="g">g</option>
+        <option value="kg">kg</option>
+        <option value="tsp">tsp</option>
+        <option value="tbsp">tbsp</option>
+        <option value="flOz">flOz</option>
+        <option value="piece">piece</option>
+    </select>
+    <br>   
+    <br>
+  
+
+    <h3>Preparation & Cooking Instructions</h3>
+    1. <input type="text" name="instruction-1" class="instruction-box"></input><br>
+    2. <input type="text" name="instruction-2" class="instruction-box"></input><br>
+    3. <input type="text" name="instruction-3" class="instruction-box"></input><br>
+    4. <input type="text" name="instruction-4" class="instruction-box"></input><br>
+    5. <input type="text" name="instruction-5" class="instruction-box"></input><br>
+    6. <input type="text" name="instruction-6" class="instruction-box"></input><br>
+    7. <input type="text" name="instruction-7" class="instruction-box"></input><br>
+    8. <input type="text" name="instruction-8" class="instruction-box"></input><br>
+    9. <input type="text" name="instruction-9" class="instruction-box"></input><br>
+    10. <input type="text" name="instruction-10" class="instruction-box"></input><br>
+    11. <input type="text" name="instruction-11" class="instruction-box"></input><br>
+    12. <input type="text" name="instruction-12" class="instruction-box"></input><br>
+    13. <input type="text" name="instruction-13" class="instruction-box"></input><br>
+    14. <input type="text" name="instruction-14" class="instruction-box"></input><br>
+    15. <input type="text" name="instruction-15" class="instruction-box"></input><br>
+    16. <input type="text" name="instruction-16" class="instruction-box"></input><br>
+    17. <input type="text" name="instruction-17" class="instruction-box"></input><br>
+    18. <input type="text" name="instruction-18" class="instruction-box"></input><br>
+    19. <input type="text" name="instruction-19" class="instruction-box"></input><br>
+    20. <input type="text" name="instruction-20" class="instruction-box"></input><br>
+    
+    <button type="submit">Add Recipe</button>
+</form>
+
+<%- include('../partials/footer') %>
