@@ -1,11 +1,20 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
+<%- include('./partials/header') %>
+
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
-  </body>
-</html>
+    <p> On this website, you can create, share and save your favourite recipes - from big publishers, small bloggers or family secrets!</p>
+    <br>
+    <h5>Create, share and print your own recipe collections for every season!</h5>
+    <br>
+    <h3>Get Started</h3>
+    <form id="login-signup" method="GET" 
+      action="/login"><input type="submit" value="Login/Sign up"/>
+      <br>
+    <form id="recipes-button" method="GET" 
+      action="/recipes"><input type="submit" value="Go to Recipes"/>
+    </form>
+    <form id="collections-button" method="GET" 
+      action="/collections"><input type="submit" value="Go to Collections"/>
+    </form>
+    </p>
+    <%- include('./partials/footer') %>
