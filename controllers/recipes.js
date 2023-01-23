@@ -1,4 +1,5 @@
 const Recipe = require('../models/recipe')
+const User = require('../models/user')
 
 module.exports = {
     index,
@@ -17,21 +18,16 @@ function newRecipe(req, res) {
     res.render('recipes/new')
 }
 
-function create(req, res) {
-    // not pushing user info to author property on Recipe - check
-    req.body.user = req.user._id; 
-    req.body.userName = req.user.name;
-    req.body.userAvatar = req.user.avatar;
 
-    // Need to figure out how to separate tags and push them to the tags array on recipe object.
-    // Need to figure out how to combine ingredient form elements and push them to ingredients array on recipe object.
-    // Need to figure out how to combine instruction form elements and push them to instructions array on recipe object.
+function create(req, res) {
+    if(!req.user) return res.redirect('/users/login');
     const recipe = new Recipe(req.body);
+    recipe.author = req.user._id;
     recipe.save(function(err) {
-    if (err) return res.redirect('/recipes/new', { title: "Add Recipe"})
-    console.log(recipe);
-    res.redirect('/recipes')
-    })
+        if (err) return res.redirect('/recipes');
+        console.log(err)
+        res.redirect(`/recipes/${recipe._id}`);
+        });
 }
 
 function show(req, res) {
