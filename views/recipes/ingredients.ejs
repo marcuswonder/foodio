@@ -1,0 +1,69 @@
+<%- include('../partials/header') %>
+
+Name: <%= recipe.name %></td><br>
+Description: <%= recipe.description %></td><br>
+Category: <%= recipe.category %></td><br>
+Tags (separated by comma): <%= recipe.tags %></td><br>
+Author: <%= recipe.author %></td><br>
+
+<br>
+Prep Time (mins): <%= recipe.prepTime %></td><br>
+Cook Time (mins): <%= recipe.cookTime %></td><br>
+# Adult Servings: <%= recipe.servings %></td><br>
+<br>
+<br>
+<h2>Ingredients</h2>
+<table id="ingredients">
+    <thead>
+        <tr>
+            <th>Qty</th>
+            <th>Ingredient</th>
+            <th>Preparation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% recipe.ingredients.forEach(function(r) { %>
+        <tr>
+            <td><%= r.qty %> <%= r.unit %></td>
+            <td><%= r.ingredient %></td>
+            <td><%= r.preparation %></td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+<br>
+
+<br>
+<br>
+<h3>Add Ingredients</h3>
+<form action="/recipes/<%= recipe._id %>/ingredients?_method=PUT" method="POST" class="Ingredient">
+    Qty: <input type="number" name="qty"></input> 
+    Unit: <select name="unit">
+        <option disabled selected value> -- Select a Unit -- </option>
+        <option value="Piece(s)">Piece(s)</option>
+        <option value="Ounce(s)">Ounce(s)</option>
+        <option value="Pound(s)">Pound(s)</option>
+        <option value="Gram(s)">Gram(s)</option>
+        <option value="Kilogram(s)">Kilogram(s)</option>
+        <option value="Teaspoon(s)">Teaspoon(s)</option>
+        <option value="Tablespoon(s)">Tablespoon(s)</option>
+        <option value="Cup(s)">Cup(s)</option>
+        <option value="Mililitre(s)">Mililitre(s)</option>
+        <option value="Litre(s)">Litre(s)</option>
+        <option value="Fluid Ounce(s)">Fluid Ounce(s)</option>
+    </select>
+    Ingredient: <input type="text" name="ingredient"></input> 
+    Preparation: <input type="text" name="preparation"></select>
+    <button type="submit">Add Ingredient</button>
+</form>
+<br>
+<br>
+
+<form id="instructions-button" method="GET" 
+    action="/recipes/<%= recipe._id %>/instructions"><input type="submit" value="Go to Instructions"/>
+</form>
+<br>   
+<br>
+
+
+<%- include('../partials/footer') %>

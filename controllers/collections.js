@@ -13,6 +13,6 @@ function index(req, res) {
 }
 
 function newCollection(req, res) {
-    res.render('collections/create', { title: "Movie Detail", collections})
+    res.render('collections/create', { title: "Collection", collections})
 }
 

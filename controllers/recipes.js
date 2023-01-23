@@ -1,11 +1,14 @@
 const Recipe = require('../models/recipe')
-const User = require('../models/user')
 
 module.exports = {
     index,
     new: newRecipe,
     create,
-    show
+    show,
+    showIngredients,
+    updateIngredients,
+    showInstructions,
+    updateInstructions,
 }
 
 function index(req, res) {
@@ -23,10 +26,11 @@ function create(req, res) {
     if(!req.user) return res.redirect('/users/login');
     const recipe = new Recipe(req.body);
     recipe.author = req.user._id;
+    recipe.userName = req.user.name
     recipe.save(function(err) {
         if (err) return res.redirect('/recipes');
         console.log(err)
-        res.redirect(`/recipes/${recipe._id}`);
+        res.redirect(`/recipes/${recipe._id}/ingredients`);
         });
 }
 
@@ -35,6 +39,44 @@ function show(req, res) {
         res.render('recipes/show', {title: "Recipe", recipe })
     })
 }
+
+function showIngredients(req, res) {
+    Recipe.findById(req.params.id, function(err, recipe) {
+        res.render('recipes/ingredients', { recipe })
+    })
+}
     
+function updateIngredients(req, res) {
+    Recipe.findById(req.params.id, function(err, recipe) {
+        recipe.ingredients.push(req.body);
+        recipe.save(function(err) {
+            if (err) return res.redirect('/recipes')
+            console.log(err)
+        // res.redirect(`/recipes/${recipe._id}/ingredients`);
+        console.log(req.body)
+        res.render('recipes/ingredients', { recipe });
+      });
+    });
+  }
+
+  function showInstructions(req, res) {
+    Recipe.findById(req.params.id, function(err, recipe) {
+        res.render('recipes/instructions', { recipe })
+    })
+}
+    
+function updateInstructions(req, res) {
+    Recipe.findById(req.params.id, function(err, recipe) {
+        console.log(req.body)
+        recipe.instructions.push(req.body);
+        recipe.save(function(err) {
+            if (err) return res.redirect('/recipes')
+            console.log(err)
+        res.render('recipes/instructions', { recipe });
+      });
+    });
+  }
+
+
   
   

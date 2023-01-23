@@ -3,13 +3,14 @@
 Name: <%= recipe.name %></td><br>
 Description: <%= recipe.description %></td><br>
 Category: <%= recipe.category %></td><br>
-Relevant Tags: <%= recipe.tags %></td><br>
-Created by: <%= recipe.userName %></td><br>
+Tags (separated by comma): <%= recipe.tags %></td><br>
+Author: <%= recipe.author %></td><br>
 
 <br>
 Prep Time (mins): <%= recipe.prepTime %></td><br>
 Cook Time (mins): <%= recipe.cookTime %></td><br>
 # Adult Servings: <%= recipe.servings %></td><br>
+<br>
 <br>
 <h2>Ingredients</h2>
 <table id="ingredients">
@@ -33,10 +34,19 @@ Cook Time (mins): <%= recipe.cookTime %></td><br>
 <br>
 <br>
 <h2>Instructions</h2>
-<ol>
-    <% recipe.instructions.forEach(function(r) { %>
-        <li><%= r.instructions %></li>
+<ol id="ingredients">
+    <% recipe.instructions.forEach(function(i) { %>
+        <li><%= i.instruction %></li>
     <% }); %>
+
 </ol>
+<br>
+<h3>Add Instructions</h3>
+<form action="/recipes/<%= recipe._id %>/instructions?_method=PUT" method="POST" class="Instruction">
+    Instruction: <input type="text" name="instruction"></input> 
+    <button type="submit">Add Instruction</button>
+</form>
+
+
 
 <%- include('../partials/footer') %>
