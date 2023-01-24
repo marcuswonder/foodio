@@ -58,8 +58,6 @@ function updateIngredients(req, res) {
         recipe.save(function(err) {
             if (err) return res.redirect('/recipes')
             console.log(err)
-        // res.redirect(`/recipes/${recipe._id}/ingredients`);
-        console.log(req.body)
         res.render('recipes/ingredients', { recipe });
       });
     });
@@ -73,7 +71,6 @@ function updateIngredients(req, res) {
     
 function updateInstructions(req, res) {
     Recipe.findById(req.params.id, function(err, recipe) {
-        console.log(req.body)
         recipe.instructions.push(req.body);
         recipe.save(function(err) {
             if (err) return res.redirect('/recipes')
@@ -94,14 +91,6 @@ function updateInstructions(req, res) {
     }
 }
 
-// function addToCollection(req, res) {
-//     Recipe.find({}, function(err, recipes) {
-//         let collection = Collection.findOne(req.params)
-//         console.log(collection)
-//         res.render('recipes', { collection, recipes })
-//     })
-// }
-
 function addToCollection(req, res) {
     console.log("I'm hit!")
     console.log(req.params) // Recipe 
@@ -115,20 +104,3 @@ function addToCollection(req, res) {
         res.redirect(`/recipes/${req.params.id}`);
     })
 }
-        
-        
-        // Add the user-centric info to req.body (the new review)
-        // req.body.user = req.user._id;
-        // req.body.userName = req.user.name;
-        // req.body.userAvatar = req.user.avatar;
-    
-        // Push the subdoc for the review
-        // movie.reviews.push(req.body);
-        // Always save the top-level document (not subdocs)
-        // movie.save(function(err) {
-        //     res.redirect(`/movies/${movie._id}`);
-        // });
-    //     });
-    // }
-
-    // Therefore, you should use the req.query object to access the value of add-to-collection instead of req.params.

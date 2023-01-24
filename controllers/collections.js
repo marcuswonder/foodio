@@ -39,6 +39,17 @@ function show(req, res) {
         res.render('collections/show', { collection })
     })
 }
+// This should populate the recipes onto the collections page - to replace show function above.
+// function show(req, res) {
+//     Collection.findById(req.params.id)
+//         .populate("recipes")
+//         .exec(function(err, collection) {
+//             Recipe.find({ _id: {$nin: collection.recipes } }, function(err, recipes) {
+//                 console.log(collection)
+//                 res.render('collections/show', { collection })
+//         })
+//     })
+// }
 
 async function deleteCollection(req, res, next) {
     try {

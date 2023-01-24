@@ -1,7 +1,12 @@
 <%- include('../partials/header') %>
 
 <h1>Recipes</h1>
-<table id="recipes-list">
+<% if (recipes.length === 0) { %>
+
+  <p>There are no recipes here!</p>
+
+<% } else { %>
+  <table id="recipes-list">
   <thead>
     <tr>
       <th>Recipe</th>
@@ -27,10 +32,10 @@
       </tr>
       <% }); %>
     </tbody>
-</table>
+  </table>
+  <% } %>
   <form id="add-recipe-page-link" method="GET" 
   action="recipes/add"><input type="submit" value="Add Recipe"/>
 </form>
-
 
 <%- include('../partials/footer') %>
