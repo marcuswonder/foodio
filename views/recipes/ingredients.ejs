@@ -1,19 +1,47 @@
 <%- include('../partials/header') %>
 
-Name: <%= recipe.name %></td><br>
-Description: <%= recipe.description %></td><br>
-Category: <%= recipe.category %></td><br>
-Tags (separated by comma): <%= recipe.tags %></td><br>
-Create by: <%= recipe.author %></td><br>
+<table id="recipe-top-info" class="recipe-info">
+    <tr>
+      <th>Name:</th>
+      <td><%= recipe.name %></td>
+    </tr>
+    <tr>
+      <th>Description:</th>
+      <td><%= recipe.description %></td>
+    </tr>
+    <tr>
+      <th>Category:</th>
+      <td><%= recipe.category %></td>
+    </tr>
+    <tr>
+      <th>Added by:</th>
+      <td><%= recipe.userName %></td>
+    </tr>
+  </table>
+  <br>
+  
+  <table id="recipe-second-info" class="recipe-info">
+    <tr>
+      <th>Prep Time (Mins):</th>
+      <td><%= recipe.prepTime %></td>
+    </tr>
+    <tr>
+      <th>Cook Time (mins):</th>
+      <td><%= recipe.cookTime %></td>
+    </tr>
+    <tr>
+      <th># Adult Servings:</th>
+      <td><%= recipe.servings %></td>
+    </tr>
+  </table>
+<br>
+<br>
 
+<% if(recipe.ingredients.length === 0) { %>
+    <h2>Ingredients</h2>
 
-<br>
-Prep Time (mins): <%= recipe.prepTime %></td><br>
-Cook Time (mins): <%= recipe.cookTime %></td><br>
-# Adult Servings: <%= recipe.servings %></td><br>
-<br>
-<br>
-<h2>Ingredients</h2>
+<% } else { %>
+
 <table id="ingredients">
     <thead>
         <tr>
@@ -36,6 +64,8 @@ Cook Time (mins): <%= recipe.cookTime %></td><br>
 
 <br>
 <br>
+
+<% } %>
 <h3>Add Ingredients</h3>
 <form action="/recipes/<%= recipe._id %>/ingredients?_method=PUT" method="POST" class="Ingredient">
     Qty: <input type="number" name="qty"></input> 

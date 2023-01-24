@@ -1,19 +1,7 @@
 <%- include('../partials/header') %>
-
-<div id="recipe-info">
-Name: <%= recipe.name %></td><br>
-Description: <%= recipe.description %></td><br>
-Category: <%= recipe.category %></td><br>
-Relevant Tags: <%= recipe.tags %></td><br>
-Added by: <%= recipe.userName %></td><br>
-</div>
-<br>
-<div id="more-recipe-info">
-Prep Time (mins): <%= recipe.prepTime %></td><br>
-Cook Time (mins): <%= recipe.cookTime %></td><br>
-# Adult Servings: <%= recipe.servings %></td><br>
-</div>
-
+<form action="/recipes/<%= recipe._id %>/edit" method="GET" class="button">
+  <button type="submit">Edit Recipe</button>
+</form>
 <table id="recipe-top-info" class="recipe-info">
   <tr>
     <th>Name:</th>
@@ -34,9 +22,9 @@ Cook Time (mins): <%= recipe.cookTime %></td><br>
 </table>
 <br>
 
-<table id="recipe-second-info" class="recipe-info"></table>
+<table id="recipe-second-info" class="recipe-info">
   <tr>
-    <th>Prep Time (mins):</th>
+    <th>Prep Time (Mins):</th>
     <td><%= recipe.prepTime %></td>
   </tr>
   <tr>
@@ -47,7 +35,7 @@ Cook Time (mins): <%= recipe.cookTime %></td><br>
     <th># Adult Servings:</th>
     <td><%= recipe.servings %></td>
   </tr>
-
+</table>
 
 
 
@@ -79,7 +67,8 @@ Cook Time (mins): <%= recipe.cookTime %></td><br>
     <li><%= i.instruction %></li>
 <% }); %>
 </ol>
-
+<br>
+<h2>Add recipe to collection</h2>
 <form id="add-to-collection-button" action="/recipes/<%= recipe._id %>/collections" method="POST">
   <select name="collection_id">
     <% for(let i = 0; i < collections.length; i++) { %>

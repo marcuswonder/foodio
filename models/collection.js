@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema
-const { recipeSchema } = require('./recipe')
 
 const collectionsSchema = new Schema({
     name: {
@@ -19,7 +18,10 @@ const collectionsSchema = new Schema({
     },
     userName: String,
     gId: String,
-    recipes: [recipeSchema]
+    recipes: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Recipe'
+    }]
 }, {
     timestamps: true
 })

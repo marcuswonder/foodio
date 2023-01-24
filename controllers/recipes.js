@@ -12,6 +12,7 @@ module.exports = {
     updateInstructions,
     delete: deleteRecipe,
     addToCollection,
+    update,
 }
 
 function index(req, res) {
@@ -96,11 +97,12 @@ function addToCollection(req, res) {
     console.log(req.params) // Recipe 
     console.log(req.body.collection_id) // Collection
     Collection.findById(req.body.collection_id, function(err, collection) {
-        req.body.user = req.user._id;
-        req.body.userName = req.user.name;
-        req.body.userAvatar = req.user.avatar;
-        collection.recipes.push(req.params);
+        collection.recipes.push(req.params.id);
         collection.save()
         res.redirect(`/recipes/${req.params.id}`);
     })
+}
+
+function update(req, res) {
+    
 }
