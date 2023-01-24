@@ -6,6 +6,7 @@ module.exports = {
     create,
     show,
     delete: deleteCollection,
+    
 }
 
 function index(req, res) {
@@ -27,9 +28,10 @@ function create(req, res) {
     collection.save(function(err) {
         if (err) return res.redirect('/collections');
         console.log(err)
-        // res.redirect(`/collections/${collection._id}`);
-        res.render('collections/index', { collection })
+        Collection.find({}, function(err, collections) {
+            res.render('collections/index', { collections })
         });
+    })
 }
 
 function show(req, res) {
@@ -39,7 +41,6 @@ function show(req, res) {
 }
 
 async function deleteCollection(req, res, next) {
-    console.log("We are in delete")
     try {
         await Collection.remove({'_id': req.params.id})
         res.redirect('/collections')
@@ -47,3 +48,4 @@ async function deleteCollection(req, res, next) {
         return next(err)
     }
 }
+

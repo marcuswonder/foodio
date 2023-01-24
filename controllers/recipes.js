@@ -1,4 +1,5 @@
 const Recipe = require('../models/recipe')
+const Collection = require('../models/collection')
 
 module.exports = {
     index,
@@ -10,6 +11,7 @@ module.exports = {
     showInstructions,
     updateInstructions,
     delete: deleteRecipe,
+    addToCollection,
 }
 
 function index(req, res) {
@@ -38,7 +40,9 @@ function create(req, res) {
 
 function show(req, res) {
     Recipe.findById(req.params.id, function(err, recipe) {
-        res.render('recipes/show', {title: "Recipe", recipe })
+        Collection.find({}, function(err, collections) {
+        res.render('recipes/show', { recipe, collections })
+        })
     })
 }
 
@@ -89,3 +93,42 @@ function updateInstructions(req, res) {
         return next(err)
     }
 }
+
+// function addToCollection(req, res) {
+//     Recipe.find({}, function(err, recipes) {
+//         let collection = Collection.findOne(req.params)
+//         console.log(collection)
+//         res.render('recipes', { collection, recipes })
+//     })
+// }
+
+function addToCollection(req, res) {
+    console.log("I'm hit!")
+    console.log(req.params) // Recipe 
+    console.log(req.body.collection_id) // Collection
+    Collection.findById(req.body.collection_id, function(err, collection) {
+        req.body.user = req.user._id;
+        req.body.userName = req.user.name;
+        req.body.userAvatar = req.user.avatar;
+        collection.recipes.push(req.params);
+        collection.save()
+        res.redirect(`/recipes/${req.params.id}`);
+    })
+}
+        
+        
+        // Add the user-centric info to req.body (the new review)
+        // req.body.user = req.user._id;
+        // req.body.userName = req.user.name;
+        // req.body.userAvatar = req.user.avatar;
+    
+        // Push the subdoc for the review
+        // movie.reviews.push(req.body);
+        // Always save the top-level document (not subdocs)
+        // movie.save(function(err) {
+        //     res.redirect(`/movies/${movie._id}`);
+        // });
+    //     });
+    // }
+
+    // Therefore, you should use the req.query object to access the value of add-to-collection instead of req.params.

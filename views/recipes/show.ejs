@@ -39,4 +39,13 @@ Cook Time (mins): <%= recipe.cookTime %></td><br>
 <% }); %>
 </ol>
 
+<form id="add-to-collection-button" action="/recipes/<%= recipe._id %>/collections" method="POST">
+  <select name="collection_id">
+    <% for(let i = 0; i < collections.length; i++) { %>
+      <option value="<%= collections[i]._id %>"><%= collections[i].name %></option>
+    <% } %>
+  </select>
+  <button type="submit">Add to Collection</button>
+  </form>
+  
 <%- include('../partials/footer') %>
