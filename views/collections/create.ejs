@@ -1,5 +1,14 @@
 <%- include('../partials/header') %>
+
 <h1>Create a Collection</h1>
+<form id="add-collection" method="POST" action="/collections">
+    Name: <input type="text" name="name"></input><br>
+    Description: <input type="text" name="description"></input><br>
+    Tags (separated by comma): <input type="text" name="tags"></input><br>
+    <i>Consider using the type of cuisine, or dish or any other relevant tag e.g. 'Italian' 'starters' or 'summer'.</i>    
+    <br>
+    <button type="submit">Create Collection</button>
+</form>
 
 
 <%- include('../partials/footer') %>

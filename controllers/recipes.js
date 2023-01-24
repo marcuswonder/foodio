@@ -9,6 +9,7 @@ module.exports = {
     updateIngredients,
     showInstructions,
     updateInstructions,
+    delete: deleteRecipe,
 }
 
 function index(req, res) {
@@ -27,6 +28,7 @@ function create(req, res) {
     const recipe = new Recipe(req.body);
     recipe.author = req.user._id;
     recipe.userName = req.user.name
+    recipe.gId = req.user.googleId
     recipe.save(function(err) {
         if (err) return res.redirect('/recipes');
         console.log(err)
@@ -78,5 +80,12 @@ function updateInstructions(req, res) {
   }
 
 
-  
-  
+  async function deleteRecipe(req, res, next) {
+    console.log("We are in delete")
+    try {
+        await Recipe.remove({'_id': req.params.id})
+        res.redirect('/recipes')
+    } catch(err) {
+        return next(err)
+    }
+}

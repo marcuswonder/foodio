@@ -5,6 +5,8 @@ Description: <%= recipe.description %></td><br>
 Category: <%= recipe.category %></td><br>
 Relevant Tags: <%= recipe.tags %></td><br>
 Created by: <%= recipe.userName %></td><br>
+Creating Google ID:  <%= recipe.gId %></td><br>
+UserID: <%= user._id %></td><br>
 
 <br>
 Prep Time (mins): <%= recipe.prepTime %></td><br>
@@ -34,9 +36,9 @@ Cook Time (mins): <%= recipe.cookTime %></td><br>
 <br>
 <h2>Instructions</h2>
 <ol>
-    <% recipe.instructions.forEach(function(r) { %>
-        <li><%= r.instructions %></li>
-    <% }); %>
+    <% recipe.instructions.forEach(function(i) { %>
+    <li><%= i.instruction %></li>
+<% }); %>
 </ol>
 
 <%- include('../partials/footer') %>

@@ -47,6 +47,7 @@ const recipeSchema = new Schema({
                 type: String}
         }],
     userName: String,
+    gId: String,
 }, {
     timestamps: true
 });

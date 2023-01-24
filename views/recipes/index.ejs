@@ -18,9 +18,16 @@
       <% recipes.forEach(function(r) { %>
         <tr>
           <td><%= r.name %></td>
-          <td><%= r.author %></td>
+          <td><%= r.userName %></td>
           <td><%= r.category %></td>
           <td><a href="/recipes/<%= r._id %>">See Full Recipe!</a></td>
+          <td>
+            <% if (user?._id.equals(r.author)) { %>
+              <form action="/recipes/<%= r._id %>?_method=DELETE" method="POST">
+                <button type="submit">X</button>
+              </form>
+            <% } %>
+          </td>
         </tr>
         <% }); %>
       </tbody>
