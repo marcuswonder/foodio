@@ -4,7 +4,9 @@ var router = express.Router();
 const collectionsCtrl = require('../controllers/collections')
 
 router.get('/', collectionsCtrl.index)
-router.get('/', collectionsCtrl.new)
-router.post('/create', collectionsCtrl.create)
+router.get('/create', collectionsCtrl.new)
+router.post('/', collectionsCtrl.create)
+router.get('/:id', collectionsCtrl.show)
+router.delete('/:id', collectionsCtrl.delete)
 
 module.exports = router;

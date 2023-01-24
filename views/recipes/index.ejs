@@ -1,37 +1,36 @@
 <%- include('../partials/header') %>
 
 <h1>Recipes</h1>
-<form id="add-recipe-page-link" method="GET" 
-    action="recipes/add"><input type="submit" value="Add Recipe"/>
-</form>
-
-<table id="list">
-    <thead>
-      <tr>
-        <th>Recipe</th>
-        <th>Author</th>
-        <th>Category</th>
-        <th></th>
-      </tr>
-    </thead>
+<table id="recipes-list">
+  <thead>
+    <tr>
+      <th>Recipe</th>
+      <th>Author</th>
+      <th>Category</th>
+      <th></th>
+    </tr>
+  </thead>
     <tbody>
       <% recipes.forEach(function(r) { %>
-        <tr>
-          <td><%= r.name %></td>
-          <td><%= r.userName %></td>
-          <td><%= r.category %></td>
-          <td><a href="/recipes/<%= r._id %>">See Full Recipe!</a></td>
-          <td>
-            <% if (user?._id.equals(r.author)) { %>
-              <form action="/recipes/<%= r._id %>?_method=DELETE" method="POST">
-                <button type="submit">X</button>
-              </form>
-            <% } %>
-          </td>
-        </tr>
-        <% }); %>
-      </tbody>
-    </table>
+      <tr>
+        <td><%= r.name %></td>
+        <td><%= r.userName %></td>
+        <td><%= r.category %></td>
+        <td><a href="/recipes/<%= r._id %>">See Full Recipe!</a></td>
+        <td>
+          <% if (user?._id.equals(r.author)) { %>
+            <form action="/recipes/<%= r._id %>?_method=DELETE" method="POST">
+              <button type="submit">X</button>
+            </form>
+          <% } %>
+        </td>
+      </tr>
+      <% }); %>
+    </tbody>
+</table>
+  <form id="add-recipe-page-link" method="GET" 
+  action="recipes/add"><input type="submit" value="Add Recipe"/>
+</form>
 
 
 <%- include('../partials/footer') %>

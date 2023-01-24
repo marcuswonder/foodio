@@ -18,6 +18,7 @@ const collectionsSchema = new Schema({
         ref: 'User'
     },
     userName: String,
+    gId: String,
     recipes: [recipeSchema]
 }, {
     timestamps: true

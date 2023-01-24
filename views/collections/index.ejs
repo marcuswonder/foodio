@@ -1,6 +1,34 @@
 <%- include('../partials/header') %>
 
 <h1>Collections</h1>
+<table id="collections-list">
+    <thead>
+      <tr>
+        <th>Collection</th>
+        <th>Author</th>
+        <th>Description</th>
+        <th></th>
+      </tr>
+    </thead>
+      <tbody>
+        <% collections.forEach(function(c) { %>
+        <tr>
+          <td><%= c.name %></td>
+          <td><%= c.userName %></td>
+          <td><%= c.description %></td>
+          <td><a href="/collections/<%= c._id %>">View Collection!</a></td>
+          <td>
+            <% if (user?._id.equals(c.author)) { %>
+              <form action="/collections/<%= c._id %>?_method=DELETE" method="POST">
+                <button type="submit">X</button>
+              </form>
+            <% } %>
+          </td>
+        </tr>
+        <% }); %>
+      </tbody>
+  </table>
+
 <form id="create-collection-page-link" method="GET" 
     action="collections/create"><input type="submit" value="Create Collection"/>
 </form>
