@@ -10,9 +10,10 @@ module.exports = {
     updateIngredients,
     showInstructions,
     updateInstructions,
-    delete: deleteRecipe,
+    deleteRecipe,
     addToCollection,
-    update,
+    updateRecipe,
+    editRecipe,
 }
 
 function index(req, res) {
@@ -103,6 +104,23 @@ function addToCollection(req, res) {
     })
 }
 
-function update(req, res) {
-    
+function updateRecipe(req, res) {
+    Recipe.findById(req.params.id, function(err, recipe) {
+        res.render('recipes/update', { recipe })
+    })
+}
+
+function editRecipe(req, res) {
+    console.log("Edit Recipe being hit!")
+    console.log(req.body)
+    Recipe.findById(req.params.id, function(err, recipe) {
+        recipe.name = req.body.name
+        recipe.description = req.body.description
+        recipe.prepTime = req.body.prepTime
+        recipe.cookTime = req.body.cookTime
+        recipe.category = req.body.category
+        recipe.servings = req.body.servings
+        recipe.save()
+        res.redirect(`/recipes/${req.params.id}`)
+    })
 }

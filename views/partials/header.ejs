@@ -5,16 +5,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="icon" type="image/x-icon" href="/images/logo.png">
     
 </head>
 <body>
     <nav>
-        <img src="/images/camera.svg">
-        <a href="/">Home</a>
+        <img src="/images/logo.png" width="50px" class="logo">
+        <a href="/" class="nav-div">
+            <div class="menu-item">Home</div>
+        </a>
+
         <% if (user) { %>
-        <a href="/recipes">Recipes</a>
-        <a href="/collections">Collections</a>
+        <a href="/recipes" class="nav-div">
+            <div class="menu-item">Recipes</div>
+        </a>
+        <a href="/collections" class="nav-div">
+            <div class="menu-item">Collections</div>
+        </a>
+
+
     <% } else { %>
-        <a href="/auth/google" class="login">LOG IN&nbsp;<img src="https://i.imgur.com/FHjYyi0.png"></a>
+        <a href="/auth/google" class="nav-div" class="login">
+            <div class="menu-item">LOG IN&nbsp;</div><img src="https://i.imgur.com/FHjYyi0.png" height=40px>
+        </a>
     <% } %>
     </nav>
+    <br>

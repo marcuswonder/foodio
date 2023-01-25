@@ -1,10 +1,118 @@
+
+html {
+  height: 100%;
+  width: 100%;
+}
+
 body {
-  padding: 50px;
+  height: 100%;
+  width: 100%;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-image: url("/images/Background.png");
+  background-size: 100%;
+  color: #222E50
+}
+
+nav {
+  padding: 10px;
+  background: #007991;
+  position: sticky;
+  top: 0;
+  border-style: solid;
+  border-width: 2px 2px 6px 2px;
+  border-color: #71BAC0;
+  color: white;
+  display: grid;
+  grid-template-columns: 10fr 10fr 10fr 10fr 60fr;
+  grid-template-areas:
+      "lgo hom rcp cltn lgin"
+      ;
+  
+}
+.nav-div {
+  display: flex;
+  align-items: center;
+  color: white;
+  justify-content: center;
+  margin: 2px;
+  font-weight: lighter;
+}
+
+.menu-item {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  height: 100%;
+  width: 100%;
+  color: white;
+  font-size: 1.25rem;
+  font-weight: lighter;
+  cursor: pointer;
+}
+
+.nav-div:link {
+  text-decoration: none;
+  color: white
+}
+
+.nav-div:visited {
+  text-decoration: none;
+  color: white
+}
+
+.nav-div:hover {
+  background-color: #71BAC0;
+  color: white
+}
+
+.nav-div:active {
+  text-decoration: none;
+  color: white
+}
+
+.logo {
+  grid-area: lgo;
+  padding: 0 15px 0 15px;
+}
+
+.home {
+  grid-area: hom;
+}
+
+.recipe {
+  grid-area: rcp;
+}
+
+.collection {
+  grid-area: cltn;
+}
+
+h1, h2, h3, h4, h5, h6, p, i, table {
+  padding: 0 15px 0 15px;
 }
 
 a {
-  color: #00B7FF;
+  color: #007991
+}
+
+a:link {
+  text-decoration: none;
+  color: #007991
+}
+
+a:visited {
+  text-decoration: none;
+  color: #439A86
+}
+
+a:hover {
+  text-decoration: none;
+  color: E9D985
+}
+
+a:active {
+  text-decoration: none;
+  color: #71BAC0
 }
 
 .login {
@@ -14,6 +122,43 @@ a {
   height: 34px;
 }
 
+
+/* .login {
+  grid-area: lgin;
+  display: flex;
+  align-items: right;
+
+} */
+
 .login img {
-  height: 30px;
+  grid-area: lgin;
+  height: 20px;
+  display: flex;
+  justify-content: right;
+  align-items: right;
+}
+
+.google-logo {
+  height: 50px;
+}
+
+table {
+  border: 1px solid;
+  padding: 10px;
+}
+thead {
+  background: gray
+}
+
+th {
+  text-align: left;
+}
+
+td {
+  text-align: left;
+  padding: 0 20px 0 0;
+}
+
+.delete {
+  text-align: center;
 }

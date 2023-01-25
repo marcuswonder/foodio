@@ -1,0 +1,77 @@
+<%- include('../partials/header') %>
+
+<form action="/recipes/<%= recipe._id %>/update/?_method=PUT" method="POST" id="recipe-top-info" class="recipe-info">
+  <tr>
+    <th>Name:</th>
+    <td><input name="name" type="text" value="<%= recipe.name %>"></input></td><br>
+    <tr>
+      <th>Added by:</th>
+      <td><%= recipe.userName %></td><br>
+    </tr>
+  </tr>
+  <tr>
+    <th>Description:</th>
+    <td><input name="description" type="text" value="<%= recipe.description %>"></input></td><br>
+  </tr>
+  <tr>
+    <th>Category:</th>
+    <td><select name="category" value="<%= recipe.category %>">
+      <option value="Snack">Snack</option>
+      <option value="Starter">Starter</option>
+      <option value="Main Course">Main Course</option>
+      <option value="Desert">Desert</option>
+      <option value="Cocktail">Cocktail</option>
+  </select></td>
+  </tr>
+  <tr>
+    <th>Prep Time (Mins):</th>
+    <td><input name="prepTime" type="number" value="<%= recipe.prepTime %>"</input></td><br>
+  </tr>
+  <tr>
+    <th>Cook Time (mins):</th>
+    <td><input name="cookTime" type="number" value="<%= recipe.cookTime %>"</input></td><br>
+  </tr>
+  <tr>
+    <th># Adult Servings:</th>
+    <td><input name="servings" type="number" value="<%= recipe.servings %>"</input></td><br>
+  </tr>
+</table>
+<br>
+    <button type="submit">Save Edits</button>
+</form>
+
+<br>
+<h2>Ingredients</h2>
+<table id="ingredients">
+    <thead>
+        <tr>
+            <th>Qty</th>
+            <th>Ingredient</th>
+            <th>Preparation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% recipe.ingredients.forEach(function(r) { %>
+        <tr>
+            <td><%= r.qty %> <%= r.unit %></td>
+            <td><%= r.ingredient %></td>
+            <td><%= r.preparation %></td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+<br>
+<br>
+<h2>Instructions</h2>
+<ol>
+    <% recipe.instructions.forEach(function(i) { %>
+    <li><%= i.instruction %></li>
+<% }); %>
+</ol>
+<br>
+
+<!-- <form action="/recipes/<%= recipe._id %>/edit" method="GET" class="button">
+    <button type="submit">Edit Recipe</button>
+  </form> -->
+
+<%- include('../partials/footer') %>
