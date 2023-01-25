@@ -11,22 +11,35 @@
 <body>
     <nav>
         <img src="/images/logo.png" width="50px" class="logo">
-        <a href="/" class="nav-div">
+
+        <a href="/" class="nav-div" class="home">
             <div class="menu-item">Home</div>
         </a>
 
         <% if (user) { %>
-        <a href="/recipes" class="nav-div">
+        <a href="/recipes" class="nav-div" class="recipe">
             <div class="menu-item">Recipes</div>
         </a>
-        <a href="/collections" class="nav-div">
+        <a href="/collections" class="nav-div" class="collection">
             <div class="menu-item">Collections</div>
+        </a>
+        <a href="/" class="empty-nav" class="collection">
+            <div></div>
+        </a>
+        <a href="/logout" class="nav-div" class="logout">
+            <div class="menu-item" class="login">Log Out</div>
         </a>
 
 
     <% } else { %>
-        <a href="/auth/google" class="nav-div" class="login">
-            <div class="menu-item">LOG IN&nbsp;</div><img src="https://i.imgur.com/FHjYyi0.png" height=40px>
+        <a href="/" class="empty-nav" class="recipe">
+            <div></div>
+        </a>
+        <a href="/" class="empty-nav" class="collection">
+            <div></div>
+        </a>
+        <a href="/auth/google" class="nav-div">
+            <div class="menu-item" class="login">Log In&nbsp;</div><img src="https://i.imgur.com/FHjYyi0.png" height=40px>
         </a>
     <% } %>
     </nav>

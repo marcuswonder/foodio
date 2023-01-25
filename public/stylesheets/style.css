@@ -23,25 +23,25 @@ nav {
   border-color: #71BAC0;
   color: white;
   display: grid;
-  grid-template-columns: 10fr 10fr 10fr 10fr 60fr;
+  grid-template-columns: 5fr 10fr 10fr 10fr 55fr 10fr;
   grid-template-areas:
-      "lgo hom rcp cltn lgin"
+      "lgo hom rcp cltn emty lgin"
       ;
   
 }
 .nav-div {
   display: flex;
-  align-items: center;
   color: white;
-  justify-content: center;
   margin: 2px;
   font-weight: lighter;
 }
 
 .menu-item {
   display: flex;
+  align-items: center;
   justify-content: center;
   margin: auto;
+  padding: 0 10px 0 10px;
   height: 100%;
   width: 100%;
   color: white;
@@ -87,6 +87,12 @@ nav {
   grid-area: cltn;
 }
 
+.empty-nav {
+  grid-area: emty;
+  width: 100%
+}
+
+
 h1, h2, h3, h4, h5, h6, p, i, table {
   padding: 0 15px 0 15px;
 }
@@ -116,19 +122,10 @@ a:active {
 }
 
 .login {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 34px;
-}
-
-
-/* .login {
   grid-area: lgin;
   display: flex;
-  align-items: right;
-
-} */
+  align-self: flex-end;
+}
 
 .login img {
   grid-area: lgin;
@@ -138,16 +135,12 @@ a:active {
   align-items: right;
 }
 
-.google-logo {
-  height: 50px;
-}
-
 table {
   border: 1px solid;
   padding: 10px;
 }
 thead {
-  background: gray
+  font-weight: bold;
 }
 
 th {

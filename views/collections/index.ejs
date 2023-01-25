@@ -6,17 +6,15 @@
       <tr>
         <th>Collection</th>
         <th>Author</th>
-        <th>Description</th>
-        <th></th>
+        <th>Delete</th>
       </tr>
     </thead>
       <tbody>
         <% collections.forEach(function(c) { %>
         <tr>
-          <td><%= c.name %></td>
+          <td><a href="/collections/<%= c._id %>"><%= c.name %></td></a>
           <td><%= c.userName %></td>
           <td><%= c.description %></td>
-          <td><a href="/collections/<%= c._id %>">View Collection!</a></td>
           <td>
             <% if (user?._id.equals(c.author)) { %>
               <form action="/collections/<%= c._id %>?_method=DELETE" method="POST">
