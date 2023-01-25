@@ -1,6 +1,6 @@
 <%- include('../partials/header') %>
 <form action="/recipes/<%= recipe._id %>/edit" method="GET" class="button">
-  <button type="submit">Edit Recipe</button>
+  <button type="submit" class="reg-button">Edit Recipe</button>
 </form>
 <table id="recipe-top-info" class="recipe-info">
   <tr>
@@ -70,12 +70,12 @@
 <br>
 <h2>Add recipe to collection</h2>
 <form id="add-to-collection-button" action="/recipes/<%= recipe._id %>/collections" method="POST">
-  <select name="collection_id">
+  <select class="input" name="collection_id">
     <% for(let i = 0; i < collections.length; i++) { %>
       <option value="<%= collections[i]._id %>"><%= collections[i].name %></option>
     <% } %>
   </select>
-  <button type="submit">Add to Collection</button>
+  <button type="submit" class="reg-button">Add to Collection</button>
   </form>
   
 <%- include('../partials/footer') %>

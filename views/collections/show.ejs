@@ -1,9 +1,54 @@
 <%- include('../partials/header') %>
 
-Name: <%= collection.name %></td><br>
-Description: <%= collection.description %></td><br>
-Relevant Tags: <%= collection.tags %></td><br>
-Created by: <%= collection.userName %></td><br>
+<table id="collection-table" >
+    <tr>
+      <th>Name:</th>
+      <td><%= collection.name %></td>
+    </tr>
+    <tr>
+      <th>Description:</th>
+      <td><%= collection.description %></td>
+    </tr>
+    <tr>
+      <th>Created by:</th>
+      <td><%= collection.userName %></td>
+    </tr>
+    <tr>
+      <th># Recipes:</th>
+      <td><%= collection.recipes.length %></td>
+    </tr>
+  </table>
+  <br>
+
+<% if (collection.recipes.length === 0) { %>
+
+    <p>There are no recipes here!</p>
+    <br>
+    <p>You can add some from the recipe pages.</p>
+  
+<% } else { %>
+
+<table id="collection-list">
+<thead>
+<tr>
+    <th>Recipes</th>
+    <th>Authors</th>
+    <th>Categories</th>
+</tr>
+</thead>
+<tbody>
+    <% collection.recipes.forEach(function(cr) { %>
+    <tr>
+    <td><a href="/recipes/<%= cr._id %>"><%= cr.name %></a></td>
+    <td><%= cr.userName %></td>
+    <td><%= cr.category %></td>
+    </tr>
+    <% }); %>
+</tbody>
+</table>
+<p>You can add more recipes to this collection from the recipes pages.
+
+<% } %>
 
 
 <%- include('../partials/footer') %>

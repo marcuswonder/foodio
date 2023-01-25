@@ -68,8 +68,8 @@
 <% } %>
 <h3>Add Ingredients</h3>
 <form action="/recipes/<%= recipe._id %>/ingredients?_method=PUT" method="POST" class="Ingredient">
-    Qty: <input type="number" name="qty"></input> 
-    Unit: <select name="unit">
+    <p>Qty: </p><input type="number" name="qty" class="short-input" autocomplete="off"></input>
+    <p>Unit: </p><select name="unit" class="input">
         <option disabled selected value> -- Select a Unit -- </option>
         <option value="Piece(s)">Piece(s)</option>
         <option value="Ounce(s)">Ounce(s)</option>
@@ -83,16 +83,16 @@
         <option value="Litre(s)">Litre(s)</option>
         <option value="Fluid Ounce(s)">Fluid Ounce(s)</option>
     </select>
-    Ingredient: <input type="text" name="ingredient"></input> 
-    Preparation: <input type="text" name="preparation"></select>
-    <button type="submit">Add Ingredient</button>
+    <p>Ingredient: </p><input type="text" name="ingredient" class="med-input" autocomplete="off"></input> 
+    <p>Preparation: </p><input type="text" name="preparation" class="med-input" autocomplete="off"></select>
+    <button type="submit" class="reg-button">Add Ingredient</button>
 </form>
 
 <br>
 <br>
 
 <form id="instructions-button" method="GET" 
-    action="/recipes/<%= recipe._id %>/instructions"><input type="submit" value="Go to Instructions"/>
+    action="/recipes/<%= recipe._id %>/instructions"><input type="submit" value="Go to Instructions" class="reg-button"/>
 </form>
 <br>   
 <br>

@@ -78,14 +78,14 @@
 <br>
 <h3>Add Instructions</h3>
 <form action="/recipes/<%= recipe._id %>/instructions?_method=PUT" method="POST" class="Instruction">
-    Instruction: <input type="text" name="instruction"></input> 
-    <button type="submit">Add Instruction</button>
+    Instruction: <input type="text" name="instruction" class="long-input" autocomplete="off"></input> 
+    <button type="submit" class="reg-button">Add Instruction</button>
 </form>
 <br>
 <br>
 <br>
 <form action="/recipes/<%= recipe._id %>" method="GET" class="view">
-    <button type="submit">View Full Recipe</button>
+    <button type="submit" class="reg-button">View Full Recipe</button>
 </form>
 
 <%- include('../partials/footer') %>

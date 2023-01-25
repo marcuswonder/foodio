@@ -84,7 +84,6 @@ function updateInstructions(req, res) {
 
 
   async function deleteRecipe(req, res, next) {
-    console.log("We are in delete")
     try {
         await Recipe.remove({'_id': req.params.id})
         res.redirect('/recipes')

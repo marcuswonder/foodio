@@ -2,13 +2,26 @@
 
 <h1>Create a Collection</h1>
 <form id="add-collection" method="POST" action="/collections">
-    Name: <input type="text" name="name"></input><br>
-    Description: <input type="text" name="description"></input><br>
-    Tags (separated by comma): <input type="text" name="tags"></input><br>
-    <i>Consider using the type of cuisine, or dish or any other relevant tag e.g. 'Italian' 'starters' or 'summer'.</i>    
-    <br>
-    <button type="submit">Create Collection</button>
+    <table id="recipe-top-info" class="recipe-info">
+        <tr>
+            <th>Name: </th>
+            <td><input type="text" name="name" class="med-input" autocomplete="off"></input><br>
+            <st>Make it descriptive!</st><br></td>
+        </tr>
+        <tr>
+            <th>Description: </th>
+            <td><input type="text" name="name" class="long-input" autocomplete="off"></input><br>
+            <st>Describe why you think this collection of recipes work well, and what your influence is!<st><br></td>
+        </tr>
+        <tr>
+            <th>Tags: </th>
+            <td><input type="text" name="tags" class="med-input" placeholder="Separate tags with a comma" autocomplete="off"></input><br>
+            <st>Help others find this collection! Think cuisines, styles, seasons etc.</st><br></td>
+        </tr>
+    </table>
+    <button type="submit" class="reg-button">Create Collection</button>
 </form>
+
 
 
 <%- include('../partials/footer') %>

@@ -1,11 +1,20 @@
 <%- include('../partials/header') %>
 
+<% if (collections.length === 0) { %>
+
+  <p>There are no collections yet!</p>
+
+  <p>Create one below:</p>
+
+<% } else { %>
+
 <h1>Collections</h1>
 <table id="collections-list">
     <thead>
       <tr>
         <th>Collection</th>
         <th>Author</th>
+        <th>Decription</th>
         <th>Delete</th>
       </tr>
     </thead>
@@ -18,7 +27,7 @@
           <td>
             <% if (user?._id.equals(c.author)) { %>
               <form action="/collections/<%= c._id %>?_method=DELETE" method="POST">
-                <button type="submit">X</button>
+                <button type="submit" class="delete-button">X</button>
               </form>
             <% } %>
           </td>
@@ -26,9 +35,10 @@
         <% }); %>
       </tbody>
   </table>
+<% } %>
 
 <form id="create-collection-page-link" method="GET" 
-    action="collections/create"><input type="submit" value="Create Collection"/>
+    action="collections/create"><input type="submit" value="Create Collection" class="reg-button"/>
 </form>
 
 <%- include('../partials/footer') %>

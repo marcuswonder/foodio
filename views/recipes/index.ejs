@@ -24,7 +24,7 @@
         <td>
           <% if (user?._id.equals(r.author)) { %>
             <form action="/recipes/<%= r._id %>?_method=DELETE" method="POST" class="delete">
-              <button type="submit">X</button>
+              <button type="submit" class="delete-button">X</button>
             </form>
           <% } %>
         </td>
@@ -34,7 +34,7 @@
   </table>
   <% } %>
   <form id="add-recipe-page-link" method="GET" 
-  action="recipes/add"><input type="submit" value="Add Recipe"/>
+  action="recipes/add"><input type="submit" value="Add Recipe" class="reg-button"/>
 </form>
 
 <%- include('../partials/footer') %>

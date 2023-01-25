@@ -2,26 +2,60 @@
 
 <h1>New Recipe</h1>
 <form id="add-recipe" method="POST" action="/recipes">
-    Name: <input type="text" name="name"></input><br>
-    Description: <input type="text" name="description"></input><br>
-    Category: <select name="category">
-        <option disabled selected value> -- Select a Category -- </option>
-        <option value="Snack">Snack</option>
-        <option value="Starter">Starter</option>
-        <option value="Main Course">Main Course</option>
-        <option value="Desert">Desert</option>
-        <option value="Cocktail">Cocktail</option>
-    </select><br>
-    Tags (separated by comma): <input type="text" name="tags"></input><br>
-    <i>Consider using the type of cuisine, or dish or any other relevant tag e.g. 'italian' 'pizza' or 'summer'.</i>
-    
+    <table id="recipe-top-info" class="recipe-info">
+        <tr>
+          <th>Name: </th>
+          <td><input type="text" name="name" class="med-input" autocomplete="off"></input><br>
+          <st>Make it snappy!</st><br></td>
+        </tr>
+        <tr>
+          <th>Description: </th>
+          <td><input type="text" name="description" class="long-input" autocomplete="off"></input><br>
+            <st>Tell the world where you found this recipe, when you serve it and why you love it!</st><br></td>
+        </tr>
+        <tr>
+            <th>Category: </th>
+            <td>
+                <select name="category" class="input">
+                <option disabled selected value> -- Select a Category -- </option>
+                <option value="Snack">Snack</option>
+                <option value="Starter">Starter</option>
+                <option value="Main Course">Main Course</option>
+                <option value="Desert">Desert</option>
+                <option value="Cocktail">Cocktail</option>
+                </select>
+                <br>
+                <st>How would you categorise this recipe?</st><br></td>
+        </tr>
+        <tr>
+          <th>Tags: </th>
+          <td><input type="text" name="tags" class="med-input" placeholder="Separate tags with a comma" autocomplete="off"></input><br>
+          <st>Help others find this recipe! Think cuisines, styles, seasons etc.</st><br></td>
+        </tr>
+      </table>
     <br>
     <br>
-    Prep Time (mins): <input type="number" name="prepTime"></input><br>
-    Cook Time (mins): <input type="number" name="cookTime"></input><br>
-    # Adult Servings: <input type="number" name="servings"></input><br>
+    <table id="recipe-bottom-info" class="recipe-info">
+        <tr>
+          <th>Prep Time (mins): </th>
+          <td><input type="number" name="prepTime" class="short-input" autocomplete="off"></input><br>
+            <st>How long does it take you to prepare the ingredients for this recipe?</st><br></td>
+        </tr>
+        <tr>
+          <th>Cook Time (mins): </th>
+          <td><input type="number" name="cookTime" class="short-input" autocomplete="off"></input><br>
+            <st>How long does it take you to make this recipe?</st><br></td>
+        </tr>
+        <tr>
+            <th># Adult Servings: </th>
+            <td><input type="number" name="servings" class="short-input" autocomplete="off"></input><br>
+              <st>How many people will the ingredients serve?</st><br></td>
+        </tr>
+      </table>
     <br>
-    <button type="submit">Add Ingredients</button>
+    <button type="submit" class="reg-button">Add Ingredients</button>
 </form>
+
+
 
 <%- include('../partials/footer') %>
