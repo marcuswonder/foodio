@@ -59,13 +59,13 @@
             <td><%= i.ingredient %></td>
             <td><%= i.preparation %></td>
         </tr>
+      <% }); %>
 
     </tbody>
 </table>
   <form action="/recipes/<%= recipe._id %>/ingredients" method="GET" id="edit-ingredients">
     <button type="submit" class="reg-button">Edit Ingredients</button>
   </form>
-      <% }); %>
 <br>
 <br>
 <h2>Instructions</h2>

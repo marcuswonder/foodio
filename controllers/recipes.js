@@ -17,6 +17,7 @@ module.exports = {
     editRecipeIngredients,
     editRecipeInstructions,
     deleteInstruction,
+    deleteIngredient,
 }
 
 function index(req, res) {
@@ -129,7 +130,6 @@ function updateRecipe(req, res) {
 
 function editRecipeIngredients(req, res) {
     Recipe.findById(req.params.id, function(err, recipe) {
-        console.log(recipe)
         res.render('recipes/updateingredients', { recipe })
     })
 }
@@ -147,3 +147,17 @@ function deleteInstruction(req, res) {
     // res.render('recipes/updateinstructions', { recipe })
     })
 }
+
+async function deleteIngredient(req, res) {
+    console.log("Delete Ingredient being hit")
+    try {
+        const recipe = await Recipe.findOne({'recipes._id': req.params.id})
+        if(!recipe) return res.redirect('/recipes')
+        recipe.ingredients.remove(req.params.id)
+        await recipe.save
+        res.redirect(`recipe/${recipe._id}`)
+    } catch(err) {
+        return next(err)
+    }
+}
+
