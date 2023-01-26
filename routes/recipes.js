@@ -15,5 +15,7 @@ router.delete('/:id', recipesCtrl.deleteRecipe)
 router.post('/:id/collections', recipesCtrl.addToCollection)
 router.get('/:id/edit', recipesCtrl.updateRecipe)
 router.put('/:id/update', recipesCtrl.editRecipe)
+router.get('/:id/edit/ingredients', recipesCtrl.updateRecipeIngredients)
+router.delete('/:id/edit/ingredients', recipesCtrl.deleteIngredient)
 
 module.exports = router;

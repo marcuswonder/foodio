@@ -14,6 +14,8 @@ module.exports = {
     addToCollection,
     updateRecipe,
     editRecipe,
+    updateRecipeIngredients,
+    deleteIngredient,
 }
 
 function index(req, res) {
@@ -121,5 +123,19 @@ function editRecipe(req, res) {
         recipe.servings = req.body.servings
         recipe.save()
         res.redirect(`/recipes/${req.params.id}`)
+    })
+}
+
+function updateRecipeIngredients(req, res) {
+    Recipe.findById(req.params.id, function(err, recipe) {
+        res.render('recipes/updateingredients', { recipe })
+    })
+}
+
+function deleteIngredient(req, res) {
+    Recipe.findById(req.params.id, function(err, recipe) {
+    console.log(req.params.id)
+    res.redirect(`/recipes/${req.params.id}/edit/ingredients`)
+    // res.render('recipes/updateingredients', { recipe })
     })
 }

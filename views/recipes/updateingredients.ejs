@@ -1,0 +1,108 @@
+<%- include('../partials/header') %>
+
+<table id="recipe-top-info" class="recipe-info">
+    <tr>
+      <th>Name:</th>
+      <td><%= recipe.name %></td>
+    </tr>
+    <tr>
+      <th>Description:</th>
+      <td><%= recipe.description %></td>
+    </tr>
+    <tr>
+      <th>Category:</th>
+      <td><%= recipe.category %></td>
+    </tr>
+    <tr>
+      <th>Added by:</th>
+      <td><%= recipe.userName %></td>
+    </tr>
+  </table>
+  <br>
+  
+  <table id="recipe-second-info" class="recipe-info">
+    <tr>
+      <th>Prep Time (Mins):</th>
+      <td><%= recipe.prepTime %></td>
+    </tr>
+    <tr>
+      <th>Cook Time (mins):</th>
+      <td><%= recipe.cookTime %></td>
+    </tr>
+    <tr>
+      <th># Adult Servings:</th>
+      <td><%= recipe.servings %></td>
+    </tr>
+  </table>
+
+<br>
+<h2>Ingredients</h2>
+<table id="ingredients">
+    <thead>
+        <tr>
+            <th>Qty</th>
+            <th>Ingredient</th>
+            <th>Preparation</th>
+            <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% recipe.ingredients.forEach(function(r) { %>
+        <tr>
+            <td><%= r.qty %> <%= r.unit %></td>
+            <td><%= r.ingredient %></td>
+            <td><%= r.preparation %></td>
+            <td>
+                <form action="/recipes/<%= r._id %>/edit/ingredients?_method=DELETE" method="POST" class="delete">
+                <button type="submit" class="delete-button">X</button>
+                </form>
+            </td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+    
+    <h3>Add Ingredients</h3>
+<form action="/recipes/<%= recipe._id %>/ingredients?_method=PUT" method="POST" class="Ingredient">
+    <p>Qty: </p><input type="number" name="qty" class="short-input" autocomplete="off"></input>
+    <p>Unit: </p><select name="unit" class="input">
+        <option disabled selected value> -- Select a Unit -- </option>
+        <option value="Piece(s)">Piece(s)</option>
+        <option value="Ounce(s)">Ounce(s)</option>
+        <option value="Pound(s)">Pound(s)</option>
+        <option value="Gram(s)">Gram(s)</option>
+        <option value="Kilogram(s)">Kilogram(s)</option>
+        <option value="Teaspoon(s)">Teaspoon(s)</option>
+        <option value="Tablespoon(s)">Tablespoon(s)</option>
+        <option value="Cup(s)">Cup(s)</option>
+        <option value="Mililitre(s)">Mililitre(s)</option>
+        <option value="Litre(s)">Litre(s)</option>
+        <option value="Fluid Ounce(s)">Fluid Ounce(s)</option>
+    </select>
+    <p>Ingredient: </p><input type="text" name="ingredient" class="med-input" autocomplete="off"></input> 
+    <p>Preparation: </p><input type="text" name="preparation" class="med-input" autocomplete="off"></select>
+    <button type="submit" class="reg-button">Add Ingredient</button>
+</form>
+
+<br>
+<br>
+
+<form id="instructions-button" method="GET" 
+    action="/recipes/<%= recipe._id %>/instructions"><input type="submit" value="Go to Instructions" class="reg-button"/>
+</form>
+
+<br>
+<br>
+<h2>Instructions</h2>
+<ol>
+    <% recipe.instructions.forEach(function(i) { %>
+    <li><%= i.instruction %></li>
+<% }); %>
+</ol>
+<br>
+
+<!-- <form action="/recipes/<%= recipe._id %>/edit" method="GET" class="button">
+    <button type="submit">Edit Recipe</button>
+  </form> -->
+
+<%- include('../partials/footer') %>

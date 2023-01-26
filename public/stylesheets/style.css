@@ -269,7 +269,7 @@ st {
 }
 
 th {
-  padding: 15px 15px 0 0;
+  padding: 0 3px 0 3px;
   vertical-align: top;
   text-align: left;
 }
@@ -297,4 +297,8 @@ td {
 
 #content-wrap {
   padding-bottom: 2.5rem;    /* Footer height */
+}
+
+textarea {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }

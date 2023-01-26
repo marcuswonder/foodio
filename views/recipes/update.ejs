@@ -1,6 +1,7 @@
 <%- include('../partials/header') %>
 
 <form action="/recipes/<%= recipe._id %>/update/?_method=PUT" method="POST" id="recipe-top-info" class="recipe-info">
+  <table id="recipe-top-info" class="recipe-info">
   <tr>
     <th>Name:</th>
     <td><input name="name" type="text"   class="med-input" value="<%= recipe.name %>"></input></td><br>
@@ -11,33 +12,34 @@
   </tr>
   <tr>
     <th>Description:</th>
-    <td><input name="description" type="text"  class="long-input"  autocomplete="off" value="<%= recipe.description %>"></input></td><br>
+    <td><textarea name="description" type="text"  class="long-input"  autocomplete="off"><%= recipe.description %></textarea></td><br>
   </tr>
   <tr>
     <th>Category:</th>
-    <td><select name="category" class="input" value="<%= recipe.category %>">
+    <td><select name="category" class="input">
+      <option value="<%= recipe.category %>"><%= recipe.category %></option>
       <option value="Snack">Snack</option>
       <option value="Starter">Starter</option>
       <option value="Main Course">Main Course</option>
       <option value="Desert">Desert</option>
       <option value="Cocktail">Cocktail</option>
-  </select></td>
+      </select></td>
   </tr>
   <tr>
     <th>Prep Time (Mins):</th>
-    <td><input name="prepTime" type="number"  class="short-input" autocomplete="off" value="<%= recipe.prepTime %>"</input></td><br>
+    <td><input name="prepTime" type="number"  class="short-input" autocomplete="off" value="<%= recipe.prepTime %>"></input></td><br>
   </tr>
   <tr>
     <th>Cook Time (mins):</th>
-    <td><input name="cookTime" type="number"  class="short-input" autocomplete="off" value="<%= recipe.cookTime %>"</input></td><br>
+    <td><input name="cookTime" type="number"  class="short-input" autocomplete="off" value="<%= recipe.cookTime %>"></input></td><br>
   </tr>
   <tr>
     <th># Adult Servings:</th>
-    <td><input name="servings" type="number"  class="short-input" autocomplete="off" value="<%= recipe.servings %>"</input></td><br>
+    <td><input name="servings" type="number"  class="short-input" autocomplete="off" value="<%= recipe.servings %>"></input></td><br>
   </tr>
 </table>
 <br>
-    <button type="submit" class="reg-button">Save Edits</button>
+    <button type="submit" class="reg-button">Save Edits to Recipe Info</button>
 </form>
 
 <br>
@@ -60,6 +62,11 @@
         <% }); %>
       </tbody>
     </table>
+  
+    <form action="/recipes/<%= recipe._id %>/edit/ingredients" method="GET" id="edit-ingredients">
+      <button type="submit" class="reg-button">Edit Ingredients</button>
+    </form>
+
 <br>
 <br>
 <h2>Instructions</h2>

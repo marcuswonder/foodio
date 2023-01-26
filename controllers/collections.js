@@ -1,6 +1,5 @@
 const Collection = require('../models/collection')
 const recipe = require('../models/recipe')
-const { collection } = require('../models/recipe')
 const Recipe = require('../models/recipe')
 
 module.exports = {
@@ -24,6 +23,9 @@ function newCollection(req, res) {
 }
 
 function create(req, res) {
+    console.log("Create Collections being hit!")
+    console.log(req.body)
+    console.log(req.user)
     if(!req.user) return res.redirect('/users/login');
     const collection = new Collection(req.body);
     collection.author = req.user._id;
