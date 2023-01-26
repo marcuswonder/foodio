@@ -12,10 +12,11 @@ module.exports = {
     updateInstructions,
     deleteRecipe,
     addToCollection,
-    updateRecipe,
     editRecipe,
-    updateRecipeIngredients,
-    deleteIngredient,
+    updateRecipe,
+    editRecipeIngredients,
+    editRecipeInstructions,
+    deleteInstruction,
 }
 
 function index(req, res) {
@@ -105,13 +106,13 @@ function addToCollection(req, res) {
     })
 }
 
-function updateRecipe(req, res) {
+function editRecipe(req, res) {
     Recipe.findById(req.params.id, function(err, recipe) {
         res.render('recipes/update', { recipe })
     })
 }
 
-function editRecipe(req, res) {
+function updateRecipe(req, res) {
     console.log("Edit Recipe being hit!")
     console.log(req.body)
     Recipe.findById(req.params.id, function(err, recipe) {
@@ -126,16 +127,23 @@ function editRecipe(req, res) {
     })
 }
 
-function updateRecipeIngredients(req, res) {
+function editRecipeIngredients(req, res) {
     Recipe.findById(req.params.id, function(err, recipe) {
+        console.log(recipe)
         res.render('recipes/updateingredients', { recipe })
     })
 }
 
-function deleteIngredient(req, res) {
+function editRecipeInstructions(req, res) {
+    Recipe.findById(req.params.id, function(err, recipe) {
+        res.render('recipes/updateinstructions', { recipe })
+    })
+}
+
+function deleteInstruction(req, res) {
     Recipe.findById(req.params.id, function(err, recipe) {
     console.log(req.params.id)
-    res.redirect(`/recipes/${req.params.id}/edit/ingredients`)
-    // res.render('recipes/updateingredients', { recipe })
+    res.redirect(`/recipes/${req.params.id}/edit/instructions`)
+    // res.render('recipes/updateinstructions', { recipe })
     })
 }

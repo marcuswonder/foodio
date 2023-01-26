@@ -53,20 +53,19 @@
       </tr>
     </thead>
     <tbody>
-      <% recipe.ingredients.forEach(function(r) { %>
+      <% recipe.ingredients.forEach(function(i) { %>
         <tr>
-            <td><%= r.qty %> <%= r.unit %></td>
-            <td><%= r.ingredient %></td>
-            <td><%= r.preparation %></td>
+            <td><%= i.qty %> <%= i.unit %></td>
+            <td><%= i.ingredient %></td>
+            <td><%= i.preparation %></td>
         </tr>
-        <% }); %>
-      </tbody>
-    </table>
-  
-    <form action="/recipes/<%= recipe._id %>/edit/ingredients" method="GET" id="edit-ingredients">
-      <button type="submit" class="reg-button">Edit Ingredients</button>
-    </form>
 
+    </tbody>
+</table>
+  <form action="/recipes/<%= recipe._id %>/ingredients" method="GET" id="edit-ingredients">
+    <button type="submit" class="reg-button">Edit Ingredients</button>
+  </form>
+      <% }); %>
 <br>
 <br>
 <h2>Instructions</h2>
@@ -75,6 +74,10 @@
     <li><%= i.instruction %></li>
 <% }); %>
 </ol>
+<form action="/recipes/<%= recipe._id %>/edit/instructions" method="GET" id="edit-instructions">
+  <button type="submit" class="reg-button">Edit Instructions</button>
+</form>
+
 <br>
 
 <!-- <form action="/recipes/<%= recipe._id %>/edit" method="GET" class="button">
