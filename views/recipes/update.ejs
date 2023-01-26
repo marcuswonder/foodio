@@ -43,45 +43,5 @@
 </form>
 
 <br>
-<h2>Ingredients</h2>
-<table id="ingredients">
-    <thead>
-        <tr>
-            <th>Qty</th>
-            <th>Ingredient</th>
-            <th>Preparation</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% recipe.ingredients.forEach(function(i) { %>
-        <tr>
-            <td><%= i.qty %> <%= i.unit %></td>
-            <td><%= i.ingredient %></td>
-            <td><%= i.preparation %></td>
-        </tr>
-      <% }); %>
-
-    </tbody>
-</table>
-  <form action="/recipes/<%= recipe._id %>/ingredients" method="GET" id="edit-ingredients">
-    <button type="submit" class="reg-button">Edit Ingredients</button>
-  </form>
-<br>
-<br>
-<h2>Instructions</h2>
-<ol>
-    <% recipe.instructions.forEach(function(i) { %>
-    <li><%= i.instruction %></li>
-<% }); %>
-</ol>
-<form action="/recipes/<%= recipe._id %>/edit/instructions" method="GET" id="edit-instructions">
-  <button type="submit" class="reg-button">Edit Instructions</button>
-</form>
-
-<br>
-
-<!-- <form action="/recipes/<%= recipe._id %>/edit" method="GET" class="button">
-    <button type="submit">Edit Recipe</button>
-  </form> -->
 
 <%- include('../partials/footer') %>

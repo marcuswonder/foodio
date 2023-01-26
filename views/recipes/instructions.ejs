@@ -78,14 +78,45 @@
 <br>
 <h3>Add Instructions</h3>
 <form action="/recipes/<%= recipe._id %>/instructions?_method=PUT" method="POST" class="Instruction">
-    Instruction: <input type="text" name="instruction" class="med-input" autocomplete="off"></input> 
-    <button type="submit" class="reg-button">Add Instruction</button>
+    Instruction: <input type="text" name="instruction"></input> 
+    <button type="submit">Add Instruction</button>
 </form>
 <br>
 <br>
 <br>
 <form action="/recipes/<%= recipe._id %>" method="GET" class="view">
-    <button type="submit" class="reg-button">View Full Recipe</button>
+    <button type="submit">View Full Recipe</button>
 </form>
+
+
+
+<% if(recipe.ingredients.length === 0) { %>
+  <h2>Instructions</h2>
+
+<% } else { %>
+
+<table id="instructions">
+  <thead>
+      <tr>
+          <th></th>
+          <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% recipe.ingredients.forEach(function(i) { %>
+      <tr>
+        <td>
+          <form action="/instruction/<%= i._id %>?_method=DELETE" method="POST" class="delete">
+            <button type="submit" class="delete-button">X</button>
+          </form></td>
+          <td><%= i.instruction %></td>
+      </tr>
+
+      <% }) %>
+    </tbody>
+  </table>
+
+
+
 
 <%- include('../partials/footer') %>

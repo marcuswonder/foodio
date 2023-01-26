@@ -7,16 +7,12 @@ router.get('/', recipesCtrl.index)
 router.get('/add', recipesCtrl.new)
 router.post('/', recipesCtrl.create)
 router.get('/:id', recipesCtrl.show)
-router.get('/:id/ingredients', recipesCtrl.showIngredients)
-router.put('/:id/ingredients', recipesCtrl.updateIngredients)
-router.get('/:id/instructions', recipesCtrl.showInstructions)
-router.put('/:id/instructions', recipesCtrl.updateInstructions)
-router.delete('/:id', recipesCtrl.deleteRecipe)
+router.delete('/:id', recipesCtrl.delete)
 router.post('/:id/collections', recipesCtrl.addToCollection)
 router.get('/:id/edit', recipesCtrl.editRecipe)
 router.put('/:id/update', recipesCtrl.updateRecipe)
-router.put('/:id/ingredients', recipesCtrl.editRecipeIngredients)
-router.delete('/:id/ingredients', recipesCtrl.deleteIngredient)
+
+
 
 
 module.exports = router;

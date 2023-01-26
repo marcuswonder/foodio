@@ -6,18 +6,12 @@ module.exports = {
     new: newRecipe,
     create,
     show,
-    showIngredients,
-    updateIngredients,
-    showInstructions,
-    updateInstructions,
-    deleteRecipe,
+    delete: deleteRecipe,
     addToCollection,
     editRecipe,
     updateRecipe,
-    editRecipeIngredients,
-    editRecipeInstructions,
-    deleteInstruction,
-    deleteIngredient,
+    // editRecipeIngredients,
+    // editRecipeInstructions,
 }
 
 function index(req, res) {
@@ -40,7 +34,8 @@ function create(req, res) {
     recipe.save(function(err) {
         if (err) return res.redirect('/recipes');
         console.log(err)
-        res.redirect(`/recipes/${recipe._id}/ingredients`);
+        console.log("Recipe create redirect hit!")
+        res.redirect(`/recipes/${recipe._id}`);
         });
 }
 
@@ -51,40 +46,7 @@ function show(req, res) {
         })
     })
 }
-
-function showIngredients(req, res) {
-    Recipe.findById(req.params.id, function(err, recipe) {
-        res.render('recipes/ingredients', { recipe })
-    })
-}
     
-function updateIngredients(req, res) {
-    Recipe.findById(req.params.id, function(err, recipe) {
-        recipe.ingredients.push(req.body);
-        recipe.save(function(err) {
-            if (err) return res.redirect('/recipes')
-            console.log(err)
-        res.render('recipes/ingredients', { recipe });
-      });
-    });
-  }
-
-  function showInstructions(req, res) {
-    Recipe.findById(req.params.id, function(err, recipe) {
-        res.render('recipes/instructions', { recipe })
-    })
-}
-    
-function updateInstructions(req, res) {
-    Recipe.findById(req.params.id, function(err, recipe) {
-        recipe.instructions.push(req.body);
-        recipe.save(function(err) {
-            if (err) return res.redirect('/recipes')
-            console.log(err)
-        res.render('recipes/instructions', { recipe });
-      });
-    });
-  }
 
 
   async function deleteRecipe(req, res, next) {
@@ -108,6 +70,7 @@ function addToCollection(req, res) {
 }
 
 function editRecipe(req, res) {
+    console.log("Edit Recipe is being hit")
     Recipe.findById(req.params.id, function(err, recipe) {
         res.render('recipes/update', { recipe })
     })
@@ -127,37 +90,3 @@ function updateRecipe(req, res) {
         res.redirect(`/recipes/${req.params.id}`)
     })
 }
-
-function editRecipeIngredients(req, res) {
-    Recipe.findById(req.params.id, function(err, recipe) {
-        res.render('recipes/updateingredients', { recipe })
-    })
-}
-
-function editRecipeInstructions(req, res) {
-    Recipe.findById(req.params.id, function(err, recipe) {
-        res.render('recipes/updateinstructions', { recipe })
-    })
-}
-
-function deleteInstruction(req, res) {
-    Recipe.findById(req.params.id, function(err, recipe) {
-    console.log(req.params.id)
-    res.redirect(`/recipes/${req.params.id}/edit/instructions`)
-    // res.render('recipes/updateinstructions', { recipe })
-    })
-}
-
-async function deleteIngredient(req, res) {
-    console.log("Delete Ingredient being hit")
-    try {
-        const recipe = await Recipe.findOne({'recipes._id': req.params.id})
-        if(!recipe) return res.redirect('/recipes')
-        recipe.ingredients.remove(req.params.id)
-        await recipe.save
-        res.redirect(`recipe/${recipe._id}`)
-    } catch(err) {
-        return next(err)
-    }
-}
-
