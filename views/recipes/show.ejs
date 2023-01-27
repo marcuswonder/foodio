@@ -122,6 +122,7 @@
   <% } else { %>
 <form id="add-to-collection-button" action="/recipes/<%= recipe._id %>/collections" method="POST">
   <select class="input" name="collection_id">
+      <option disabled selected value> -- Select a Collection -- </option>
     <% for(let i = 0; i < collections.length; i++) { %>
       <option value="<%= collections[i]._id %>"><%= collections[i].name %></option>
     <% } %>
