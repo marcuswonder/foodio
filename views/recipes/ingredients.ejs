@@ -1,5 +1,8 @@
 <%- include('../partials/header') %>
+<title><%= recipe.name %> Ingredients</title>
+<h1><%= recipe.name %> Ingredients</h1>
 
+<h3>Recipe Info</h3>
 <table id="recipe-top-info" class="recipe-info">
     <tr>
       <th>Name:</th>
@@ -20,6 +23,7 @@
   </table>
   <br>
   
+  <h3>Preparation Info</h3>
   <table id="recipe-second-info" class="recipe-info">
     <tr>
       <th>Prep Time (Mins):</th>
@@ -37,6 +41,7 @@
 <br>
 <br>
 
+<h3>Ingredients</h3>
 <% if(recipe.ingredients.length === 0) { %>
     <h2>Ingredients</h2>
 
@@ -48,7 +53,7 @@
             <th>Qty</th>
             <th>Ingredient</th>
             <th>Preparation</th>
-            <th>Delete</th>
+            <th></th>
       </tr>
     </thead>
     <tbody>
@@ -59,7 +64,7 @@
             <td><%= i.preparation %></td>
             <td>
               <form action="/ingredients/<%= i._id %>?_method=DELETE" method="POST" class="delete">
-              <button type="submit" class="delete-button">X</button>
+                <button type="submit" class="delete-button">X</button>
               </form></td>
         </tr>
 
@@ -69,7 +74,7 @@
 <br>
 <br>
 <% } %>
-<h3>Add Ingredients</h3>
+<h4>Add Ingredients</h4>
 
 <form action="/recipes/<%= recipe._id %>/ingredients?_method=PUT" method="POST" class="Ingredient">
 <table id="recipe-ingredients" class="recipe-info">
@@ -111,9 +116,7 @@
 <br>
 <br>
 
-<form id="instructions-button" method="GET" 
-    action="/recipes/<%= recipe._id %>/instructions"><input type="submit" value="Go to Instructions" class="reg-button"/>
-</form>
+<a id="instructions-button" href="/recipes/<%= recipe._id %>/instructions"><button class="reg-button"/>Go to Instructions</button></a>
 <br>   
 <br>
 

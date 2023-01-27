@@ -1,4 +1,6 @@
 <%- include('../partials/header') %>
+<title>Collections</title>
+<h1>Collections</h1>
 
 <% if (collections.length === 0) { %>
 
@@ -8,14 +10,13 @@
 
 <% } else { %>
 
-<h1>Collections</h1>
 <table id="collections-list">
     <thead>
       <tr>
         <th>Collection</th>
         <th>Author</th>
         <th>Decription</th>
-        <th>Delete</th>
+        <th></th>
       </tr>
     </thead>
       <tbody>

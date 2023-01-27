@@ -26,7 +26,7 @@ function newRecipe(req, res) {
 
 
 function create(req, res) {
-    if(!req.user) return res.redirect('/users/login');
+    if(!req.user) return res.redirect('/auth/google');
     const recipe = new Recipe(req.body);
     recipe.author = req.user._id;
     recipe.userName = req.user.name

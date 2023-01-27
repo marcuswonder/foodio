@@ -1,6 +1,7 @@
 <%- include('../partials/header') %>
-
+<title>Recipes</title>
 <h1>Recipes</h1>
+
 <% if (recipes.length === 0) { %>
 
   <p>There are no recipes here!</p>
@@ -12,7 +13,7 @@
       <th>Recipe</th>
       <th>Author</th>
       <th>Category</th>
-      <th>Delete</th>
+      <th></th>
     </tr>
   </thead>
     <tbody>
@@ -22,7 +23,7 @@
         <td><%= r.userName %></td>
         <td><%= r.category %></td>
         <td>
-          <% if (user?._id.equals(r.author)) { %>
+          <% if (user?._id.equals(r.author)) { %> 
             <form action="/recipes/<%= r._id %>?_method=DELETE" method="POST" class="delete">
               <button type="submit" class="delete-button">X</button>
             </form>
@@ -33,8 +34,8 @@
     </tbody>
   </table>
   <% } %>
-  <form id="add-recipe-page-link" method="GET" 
-  action="recipes/add"><input type="submit" value="Add Recipe" class="reg-button"/>
-</form>
+  <a id="add-recipe-page-link" method="GET" 
+  href="recipes/add"><input type="submit" value="Add Recipe" class="reg-button"/>
+</a>
 
 <%- include('../partials/footer') %>

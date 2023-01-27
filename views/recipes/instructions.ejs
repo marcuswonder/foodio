@@ -1,5 +1,9 @@
 <%- include('../partials/header') %>
 
+<title><%= recipe.name %> Instructions</title>
+<h1><%= recipe.name %> Instructions</h1>
+
+<h3>Recipe Info</h3>
 <table id="recipe-top-info" class="recipe-info">
     <tr>
       <th>Name:</th>
@@ -20,6 +24,7 @@
   </table>
   <br>
   
+  <h3>Preparation Info</h3>
   <table id="recipe-second-info" class="recipe-info">
     <tr>
       <th>Prep Time (Mins):</th>
@@ -37,86 +42,87 @@
 <br>
 <br>
 <br>
-<h2>Ingredients</h2>
-<% if(recipe.ingredients.length === 0) { %>
 
-<% } else { %>
 
+<h3>Ingredients</h3>
+<% if(recipe.ingredients.length > 0) { %>
 <table id="ingredients">
-    <thead>
-        <tr>
-            <th>Qty</th>
-            <th>Ingredient</th>
-            <th>Preparation</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% recipe.ingredients.forEach(function(r) { %>
-        <tr>
-            <td><%= r.qty %> <%= r.unit %></td>
-            <td><%= r.ingredient %></td>
-            <td><%= r.preparation %></td>
-        </tr>
-        <% }); %>
-      </tbody>
-    </table>
-<% } %>
-<br>
-<br>
-<br>
-<h2>Instructions</h2>
-<% if(recipe.instructions.length === 0) { %>
-
-    <% } else { %>
-<ol id="ingredients">
-    <% recipe.instructions.forEach(function(i) { %>
-        <li><%= i.instruction %></li>
-    <% }); %>
-</ol>
-<br>
-<% } %>
-<br>
-<h3>Add Instructions</h3>
-<form action="/recipes/<%= recipe._id %>/instructions?_method=PUT" method="POST" class="Instruction">
-    Instruction: <input type="text" name="instruction"></input> 
-    <button type="submit">Add Instruction</button>
-</form>
-<br>
-<br>
-<br>
-<form action="/recipes/<%= recipe._id %>" method="GET" class="view">
-    <button type="submit">View Full Recipe</button>
-</form>
-
-
-
-<% if(recipe.ingredients.length === 0) { %>
-  <h2>Instructions</h2>
-
-<% } else { %>
-
-<table id="instructions">
   <thead>
       <tr>
-          <th></th>
-          <th>Delete</th>
+          <th>Qty</th>
+          <th>Ingredient</th>
+          <th>Preparation</th>
     </tr>
   </thead>
   <tbody>
-    <% recipe.ingredients.forEach(function(i) { %>
+    <% recipe.ingredients.forEach(function(r) { %>
       <tr>
-        <td>
-          <form action="/instruction/<%= i._id %>?_method=DELETE" method="POST" class="delete">
-            <button type="submit" class="delete-button">X</button>
-          </form></td>
-          <td><%= i.instruction %></td>
+          <td><%= r.qty %> <%= r.unit %></td>
+          <td><%= r.ingredient %></td>
+          <td><%= r.preparation %></td>
       </tr>
-
-      <% }) %>
+    <% }) %> 
     </tbody>
   </table>
 
+  <% } else { %>
+
+<% if(recipe.ingredients.length === 0 && user?._id.equals(recipe.author)) { %>
+  <p>There are no ingredients here yet. Click the button below to add some!</p><br>
+  <a href="/recipes/<%= recipe._id %>/ingredients" class="button">
+    <button type="submit" class="reg-button">Add Recipe Ingredients</button></a>
+
+    <% } else { %>
+      <p>There are no ingredients here yet. We hope the author will be back soon to add some!</p>
+    <% } %>
+  <% } %> 
+    <br>
+    <br>
 
 
+<h3>Instructions</h3>
+<% if(recipe.instructions.length > 0) { %>
+  <table id="instructions">
+    <thead>
+        <tr>
+            <th>Instruction</th>
+            <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% recipe.instructions.forEach(function(i) { %>
+        <tr>
+          <td><%= i.instruction %></td>
+          <td>
+            <form action="/instructions/<%= i._id %>?_method=DELETE" method="POST" class="delete">
+              <button type="submit" class="delete-button">X</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+<% } else { %>
+  <% if(recipe.instructions.length === 0 && (!user)) { %>
+    <p>There aren't any instructions yet. We're sure that the author will add some soon!</p>
+  <% } else { %>
+    <h4>Add Instructions</h4>
+    <% if(recipe.instructions.length === 0 && user?._id.equals(recipe.author)) { %>
+    <p>There aren't any instructions yet. Use the button below to add some!</p>
+    <% } %>
+  <% } %>
+<% } %>
 
+<h4>Add Instruction</h4>
+<form action="/recipes/<%= recipe._id %>/instructions?_method=PUT" method="POST" class="Instruction">
+  <p>Instruction: <input type="text" name="instruction" class="med-input"></input></p>
+  <button type="submit" class="reg-button">Add Instruction</button>
+</form>
+<br>
+<br>
+
+<a href="/recipes/<%= recipe._id %>" class="view">
+  <button type="submit" class="reg-button">View Full Recipe</button></a>
+<br>
+<br>
 <%- include('../partials/footer') %>

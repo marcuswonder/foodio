@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 const collectionsCtrl = require('../controllers/collections')
+const ensureLoggedIn = require('../config/ensureLoggedIn');
 
 router.get('/', collectionsCtrl.index)
 router.get('/create', collectionsCtrl.new)

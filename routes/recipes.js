@@ -2,15 +2,16 @@ var express = require('express');
 var router = express.Router();
 
 const recipesCtrl = require('../controllers/recipes')
+const ensureLoggedIn = require('../config/ensureLoggedIn');
 
 router.get('/', recipesCtrl.index)
-router.get('/add', recipesCtrl.new)
-router.post('/', recipesCtrl.create)
+router.get('/add', ensureLoggedIn, recipesCtrl.new)
+router.post('/', ensureLoggedIn, recipesCtrl.create)
 router.get('/:id', recipesCtrl.show)
-router.delete('/:id', recipesCtrl.delete)
-router.post('/:id/collections', recipesCtrl.addToCollection)
-router.get('/:id/edit', recipesCtrl.editRecipe)
-router.put('/:id/update', recipesCtrl.updateRecipe)
+router.delete('/:id', ensureLoggedIn, recipesCtrl.delete)
+router.post('/:id/collections', ensureLoggedIn, recipesCtrl.addToCollection)
+router.get('/:id/edit', ensureLoggedIn, recipesCtrl.editRecipe)
+router.put('/:id/update', ensureLoggedIn, recipesCtrl.updateRecipe)
 
 
 

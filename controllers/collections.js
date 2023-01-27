@@ -25,7 +25,7 @@ function create(req, res) {
     console.log("Create Collections being hit!")
     console.log(req.body)
     console.log(req.user)
-    if(!req.user) return res.redirect('/users/login');
+    if(!req.user) return res.redirect('/auth/google');
     const collection = new Collection(req.body);
     collection.author = req.user._id;
     collection.userName = req.user.name

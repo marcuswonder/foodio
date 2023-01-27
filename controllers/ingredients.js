@@ -24,23 +24,21 @@ function create(req, res) {
             if (err) return res.redirect('/recipes')
             console.log(err)
         // res.render('recipes/ingredients', { recipe });
-        res.render('recipes/ingredients', { recipe })
+        // res.render('recipes/ingredients', { recipe })
+        res.redirect(`/recipes/${recipe._id}/ingredients`);
       });
     });
   }
 
-async function deleteIngredient(req, res, next) {
-    try {
-        const recipe = await Recipe.findOne({'ingredients._id': req.params.id})
-        if(!recipe) return res.redirect('/recipes')
-        recipe.ingredients.remove(req.params.id)
-        await recipe.save
-        res.redirect(`recipes/${recipe._id}`)
-        // res.render('recipes/ingredients', { recipe })
-    } catch(err) {
-        return next(err)
-    }
-    
-    
-  }
 
+async function deleteIngredient(req, res) {
+  try {
+    const recipe = await Recipe.findOne({'ingredients._id': req.params.id});
+    const idx = recipe.ingredients.findIndex(i => i._id.toString() === req.params.id);
+    recipe.ingredients.splice(idx, 1);
+    await recipe.save();
+    res.redirect(`/recipes/${recipe._id}/ingredients`);
+  } catch (err) {
+    console.log(err);
+  }
+}

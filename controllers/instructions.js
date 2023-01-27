@@ -1,5 +1,4 @@
 const Recipe = require('../models/recipe')
-const Collection = require('../models/collection')
 
 module.exports = {
     show,
@@ -19,11 +18,21 @@ function create(req, res) {
         recipe.save(function(err) {
             if (err) return res.redirect('/recipes')
             console.log(err)
-        res.render('recipes/instructions', { recipe });
+        res.redirect(`/recipes/${recipe._id}/instructions`);
       });
     });
   }
 
-  function deleteInstruction(req, res) {
-
+  async function deleteInstruction(req, res) {
+    try {
+      const recipe = await Recipe.findOne({'instruction._id': req.params.id});
+      const idx = recipe.instructions.findIndex(i => i._id.toString() === req.params.id);
+      recipe.instructions.splice(idx, 1);
+      await recipe.save();
+      res.redirect(`/recipes/${recipe._id}/instructions`);
+    } catch (err) {
+      console.log(err);
+    }
   }
+
+  

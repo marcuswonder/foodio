@@ -2,11 +2,12 @@ var express = require('express');
 var router = express.Router();
 
 const ingredientsCtrl = require('../controllers/ingredients')
+const ensureLoggedIn = require('../config/ensureLoggedIn');
 
 // Routers do not have /ingredients path set
-router.get('/recipes/:id/ingredients', ingredientsCtrl.show)
-router.get('/recipes/:id/ingredients', ingredientsCtrl.show)
-router.put('/recipes/:id/ingredients', ingredientsCtrl.create)
-router.delete('/ingredients/:id', ingredientsCtrl.delete)
+router.get('/recipes/:id/ingredients', ensureLoggedIn, ingredientsCtrl.show)
+router.get('/recipes/:id/ingredients', ensureLoggedIn, ingredientsCtrl.show)
+router.put('/recipes/:id/ingredients', ensureLoggedIn, ingredientsCtrl.create)
+router.delete('/ingredients/:id', ensureLoggedIn, ingredientsCtrl.delete)
 
 module.exports = router;

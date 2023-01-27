@@ -12,25 +12,24 @@
     <div id="page-container">
         <div id="content-wrap">
             <nav>
-                <img src="/images/logo.png" width="50px" class="logo">
+                <div id="main-nav">
+                    <a href="/" class="nav-div-logo" class="home"><img src="/images/logo.png" width="50px" href="/" class="home"></a>
 
-                <a href="/" class="nav-div" class="home">
-                    <div class="menu-item">Home</div>
-                </a>
-
-                <% if (user) { %>
-                <a href="/recipes" class="nav-div" class="recipe">
-                    <div class="menu-item">Recipes</div>
-                </a>
-                <a href="/collections" class="nav-div" class="collection">
-                    <div class="menu-item">Collections</div>
-                </a>
-                <a href="/" class="empty-nav" class="collection">
-                    <div></div>
-                </a>
-                <a href="/logout" class="nav-div" class="logout">
-                    <div class="menu-item" class="login">Log Out</div>
-                </a>
+                    <a href="/recipes" class="nav-div" class="recipe">
+                        <div class="menu-item">Recipes</div>
+                    </a>
+                    <a href="/collections" class="nav-div" class="collection">
+                        <div class="menu-item">Collections</div>
+                    </a>
+                    <% if (user) { %>
+                    <a href="/" class="empty-nav">
+                    </a>
+                </div>   
+                <div id="login-nav">
+                    <a href="/logout" class="nav-div" class="login">
+                        <div class="menu-item" class="login">Log Out</div>
+                    </a>
+                </div> 
 
 
             <% } else { %>

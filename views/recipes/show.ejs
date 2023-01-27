@@ -1,6 +1,9 @@
 <%- include('../partials/header') %>
 
-<h2>Recipe Info</h2>
+<title><%= recipe.name %></title>
+<h1><%= recipe.name %></h1>
+
+<h3>Recipe Info</h3>
 <table id="recipe-top-info" class="recipe-info">
   <tr>
     <th>Name:</th>
@@ -21,6 +24,7 @@
 </table>
 <br>
 
+<h3>Preparation Info</h3>
 <table id="recipe-second-info" class="recipe-info">
   <tr>
     <th>Prep Time (Mins):</th>
@@ -36,62 +40,86 @@
   </tr>
 </table>
 
+<% if (user?._id.equals(recipe.author)) { %>
 <form action="/recipes/<%= recipe._id %>/edit" method="GET" class="button">
   <button type="submit" class="reg-button">Edit Recipe Info</button></form>
 <br>
+<% } else { %>
+  <% } %>
 
+<h3>Ingredients</h3>
+<% if(recipe.ingredients.length > 0) { %>
+<table id="ingredients">
+  <thead>
+      <tr>
+          <th>Qty</th>
+          <th>Ingredient</th>
+          <th>Preparation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% recipe.ingredients.forEach(function(r) { %>
+      <tr>
+          <td><%= r.qty %> <%= r.unit %></td>
+          <td><%= r.ingredient %></td>
+          <td><%= r.preparation %></td>
+      </tr>
+    <% }) %> 
+    </tbody>
+  </table>
+    <% if (user?._id.equals(recipe.author)) { %>
+  <a href="/recipes/<%= recipe._id %>/ingredients" class="button">
+    <button type="submit" class="reg-button">Edit Recipe Ingredients</button></a>
+    <% } %>
+  <% } else { %>
 
-<h2>Ingredients</h2>
-<% if(recipe.ingredients.length === 0) { %>
+<% if(recipe.ingredients.length === 0 && user?._id.equals(recipe.author)) { %>
+  <h4>Add Ingredients</h4>
   <p>There are no ingredients here yet. Use the button below to add some!</p><br>
   <a href="/recipes/<%= recipe._id %>/ingredients" class="button">
     <button type="submit" class="reg-button">Add Recipe Ingredients</button></a>
-<% } else { %>
-  
-<table id="ingredients">
-    <thead>
-        <tr>
-            <th>Qty</th>
-            <th>Ingredient</th>
-            <th>Preparation</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% recipe.ingredients.forEach(function(r) { %>
-        <tr>
-            <td><%= r.qty %> <%= r.unit %></td>
-            <td><%= r.ingredient %></td>
-            <td><%= r.preparation %></td>
-        </tr>
-      <% }); %> 
-      </tbody>
-    </table>
-    <a href="/recipes/<%= recipe._id %>/ingredients" class="button">
-      <button type="submit" class="reg-button">Edit Recipe Ingredients</button></a>
-  <% } %>
+
+    <% } else { %>
+      <p>There are no ingredients here yet. We hope the author will be back soon to add some!</p>
+    <% } %>
+  <% } %> 
     <br>
     <br>
 
 
 
-<h2>Instructions</h2>
-<% if(recipe.instructions.length === 0) { %>
-  <p>There are no instructions here yet. Use the button below to add some!</p><br>
-  <a href="/recipes/<%= recipe._id %>/instructions" class="button">
-    <button type="submit" class="reg-button">Add Recipe Instructions</button></a>
-<% } else { %>
-<ol>
+<h3>Instructions</h3>
+<% if(recipe.instructions.length > 0) { %>
+  <ol>
     <% recipe.instructions.forEach(function(i) { %>
     <li><%= i.instruction %></li>
 <% }); %>
 </ol>
-<a href="/recipes/<%= recipe._id %>/instructions" class="button">
-  <button type="submit" class="reg-button">Edit Recipe Instructions</button></a>
+<% if (user?._id.equals(recipe.author)) { %>
+  <a href="/recipes/<%= recipe._id %>/instructions" class="button">
+    <button type="submit" class="reg-button">Edit Recipe Instructions</button></a>
 <% } %>
-<br>
+<% } else { %>
+
+  <% if(recipe.instructions.length === 0 && user?._id.equals(recipe.author)) { %>
+    <h4>Add Instructions</h4>
+    <p>There are no instructions here yet. Use the button below to add some!</p><br>
+    <a href="/recipes/<%= recipe._id %>/instructions" class="button">
+      <button type="submit" class="reg-button">Add Recipe Instructions</button></a>
+
+      <% } else { %>
+        <p>There are no instructions here yet. We hope the author will be back soon to add some!</p>
+    <% } %>
+  <% } %>
+  <br>
+  <br>
 
 
 <h2>Add recipe to collection</h2>
+<% if (!user) { %>
+  <p>You need to log in to add recipes to your collections</p>
+
+  <% } else { %>
 <form id="add-to-collection-button" action="/recipes/<%= recipe._id %>/collections" method="POST">
   <select class="input" name="collection_id">
     <% for(let i = 0; i < collections.length; i++) { %>
@@ -100,6 +128,7 @@
   </select>
   <button type="submit" class="reg-button">Add to Collection</button>
   </form>
+  <% } %>
   <br>
   <br>
   

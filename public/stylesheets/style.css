@@ -22,11 +22,9 @@ nav {
   border-width: 2px 2px 6px 2px;
   border-color: #71BAC0;
   color: white;
-  display: grid;
-  grid-template-columns: 5fr 10fr 10fr 10fr 55fr 10fr;
-  grid-template-areas:
-      "lgo hom rcp cltn emty lgin"
-      ;
+  display: flex;
+  justify-content:space-between;
+  flex-direction: row;
   
 }
 .nav-div {
@@ -75,8 +73,31 @@ nav {
   padding: 0 15px 0 15px;
 }
 
-.home {
+.home:hover {
   grid-area: hom;
+}
+
+.home:hover {
+  grid-area: hom;
+}
+
+.home:hover {
+  grid-area: hom;
+}
+
+.home:acive {
+  grid-area: hom;
+}
+
+#main-nav {
+  display: flex;
+  flex-direction: row;
+}
+
+#login-nav {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
 }
 
 .recipe {
@@ -87,19 +108,115 @@ nav {
   grid-area: cltn;
 }
 
-.empty-nav {
-  grid-area: emty;
-  width: 100%
-}
 
-
-h1, h2, h3, h4, h5, h6, p, i, table {
+h1, h2, h3, h4, h5, h6, p, i {
   padding: 3px 15px 3px 15px;
 }
 
+
+
+
+
+
+
+
+
+
 table {
   margin: 3px 15px 3px 15px;
+  border: 1px solid;
+  padding: 10px;
 }
+
+table {
+
+}
+thead {
+  font-weight: bold;
+}
+
+th {
+  text-align: left;
+}
+
+td {
+  text-align: left;
+  padding: 0 20px 0 0;
+}
+
+.input {
+  padding: 5px;
+  border: 5px;
+  margin: 10px 0 10px 0;
+  border: 1px #007991;
+}
+
+.short-input {
+  width: 45px;
+  padding: 5px;
+  border: 5px;
+  margin: 10px 0 10px 0;
+  border: solid 1px #007991;
+  
+}
+
+.med-input {
+  width: 300px;
+  padding: 5px;
+  border: 5px;
+  margin: 10px 0 10px 0;
+  border: solid 1px #007991;
+}
+
+.long-input {
+  width: 500px;
+  height: 200px;
+  padding: 5px;
+  border: 5px;
+  margin: 10px 0 10px 0;
+  border: solid 1px #007991;
+}
+
+.input {
+  padding: 5px;
+  border: 5px;
+  margin: 10px 0 10px 0;
+  border: solid 1px #007991;
+}
+
+st {
+  font-size: .75rem;
+  font-style: italic;
+}
+
+th {
+  padding: 0 3px 0 3px;
+  vertical-align: top;
+  text-align: left;
+}
+
+td {
+  vertical-align: top;
+  text-align: left;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 a {
   color: #007991
@@ -129,31 +246,17 @@ a:active {
   grid-area: lgin;
   display: flex;
   align-self: flex-end;
+  align-content:flex-end;
+  align-content: right;
 }
 
 .login img {
   grid-area: lgin;
-  height: 20px;
-  display: flex;
+  display:flexbox;
+  height: 15px;
+  /* display: flex; */
   justify-content: right;
   align-items: right;
-}
-
-table {
-  border: 1px solid;
-  padding: 10px;
-}
-thead {
-  font-weight: bold;
-}
-
-th {
-  text-align: left;
-}
-
-td {
-  text-align: left;
-  padding: 0 20px 0 0;
 }
 
 .delete {
@@ -223,61 +326,7 @@ td {
   color: white;
 }
 
-.input {
-  padding: 5px;
-  border: 5px;
-  margin: 10px 0 10px 0;
-  border: 1px #007991;
-}
 
-.short-input {
-  width: 45px;
-  padding: 5px;
-  border: 5px;
-  margin: 10px 0 10px 0;
-  border: solid 1px #007991;
-  
-}
-
-.med-input {
-  width: 300px;
-  padding: 5px;
-  border: 5px;
-  margin: 10px 0 10px 0;
-  border: solid 1px #007991;
-}
-
-.long-input {
-  width: 500px;
-  height: 200px;
-  padding: 5px;
-  border: 5px;
-  margin: 10px 0 10px 0;
-  border: solid 1px #007991;
-}
-
-.input {
-  padding: 5px;
-  border: 5px;
-  margin: 10px 0 10px 0;
-  border: solid 1px #007991;
-}
-
-st {
-  font-size: .75rem;
-  font-style: italic;
-}
-
-th {
-  padding: 0 3px 0 3px;
-  vertical-align: top;
-  text-align: left;
-}
-
-td {
-  vertical-align: top;
-  text-align: left;
-}
 
 #footer {
   position: absolute;
