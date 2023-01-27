@@ -35,6 +35,67 @@ In addition, I have been able to create and delete referential relationships bet
 
 ## Screenshots
 
+1. Home - Not Logged In
+<img src="public/images/screenshots/1. Home - Not Logged In.png">
+<br>
+<br>
+
+
+2. Home - Logged In
+<img src="public/images/screenshots/2. Home - Logged In.png"
+<br>
+<br>
+
+
+3. Recipes - No Recipes
+<img src="public/images/screenshots/3. Recipes - No Recipes.png"
+<br>
+<br>
+
+
+4. New Recipes - Info
+<img src="public/images/screenshots/4. New Recipes - Info.png"
+<br>
+<br>
+
+
+5. New Recipes - Ingredients
+<img src="public/images/screenshots/5. New Recipes - Ingredients.png"
+<br>
+<br>
+
+
+6. New Recipe - Instructions
+<img src="public/images/screenshots/6. New Recipe - Instructions.png"
+<br>
+<br>
+
+
+7. Collection - Create
+<img src="public/images/screenshots/7. Collection - Create.png"
+<br>
+<br>
+
+
+8. Collections - Index
+<img src="public/images/screenshots/8. Collections - Index.png"
+<br>
+<br>
+
+
+9. Add Recipe to Collection
+<img src="public/images/screenshots/9. Add Recipe to Collection.png"
+<br>
+<br>
+
+
+10. Recipe in Collection
+<img src="public/images/screenshots/10. Recipe in Collection.png"
+<br>
+<br>
+
+
+
 <br>
 <br>
 
