@@ -92,7 +92,7 @@
     <tbody>
       <% recipe.instructions.forEach(function(i) { %>
         <tr>
-          <td><ol></ol><li></ol><%= i.instruction %></li></td>
+          <ol><td><li><%= i.instruction %></li></td></ol>
         </ol><td>
             <form action="/instructions/<%= i._id %>?_method=DELETE" method="POST" class="delete">
               <button type="submit" class="delete-button">X</button>

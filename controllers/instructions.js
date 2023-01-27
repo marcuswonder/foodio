@@ -25,7 +25,7 @@ function create(req, res) {
 
   async function deleteInstruction(req, res) {
     try {
-      const recipe = await Recipe.findOne({'instruction._id': req.params.id});
+      const recipe = await Recipe.findOne({'instructions._id': req.params.id});
       const idx = recipe.instructions.findIndex(i => i._id.toString() === req.params.id);
       recipe.instructions.splice(idx, 1);
       await recipe.save();

@@ -7,7 +7,7 @@ module.exports = {
     create,
     show,
     delete: deleteCollection,
-    deleteRecipeFromCollection,
+    removeRecipeFromCollection,
     
 }
 
@@ -58,6 +58,25 @@ async function deleteCollection(req, res, next) {
     }
 }
 
-function deleteRecipeFromCollection(req, res) {
-
+function removeRecipeFromCollection(req, res) {
+    console.log("Remove Recipe from Collecition being hit")
+    console.log(req.body)
+    console.log(req.params)
+    console.log(req.body.id)
+    console.log(req.params.id)
+//     const collection = Collection.findOne({'recipes._id': req.params})
+//     Collection.findByIdAndUpdate(collectionId, { $pull: { recipes: recipeId } }, { new: true }, (err, collection) => {
+//     // Handle any errors
+//     if (err) {
+//       // handle error
+//     }
+//     // Delete the recipe
+//     Recipe.findByIdAndDelete(recipeId, (err, recipe) => {
+//       // Handle any errors
+//       if (err) {
+//         // handle error
+//       }
+//       // Do something with the updated collection or deleted recipe
+//     });
+//   });
     }
