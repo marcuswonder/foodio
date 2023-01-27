@@ -7,7 +7,7 @@ module.exports = {
     create,
     show,
     delete: deleteCollection,
-    removeRecipeFromCollection,
+    // removeRecipeFromCollection,
     
 }
 
@@ -22,9 +22,6 @@ function newCollection(req, res) {
 }
 
 function create(req, res) {
-    console.log("Create Collections being hit!")
-    console.log(req.body)
-    console.log(req.user)
     if(!req.user) return res.redirect('/auth/google');
     const collection = new Collection(req.body);
     collection.author = req.user._id;
@@ -58,25 +55,25 @@ async function deleteCollection(req, res, next) {
     }
 }
 
-function removeRecipeFromCollection(req, res) {
-    console.log("Remove Recipe from Collecition being hit")
-    console.log(req.body)
-    console.log(req.params)
-    console.log(req.body.id)
-    console.log(req.params.id)
-//     const collection = Collection.findOne({'recipes._id': req.params})
-//     Collection.findByIdAndUpdate(collectionId, { $pull: { recipes: recipeId } }, { new: true }, (err, collection) => {
-//     // Handle any errors
-//     if (err) {
-//       // handle error
+// function removeRecipeFromCollection(req, res) {
+//     console.log("Remove Recipe from Collecition being hit")
+//     console.log(req.body)
+//     console.log(req.params)
+//     console.log(req.body.id)
+//     console.log(req.params.id)
+// //     const collection = Collection.findOne({'recipes._id': req.params})
+// //     Collection.findByIdAndUpdate(collectionId, { $pull: { recipes: recipeId } }, { new: true }, (err, collection) => {
+// //     // Handle any errors
+// //     if (err) {
+// //       // handle error
+// //     }
+// //     // Delete the recipe
+// //     Recipe.findByIdAndDelete(recipeId, (err, recipe) => {
+// //       // Handle any errors
+// //       if (err) {
+// //         // handle error
+// //       }
+// //       // Do something with the updated collection or deleted recipe
+// //     });
+// //   });
 //     }
-//     // Delete the recipe
-//     Recipe.findByIdAndDelete(recipeId, (err, recipe) => {
-//       // Handle any errors
-//       if (err) {
-//         // handle error
-//       }
-//       // Do something with the updated collection or deleted recipe
-//     });
-//   });
-    }
