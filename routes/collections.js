@@ -9,6 +9,6 @@ router.get('/create', ensureLoggedIn, collectionsCtrl.new)
 router.post('/', ensureLoggedIn, collectionsCtrl.create)
 router.get('/:id', collectionsCtrl.show)
 router.delete('/:id', ensureLoggedIn, collectionsCtrl.delete)
-// router.put('/:collectionId/remove/:recipeId', ensureLoggedIn, collectionsCtrl.removeRecipeFromCollection)
+router.put('/:collectionId/recipes/:recipeId', ensureLoggedIn, collectionsCtrl.removeRecipeFromCollection)
 
 module.exports = router;

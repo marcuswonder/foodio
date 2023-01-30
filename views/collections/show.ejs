@@ -39,6 +39,11 @@
           <td><%= cr.userName %></td>
           <td><%= cr.category %></td>
           <td>
+            <% if (user?._id.equals(collection.author)) { %> 
+              <form action="/collections/<%= collection._id %>/recipes/<%= cr._id %>?_method=PUT" method="POST" class="remove">
+                <button type="submit" class="delete-button">X</button>
+              </form>
+            <% } %>
           </td>
         </tr>
       <% }) %>

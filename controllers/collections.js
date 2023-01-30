@@ -1,4 +1,5 @@
 const Collection = require('../models/collection')
+const recipe = require('../models/recipe')
 const Recipe = require('../models/recipe')
 
 module.exports = {
@@ -7,7 +8,7 @@ module.exports = {
     create,
     show,
     delete: deleteCollection,
-    // removeRecipeFromCollection,
+    removeRecipeFromCollection,
     
 }
 
@@ -55,25 +56,15 @@ async function deleteCollection(req, res, next) {
     }
 }
 
-// function removeRecipeFromCollection(req, res) {
-//     console.log("Remove Recipe from Collecition being hit")
-//     console.log(req.body)
-//     console.log(req.params)
-//     console.log(req.body.id)
-//     console.log(req.params.id)
-// //     const collection = Collection.findOne({'recipes._id': req.params})
-// //     Collection.findByIdAndUpdate(collectionId, { $pull: { recipes: recipeId } }, { new: true }, (err, collection) => {
-// //     // Handle any errors
-// //     if (err) {
-// //       // handle error
-// //     }
-// //     // Delete the recipe
-// //     Recipe.findByIdAndDelete(recipeId, (err, recipe) => {
-// //       // Handle any errors
-// //       if (err) {
-// //         // handle error
-// //       }
-// //       // Do something with the updated collection or deleted recipe
-// //     });
-// //   });
-//     }
+
+async function removeRecipeFromCollection(req, res) {
+    try {
+      const collection = await Collection.findById(req.params.collectionId);
+      const idx = collection.recipes.findIndex(r => r._id.toString() === req.params.recipeId);
+      collection.recipes.splice(idx, 1);
+      await collection.save();
+      res.redirect(`/collections/${req.params.collectionId}`);
+    } catch (err) {
+      console.log(err);
+    }
+  }
