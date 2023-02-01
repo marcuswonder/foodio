@@ -58,8 +58,29 @@
   <% } %>
 <% } %>
 
+<h3>Tags</h3>
+  <% if(collection.tags.length > 0) { %>
+    <ul>
+      <% collection.tags.forEach(function(t) { %>
+      <li><%= t.tag %></li>
+  <% }) %>
+  </ul>
+  <% } %>
 
+  <ul>
+    <%- collection.tags.map(t =>
+    `<li>
+      ${t.tag} </li>`
+  ).join('') %>
+  </ul>
+  <br>
+  <br>
+  <h4>Add Tags</h4>
+  <a href="/collections/<%= collection._id %>/tags" class="button">
+    <button type="submit" class="reg-button">Add Collection Tags</button></a>
 
-
+</form>
+<br>
+<br>
 
 <%- include('../partials/footer') %>

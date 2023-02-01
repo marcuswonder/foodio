@@ -23,8 +23,6 @@ function create(req, res) {
         recipe.save(function(err) {
             if (err) return res.redirect('/recipes')
             console.log(err)
-        // res.render('recipes/ingredients', { recipe });
-        // res.render('recipes/ingredients', { recipe })
         res.redirect(`/recipes/${recipe._id}/ingredients`);
       });
     });

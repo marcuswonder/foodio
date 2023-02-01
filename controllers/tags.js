@@ -22,7 +22,6 @@ function create(req, res) {
     // tag.gId = req.user.googleId
     tag.save()
     Recipe.findById(req.params.id, function(err, recipe) {
-        console.log(recipe)
         recipe.tags.push(tag)
         recipe.save(function(err) {
         if (err) return res.redirect('/recipes');
@@ -34,11 +33,18 @@ function create(req, res) {
 
 
 function newCollectionTag(req, res) {
-    console.log("Tags show hit")
-    console.log(req.params.id)
+    console.log("New Collection Tag hit")
     Collection.findById(req.params.id, function(err, collection) {
-        console.log(collection) 
-        // Why is collection null here?
         res.render('tags/newcollectiontags', { collection })
     })
 }
+
+// async function newCollectionTag(req, res) {
+//     console.log("New Collection Tag hit")
+//     console.log(req.params.id)
+//     const collection = await Collection.findById(req.params.id)
+//         console.log({collection}) 
+//         console.log(collection)
+//         // Why is collection null here?
+//         res.render('tags/newcollectiontags', { collection })
+// }

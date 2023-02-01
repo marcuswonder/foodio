@@ -31,7 +31,8 @@ function create(req, res) {
     collection.save(function(err) {
         if (err) return res.redirect('/collections');
         console.log(err)
-        res.render('tags/newcollectiontags', { collection })
+        // res.render('tags/newcollectiontags', { collection })
+        res.redirect(`/collections/${collection._id}`)
     })
 }
 
