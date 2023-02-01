@@ -14,11 +14,13 @@ module.exports = {
     // editRecipeInstructions,
 }
 
-function index(req, res) {
-    Recipe.find({}, function(err, recipes) {
+async function index(req, res) {
+    const recipes = await Recipe.find({})
+        .populate('tags')
+        .exec()
         res.render('recipes/index', { recipes })
-    })
 }
+
 
 function newRecipe(req, res) {
     res.render('recipes/new')
@@ -39,12 +41,12 @@ function create(req, res) {
         });
 }
 
-function show(req, res) {
-    Recipe.findById(req.params.id, function(err, recipe) {
-        Collection.find({}, function(err, collections) {
+async function show(req, res) {
+    const recipe = await Recipe.findById(req.params.id)
+    .populate('tags')
+    .exec()
+    const collections = await Collection.find({})
         res.render('recipes/show', { recipe, collections })
-        })
-    })
 }
     
 

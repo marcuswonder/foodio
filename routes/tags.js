@@ -4,8 +4,9 @@ var router = express.Router();
 const tagsCtrl = require('../controllers/tags')
 const ensureLoggedIn = require('../config/ensureLoggedIn');
 
-// router.get('/recipes/:id/ingredients', ensureLoggedIn, ingredientsCtrl.show)
-// router.put('/recipes/:id/ingredients', ensureLoggedIn, ingredientsCtrl.create)
-// router.delete('/ingredients/:id', ensureLoggedIn, ingredientsCtrl.delete)
+router.get('/recipes/:id/tags', ensureLoggedIn, tagsCtrl.newRecipeTag)
+router.post('/recipes/:id/tags', ensureLoggedIn, tagsCtrl.create)
+router.get('/collections/:id/tags', ensureLoggedIn, tagsCtrl.newCollectionTag)
+// router.delete('/ingredients/:id', ensureLoggedIn, tagsCtrl.delete)
 
 module.exports = router;

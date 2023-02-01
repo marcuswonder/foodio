@@ -90,7 +90,7 @@
 
 <h3>Instructions</h3>
 <% if(recipe.instructions.length > 0) { %>
-  <ol>
+<ol>
     <% recipe.instructions.forEach(function(i) { %>
     <li><%= i.instruction %></li>
 <% }); %>
@@ -113,6 +113,44 @@
   <% } %>
   <br>
   <br>
+
+
+
+
+  <h3>Tags</h3>
+  <% if(recipe.tags.length > 0) { %>
+    <ul>
+      <% recipe.tags.forEach(function(t) { %>
+      <li><%= t.tag %></li>
+  <% }) %>
+  </ul>
+  <% } %>
+
+  <ul>
+    <%- recipe.tags.map(t =>
+    `<li>
+      ${t.tag} </li>`
+  ).join('') %>
+  </ul>
+
+  <% if (user?._id.equals(recipe.author)) { %>
+    <a href="/recipes/<%= recipe._id %>/tags" class="button">
+      <button type="submit" class="reg-button">Edit Recipe Tags</button></a>
+  
+  <% } else { %>
+  
+    <% if(recipe.tags.length === 0 && user?._id.equals(recipe.author)) { %>
+      <h4>Add Tags</h4>
+      <p>There are no tags here yet. Use the button below to add some!</p><br>
+      <a href="/recipes/<%= recipe._id %>/tags" class="button">
+        <button type="submit" class="reg-button">Edit Recipe Tags</button></a>
+  
+        <% } else { %>
+          <p>There are no tags here yet. We hope the author will be back soon to add some!</p>
+      <% } %>
+    <% } %>
+    <br>
+    <br>
 
 
 <h2>Add recipe to collection</h2>

@@ -9,9 +9,10 @@ const collectionsSchema = new Schema({
     description: {
         type: String
     },
-    tags: {
-        type: [String]
-    },
+    tags: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Tag'
+    }],
     author: {
         type: Schema.Types.ObjectId,
         ref: 'User'

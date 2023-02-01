@@ -12,10 +12,6 @@ const recipeSchema = new Schema({
     category: {
         type: String
     },
-    tags: {
-        type: [String],
-        required: true
-    },
     prepTime: {
         type: Number,
         min: 0,
@@ -46,6 +42,10 @@ const recipeSchema = new Schema({
         instruction: {
             type: String}
     }],
+    tags: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Tag'
+      }],
     userName: String,
     gId: String,
 }, {
