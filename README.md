@@ -3,8 +3,8 @@
 <br>
 
 ## Overview
-We get recipes from so many different places these days - established food publications, bloggers and Instagram (just to name a few) - that it can be a challenge to keep track of them all. How many times have you found a recipe online and then not been able to get back to it at a later date. 
 
+We get recipes from so many different places these days - established food publications, bloggers and Instagram (just to name a few) - that it can be a challenge to keep track of them all. How many times have you found a recipe online and then not been able to get back to it at a later date. 
 Foodio is the place to find, collect, share, and print your favourite recipes with your family and friends.
 
 <br>
@@ -66,7 +66,7 @@ Simply visit the link above and sign up with your Google Account. Go to 'Recipes
 <br>
 
 ## Timeframe & Working Team
-This was a solo project assigned as part of my Software Engineering Immersive course at General Assembly for which we were given 5 working days. I worked over the weekend totalling 7 full days of development.
+This was the second project assigned as part of my Software Engineering Immersive course at General Assembly; it was a solo project for which we were given 5 working days. I worked over the weekend totalling 7 full days of development.
 
 <br>
 <br>
@@ -297,6 +297,7 @@ Model relationships are key, and fully thinking through the practicalities of ho
 You can find a live tracker of my bug and improvement pipeline on cancan, my project-management app: <a href="https://cancan.herokuapp.com" target="blank">cancan.herokuapp.com</a>
 
 Use the following credentials to log in to the app and navigate to "my boards", and visit the "Foodio" board:
+
 <ul>
     <li>User: guest@guest.com
     <li>Pass: guest
