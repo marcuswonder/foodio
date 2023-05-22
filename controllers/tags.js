@@ -1,6 +1,6 @@
 const Tag = require('../models/tag')
 const Recipe = require('../models/recipe')
-const Collection = require('../models/recipe')
+const Collection = require('../models/collection')
 
 module.exports = {
     newRecipeTag,
@@ -32,9 +32,32 @@ function create(req, res) {
 }
 
 
+// function newCollectionTag(req, res) {
+//     console.log("New Collection Tag hit")
+//     Collection.findById(req.params.id, function(err, collection) {
+//         if (err) {
+//             console.error(err);
+//             return res.status(500).send('Error finding collection');
+//         }
+//         if (!collection) {
+//             return res.status(404).send('Collection not found');
+//         }
+//         res.render('tags/newcollectiontags', { collection })
+//     })
+// }
+
 function newCollectionTag(req, res) {
     console.log("New Collection Tag hit")
+    console.log(req.params.id)
     Collection.findById(req.params.id, function(err, collection) {
+        console.log(collection)
+        if (err) {
+            console.error(err);
+            return res.status(500).send('Error finding collection');
+        }
+        if (!collection) {
+            return res.status(404).send('Collection not found');
+        }
         res.render('tags/newcollectiontags', { collection })
     })
 }
