@@ -45,7 +45,8 @@ const recipeSchema = new Schema({
     tags: [{
         type: Schema.Types.ObjectId,
         ref: 'Tag'
-      }],
+    }],
+    photo: String,
     userName: String,
     gId: String,
 }, {

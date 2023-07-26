@@ -1,5 +1,6 @@
 const Recipe = require('../models/recipe')
 const Collection = require('../models/collection')
+const { uploadFile } = require("../config/s3Client");
 
 module.exports = {
     index,
@@ -27,18 +28,28 @@ function newRecipe(req, res) {
 }
 
 
-function create(req, res) {
+async function create(req, res) {
     if(!req.user) return res.redirect('/auth/google');
     const recipe = new Recipe(req.body);
     recipe.author = req.user._id;
     recipe.userName = req.user.name
     recipe.gId = req.user.googleId
-    recipe.save(function(err) {
-        if (err) return res.redirect('/recipes');
-        console.log(err)
-        console.log("Recipe create redirect hit!")
+    try {
+        const result = await uploadFile(req.file);
+        recipe.photo = result.Location;
         res.redirect(`/recipes/${recipe._id}`);
-        });
+
+    } catch (error) {
+        console.log("Recipe image upload catch error", error)
+        return res.redirect('/recipes');
+    }
+    
+    recipe.save(function(err) {
+        if (err) {
+            console.log("Recipe save error", err)
+            return res.redirect('/recipes');
+        }
+    });
 }
 
 async function show(req, res) {

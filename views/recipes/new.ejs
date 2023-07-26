@@ -4,7 +4,7 @@
 <h1>New Recipe</h1>
 
 <h1>Recipe & Preparation Info</h1>
-<form id="add-recipe" method="POST" action="/recipes">
+<form id="add-recipe" method="POST" action="/recipes" enctype="multipart/form-data">
     <table id="recipe-top-info" class="recipe-info">
         <tr>
           <th>Name: </th>
@@ -48,6 +48,14 @@
             <th># Adult Servings: </th>
             <td><input type="number" name="servings" class="short-input" autocomplete="off"></input><br>
               <st>How many people will the ingredients serve?</st><br></td>
+        </tr>
+      </table>
+      <table id="recipe-photo" class="recipe-info">
+        <tr>
+          <th>Photo: </th>
+            <td><input type="file" name="photo" accept="image/*"><br>
+              <st>Upload a photo of your recipe.</st><br>
+            </td>
         </tr>
       </table>
     <br>
