@@ -20,8 +20,8 @@ async function aiImageGenerator(recipeName) {
     try {
         console.log("openAI try block hit")
         const response = await openai.createImage({
-            // prompt: recipeName,
-            prompt: 'Lamb Rogan Josh',
+            prompt: recipeName,
+            // prompt: 'Lamb Rogan Josh',
             n: 1,
             size: "1024x1024",
         })
