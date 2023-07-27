@@ -1,6 +1,10 @@
 const Recipe = require('../models/recipe')
 const Collection = require('../models/collection')
 const { uploadFile } = require("../config/s3Client");
+const { aiImageGenerator } = require("../config/openAi");
+const multer = require('multer');
+const upload = multer();
+
 
 module.exports = {
     index,
@@ -28,6 +32,7 @@ function newRecipe(req, res) {
 }
 
 
+
 async function create(req, res) {
     if(!req.user) return res.redirect('/auth/google');
     const recipe = new Recipe(req.body);
@@ -35,6 +40,16 @@ async function create(req, res) {
     recipe.userName = req.user.name
     recipe.gId = req.user.googleId
     try {
+        if(req.file) {
+            console.log("recipe create if statement hit")
+            const result = await uploadFile(req.file);
+            recipe.photo = result.Location;
+
+        } else {
+            console.log("recipe create else statement hit")
+            const response = await aiImageGenerator(recipe.name)
+            recipe.photo = response
+        }
         const result = await uploadFile(req.file);
         recipe.photo = result.Location;
         res.redirect(`/recipes/${recipe._id}`);
