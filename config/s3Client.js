@@ -9,7 +9,7 @@ const s3Client = new S3Client({
 });
 
 const uploadFile = async (file) => {
-  // console.log("file", file)
+  console.log("S3: file", file)
   const params = {
     Bucket: process.env.S3_BUCKET,
     Key: file.originalname,
@@ -17,7 +17,7 @@ const uploadFile = async (file) => {
     ContentType: file.mimetype,
     // ACL: 'public-read'
   };
-  // console.log("params", params)
+  console.log("S3: params", params)
 
   try {
     const data = await s3Client.send(new PutObjectCommand(params));
@@ -26,11 +26,10 @@ const uploadFile = async (file) => {
     const Location = `https://${params.Bucket}.s3.amazonaws.com/${params.Key}`;
 
     return {Location};
+
   } catch (err) {
     console.log('Error occurred while trying to upload to S3 bucket', err);
   }
 };
-
-
 
 module.exports = { s3Client, uploadFile }
