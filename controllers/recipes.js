@@ -45,25 +45,21 @@ async function create(req, res) {
         const result = await uploadFile(req.file);
         recipe.photo = result.Location;
 
-        recipe.save(function (err) {
-          if (err) {
-            console.log("Controller: User Image Recipe Save Error", err)
-            return res.redirect('/recipes');
-          }
-          res.redirect(`/recipes/${recipe._id}`);
+        await recipe.save().catch(err => {
+          console.log("Controller: User Image Recipe Save Error", err);
+          return res.redirect('/recipes');
         });
+        res.redirect(`/recipes/${recipe._id}`);
         
       } else {
         const aiImage = await aiImageGeneratorAndS3Upload(recipe);
         recipe.photo = aiImage.Location;
 
-        recipe.save(function (err) {
-          if (err) {
-            console.log("Controller: AI Image Recipe Save Error", err)
-            return res.redirect('/recipes');
-          }
-          res.redirect(`/recipes/${recipe._id}`);
+        await recipe.save().catch(err => {
+          console.log("Controller: AI Image Recipe Save Error", err);
+          return res.redirect('/recipes');
         });
+        res.redirect(`/recipes/${recipe._id}`);
       }
   
     } catch (error) {
@@ -79,6 +75,7 @@ async function show(req, res) {
     const recipe = await Recipe.findById(req.params.id)
     .populate('tags')
     .exec()
+    console.log("recipe", recipe)
     const collections = await Collection.find({})
         res.render('recipes/show', { recipe, collections })
 }
@@ -94,35 +91,26 @@ async function show(req, res) {
     }
 }
 
-function addToCollection(req, res) {
-    console.log("I'm hit!")
-    console.log(req.params) // Recipe 
-    console.log(req.body.collection_id) // Collection
-    Collection.findById(req.body.collection_id, function(err, collection) {
-        collection.recipes.push(req.params.id);
-        collection.save()
-        res.redirect(`/recipes/${req.params.id}`);
-    })
+async function addToCollection(req, res) {
+  const collection = await Collection.findById(req.body.collection_id);
+  collection.recipes.push(req.params.id);
+  await collection.save();
+  res.redirect(`/recipes/${req.params.id}`);
 }
 
-function editRecipe(req, res) {
-    console.log("Edit Recipe is being hit")
-    Recipe.findById(req.params.id, function(err, recipe) {
-        res.render('recipes/update', { recipe })
-    })
+async function editRecipe(req, res) {
+  const recipe = await Recipe.findById(req.params.id);
+  res.render('recipes/update', { recipe });
 }
 
-function updateRecipe(req, res) {
-    console.log("Edit Recipe being hit!")
-    console.log(req.body)
-    Recipe.findById(req.params.id, function(err, recipe) {
-        recipe.name = req.body.name
-        recipe.description = req.body.description
-        recipe.prepTime = req.body.prepTime
-        recipe.cookTime = req.body.cookTime
-        recipe.category = req.body.category
-        recipe.servings = req.body.servings
-        recipe.save()
-        res.redirect(`/recipes/${req.params.id}`)
-    })
+async function updateRecipe(req, res) {
+  const recipe = await Recipe.findById(req.params.id);
+  recipe.name = req.body.name;
+  recipe.description = req.body.description;
+  recipe.prepTime = req.body.prepTime;
+  recipe.cookTime = req.body.cookTime;
+  recipe.category = req.body.category;
+  recipe.servings = req.body.servings;
+  await recipe.save();
+  res.redirect(`/recipes/${req.params.id}`);
 }
