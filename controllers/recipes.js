@@ -1,7 +1,7 @@
 const Recipe = require('../models/recipe')
 const Collection = require('../models/collection')
 const { uploadFile } = require("../config/s3Client");
-const { aiImageGenerator } = require("../config/openAi");
+const { aiImageGeneratorAndS3Upload } = require("../config/openAi");
 const multer = require('multer');
 const upload = multer();
 
@@ -32,86 +32,6 @@ function newRecipe(req, res) {
 }
 
 
-
-// async function create(req, res) {
-//     if(!req.user) return res.redirect('/auth/google');
-//     const recipe = new Recipe(req.body);
-//     recipe.author = req.user._id;
-//     recipe.userName = req.user.name
-//     recipe.gId = req.user.googleId
-//     try {
-//         if(req.file) {
-//             console.log("recipe create if statement hit")
-//             const result = await uploadFile(req.file);
-//             console.log("result", result)
-//             recipe.photo = result.Location;
-
-//         } else {
-//             console.log("recipe create else statement hit")
-//             const response = await aiImageGenerator(recipe.name)
-//             recipe.photo = response
-//         }
-//         const result = await uploadFile(req.file);
-//         recipe.photo = result.Location;
-//         res.redirect(`/recipes/${recipe._id}`);
-
-//     } catch (error) {
-//         console.log("Recipe image upload catch error", error)
-//         return res.redirect('/recipes');
-//     }
-    
-//     recipe.save(function(err) {
-//         if (err) {
-//             console.log("Recipe save error", err)
-//             return res.redirect('/recipes');
-//         }
-//     });
-// }
-
-
-
-// async function create(req, res) {
-//     if (!req.user) return res.redirect('/auth/google');
-  
-//     const recipe = new Recipe(req.body);
-//     recipe.author = req.user._id;
-//     recipe.userName = req.user.name;
-//     recipe.gId = req.user.googleId;
-  
-//     try {
-//       let imageData;
-  
-//       if (req.file) {
-//         imageData = req.file.buffer;
-        
-//       } else {
-//         // If there's no req.file, generate the image using DALL-E API
-//         const response = await aiImageGenerator(recipe.name);
-//         imageData = response;
-//       }
-  
-//       // Pass the image data to the uploadFile function for AWS S3 upload
-//       const result = await uploadFile(imageData);
-//       recipe.photo = result.Location;
-  
-//       // Save the recipe after the image upload
-//       recipe.save(function (err) {
-//         if (err) {
-//           return res.redirect('/recipes');
-//         }
-  
-//         res.redirect(`/recipes/${recipe._id}`);
-//       });
-  
-//     } catch (error) {
-//       return res.redirect('/recipes');
-//     }
-//   }
-
-
-
-
-
 async function create(req, res) {
     if (!req.user) return res.redirect('/auth/google');
   
@@ -130,35 +50,24 @@ async function create(req, res) {
             console.log("Controller: User Image Recipe Save Error", err)
             return res.redirect('/recipes');
           }
-    
           res.redirect(`/recipes/${recipe._id}`);
         });
         
-        
       } else {
-        console.log("Controller: Else Block Hit")
-
-        const aiImage = await aiImageGenerator(recipe);
-        console.log("Controller: aiImage", aiImage)
-        
-        // const result = await uploadFile(aiImage);
-        // console.log("Controller: result", result)
-        
+        const aiImage = await aiImageGeneratorAndS3Upload(recipe);
         recipe.photo = aiImage.Location;
-        console.log("Controller: recipe.photo", recipe.photo)
 
         recipe.save(function (err) {
           if (err) {
             console.log("Controller: AI Image Recipe Save Error", err)
             return res.redirect('/recipes');
           }
-    
           res.redirect(`/recipes/${recipe._id}`);
         });
       }
-      
   
     } catch (error) {
+      console.log("Controller: Recipe Catch Block Error", error)
       return res.redirect('/recipes');
     }
   }

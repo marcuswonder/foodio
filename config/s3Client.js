@@ -9,19 +9,15 @@ const s3Client = new S3Client({
 });
 
 const uploadFile = async (file) => {
-  console.log("S3: file", file)
   const params = {
     Bucket: process.env.S3_BUCKET,
     Key: file.originalname,
     Body: file.buffer,
     ContentType: file.mimetype,
-    // ACL: 'public-read'
   };
-  console.log("S3: params", params)
 
   try {
-    const data = await s3Client.send(new PutObjectCommand(params));
-    console.log("Response", data)
+    await s3Client.send(new PutObjectCommand(params));
     
     const Location = `https://${params.Bucket}.s3.amazonaws.com/${params.Key}`;
 
