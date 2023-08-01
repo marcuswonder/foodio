@@ -12,7 +12,7 @@ const openai = new OpenAIApi(configuration);
 
 async function aiImageGeneratorAndS3Upload(recipe) {
     try {
-      let prompt; // define variable outside the if/else
+      let prompt
     
       if(recipe.category !== "Cocktail") {
         prompt = `A photorealistic image taken from an angle with a slightly blurred background of a ${recipe.name} ${recipe.category} served on a round white plate on a farmhouse style wooden table.`;
@@ -27,17 +27,8 @@ async function aiImageGeneratorAndS3Upload(recipe) {
         });
         
         const image_url = response.data.data[0].url;
-        const imageData = await downloadImage(image_url);
-        const tempFileName = `temp-${Date.now()}`;
-
-        if (!fs.existsSync('../public/temp')) {
-          fs.mkdirSync('../public/temp', { recursive: true });
-        }
-
-        fs.writeFileSync(`../public/temp/${tempFileName}`, imageData);
-        
-        const buffer = fs.readFileSync(`../public/temp/${tempFileName}`);      
-
+        const buffer = await downloadImage(image_url);
+       
         let imageDataForUpload = {}
           imageDataForUpload.originalname = recipe.name,
           imageDataForUpload.buffer = buffer
