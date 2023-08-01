@@ -82,13 +82,15 @@ async function show(req, res) {
     
 
 
-  async function deleteRecipe(req, res, next) {
-    try {
-        await Recipe.remove({'_id': req.params.id})
-        res.redirect('/recipes')
-    } catch(err) {
-        return next(err)
-    }
+async function deleteRecipe(req, res, next) {
+  try {
+      console.log("req.params.id", req.params.id)
+      await Recipe.deleteOne({'_id': req.params.id})
+      res.redirect('/recipes')
+  } catch(err) {
+      console.log(err)
+      return next(err)
+  }
 }
 
 async function addToCollection(req, res) {

@@ -52,7 +52,7 @@ async function show(req, res) {
 
 async function deleteCollection(req, res, next) {
     try {
-        await Collection.remove({ '_id': req.params.id });
+        await Collection.deleteOne({ '_id': req.params.id });
         res.redirect('/collections');
     } catch (err) {
         return next(err);
