@@ -3,13 +3,19 @@ const Collection = require('../models/collection')
 const { uploadFile } = require("../config/s3Client");
 const { aiImageGeneratorAndS3Upload } = require("../config/openAi");
 const multer = require('multer');
-const upload = multer();
+// const upload = multer();
+const validator = require('validator');
+
+
+
 
 
 module.exports = {
     index,
-    new: newRecipe,
+    new: newAddRecipe,
     create,
+    newPasteRecipe,
+    paste,
     show,
     delete: deleteRecipe,
     addToCollection,
@@ -27,48 +33,70 @@ async function index(req, res) {
 }
 
 
-function newRecipe(req, res) {
+function newAddRecipe(req, res) {
     res.render('recipes/new')
 }
 
 
 async function create(req, res) {
-    if (!req.user) return res.redirect('/auth/google');
-  
-    const recipe = new Recipe(req.body);
-    recipe.author = req.user._id;
-    recipe.userName = req.user.name;
-    recipe.gId = req.user.googleId;
-  
-    try {
-      if(req.file) {
-        const result = await uploadFile(req.file);
-        recipe.photo = result.Location;
+  // console.log("Controller Create Function: req.body", req.body)
+  if (!req.user) return res.redirect('/auth/google');
 
-        await recipe.save().catch(err => {
-          console.log("Controller: User Image Recipe Save Error", err);
-          return res.redirect('/recipes');
-        });
-        res.redirect(`/recipes/${recipe._id}`);
-        
-      } else {
-        const aiImage = await aiImageGeneratorAndS3Upload(recipe);
-        recipe.photo = aiImage.Location;
+  const recipe = new Recipe(req.body);
+  recipe.author = req.user._id;
+  recipe.userName = req.user.name;
+  recipe.gId = req.user.googleId;
 
-        await recipe.save().catch(err => {
-          console.log("Controller: AI Image Recipe Save Error", err);
-          return res.redirect('/recipes');
-        });
-        res.redirect(`/recipes/${recipe._id}`);
-      }
-  
-    } catch (error) {
-      console.log("Controller: Recipe Catch Block Error", error)
-      return res.redirect('/recipes');
+  try {
+    if(req.file) {
+      const result = await uploadFile(req.file);
+      recipe.photo = result.Location;
+
+      await recipe.save().catch(err => {
+        console.log("Controller: User Image Recipe Save Error", err);
+        return res.redirect('/recipes');
+      });
+      res.redirect(`/recipes/${recipe._id}`);
+      
+    } else {
+      const aiImage = await aiImageGeneratorAndS3Upload(recipe);
+      recipe.photo = aiImage.Location;
+
+      await recipe.save().catch(err => {
+        console.log("Controller: AI Image Recipe Save Error", err);
+        return res.redirect('/recipes');
+      });
+      res.redirect(`/recipes/${recipe._id}`);
     }
+
+  } catch (error) {
+    console.log("Controller: Recipe Catch Block Error", error)
+    return res.redirect('/recipes');
   }
+}
+
+async function newPasteRecipe(req, res) {
+  res.render('recipes/paste')
+}
+
+async function paste(req, res) {
+  console.log("Controller: Paste function hit")
+  console.log("Controller Paste Function: req.body", req.body)
+  
+  const isValidUrl = validator.isURL(req.body.recipeLink, {
+    require_protocol: true,
+  });
+  
+  if (!isValidUrl) {
+    console.log("Value is not a valid URL")
+  }
+  
+  
+  res.render('recipes/paste')
 
 
+
+}
 
 
 async function show(req, res) {

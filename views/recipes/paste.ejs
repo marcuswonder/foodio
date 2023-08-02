@@ -1,0 +1,12 @@
+<%- include('../partials/header') %>
+
+<title>Paste Recipe</title>
+<h1>Paste the link to a recipe from the internet</h1>
+
+<form id="paste-recipe" method="POST" action="/recipes/paste">
+    <input type="text" class="med-input" id="paste" name="recipeLink">
+    <br>
+    <button type="submit" class="reg-button">Import Recipe</button>
+</form>
+
+<%- include('../partials/footer') %>
