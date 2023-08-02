@@ -2,9 +2,11 @@ const Recipe = require('../models/recipe')
 const Collection = require('../models/collection')
 const { uploadFile } = require("../config/s3Client");
 const { aiImageGeneratorAndS3Upload } = require("../config/openAi");
-const multer = require('multer');
+
+// const multer = require('multer');
 // const upload = multer();
 const validator = require('validator');
+const { getBbcGoodFoodRecipe } = require("../config/cheerio")
 
 
 
@@ -82,8 +84,10 @@ async function newPasteRecipe(req, res) {
 async function paste(req, res) {
   console.log("Controller: Paste function hit")
   console.log("Controller Paste Function: req.body", req.body)
+
+  const recipeLink = req.body.recipeLink
   
-  const isValidUrl = validator.isURL(req.body.recipeLink, {
+  const isValidUrl = validator.isURL(recipeLink, {
     require_protocol: true,
   });
   
@@ -91,6 +95,7 @@ async function paste(req, res) {
     console.log("Value is not a valid URL")
   }
   
+  getBbcGoodFoodRecipe(recipeLink)
   
   res.render('recipes/paste')
 
