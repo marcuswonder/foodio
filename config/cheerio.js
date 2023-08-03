@@ -84,7 +84,7 @@ async function getBbcGoodFoodRecipe(recipeLink) {
             servings: servings,
             ingredients: ingredients,
             instructions: [instructions],
-            photoLink: photoLink,
+            photo: photoLink,
         }
 
         console.log("Cheerio: recipe", recipe)

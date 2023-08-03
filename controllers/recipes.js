@@ -100,8 +100,6 @@ async function paste(req, res) {
   console.log("Controller: bbcRecipe", bbcRecipe)
 
   if (!req.user) return res.redirect('/auth/google');
-  
-  console.log("BBC Recipe create hit")
 
   bbcRecipe.author = req.user._id
   bbcRecipe.userName = req.user.name
@@ -109,18 +107,6 @@ async function paste(req, res) {
   bbcRecipe.category = req.body.category
 
   const recipe = new Recipe(bbcRecipe);
-
-  // recipe.author = req.user._id
-  // recipe.userName = req.user.name
-  // recipe.gId = req.user.googleId
-  // recipe.name = bbcRecipe.name
-  // recipe.description = bbcRecipe.description
-  // recipe.prepTime = bbcRecipe.prepTime
-  // recipe.cookTime = bbcRecipe.cookTime
-  // recipe.servings = bbcRecipe.servings
-  // recipe.ingredients = bbcRecipe.ingredients
-  // recipe.instructions = bbcRecipe.instructions
-  // photoLink: bbcRecipe.photoLink
 
   console.log("controller BBC Recipe create", recipe)
   
