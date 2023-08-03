@@ -4,15 +4,10 @@ const cheerio = require('cheerio');
 async function getBbcGoodFoodRecipe(recipeLink) {
     console.log("Cheerio: getBbcGoodFoodRecipe function hit and recipeLink", recipeLink)
     
-    axios.get(recipeLink) 
-	.then(response => {
+    try {
+        const response = await axios.get(recipeLink);
         console.log("Axios: getBbcGoodFoodRecipe axios get function worked")
-        // console.log("Axios: GetBBC response.data", response.data);
-        // console.log("Axios: GetBBC response.status", response.status);
-        // console.log("Axios: GetBBC response.statusText", response.statusText);
-        // console.log("Axios: GetBBC response.headers", response.headers);
-        // console.log("Axios: GetBBC response.config", response.config);
-        
+
         const $ = cheerio.load(response.data)
 
         // photoLink
@@ -74,7 +69,7 @@ async function getBbcGoodFoodRecipe(recipeLink) {
 
         $instructions('li').each((index, element) => {
             unformattedInstructions.push($(element).text());
-          });
+        });
         
         let instructions = unformattedInstructions.map(instruction => instruction.replace(/STEP \d+/, ''));
 
@@ -95,12 +90,10 @@ async function getBbcGoodFoodRecipe(recipeLink) {
         console.log("Cheerio: recipe", recipe)
 
         return recipe
-        
-      })
-
-    .catch(error => {
+            
+    } catch (error) {
         console.log(error);
-    })
+    }
 }
 
 function timeStringToMinutes(timeString) {

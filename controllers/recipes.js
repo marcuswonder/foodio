@@ -84,6 +84,7 @@ async function newPasteRecipe(req, res) {
 async function paste(req, res) {
   console.log("Controller: Paste function hit")
   console.log("Controller Paste Function: req.body", req.body)
+  console.log("Controller Paste Function: req.user", req.user)
 
   const recipeLink = req.body.recipeLink
   
@@ -95,9 +96,38 @@ async function paste(req, res) {
     console.log("Value is not a valid URL")
   }
   
-  getBbcGoodFoodRecipe(recipeLink)
+  const bbcRecipe = await getBbcGoodFoodRecipe(recipeLink)
+  console.log("Controller: bbcRecipe", bbcRecipe)
+
+  if (!req.user) return res.redirect('/auth/google');
   
-  res.render('recipes/paste')
+  console.log("BBC Recipe create hit")
+
+  bbcRecipe.author = req.user._id
+  bbcRecipe.userName = req.user.name
+  bbcRecipe.gId = req.user.googleId
+
+  const recipe = new Recipe(bbcRecipe);
+
+  // recipe.author = req.user._id
+  // recipe.userName = req.user.name
+  // recipe.gId = req.user.googleId
+  // recipe.name = bbcRecipe.name
+  // recipe.description = bbcRecipe.description
+  // recipe.prepTime = bbcRecipe.prepTime
+  // recipe.cookTime = bbcRecipe.cookTime
+  // recipe.servings = bbcRecipe.servings
+  // recipe.ingredients = bbcRecipe.ingredients
+  // recipe.instructions = bbcRecipe.instructions
+  // photoLink: bbcRecipe.photoLink
+
+  console.log("controller BBC Recipe create", recipe)
+  
+  await recipe.save().catch(err => {
+    console.log("Controller: BBC Scrape Recipe Save Error", err);
+    return res.redirect('/recipes');
+  });
+  res.redirect(`/recipes/${recipe._id}`);
 
 
 
