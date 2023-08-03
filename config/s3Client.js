@@ -1,4 +1,6 @@
 const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
+const https = require('https');
+const fs = require('fs');
 
 const s3Client = new S3Client({
   region: 'eu-west-2',
@@ -28,4 +30,32 @@ const uploadFile = async (file) => {
   }
 };
 
-module.exports = { s3Client, uploadFile }
+async function manuallyUploadFile(image_url, recipe) {
+  const buffer = await downloadImage(image_url);
+  
+  let imageDataForUpload = {}
+    imageDataForUpload.originalname = recipe.name,
+    imageDataForUpload.buffer = buffer
+
+  const result = await uploadFile(imageDataForUpload);
+  return result
+}
+
+async function downloadImage(image_url) {
+  return new Promise((resolve, reject) => {
+    https.get(image_url, (response) => {
+      if (response.statusCode !== 200) {
+        reject(new Error(`Failed to fetch image. Status code: ${response.statusCode}`));
+        return;
+      }
+
+      const chunks = [];
+      response.on('data', (chunk) => chunks.push(chunk));
+      response.on('end', () => resolve(Buffer.concat(chunks)));
+    }).on('error', (error) => {
+      reject(error);
+    });
+  });
+}
+
+module.exports = { s3Client, uploadFile, manuallyUploadFile }
