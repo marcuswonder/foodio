@@ -106,6 +106,7 @@ async function paste(req, res) {
   bbcRecipe.author = req.user._id
   bbcRecipe.userName = req.user.name
   bbcRecipe.gId = req.user.googleId
+  bbcRecipe.category = req.body.category
 
   const recipe = new Recipe(bbcRecipe);
 
