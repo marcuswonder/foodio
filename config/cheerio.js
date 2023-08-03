@@ -2,7 +2,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 
 async function getBbcGoodFoodRecipe(recipeLink) {
-    console.log("Cheerio: getBbcGoodFoodRecipe function hit and recipeLink", recipeLink)
+    // console.log("Cheerio: getBbcGoodFoodRecipe function hit and recipeLink", recipeLink)
     
     try {
         const response = await axios.get(recipeLink);
@@ -56,7 +56,7 @@ async function getBbcGoodFoodRecipe(recipeLink) {
         // console.log("Axios: ingredientsQuantitiesAndMeasures", ingredientsQuantitiesAndMeasures);
         
 
-        console.log("Axios: ingredientsQuantitiesAndMeasures", ingredientsQuantitiesAndMeasures);
+        // console.log("Cheerio: ingredientsQuantitiesAndMeasures", ingredientsQuantitiesAndMeasures);
 
         let ingredients = parseIngredients(ingredientsQuantitiesAndMeasures)
         // console.log("Axios: ingredientsObject", ingredientsObject);
@@ -71,10 +71,15 @@ async function getBbcGoodFoodRecipe(recipeLink) {
             unformattedInstructions.push($(element).text());
         });
         
-        let instructions = unformattedInstructions.map(instruction => instruction.replace(/STEP \d+/, ''));
+        let formattedInstructions = unformattedInstructions.map(instruction => instruction.replace(/STEP \d+/, ''));
+        let instructions = [];
 
-        
-        // console.log("Axios: instructions", instructions);
+        for(let i = 0; i < formattedInstructions.length; i++) {
+            let instructionObj = {instruction: formattedInstructions[i]};
+            instructions.push(instructionObj);
+        }
+
+        console.log("Cheerio: instructions", instructions);
         
         let recipe = {
             name: name,
@@ -83,7 +88,7 @@ async function getBbcGoodFoodRecipe(recipeLink) {
             cookTime: cookTime,
             servings: servings,
             ingredients: ingredients,
-            instructions: [instructions],
+            instructions: instructions,
             photo: photoLink,
         }
 
