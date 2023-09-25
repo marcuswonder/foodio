@@ -1,11 +1,11 @@
 <%- include('../partials/header') %>
 
-<title>Paste Recipe</title>
-<h1>Paste the link to a recipe from the internet</h1>
+<title>Copy Recipe</title>
+<h1>Copy and paste the link to a recipe from the internet</h1>
 <p>Currently we only support recipes copied from BBC Good Food</p>
 
-<form id="paste-recipe" method="POST" action="/recipes/paste">
-    <input type="text" class="med-input" id="paste" name="recipeLink">
+<form id="copy-recipe" method="POST" action="/recipes/copy">
+    <input type="text" class="med-input" id="copy" name="recipeLink">
     <br>
     <select name="category" class="input">
         <st>How would you categorise this recipe?</st><br></td>
@@ -23,8 +23,8 @@
 </form>
 
 <script>
-    document.getElementById('paste-recipe').addEventListener('submit', function(event) {
-        const inputVal = document.getElementById('paste').value;
+    document.getElementById('copy-recipe').addEventListener('submit', function(event) {
+        const inputVal = document.getElementById('copy').value;
 
         if (!inputVal.includes('www.bbcgoodfood.com')) {
             alert('We can only support recipes from BBC Good Food at this time"')

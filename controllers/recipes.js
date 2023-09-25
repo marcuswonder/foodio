@@ -16,8 +16,8 @@ module.exports = {
     index,
     new: newAddRecipe,
     create,
-    newPasteRecipe,
-    paste,
+    newCopyRecipe,
+    copy: copyRecipe,
     show,
     delete: deleteRecipe,
     addToCollection,
@@ -77,14 +77,14 @@ async function create(req, res) {
   }
 }
 
-async function newPasteRecipe(req, res) {
-  res.render('recipes/paste')
+async function newCopyRecipe(req, res) {
+  res.render('recipes/copy')
 }
 
-async function paste(req, res) {
-  console.log("Controller: Paste function hit")
-  console.log("Controller Paste Function: req.body", req.body)
-  console.log("Controller Paste Function: req.user", req.user)
+async function copyRecipe(req, res) {
+  console.log("Controller: Copy function hit")
+  console.log("Controller Copy Function: req.body", req.body)
+  console.log("Controller Copy Function: req.user", req.user)
 
   const recipeLink = req.body.recipeLink
   
