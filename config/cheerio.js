@@ -31,11 +31,13 @@ async function getBbcGoodFoodRecipe(recipeLink) {
         
         // Servings
         const servingsFullString = $('.post-header__servings').text();
-        console.log("Cheerio: servingsFullString", servingsFullString)
+        // console.log("Cheerio: servingsFullString", servingsFullString)
         const servingsNumString = servingsFullString.replace("Serves ","")
-        console.log("Cheerio: servingsNumString", servingsNumString)
+        // console.log("Cheerio: servingsNumString", servingsNumString)
+
+        const servings = findAverageNumberFromRange(servingsNumString)
         
-        const servings = Number(servingsNumString)
+        // const servings = Number(servingsNumString)
 
         // Ingredients
         const ingredientsHtml = $('.recipe__ingredients').html()
@@ -168,6 +170,8 @@ function timeStringToMinutes(timeString) {
   };
 
 function parseIngredients(ingredientsQuantitiesAndMeasures) {
+    console.log("Cheerio: parseIngredients ingredientsQuantitiesAndMeasures", ingredientsQuantitiesAndMeasures)
+
     let ingredients = []
     for(let ingredientString of ingredientsQuantitiesAndMeasures) {
         const result = {};
@@ -213,9 +217,9 @@ function parseIngredients(ingredientsQuantitiesAndMeasures) {
             '4/5' : .8,
         }
 
-        // console.log("Cheerio: splitIngredient", splitIngredient)
+        console.log("Cheerio: splitIngredient", splitIngredient)
 
-        // check if first item is fraction
+        // check if first item in the array is fraction
         if (splitIngredient[0] in fractionMapping) {
             
             let qty = fractionMapping[splitIngredient[0]]
@@ -248,7 +252,40 @@ function parseIngredients(ingredientsQuantitiesAndMeasures) {
                 result.preparation = combinedPreparation || ''
             }
             
-        
+        // check if first item in the array contains "-" and average range
+        } else if(splitIngredient[0].includes('-')) {
+            let qty = findAverageNumberFromRange(splitIngredient[0])   
+            result.qty = qty
+
+            // Check if second item matches unitMapping key, return value
+            if (splitIngredient[1] in unitMapping) {
+                let unit = unitMapping[splitIngredient[1]]; 
+                result.unit = unit
+
+                // Remove first and second items. Combine remaining items for regex comparison.
+                splitIngredient.splice(0,2)
+                const splitIngredientAndPreparation = combineArrayElementsWithSpaces(splitIngredient).split(", ")
+                result.ingredient = splitIngredientAndPreparation[0]
+                
+                // splice ingredient and combine remaining elements in case of commas in preparation
+                splitIngredientAndPreparation.splice(0,1)
+                const combinedPreparation = combineArrayElementsWithSpaces(splitIngredientAndPreparation)
+                result.preparation = combinedPreparation || ''
+            
+            } else {
+                result.unit = 'Piece(s)'
+                splitIngredient.splice(0,1)
+                const splitIngredientAndPreparation = combineArrayElementsWithSpaces(splitIngredient).split(", ")
+                result.ingredient = splitIngredientAndPreparation[0]
+                 
+                // splice ingredient and combine remaining elements in case of commas in preparation
+                splitIngredientAndPreparation.splice(0,1)
+                const combinedPreparation = combineArrayElementsWithSpaces(splitIngredientAndPreparation)
+                result.preparation = combinedPreparation || ''
+            }
+
+
+
         // check if first item holds numbers only
         } else if(containsNumbers(splitIngredient[0]) && !containsLetters(splitIngredient[0])) {
             result.qty = Number(splitIngredient[0])
@@ -323,8 +360,7 @@ function parseIngredients(ingredientsQuantitiesAndMeasures) {
                 }
             
             }
-
-
+        
         } else {
             result.qty = 1
             result.unit = 'Piece(s)'
@@ -376,6 +412,36 @@ function combineArrayElementsWithSpaces(arr) {
         }
     }
     return result;
+}
+
+function findAverageNumberFromRange(string) {
+    if (string.includes(' - ')) {
+        const numberRange = string.split(' - ').map(Number)
+        console.log("Cheerio: findAverageNumberFromRange numberRange", numberRange)
+        let num = (numberRange[0] + numberRange[1]) / 2
+
+        if(isNaN(num)) {
+            num = 1
+        }
+
+        console.log("Cheerio: findAverageNumberFromRange - spaces", num)
+        return num
+        
+    } else if(string.includes('-')) {
+        const numberRange = string.split('-').map(Number)
+        console.log("Cheerio: findAverageNumberFromRange numberRange", numberRange)
+        let num = (numberRange[0] + numberRange[1]) / 2
+        
+        if(isNaN(num)) {
+            num = 1
+        }
+        console.log("Cheerio: findAverageNumberFromRange - no spaces", num)
+        return num
+    }
+    else {
+        const num = Number(string)
+        return num
+    }
 }
 
 function isFraction(string) {
