@@ -33,6 +33,51 @@
       <% }); %>
     </tbody>
   </table>
+  
+  <div id="recipes-container">
+    <div class="recipe-card-grid">
+      <% recipes.forEach(function(r) { %>
+        <a href="/recipes/<%= r._id %>" class="recipe-card-container">
+          <div class="recipe-image">
+            <img src="<%= r.photo %>" alt="Recipe Image">
+          </div>
+          <div class="recipe-title">
+            <h2><%= r.name %></h2>
+          </div>
+          <div class="recipe-author">
+            <p><%= r.userName %></p>
+          </div>
+          <div class="recipe-about-container">
+            <div class="recipe-about-time-container">
+              <div class="recipe-about-time-icon">
+                <img src="/public/icons/times.png" alt="time icon">
+              </div>
+              <div class="recipe-about-time-value">             
+                <p><%= r.prepTime + r.cookTime %> mins</p>
+
+                <!-- <% if ((r.prepTime + r.cookTime) > 60) { %>
+                  <p><%= (r.prepTime + r.cookTime) / 60 %> hrs</p>
+                <% } else { %>
+                  <p><%= r.prepTime + r.cookTime %> mins</p>
+                <% } %> -->
+
+              </div>
+            </div>
+            
+            <div class="recipe-about-servings-container">
+              <div class="recipe-about-servings-icon">
+                <img src="../../public/icons/servings.png" alt="servings icon">
+              </div>
+              <div class="recipe-about-servings-value">
+                <p><%= r.servings %></p>
+              </div>
+            </div>
+          </div>
+        </a>
+      <% }) %>
+    </div>
+  </div>
+
   <% } %>
   <a id="add-recipe-page-link" method="GET" 
     href="recipes/add"><input type="submit" value="Add a Recipe" class="reg-button"/>
