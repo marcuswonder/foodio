@@ -97,27 +97,23 @@ async function paste(req, res) {
   }
   
   const bbcRecipe = await getBbcGoodFoodRecipe(recipeLink)
-  console.log("Controller: bbcRecipe", bbcRecipe)
 
   if (!req.user) return res.redirect('/auth/google');
-
+  
   bbcRecipe.author = req.user._id
   bbcRecipe.userName = req.user.name
   bbcRecipe.gId = req.user.googleId
   bbcRecipe.category = req.body.category
 
-  const recipe = new Recipe(bbcRecipe);
+  console.log("Controller: bbcRecipe", bbcRecipe)
 
-  console.log("controller BBC Recipe create", recipe)
+  const recipe = new Recipe(bbcRecipe);
   
   await recipe.save().catch(err => {
     console.log("Controller: BBC Scrape Recipe Save Error", err);
     return res.redirect('/recipes');
   });
   res.redirect(`/recipes/${recipe._id}`);
-
-
-
 }
 
 
@@ -125,7 +121,6 @@ async function show(req, res) {
     const recipe = await Recipe.findById(req.params.id)
     .populate('tags')
     .exec()
-    console.log("recipe", recipe)
     const collections = await Collection.find({})
         res.render('recipes/show', { recipe, collections })
 }
@@ -134,7 +129,6 @@ async function show(req, res) {
 
 async function deleteRecipe(req, res, next) {
   try {
-      console.log("req.params.id", req.params.id)
       await Recipe.deleteOne({'_id': req.params.id})
       res.redirect('/recipes')
   } catch(err) {

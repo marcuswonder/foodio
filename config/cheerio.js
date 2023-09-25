@@ -6,7 +6,6 @@ async function getBbcGoodFoodRecipe(recipeLink) {
     
     try {
         const response = await axios.get(recipeLink);
-        console.log("Axios: getBbcGoodFoodRecipe axios get function worked")
 
         const $ = cheerio.load(response.data)
 
@@ -15,31 +14,28 @@ async function getBbcGoodFoodRecipe(recipeLink) {
         
         let photoUrls = photoSrcset ? photoSrcset.split(',') : [];
         let photoLink = photoUrls.length > 0 ? photoUrls[4] : '';
-        // console.log("Axios: photo", photo)
 
         // Name
         const name = $('.post-header__title > h1').text()
-        // console.log("Axios: title", name)
+        
+        // Description
+        const description = $('.post-header__body div:nth-child(6) > p').text()
         
         // Prep & Cook Times
-        const description = $('.post-header__body div:nth-child(6) > p').text()
-        // console.log("Axios: title", description)
-
         const prepTimeString = $('.post-header__planning time').first().text();
-        // console.log("Axios: prepTime", prepTimeString)
-
         const prepTime = timeStringToMinutes(prepTimeString)
         
         const cookTimeString = $('.post-header__planning time').last().text();
-        // console.log("Axios: prepTime", cookTimeString)
         
         const cookTime = timeStringToMinutes(cookTimeString)
         
         // Servings
         const servingsFullString = $('.post-header__servings').text();
+        console.log("Cheerio: servingsFullString", servingsFullString)
         const servingsNumString = servingsFullString.replace("Serves ","")
+        console.log("Cheerio: servingsNumString", servingsNumString)
+        
         const servings = Number(servingsNumString)
-        // console.log("Axios: servings", servings)
 
         // Ingredients
         const ingredientsHtml = $('.recipe__ingredients').html()
@@ -53,14 +49,7 @@ async function getBbcGoodFoodRecipe(recipeLink) {
             });
         });
 
-        // console.log("Axios: ingredientsQuantitiesAndMeasures", ingredientsQuantitiesAndMeasures);
-        
-
-        // console.log("Cheerio: ingredientsQuantitiesAndMeasures", ingredientsQuantitiesAndMeasures);
-
         let ingredients = parseIngredients(ingredientsQuantitiesAndMeasures)
-        // console.log("Axios: ingredientsObject", ingredientsObject);
-    
     
         const instructionsHtml = $('.recipe__method-steps').html()
         const $instructions = cheerio.load(instructionsHtml)
@@ -78,8 +67,6 @@ async function getBbcGoodFoodRecipe(recipeLink) {
             let instructionObj = {instruction: formattedInstructions[i]};
             instructions.push(instructionObj);
         }
-
-        console.log("Cheerio: instructions", instructions);
         
         let recipe = {
             name: name,
@@ -91,8 +78,6 @@ async function getBbcGoodFoodRecipe(recipeLink) {
             instructions: instructions,
             photo: photoLink,
         }
-
-        console.log("Cheerio: recipe", recipe)
 
         return recipe
             
@@ -198,28 +183,37 @@ function parseIngredients(ingredientsQuantitiesAndMeasures) {
             splitIngredient.splice(1,1)
         }
 
-        
-
         const fractionMapping = {
             '½' : .5,
+            '1⁄2' : .5,
             '1/2' : .5,
-            '¾': .75,
-            '3/4': .75,
-            '¼': .25,
-            '1/4': .25,
+            '¾' : .75,
+            '3⁄4' : .75,
+            '3/4' : .75,
+            '¼' : .25,
+            '1⁄4' : .25,
+            '1/4' : .25,
             '⅔' : .666,
+            '2⁄3' : .666,
             '2/3' : .666,
             '⅓' : .333,
+            '1⁄3' : .333,
             '1/3' : .333,
             '⅕' : .2,
+            '1⁄5' : .2,
             '1/5' : .2,
             '⅖' : .4,
+            '2⁄5' : .4,
             '2/5' : .4,
             '⅗' : .6,
+            '3⁄5' : .6,
             '3/5' : .6,
             '⅘' : .8,
+            '4⁄5' : .8,
             '4/5' : .8,
         }
+
+        // console.log("Cheerio: splitIngredient", splitIngredient)
 
         // check if first item is fraction
         if (splitIngredient[0] in fractionMapping) {
@@ -237,6 +231,17 @@ function parseIngredients(ingredientsQuantitiesAndMeasures) {
                 const splitIngredientAndPreparation = combineArrayElementsWithSpaces(splitIngredient).split(", ")
                 result.ingredient = splitIngredientAndPreparation[0]
                 
+                // splice ingredient and combine remaining elements in case of commas in preparation
+                splitIngredientAndPreparation.splice(0,1)
+                const combinedPreparation = combineArrayElementsWithSpaces(splitIngredientAndPreparation)
+                result.preparation = combinedPreparation || ''
+            
+            } else {
+                result.unit = 'Piece(s)'
+                splitIngredient.splice(0,1)
+                const splitIngredientAndPreparation = combineArrayElementsWithSpaces(splitIngredient).split(", ")
+                result.ingredient = splitIngredientAndPreparation[0]
+                 
                 // splice ingredient and combine remaining elements in case of commas in preparation
                 splitIngredientAndPreparation.splice(0,1)
                 const combinedPreparation = combineArrayElementsWithSpaces(splitIngredientAndPreparation)
@@ -335,7 +340,7 @@ function parseIngredients(ingredientsQuantitiesAndMeasures) {
 
         }
         ingredients.push(result)
-        console.log("Cheerio: getBbcGoodFoodRecipe ingredients", ingredients)
+        // console.log("Cheerio: getBbcGoodFoodRecipe ingredients", ingredients)
     }
     return ingredients
 }
