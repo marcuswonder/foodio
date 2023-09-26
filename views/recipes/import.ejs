@@ -1,0 +1,12 @@
+<%- include('../partials/header') %>
+
+<title>Import Recipe</title>
+<h1>Use our new AI tool to import a written a recipe from anywhere on the internet</h1>
+
+<form id="copy-recipe" method="POST" action="/recipes/import">
+    <input type="text" class="med-input" id="import" name="recipeLink">
+    <br>
+    <button type="submit" class="reg-button">Import Recipe</button>
+</form>
+
+<%- include('../partials/footer') %>

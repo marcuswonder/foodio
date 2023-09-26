@@ -2,14 +2,10 @@ const Recipe = require('../models/recipe')
 const Collection = require('../models/collection')
 const { uploadFile } = require("../config/s3Client");
 const { aiImageGeneratorAndS3Upload } = require("../config/openAi");
-
 // const multer = require('multer');
 // const upload = multer();
 const validator = require('validator');
 const { getBbcGoodFoodRecipe } = require("../config/cheerio")
-
-
-
 
 
 module.exports = {
@@ -18,6 +14,8 @@ module.exports = {
     create,
     newCopyRecipe,
     copy: copyRecipe,
+    newImportRecipe,
+    import: importRecipe,
     show,
     delete: deleteRecipe,
     addToCollection,
@@ -114,6 +112,33 @@ async function copyRecipe(req, res) {
     return res.redirect('/recipes');
   });
   res.redirect(`/recipes/${recipe._id}`);
+}
+
+async function newImportRecipe(req, res) {
+  res.render('recipes/import')
+}
+
+async function importRecipe(req, res) {
+  console.log("Controller: Import function hit")
+  console.log("Controller Import Function: req.body", req.body)
+  console.log("Controller Import Function: req.user", req.user)
+
+  if (!req.user) return res.redirect('/auth/google');
+
+  const recipeLink = req.body.recipeLink
+  
+  const isValidUrl = validator.isURL(recipeLink, {
+    require_protocol: true,
+  })
+  
+  if (!isValidUrl) {
+    console.log("Value is not a valid URL")
+  }
+  
+  const recipeLinkContent = await fetchAiRecipe(recipeLink)
+  console.log("Recipe Controller: importRecipe recipeLinkContent", recipeLinkContent)
+
+
 }
 
 
