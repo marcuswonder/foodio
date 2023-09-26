@@ -3,6 +3,7 @@ const { Configuration, OpenAIApi } = require("openai");
 const https = require('https');
 const fs = require('fs');
 const { uploadFile } = require("./s3Client.js");
+const { generateChatGPTPrompt } = require("./openAiPrompt.js")
 
 const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
@@ -61,4 +62,25 @@ async function downloadImage(image_url) {
 }
 
 
-module.exports = { aiImageGeneratorAndS3Upload }
+// async function chatGPTQuery(parsedHTMLString) {
+//   try {
+//     const prompt = generateChatGPTPrompt(parsedHTMLString)
+
+//     const response = await openai.createCompletion({
+//       model: "gpt-3.5-turbo-0613",
+//       prompt: prompt,
+//       max_tokens: 150
+//     });
+    
+//     console.log("openAI: chatGPTQuery successfully reached")
+//     console.log("openAI: chatGPTQuery response", response)
+    
+//     return response.data.choices[0].text.trim()
+
+//   } catch (error) {
+//     return error
+//   }
+// }
+
+
+module.exports = { aiImageGeneratorAndS3Upload, chatGPTQuery }

@@ -1,11 +1,11 @@
 const Recipe = require('../models/recipe')
 const Collection = require('../models/collection')
 const { uploadFile } = require("../config/s3Client");
-const { aiImageGeneratorAndS3Upload } = require("../config/openAi");
+const { aiImageGeneratorAndS3Upload, chatGPTQuery } = require("../config/openAi");
 // const multer = require('multer');
 // const upload = multer();
 const validator = require('validator');
-const { getBbcGoodFoodRecipe } = require("../config/cheerio")
+const { getBbcGoodFoodRecipe, getRecipeHTML } = require("../config/cheerio")
 
 
 module.exports = {
@@ -91,7 +91,7 @@ async function copyRecipe(req, res) {
   });
   
   if (!isValidUrl) {
-    console.log("Value is not a valid URL")
+    console.log("Recipe Controller: Value is not a valid URL")
   }
   
   const bbcRecipe = await getBbcGoodFoodRecipe(recipeLink)
@@ -118,28 +118,40 @@ async function newImportRecipe(req, res) {
   res.render('recipes/import')
 }
 
-async function importRecipe(req, res) {
-  console.log("Controller: Import function hit")
-  console.log("Controller Import Function: req.body", req.body)
-  console.log("Controller Import Function: req.user", req.user)
+// async function importRecipe(req, res) {
+//   console.log("Controller: Import function hit")
+//   console.log("Controller Import Function: req.body", req.body)
+//   console.log("Controller Import Function: req.user", req.user)
 
-  if (!req.user) return res.redirect('/auth/google');
+//   if (!req.user) return res.redirect('/auth/google');
 
-  const recipeLink = req.body.recipeLink
+//   const recipeLink = req.body.recipeLink
   
-  const isValidUrl = validator.isURL(recipeLink, {
-    require_protocol: true,
-  })
+//   const isValidUrl = validator.isURL(recipeLink, {
+//     require_protocol: true,
+//   })
   
-  if (!isValidUrl) {
-    console.log("Value is not a valid URL")
-  }
+//   if (!isValidUrl) {
+//     console.log("Recipe Controller: Value is not a valid URL")
+//   }
   
-  const recipeLinkContent = await fetchAiRecipe(recipeLink)
-  console.log("Recipe Controller: importRecipe recipeLinkContent", recipeLinkContent)
+//   const parsedHTML = await getRecipeHTML(recipeLink)
+//   console.log("Recipe Controller: importRecipe parsedHTML", parsedHTML)
 
+//   const parsedHTMLString = JSON.stringify(parsedHTML)
 
-}
+//   try {
+//     const chatGPTResponse = await chatGPTQuery(parsedHTMLString);
+//     console.log("Recipe Controller: chatGPTResponse parsedHTMLString", parsedHTMLString)
+    
+//     console.log("Recipe Controller: importRecipe chatGPTResponse", chatGPTResponse);
+//     res.json({ reply: chatGPTResponse });
+
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ error: error.message });
+//   }
+// }
 
 
 async function show(req, res) {

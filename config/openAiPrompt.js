@@ -1,6 +1,7 @@
-const prompt = `I want you to follow my instructions step-by-step. Do not move on from one step to the next until you have completed the full step.
+function generateChatGPTPrompt(parsedHTML) {
+    const prompt = `I want you to follow my instructions step-by-step. Do not move on from one step to the next until you have completed the full step.
   
-  1. Firstly, please parse this content which was taken from a food blog ${recipeLinkContent}
+  1. Firstly, please review this content which is parsed HTML taken from a food blog ${parsedHTML}
   
   2. Secondly, I want you to return suitable text for the following elements:
   - name: the name of the recipe
@@ -142,6 +143,7 @@ const prompt = `I want you to follow my instructions step-by-step. Do not move o
       },
       category: {
           type: String
+          required: true
       },
       prepTime: {
           type: Number,
@@ -171,3 +173,8 @@ const prompt = `I want you to follow my instructions step-by-step. Do not move o
   }
   
   Please do not explain how you have come to your decisions; I need an object that I will be able to save into my database directly. Please name the object recipe and ensure that it follows the model above.`
+
+ return prompt 
+}
+
+module.exports = { generateChatGPTPrompt }

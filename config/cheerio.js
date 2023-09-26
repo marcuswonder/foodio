@@ -88,6 +88,54 @@ async function getBbcGoodFoodRecipe(recipeLink) {
     }
 }
 
+// Gets all textTags and spans
+// async function getRecipeHTML(recipeLink) {
+//     const response = await axios.get(recipeLink);
+
+//     const $ = cheerio.load(response.data)
+
+//     const parsedHTML = []
+
+//     const textTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'td', 'li', 'span']
+
+//     textTags.forEach((tagName) => {
+//         $(tagName).each((index, element) => {
+//             parsedHTML.push({
+//                 tagName: tagName,
+//                 className: $(element).attr('class') || null,
+//                 content: $(element).text()
+//             });
+//         });
+//     });
+
+//     // console.log("Cheerio: getRecipeHTML parsedHTML", parsedHTML);
+
+//     return parsedHTML
+// }
+
+
+async function getRecipeHTML(recipeLink) {
+    const $ = cheerio.load.response.data
+
+    const parsedHTMLObject = {}
+
+    nameKeywords = ['title', 'recipe-title', 'recipeTitle', 'name', 'recipe-name', 'recipeName']
+    descriptionKeywords = ['description', 'recipe-description', 'recipeDescription']
+    prepTimeKeywords = ['prep', 'prep-time']
+    cookTimeKeywords = []
+    servingsKeywords = []
+    ingredientsKeywords = []
+    instructionsKeywords = []
+
+    // nameKeywords.forEach(keyword => {
+    //     $('h1[class*="' + keyword + '"], h2[class*="' + keyword + '"], h3[class*="' + keyword + '"], h4[class*="' + keyword + '"], h5[class*="' + keyword + '"], h6[class*="' + keyword + '"], p[class*="' + keyword + '"],li3[class*="' + keyword + '"], span[class*="' + keyword + '"], td[class*="' + keyword + '"]').each(function() {
+    //         parsedHTMLObject.name = $(this).text()
+    //     }
+    // })
+
+
+}
+
 function timeStringToMinutes(timeString) {
     // Handle ranges by finding the average
     if (timeString.includes('-')) {
@@ -457,4 +505,4 @@ function isFraction(string) {
 }
 
 
-module.exports = { getBbcGoodFoodRecipe }
+module.exports = { getBbcGoodFoodRecipe, getRecipeHTML }
