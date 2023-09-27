@@ -1,8 +1,247 @@
 const axios = require('axios'); 
 const cheerio = require('cheerio');
+const { chatGPTQuery } = require("./openAi");
+const { generateChatGPTPrompt } = require("./openAiIngredientPrompt")
+
+async function determineRecipeSource(recipeLink) {
+
+    try {
+        const response = await axios.get(recipeLink);
+
+        const $ = cheerio.load(response.data)
+
+    
+
+        // WPRM Match
+        const WPRMSearch = 'wprm'
+        const WPRMElementCount = $('[class*="' + WPRMSearch + '"]').length
+        console.log("Cheerio: determineRecipeSource WPRMElementCount", WPRMElementCount)
+        
+        
+        // Tasty Recipes Match
+        const tastyRecipesSearch = 'tasty-recipes'
+
+        const tastyRecipesElementCount = $('[class*="' + tastyRecipesSearch + '"]').length
+        console.log("Cheerio: determineRecipeSource tastyRecipesElementCount", tastyRecipesElementCount)
+
+        // Logic
+        if(recipeLink.includes('bbcgoodfood.com')) {
+            console.log("Cheerio: determineRecipeSource BBC Good Food Identified")
+            getBbcGoodFoodRecipe($)
+            
+        } else if(WPRMElementCount > 10) {
+            console.log("Cheerio: determineRecipeSource WPRM Identified")
+            getWPRMRecipe($)
+            
+        } else if(tastyRecipesElementCount > 10) {
+            console.log("Cheerio: determineRecipeSource Tasty Recipes Identified")
+            // getTastyRecipesRecipe($)
+            
+        } else {
+            console.log("Cheerio: determineRecipeSource Generic Website Identified")
+            // genericScrapeTool($)
+        }    
+
+    } catch (error) {
+        console.log("Cheerio: Error retrieving HTML", error)
+    }
+}
+
+function getWPRMRecipe($) {
+    // photoLink
+    const photoLink = $('.wprm-recipe-container .wprm-recipe-image img').attr('src')
+
+    console.log("Cheerio: WRPM photoLink", photoLink)
+    
+    //  Name
+    const name = $('.wprm-recipe-name').text()
+    console.log("Cheerio: WRPM name", name)
+    
+    // Description
+    const description = $('.wprm-recipe-summary').text()
+    console.log("Cheerio: WRPM description", description)
+    
+    // Prep Time
+    let prepTime
+
+    const prepMinsText = $('.wprm-recipe-prep_time-minutes').clone().children().remove().end().text()
+    const prepMins = parseInt(prepMinsText, 10)
+    
+    const prepHoursText = $('.wprm-recipe-prep_time-hours').clone().children().remove().end().text()
+    const prepHours = parseInt(prepHoursText, 10)
+
+    if(!prepHours) {
+        const prepTime = prepMins
+        console.log("Cheerio: WRPM prepTime", prepTime)
+
+    } else {
+        const prepTime = ((prepHours * 60) + prepMins)
+        console.log("Cheerio: WRPM prepTime", prepTime)
+    }
+    
+    // Cook Time
+    let cookTime
+
+    const cookMinsText = $('.wprm-recipe-cook_time-minutes').clone().children().remove().end().text()
+    const cookMins = parseInt(cookMinsText, 10)
+    
+    const cookHoursText = $('.wprm-recipe-cook_time-hours').clone().children().remove().end().text()
+    const cookHours = parseInt(cookHoursText, 10)
+
+    if(!cookHours) {
+        const cookTime = cookMins
+        console.log("Cheerio: WRPM cookTime", cookTime)
+
+    } else {
+        const cookTime = ((cookHours * 60) + cookMins)
+        console.log("Cheerio: WRPM cookTime", cookTime)
+    }
+    
+    
+    // Servings
+    let servingsText = $('.wprm-recipe-servings-container .wprm-recipe-servings[type="number"]').attr('value');
+
+    // If the input element doesn't exist, get the text from the span element
+    if (!servingsText) {
+        servingsText = $('.wprm-recipe-servings-container .wprm-recipe-servings:not([type="number"])').text();
+    }
+
+    const servings = parseInt(servingsText, 10)
+    console.log("Cheerio: WRPM servings", servings)
+
+    // AI Ingredients
+    let ingredientsArray = []
+
+    // Compile Array
+    $('.wprm-recipe-ingredient').each(function() {
+        let ingredientObject = {}
+
+        // Extract Qty
+        let ingredientQty = $(this).find('.wprm-recipe-ingredient-amount').text().trim()
+        ingredientObject.qty = ingredientQty
+        
+        // Extract Unit
+        let ingredientUnit = $(this).find('.wprm-recipe-ingredient-amount').text().trim()
+        ingredientObject.unit = ingredientUnit
+
+        // Extract Ingredient
+        let ingredientName = $(this).find('.wprm-recipe-ingredient-name').contents().not($(this).find('.wprm-recipe-ingredient-name a')).text().trim();
+        
+        if (!ingredientName) {
+            ingredientName = $(this).find('.wprm-recipe-ingredient-name a').text().trim();
+        }
+        
+        ingredientObject.ingredient = ingredientName
+
+        // Extract preparation (optional)
+        ingredientObject.preparation = $(this).find('.wprm-recipe-ingredient-notes').text().trim() || null
+    
+        ingredientsArray.push(ingredientObject);
+    })
+
+    const ingredients = AiIngredientQuery(ingredientsArray)
+
+    console.log("Cheerio: gtWRPMRecipe ingredients", ingredients)
+
+
+}
+
+async function AiIngredientQuery(ingredientsArray) {
+    // Generate Prompt
+    const prompt = generateChatGPTPrompt(ingredientsArray)
+    // console.log("Cheerio: AiIngredientQuery prompt", prompt)
+
+    // Make OpenAI API Call
+    let AiResponse = await chatGPTQuery(prompt)
+
+    // Parse AI Response
+    // AiResponse = AiResponse.replace('var ingredients = ', '').trim()
+    // AiResponse = AiResponse.substring(0, AiResponse.lastIndexOf(';'))
+
+    // console.log("Cheerio: AiIngredientQuery AiResponse after removal of JS", AiResponse)
+
+    let parsedAiIngredients
+    try {
+        parsedAiIngredients = JSON.parse(AiResponse);
+    
+    } catch (error) {
+        console.error("Cheerio: Error parsing JSON in AiIngredientQuery", error);
+    }
+
+    return parsedAiIngredients
+    
+}
+
+    
+    // // Ingredients
+    // let ingredients = []
+
+    // $('.wprm-recipe-ingredient').each(function() {
+    //     let ingredientObject = {};
+    
+    //     // Extract qty
+    //     let ingredientQtyString = $(this).find('.wprm-recipe-ingredient-amount').text().trim()
+        
+    //     // remove leading unhelpful words
+    //     ingredientQtyString = removeUnhelpfulWords(ingredientQtyText)
+
+    //     // split ingredientQtyString into array
+    //     const splitIngredientQty = ingredientQtyString.split(" ")
+
+    //     // check length and fraction and convert to number
+    //     if(splitIngredientQty.length === 1) {
+    //         if (splitIngredientQty[0] in fractionMapping) {
+            
+    //             let qty = fractionMapping[splitIngredientQty[0]]
+    //             ingredientQtyString = qty
+            
+    //         } else {
+    //             const ingredientQtyFullUnit = parseInt(splitIngredientQty[0], 10)
+
+    //         }
+    
+    //     }
+
+
+        
+    //     ingredientObject.qty
+
+    
+        // Extract unit
+        // ingredientObject.unit = $(this).find('.wprm-recipe-ingredient-unit').text().trim() || null
+    
+        // Extract ingredient
+        // let ingredientName = $(this).find('.wprm-recipe-ingredient-name').contents().not($(this).find('.wprm-recipe-ingredient-name a')).text().trim();
+        
+        // if (!ingredientName) {
+        //     ingredientName = $(this).find('.wprm-recipe-ingredient-name a').text().trim();
+        // }
+        // ingredientObject.ingredient = ingredientName || null;
+    
+        // Extract preparation (optional)
+        // ingredientObject.preparation = $(this).find('.wprm-recipe-ingredient-notes').text().trim() || null
+    
+        // ingredients.push(ingredientObject);
+    // })
+    // console.log("Cheerio: WRPM ingredients", ingredients)
+
+
+    // let recipe = {
+    //     name: name,
+    //     description: description,
+    //     prepTime: prepTime,
+    //     cookTime: cookTime,
+    //     servings: servings,
+    //     ingredients: ingredients,
+    //     instructions: instructions,
+        // photo: photoLink,
+    // }
+
+    // return recipe
+// }
+
 
 async function getBbcGoodFoodRecipe(recipeLink) {
-    // console.log("Cheerio: getBbcGoodFoodRecipe function hit and recipeLink", recipeLink)
     
     try {
         const response = await axios.get(recipeLink);
@@ -84,57 +323,10 @@ async function getBbcGoodFoodRecipe(recipeLink) {
         return recipe
             
     } catch (error) {
-        console.log(error);
+        console.log("Cheerio: Error retrieving HTML", error)
     }
 }
 
-// Gets all textTags and spans
-// async function getRecipeHTML(recipeLink) {
-//     const response = await axios.get(recipeLink);
-
-//     const $ = cheerio.load(response.data)
-
-//     const parsedHTML = []
-
-//     const textTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'td', 'li', 'span']
-
-//     textTags.forEach((tagName) => {
-//         $(tagName).each((index, element) => {
-//             parsedHTML.push({
-//                 tagName: tagName,
-//                 className: $(element).attr('class') || null,
-//                 content: $(element).text()
-//             });
-//         });
-//     });
-
-//     // console.log("Cheerio: getRecipeHTML parsedHTML", parsedHTML);
-
-//     return parsedHTML
-// }
-
-
-async function getRecipeHTML(recipeLink) {
-    const $ = cheerio.load.response.data
-
-    const parsedHTMLObject = {}
-
-    nameKeywords = ['title', 'recipe-title', 'recipeTitle', 'name', 'recipe-name', 'recipeName']
-    descriptionKeywords = ['description', 'recipe-description', 'recipeDescription']
-    prepTimeKeywords = ['prep', 'prep-time']
-    cookTimeKeywords = []
-    servingsKeywords = []
-    ingredientsKeywords = []
-    instructionsKeywords = []
-
-    // nameKeywords.forEach(keyword => {
-    //     $('h1[class*="' + keyword + '"], h2[class*="' + keyword + '"], h3[class*="' + keyword + '"], h4[class*="' + keyword + '"], h5[class*="' + keyword + '"], h6[class*="' + keyword + '"], p[class*="' + keyword + '"],li3[class*="' + keyword + '"], span[class*="' + keyword + '"], td[class*="' + keyword + '"]').each(function() {
-    //         parsedHTMLObject.name = $(this).text()
-    //     }
-    // })
-
-
-}
 
 function timeStringToMinutes(timeString) {
     // Handle ranges by finding the average
@@ -225,7 +417,7 @@ function parseIngredients(ingredientsQuantitiesAndMeasures) {
         const result = {};
         
         // remove leading unhelpful words
-        ingredientString = removeUnhelpfulWords(ingredientString);
+        ingredientString = removeUnhelpfulWords(ingredientString)
 
         // split ingredientString into array
         const splitIngredient = ingredientString.split(" ")
@@ -235,35 +427,35 @@ function parseIngredients(ingredientsQuantitiesAndMeasures) {
             splitIngredient.splice(1,1)
         }
 
-        const fractionMapping = {
-            '½' : .5,
-            '1⁄2' : .5,
-            '1/2' : .5,
-            '¾' : .75,
-            '3⁄4' : .75,
-            '3/4' : .75,
-            '¼' : .25,
-            '1⁄4' : .25,
-            '1/4' : .25,
-            '⅔' : .666,
-            '2⁄3' : .666,
-            '2/3' : .666,
-            '⅓' : .333,
-            '1⁄3' : .333,
-            '1/3' : .333,
-            '⅕' : .2,
-            '1⁄5' : .2,
-            '1/5' : .2,
-            '⅖' : .4,
-            '2⁄5' : .4,
-            '2/5' : .4,
-            '⅗' : .6,
-            '3⁄5' : .6,
-            '3/5' : .6,
-            '⅘' : .8,
-            '4⁄5' : .8,
-            '4/5' : .8,
-        }
+        // const fractionMapping = {
+        //     '½' : .5,
+        //     '1⁄2' : .5,
+        //     '1/2' : .5,
+        //     '¾' : .75,
+        //     '3⁄4' : .75,
+        //     '3/4' : .75,
+        //     '¼' : .25,
+        //     '1⁄4' : .25,
+        //     '1/4' : .25,
+        //     '⅔' : .666,
+        //     '2⁄3' : .666,
+        //     '2/3' : .666,
+        //     '⅓' : .333,
+        //     '1⁄3' : .333,
+        //     '1/3' : .333,
+        //     '⅕' : .2,
+        //     '1⁄5' : .2,
+        //     '1/5' : .2,
+        //     '⅖' : .4,
+        //     '2⁄5' : .4,
+        //     '2/5' : .4,
+        //     '⅗' : .6,
+        //     '3⁄5' : .6,
+        //     '3/5' : .6,
+        //     '⅘' : .8,
+        //     '4⁄5' : .8,
+        //     '4/5' : .8,
+        // }
 
         console.log("Cheerio: splitIngredient", splitIngredient)
 
@@ -504,5 +696,34 @@ function isFraction(string) {
     }
 }
 
+const fractionMapping = {
+    '½' : .5,
+    '1⁄2' : .5,
+    '1/2' : .5,
+    '¾' : .75,
+    '3⁄4' : .75,
+    '3/4' : .75,
+    '¼' : .25,
+    '1⁄4' : .25,
+    '1/4' : .25,
+    '⅔' : .666,
+    '2⁄3' : .666,
+    '2/3' : .666,
+    '⅓' : .333,
+    '1⁄3' : .333,
+    '1/3' : .333,
+    '⅕' : .2,
+    '1⁄5' : .2,
+    '1/5' : .2,
+    '⅖' : .4,
+    '2⁄5' : .4,
+    '2/5' : .4,
+    '⅗' : .6,
+    '3⁄5' : .6,
+    '3/5' : .6,
+    '⅘' : .8,
+    '4⁄5' : .8,
+    '4/5' : .8,
+}
 
-module.exports = { getBbcGoodFoodRecipe, getRecipeHTML }
+module.exports = { getBbcGoodFoodRecipe, determineRecipeSource }

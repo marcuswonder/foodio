@@ -5,7 +5,7 @@ const { aiImageGeneratorAndS3Upload, chatGPTQuery } = require("../config/openAi"
 // const multer = require('multer');
 // const upload = multer();
 const validator = require('validator');
-const { getBbcGoodFoodRecipe, getRecipeHTML } = require("../config/cheerio")
+const { getBbcGoodFoodRecipe, determineRecipeSource } = require("../config/cheerio")
 
 
 module.exports = {
@@ -15,7 +15,7 @@ module.exports = {
     newCopyRecipe,
     copy: copyRecipe,
     newImportRecipe,
-    import: importRecipe,
+    import: importRecipeWithScrapingTools,
     show,
     delete: deleteRecipe,
     addToCollection,
@@ -118,6 +118,27 @@ async function newImportRecipe(req, res) {
   res.render('recipes/import')
 }
 
+async function importRecipeWithScrapingTools(req, res) {
+  if (!req.user) return res.redirect('/auth/google');
+
+  const recipeLink = req.body.recipeLink
+  
+  const isValidUrl = validator.isURL(recipeLink, {
+    require_protocol: true,
+  })
+  
+  if (!isValidUrl) {
+    console.log("Recipe Controller: Value is not a valid URL")
+  }
+  
+  const parsedHTML = await determineRecipeSource(recipeLink)
+  // console.log("Recipe Controller: importRecipe parsedHTML", parsedHTML)
+
+  // const parsedHTMLString = JSON.stringify(parsedHTML)
+}
+
+
+// OpenAI Call
 // async function importRecipe(req, res) {
 //   console.log("Controller: Import function hit")
 //   console.log("Controller Import Function: req.body", req.body)

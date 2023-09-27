@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { Configuration, OpenAIApi } = require("openai");
+const { Configuration, OpenAIApi } = require("openai")
 const https = require('https');
 const fs = require('fs');
 const { uploadFile } = require("./s3Client.js");
@@ -62,25 +62,23 @@ async function downloadImage(image_url) {
 }
 
 
-// async function chatGPTQuery(parsedHTMLString) {
-//   try {
-//     const prompt = generateChatGPTPrompt(parsedHTMLString)
+async function chatGPTQuery(prompt) {
+  try {
+      const response = await openai.createChatCompletion({
+        model: "gpt-3.5-turbo-16k",
+        messages: [{ 
+          role: "user", 
+          content: prompt}],
+      })
 
-//     const response = await openai.createCompletion({
-//       model: "gpt-3.5-turbo-0613",
-//       prompt: prompt,
-//       max_tokens: 150
-//     });
-    
-//     console.log("openAI: chatGPTQuery successfully reached")
-//     console.log("openAI: chatGPTQuery response", response)
-    
-//     return response.data.choices[0].text.trim()
+      console.log("Cheerio: ChatGPTQuery response.data.choices[0].message.content", response.data.choices[0].message.content)
+      
+      return response.data.choices[0].message.content
 
-//   } catch (error) {
-//     return error
-//   }
-// }
-
+  } catch (error) {
+      console.error('OpenAI: Error calling API:', error)
+      throw error;
+  }
+}
 
 module.exports = { aiImageGeneratorAndS3Upload, chatGPTQuery }
