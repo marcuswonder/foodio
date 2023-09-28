@@ -139,10 +139,11 @@ function getWPRMRecipe($) {
 
     } else if(prepTime && !cookTime && totalTime) {
         prepTime = prepTime
-        cookTime = (totalTime - cookTime)
+        cookTime = (totalTime - prepTime)
+
     } else if(!prepTime && !cookTime && totalTime) {
-        prepTime = 0
-        cookTime = cookTime
+        prepTime = (totalTime * .4)
+        cookTime = (totalTime * .6)
     } else {
         prepTime = 0
         cookTime = 0
