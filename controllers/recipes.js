@@ -21,6 +21,7 @@ module.exports = {
     addToCollection,
     editRecipe,
     updateRecipe,
+    comingSoon,
     // editRecipeIngredients,
     // editRecipeInstructions,
 }
@@ -114,8 +115,12 @@ async function copyRecipe(req, res) {
   res.redirect(`/recipes/${recipe._id}`);
 }
 
-async function newImportRecipe(req, res) {
+function newImportRecipe(req, res) {
   res.render('recipes/import')
+}
+
+function comingSoon(req, res) {
+  res.render('recipes/coming-soon')
 }
 
 async function importRecipeWithScrapingTools(req, res) {
@@ -123,7 +128,7 @@ async function importRecipeWithScrapingTools(req, res) {
   console.log("Recipe Controller Import Function: req.body", req.body)
   console.log("Recipe Controller Import Function: req.user", req.user)
 
-  if (!req.user) return res.redirect('/auth/google');
+  if (!req.user) return res.redirect('/auth/google')
 
   const recipeLink = req.body.recipeLink
   
@@ -145,16 +150,22 @@ async function importRecipeWithScrapingTools(req, res) {
 
   console.log("Controller: parsedRecipe", parsedRecipe)
 
-  const recipe = new Recipe(parsedRecipe);
-  
-  await recipe.save().catch(err => {
+  const recipe = new Recipe(parsedRecipe)
+
+  try {
+    await recipe.save()
+    res.redirect(`/recipes/${recipe._id}`)
+
+  } catch (err) {
     console.log("Controller: Scraped Recipe Save Error", err)
 
-    return res.redirect('/recipes')
-  })
-  res.redirect(`/recipes/${recipe._id}`)
-
-  // const parsedHTMLString = JSON.stringify(parsedHTML)
+    try {
+      res.redirect('/recipes/coming-soon')
+      
+    } catch(err) {
+      console.log("Controller: Coming Soon Redirect Error", err)
+    }
+  }
 }
 
 
