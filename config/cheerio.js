@@ -3,7 +3,7 @@ const cheerio = require('cheerio');
 const { chatGPTQuery } = require("./openAi");
 const { generateChatGPTPrompt } = require("./openAiIngredientPrompt")
 
-async function determineRecipeSource(recipeLink) {
+async function determineRecipeSourceAndParse(recipeLink) {
     try {
         const response = await axios.get(recipeLink);
         const $ = cheerio.load(response.data)
@@ -42,15 +42,15 @@ async function determineRecipeSource(recipeLink) {
 function getWPRMRecipe($) {
     // photoLink
     const photoLink = $('.wprm-recipe-container .wprm-recipe-image img').attr('src')
-    console.log("Cheerio: WPRM photoLink", photoLink)
+    // console.log("Cheerio: WPRM photoLink", photoLink)
     
     //  Name
     const name = $('.wprm-recipe-name').text()
-    console.log("Cheerio: WPRM name", name)
+    // console.log("Cheerio: WPRM name", name)
     
     // Description
     const description = $('.wprm-recipe-summary').text()
-    console.log("Cheerio: WPRM description", description)
+    // console.log("Cheerio: WPRM description", description)
     
     // Prep Time
     let prepTime
@@ -62,12 +62,12 @@ function getWPRMRecipe($) {
     const prepHours = parseInt(prepHoursText, 10)
 
     if(!prepHours) {
-        const prepTime = prepMins
-        console.log("Cheerio: WPRM prepTime", prepTime)
+        prepTime = prepMins
+        // console.log("Cheerio: WRPM prepTime", prepTime)
 
     } else {
-        const prepTime = ((prepHours * 60) + prepMins)
-        console.log("Cheerio: WPRM prepTime", prepTime)
+        prepTime = ((prepHours * 60) + prepMins)
+        console.log("Cheerio: WRPM prepTime", prepTime)
     }
     
     // Cook Time
@@ -80,12 +80,12 @@ function getWPRMRecipe($) {
     const cookHours = parseInt(cookHoursText, 10)
 
     if(!cookHours) {
-        const cookTime = cookMins
-        console.log("Cheerio: WPRM cookTime", cookTime)
+        cookTime = cookMins
+        // console.log("Cheerio: WPRM cookTime", cookTime)
 
     } else {
-        const cookTime = ((cookHours * 60) + cookMins)
-        console.log("Cheerio: WPRM cookTime", cookTime)
+        cookTime = ((cookHours * 60) + cookMins)
+        // console.log("Cheerio: WPRM cookTime", cookTime)
     }
     
     
@@ -98,7 +98,7 @@ function getWPRMRecipe($) {
     }
 
     const servings = parseInt(servingsText, 10)
-    console.log("Cheerio: WPRM servings", servings)
+    // console.log("Cheerio: WPRM servings", servings)
 
     // Ingredients
     let ingredients = []
@@ -110,7 +110,7 @@ function getWPRMRecipe($) {
         ingredients.push(ingredient);
     })
 
-    console.log("Cheerio: gtWPRMRecipe ingredients", ingredients)
+    // console.log("Cheerio: gtWPRMRecipe ingredients", ingredients)
     
     // Instructions
     let instructions = []
@@ -122,9 +122,22 @@ function getWPRMRecipe($) {
         instructions.push(instruction);
     })
 
-    console.log("Cheerio: gtWPRMRecipe instructions", instructions)
+    // console.log("Cheerio: gtWPRMRecipe instructions", instructions)
     
+    let recipe = {
+        name: name,
+        description: description,
+        prepTime: prepTime,
+        cookTime: cookTime,
+        servings: servings,
+        ingredients: ingredients,
+        instructions: instructions,
+        photo: photoLink,
+    }
     
+    console.log("Cheerio: gtWPRMRecipe recipe", recipe)
+    
+    return recipe
 }
 
 async function AiIngredientQuery(ingredientsArray) {
@@ -707,4 +720,4 @@ const fractionMapping = {
     '4/5' : .8,
 }
 
-module.exports = { getBbcGoodFoodRecipe, determineRecipeSource }
+module.exports = { getBbcGoodFoodRecipe, determineRecipeSourceAndParse }
