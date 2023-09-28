@@ -47,24 +47,15 @@
 <% } else { %>
 
 <table id="ingredients">
-    <thead>
-        <tr>
-            <th>Qty</th>
-            <th>Ingredient</th>
-            <th>Preparation</th>
-            <th></th>
-      </tr>
-    </thead>
     <tbody>
       <% recipe.ingredients.forEach(function(i) { %>
         <tr>
-            <td><%= i.qty %> <%= i.unit %></td>
             <td><%= i.ingredient %></td>
-            <td><%= i.preparation %></td>
             <td>
               <form action="/ingredients/<%= i._id %>?_method=DELETE" method="POST" class="delete">
                 <button type="submit" class="delete-button">X</button>
-              </form></td>
+              </form>
+            </td>
         </tr>
 
         <% }); %>
