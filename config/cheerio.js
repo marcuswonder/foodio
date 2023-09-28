@@ -45,21 +45,21 @@ async function determineRecipeSourceAndParse(recipeLink) {
 
 function getWPRMRecipe($) {
     // photoLink
-    const photoLink = $('.wprm-recipe-container .wprm-recipe-image img').attr('src')
+    const photoLink = $('.wprm-recipe-image img').attr('src')
     console.log("Cheerio: WPRM photoLink", photoLink)
     
     //  Name
-    const name = $('.wprm-recipe-name').text()
+    const name = $('.wprm-recipe-container .wprm-recipe-name').text()
     console.log("Cheerio: WPRM name", name)
     
     // Description
-    const description = $('.wprm-recipe-summary').text()
+    const description = $('.wprm-recipe-container .wprm-recipe-summary').text()
     console.log("Cheerio: WPRM description", description)
     
     // Prep Time
     let prepTime
 
-    const prepMinsText = $('.wprm-recipe-prep_time-minutes').clone().children().remove().end().text()
+    const prepMinsText = $('.wprm-recipe-container .wprm-recipe-prep_time-minutes').clone().children().remove().end().text()
     console.log("Cheerio: getWPRMRecipe prepMinsText", prepMinsText)
     
     let prepMins
@@ -68,7 +68,7 @@ function getWPRMRecipe($) {
         prepMins = parseInt(prepMinsText, 10)
     }
     
-    const prepHoursText = $('.wprm-recipe-prep_time-hours').clone().children().remove().end().text()
+    const prepHoursText = $('.wprm-recipe-container .wprm-recipe-prep_time-hours').clone().children().remove().end().text()
     const prepHours = parseInt(prepHoursText, 10)
     
     if(!prepHours) {
@@ -83,7 +83,7 @@ function getWPRMRecipe($) {
     // Cook Time
     let cookTime
     
-    const cookMinsText = $('.wprm-recipe-cook_time-minutes').clone().children().remove().end().text()
+    const cookMinsText = $('.wprm-recipe-container .wprm-recipe-cook_time-minutes').clone().children().remove().end().text()
     console.log("Cheerio: getWPRMRecipe cookMinsText", cookMinsText)
 
     let cookMins
@@ -92,7 +92,7 @@ function getWPRMRecipe($) {
         cookMins = parseInt(cookMinsText, 10)
     }
     
-    const cookHoursText = $('.wprm-recipe-cook_time-hours').clone().children().remove().end().text()
+    const cookHoursText = $('.wprm-recipe-container .wprm-recipe-cook_time-hours').clone().children().remove().end().text()
     const cookHours = parseInt(cookHoursText, 10)
     
     if(!cookHours) {
@@ -107,7 +107,7 @@ function getWPRMRecipe($) {
     // Total Time
     let totalTime
     
-    const totalMinsText = $('.wprm-recipe-total_time-minutes').clone().children().remove().end().text()
+    const totalMinsText = $('.wprm-recipe-container .wprm-recipe-total_time-minutes').clone().children().remove().end().text()
     console.log("Cheerio: getWPRMRecipe totalMinsText", totalMinsText)
     
     let totalMins
@@ -116,7 +116,7 @@ function getWPRMRecipe($) {
         totalMins = parseInt(totalMinsText, 10)
     }
     
-    const totalHoursText = $('.wprm-recipe-total_time-hours').clone().children().remove().end().text()
+    const totalHoursText = $('.wprm-recipe-container .wprm-recipe-total_time-hours').clone().children().remove().end().text()
     const totalHours = parseInt(totalHoursText, 10)
     
     if(!totalHours) {
@@ -151,7 +151,7 @@ function getWPRMRecipe($) {
     
     
     // Servings
-    let servingsText = $('.wprm-recipe-servings-container .wprm-recipe-servings[type="number"]').attr('value');
+    let servingsText = $('.wprm-recipe-container .wprm-recipe-servings-container .wprm-recipe-servings[type="number"]').attr('value');
 
     // If the input element doesn't exist, get the text from the span element
     if (!servingsText) {
@@ -164,7 +164,7 @@ function getWPRMRecipe($) {
     // Ingredients
     let ingredients = []
 
-    $('.wprm-recipe-ingredient').each(function() {
+    $('.wprm-recipe-container .wprm-recipe-ingredient').each(function() {
         const ingredient = $(this).text();
         console.log("Cheerio: getWPRMRecipe ingredient", ingredient);
         
@@ -176,7 +176,7 @@ function getWPRMRecipe($) {
     // Instructions
     let instructions = []
 
-    $('.wprm-recipe-instruction-text').each(function() {
+    $('.wprm-recipe-container .wprm-recipe-instruction-text').each(function() {
         const instruction = $(this).text();
         console.log("Cheerio: getWPRMRecipe instruction", instruction);
         
