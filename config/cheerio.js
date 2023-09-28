@@ -44,7 +44,7 @@ async function determineRecipeSourceAndParse(recipeLink) {
 }
 
 function getWPRMRecipe($) {
-    // photoLink
+    // // photoLink
     const photoLink = $('.wprm-recipe-image img').attr('src')
     console.log("Cheerio: WPRM photoLink", photoLink)
     

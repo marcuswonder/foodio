@@ -142,7 +142,16 @@ async function importRecipeWithScrapingTools(req, res) {
   
   const parsedRecipe = await determineRecipeSourceAndParse(recipeLink)
   console.log("Recipe Controller: importRecipeWithScrapingTool parsedRecipe", parsedRecipe)
-  
+
+  const isValidPhotoUrl = validator.isURL(parsedRecipe.photo, {
+    require_protocol: true,
+  })
+
+  if (!isValidPhotoUrl) {
+    const photoLink = await aiImageGeneratorAndS3Upload(parsedRecipe)
+    parsedRecipe.photo = photoLink.Location
+  }
+
   parsedRecipe.author = req.user._id
   parsedRecipe.userName = req.user.name
   parsedRecipe.gId = req.user.googleId
@@ -161,7 +170,7 @@ async function importRecipeWithScrapingTools(req, res) {
 
     try {
       res.redirect('/recipes/coming-soon')
-      
+
     } catch(err) {
       console.log("Controller: Coming Soon Redirect Error", err)
     }
