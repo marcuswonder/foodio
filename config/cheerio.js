@@ -105,14 +105,26 @@ function getWPRMRecipe($) {
 
     $('.wprm-recipe-ingredient').each(function() {
         const ingredient = $(this).text();
-        console.log("Cheerio: getWPRMRecipe ingredient", ingredient);
+        // console.log("Cheerio: getWPRMRecipe ingredient", ingredient);
         
         ingredients.push(ingredient);
     })
 
     console.log("Cheerio: gtWPRMRecipe ingredients", ingredients)
+    
+    // Instructions
+    let instructions = []
 
+    $('.wprm-recipe-instruction-text').each(function() {
+        const instruction = $(this).text();
+        // console.log("Cheerio: getWPRMRecipe instruction", instruction);
+        
+        instructions.push(instruction);
+    })
 
+    console.log("Cheerio: gtWPRMRecipe instructions", instructions)
+    
+    
 }
 
 async function AiIngredientQuery(ingredientsArray) {
