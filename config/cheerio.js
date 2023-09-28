@@ -19,19 +19,23 @@ async function determineRecipeSourceAndParse(recipeLink) {
         // Logic
         if(recipeLink.includes('bbcgoodfood.com')) {
             console.log("Cheerio: determineRecipeSource BBC Good Food Identified")
-            getBbcGoodFoodRecipe($)
+            const parsedRecipe = getBbcGoodFoodRecipe($)
+            return parsedRecipe
             
         } else if(WPRMElementCount > 10) {
             console.log("Cheerio: determineRecipeSource WPRM Identified")
-            getWPRMRecipe($)
+            const parsedRecipe = getWPRMRecipe($)
+            return parsedRecipe
             
         } else if(tastyRecipesElementCount > 10) {
             console.log("Cheerio: determineRecipeSource Tasty Recipes Identified")
-            // getTastyRecipesRecipe($)
+            // const parsedRecipe = getTastyRecipesRecipe($)
+            // return parsedRecipe
             
         } else {
             console.log("Cheerio: determineRecipeSource Generic Website Identified")
-            // genericScrapeTool($)
+            // const parsedRecipe = await genericScrapeTool($)
+            // return parsedRecipe
         }    
 
     } catch (error) {
@@ -107,7 +111,7 @@ function getWPRMRecipe($) {
         const ingredient = $(this).text();
         // console.log("Cheerio: getWPRMRecipe ingredient", ingredient);
         
-        ingredients.push(ingredient);
+        ingredients.push({ingredient});
     })
 
     // console.log("Cheerio: gtWPRMRecipe ingredients", ingredients)
@@ -119,12 +123,12 @@ function getWPRMRecipe($) {
         const instruction = $(this).text();
         // console.log("Cheerio: getWPRMRecipe instruction", instruction);
         
-        instructions.push(instruction);
+        instructions.push({instruction});
     })
 
     // console.log("Cheerio: gtWPRMRecipe instructions", instructions)
     
-    let recipe = {
+    let parsedRecipe = {
         name: name,
         description: description,
         prepTime: prepTime,
@@ -135,111 +139,41 @@ function getWPRMRecipe($) {
         photo: photoLink,
     }
     
-    console.log("Cheerio: gtWPRMRecipe recipe", recipe)
+    console.log("Cheerio: gtWPRMRecipe parsedRecipe", parsedRecipe)
     
-    return recipe
+    return parsedRecipe
 }
 
 async function AiIngredientQuery(ingredientsArray) {
-    // Generate Prompt
-    const prompt = generateChatGPTPrompt(ingredientsArray)
-    // console.log("Cheerio: AiIngredientQuery prompt", prompt)
+    // // Generate Prompt
+    // const prompt = generateChatGPTPrompt(ingredientsArray)
+    // // console.log("Cheerio: AiIngredientQuery prompt", prompt)
 
-    // Make OpenAI API Call
-    let AiResponse = await chatGPTQuery(prompt)
+    // // Make OpenAI API Call
+    // let AiResponse = await chatGPTQuery(prompt)
 
-    // Parse AI Response
-    // AiResponse = AiResponse.replace('var ingredients = ', '').trim()
-    // AiResponse = AiResponse.substring(0, AiResponse.lastIndexOf(';'))
+    // // Parse AI Response
+    // // AiResponse = AiResponse.replace('var ingredients = ', '').trim()
+    // // AiResponse = AiResponse.substring(0, AiResponse.lastIndexOf(';'))
 
-    // console.log("Cheerio: AiIngredientQuery AiResponse after removal of JS", AiResponse)
+    // // console.log("Cheerio: AiIngredientQuery AiResponse after removal of JS", AiResponse)
 
-    let parsedAiIngredients
-    try {
-        parsedAiIngredients = JSON.parse(AiResponse);
+    // let parsedAiIngredients
+    // try {
+    //     parsedAiIngredients = JSON.parse(AiResponse);
     
-    } catch (error) {
-        console.error("Cheerio: Error parsing JSON in AiIngredientQuery", error);
-    }
-
-    return parsedAiIngredients
-    
-}
-
-    
-    // // Ingredients
-    // let ingredients = []
-
-    // $('.wprm-recipe-ingredient').each(function() {
-    //     let ingredientObject = {};
-    
-    //     // Extract qty
-    //     let ingredientQtyString = $(this).find('.wprm-recipe-ingredient-amount').text().trim()
-        
-    //     // remove leading unhelpful words
-    //     ingredientQtyString = removeUnhelpfulWords(ingredientQtyText)
-
-    //     // split ingredientQtyString into array
-    //     const splitIngredientQty = ingredientQtyString.split(" ")
-
-    //     // check length and fraction and convert to number
-    //     if(splitIngredientQty.length === 1) {
-    //         if (splitIngredientQty[0] in fractionMapping) {
-            
-    //             let qty = fractionMapping[splitIngredientQty[0]]
-    //             ingredientQtyString = qty
-            
-    //         } else {
-    //             const ingredientQtyFullUnit = parseInt(splitIngredientQty[0], 10)
-
-    //         }
-    
-    //     }
-
-
-        
-    //     ingredientObject.qty
-
-    
-        // Extract unit
-        // ingredientObject.unit = $(this).find('.wprm-recipe-ingredient-unit').text().trim() || null
-    
-        // Extract ingredient
-        // let ingredientName = $(this).find('.wprm-recipe-ingredient-name').contents().not($(this).find('.wprm-recipe-ingredient-name a')).text().trim();
-        
-        // if (!ingredientName) {
-        //     ingredientName = $(this).find('.wprm-recipe-ingredient-name a').text().trim();
-        // }
-        // ingredientObject.ingredient = ingredientName || null;
-    
-        // Extract preparation (optional)
-        // ingredientObject.preparation = $(this).find('.wprm-recipe-ingredient-notes').text().trim() || null
-    
-        // ingredients.push(ingredientObject);
-    // })
-    // console.log("Cheerio: WPRM ingredients", ingredients)
-
-
-    // let recipe = {
-    //     name: name,
-    //     description: description,
-    //     prepTime: prepTime,
-    //     cookTime: cookTime,
-    //     servings: servings,
-    //     ingredients: ingredients,
-    //     instructions: instructions,
-        // photo: photoLink,
+    // } catch (error) {
+    //     console.error("Cheerio: Error parsing JSON in AiIngredientQuery", error);
     // }
 
-    // return recipe
-// }
+    // return parsedAiIngredients
+}
 
 
 async function getBbcGoodFoodRecipe(recipeLink) {
     
     try {
         const response = await axios.get(recipeLink);
-
         const $ = cheerio.load(response.data)
 
         // photoLink

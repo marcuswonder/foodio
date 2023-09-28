@@ -119,6 +119,10 @@ async function newImportRecipe(req, res) {
 }
 
 async function importRecipeWithScrapingTools(req, res) {
+  console.log("Recipe Controller: Import function hit")
+  console.log("Recipe Controller Import Function: req.body", req.body)
+  console.log("Recipe Controller Import Function: req.user", req.user)
+
   if (!req.user) return res.redirect('/auth/google');
 
   const recipeLink = req.body.recipeLink
@@ -131,8 +135,24 @@ async function importRecipeWithScrapingTools(req, res) {
     console.log("Recipe Controller: Value is not a valid URL")
   }
   
-  const parsedHTML = await determineRecipeSourceAndParse(recipeLink)
-  // console.log("Recipe Controller: importRecipe parsedHTML", parsedHTML)
+  const parsedRecipe = await determineRecipeSourceAndParse(recipeLink)
+  console.log("Recipe Controller: importRecipeWithScrapingTool parsedRecipe", parsedRecipe)
+  
+  parsedRecipe.author = req.user._id
+  parsedRecipe.userName = req.user.name
+  parsedRecipe.gId = req.user.googleId
+  parsedRecipe.category = req.body.category
+
+  console.log("Controller: parsedRecipe", parsedRecipe)
+
+  const recipe = new Recipe(parsedRecipe);
+  
+  await recipe.save().catch(err => {
+    console.log("Controller: Scraped Recipe Save Error", err)
+
+    return res.redirect('/recipes')
+  })
+  res.redirect(`/recipes/${recipe._id}`)
 
   // const parsedHTMLString = JSON.stringify(parsedHTML)
 }
