@@ -4,17 +4,25 @@ const { chatGPTQuery } = require("./openAi");
 const { generateChatGPTPrompt } = require("./openAiIngredientPrompt")
 
 async function determineRecipeSource(recipeLink) {
+
     try {
         const response = await axios.get(recipeLink);
+
         const $ = cheerio.load(response.data)
+
+    
 
         // WPRM Match
         const WPRMSearch = 'wprm'
         const WPRMElementCount = $('[class*="' + WPRMSearch + '"]').length
+        console.log("Cheerio: determineRecipeSource WPRMElementCount", WPRMElementCount)
+        
         
         // Tasty Recipes Match
         const tastyRecipesSearch = 'tasty-recipes'
+
         const tastyRecipesElementCount = $('[class*="' + tastyRecipesSearch + '"]').length
+        console.log("Cheerio: determineRecipeSource tastyRecipesElementCount", tastyRecipesElementCount)
 
         // Logic
         if(recipeLink.includes('bbcgoodfood.com')) {
@@ -42,15 +50,16 @@ async function determineRecipeSource(recipeLink) {
 function getWPRMRecipe($) {
     // photoLink
     const photoLink = $('.wprm-recipe-container .wprm-recipe-image img').attr('src')
-    console.log("Cheerio: WPRM photoLink", photoLink)
+
+    console.log("Cheerio: WRPM photoLink", photoLink)
     
     //  Name
     const name = $('.wprm-recipe-name').text()
-    console.log("Cheerio: WPRM name", name)
+    console.log("Cheerio: WRPM name", name)
     
     // Description
     const description = $('.wprm-recipe-summary').text()
-    console.log("Cheerio: WPRM description", description)
+    console.log("Cheerio: WRPM description", description)
     
     // Prep Time
     let prepTime
@@ -63,11 +72,11 @@ function getWPRMRecipe($) {
 
     if(!prepHours) {
         const prepTime = prepMins
-        console.log("Cheerio: WPRM prepTime", prepTime)
+        console.log("Cheerio: WRPM prepTime", prepTime)
 
     } else {
         const prepTime = ((prepHours * 60) + prepMins)
-        console.log("Cheerio: WPRM prepTime", prepTime)
+        console.log("Cheerio: WRPM prepTime", prepTime)
     }
     
     // Cook Time
@@ -81,11 +90,11 @@ function getWPRMRecipe($) {
 
     if(!cookHours) {
         const cookTime = cookMins
-        console.log("Cheerio: WPRM cookTime", cookTime)
+        console.log("Cheerio: WRPM cookTime", cookTime)
 
     } else {
         const cookTime = ((cookHours * 60) + cookMins)
-        console.log("Cheerio: WPRM cookTime", cookTime)
+        console.log("Cheerio: WRPM cookTime", cookTime)
     }
     
     
@@ -98,19 +107,41 @@ function getWPRMRecipe($) {
     }
 
     const servings = parseInt(servingsText, 10)
-    console.log("Cheerio: WPRM servings", servings)
+    console.log("Cheerio: WRPM servings", servings)
 
-    // Ingredients
-    let ingredients = []
+    // AI Ingredients
+    let ingredientsArray = []
 
+    // Compile Array
     $('.wprm-recipe-ingredient').each(function() {
-        const ingredient = $(this).text();
-        console.log("Cheerio: getWPRMRecipe ingredient", ingredient);
+        let ingredientObject = {}
+
+        // Extract Qty
+        let ingredientQty = $(this).find('.wprm-recipe-ingredient-amount').text().trim()
+        ingredientObject.qty = ingredientQty
         
-        ingredients.push(ingredient);
+        // Extract Unit
+        let ingredientUnit = $(this).find('.wprm-recipe-ingredient-amount').text().trim()
+        ingredientObject.unit = ingredientUnit
+
+        // Extract Ingredient
+        let ingredientName = $(this).find('.wprm-recipe-ingredient-name').contents().not($(this).find('.wprm-recipe-ingredient-name a')).text().trim();
+        
+        if (!ingredientName) {
+            ingredientName = $(this).find('.wprm-recipe-ingredient-name a').text().trim();
+        }
+        
+        ingredientObject.ingredient = ingredientName
+
+        // Extract preparation (optional)
+        ingredientObject.preparation = $(this).find('.wprm-recipe-ingredient-notes').text().trim() || null
+    
+        ingredientsArray.push(ingredientObject);
     })
 
-    console.log("Cheerio: gtWPRMRecipe ingredients", ingredients)
+    const ingredients = AiIngredientQuery(ingredientsArray)
+
+    console.log("Cheerio: gtWRPMRecipe ingredients", ingredients)
 
 
 }
@@ -192,7 +223,7 @@ async function AiIngredientQuery(ingredientsArray) {
     
         // ingredients.push(ingredientObject);
     // })
-    // console.log("Cheerio: WPRM ingredients", ingredients)
+    // console.log("Cheerio: WRPM ingredients", ingredients)
 
 
     // let recipe = {
