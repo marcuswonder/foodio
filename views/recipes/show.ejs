@@ -51,19 +51,10 @@
 <h3>Ingredients</h3>
 <% if(recipe.ingredients.length > 0) { %>
 <table id="ingredients">
-  <thead>
-      <tr>
-          <th>Qty</th>
-          <th>Ingredient</th>
-          <th>Preparation</th>
-    </tr>
-  </thead>
   <tbody>
     <% recipe.ingredients.forEach(function(r) { %>
       <tr>
-          <td><%= r.qty %> <%= r.unit %></td>
           <td><%= r.ingredient %></td>
-          <td><%= r.preparation %></td>
       </tr>
     <% }) %> 
     </tbody>
