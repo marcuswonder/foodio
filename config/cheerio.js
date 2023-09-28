@@ -46,50 +46,106 @@ async function determineRecipeSourceAndParse(recipeLink) {
 function getWPRMRecipe($) {
     // photoLink
     const photoLink = $('.wprm-recipe-container .wprm-recipe-image img').attr('src')
-    // console.log("Cheerio: WPRM photoLink", photoLink)
+    console.log("Cheerio: WPRM photoLink", photoLink)
     
     //  Name
     const name = $('.wprm-recipe-name').text()
-    // console.log("Cheerio: WPRM name", name)
+    console.log("Cheerio: WPRM name", name)
     
     // Description
     const description = $('.wprm-recipe-summary').text()
-    // console.log("Cheerio: WPRM description", description)
+    console.log("Cheerio: WPRM description", description)
     
     // Prep Time
     let prepTime
 
     const prepMinsText = $('.wprm-recipe-prep_time-minutes').clone().children().remove().end().text()
-    const prepMins = parseInt(prepMinsText, 10)
+    console.log("Cheerio: getWPRMRecipe prepMinsText", prepMinsText)
+    
+    let prepMins
+    
+    if(prepMinsText) {
+        prepMins = parseInt(prepMinsText, 10)
+    }
     
     const prepHoursText = $('.wprm-recipe-prep_time-hours').clone().children().remove().end().text()
     const prepHours = parseInt(prepHoursText, 10)
-
+    
     if(!prepHours) {
         prepTime = prepMins
-        // console.log("Cheerio: WRPM prepTime", prepTime)
+        console.log("Cheerio: WPRM prepTime", prepTime)
 
     } else {
         prepTime = ((prepHours * 60) + prepMins)
-        console.log("Cheerio: WRPM prepTime", prepTime)
+        console.log("Cheerio: WPRM prepTime", prepTime)
     }
     
     // Cook Time
     let cookTime
-
+    
     const cookMinsText = $('.wprm-recipe-cook_time-minutes').clone().children().remove().end().text()
-    const cookMins = parseInt(cookMinsText, 10)
+    console.log("Cheerio: getWPRMRecipe cookMinsText", cookMinsText)
+
+    let cookMins
+    
+    if(cookMinsText) {
+        cookMins = parseInt(cookMinsText, 10)
+    }
     
     const cookHoursText = $('.wprm-recipe-cook_time-hours').clone().children().remove().end().text()
     const cookHours = parseInt(cookHoursText, 10)
-
+    
     if(!cookHours) {
         cookTime = cookMins
-        // console.log("Cheerio: WPRM cookTime", cookTime)
-
+        console.log("Cheerio: WPRM cookTime", cookTime)
+        
     } else {
         cookTime = ((cookHours * 60) + cookMins)
-        // console.log("Cheerio: WPRM cookTime", cookTime)
+        console.log("Cheerio: WPRM cookTime", cookTime)
+    }
+    
+    // Total Time
+    let totalTime
+    
+    const totalMinsText = $('.wprm-recipe-total_time-minutes').clone().children().remove().end().text()
+    console.log("Cheerio: getWPRMRecipe totalMinsText", totalMinsText)
+    
+    let totalMins
+    
+    if(totalMinsText) {
+        totalMins = parseInt(totalMinsText, 10)
+    }
+    
+    const totalHoursText = $('.wprm-recipe-total_time-hours').clone().children().remove().end().text()
+    const totalHours = parseInt(totalHoursText, 10)
+    
+    if(!totalHours) {
+        totalTime = totalMins
+        console.log("Cheerio: WPRM totalTime", totalTime)
+        
+    } else {
+        totalTime = ((totalHours * 60) + totalMins)
+        console.log("Cheerio: WPRM totalTime", totalTime)
+    }
+
+    // Time Calculations
+    if(prepTime && cookTime) {
+        prepTime = prepTime
+        cookTime = cookTime
+
+    } else if(!prepTime && cookTime && totalTime) {
+        prepTime = (totalTime - cookTime)
+        cookTime = cookTime
+
+    } else if(prepTime && !cookTime && totalTime) {
+        prepTime = prepTime
+        cookTime = (totalTime - cookTime)
+    } else if(!prepTime && !cookTime && totalTime) {
+        prepTime = 0
+        cookTime = cookTime
+    } else {
+        prepTime = 0
+        cookTime = 0
     }
     
     
@@ -102,31 +158,31 @@ function getWPRMRecipe($) {
     }
 
     const servings = parseInt(servingsText, 10)
-    // console.log("Cheerio: WPRM servings", servings)
+    console.log("Cheerio: WPRM servings", servings)
 
     // Ingredients
     let ingredients = []
 
     $('.wprm-recipe-ingredient').each(function() {
         const ingredient = $(this).text();
-        // console.log("Cheerio: getWPRMRecipe ingredient", ingredient);
+        console.log("Cheerio: getWPRMRecipe ingredient", ingredient);
         
         ingredients.push({ingredient});
     })
 
-    // console.log("Cheerio: gtWPRMRecipe ingredients", ingredients)
+    // console.log("Cheerio: getWPRMRecipe ingredients", ingredients)
     
     // Instructions
     let instructions = []
 
     $('.wprm-recipe-instruction-text').each(function() {
         const instruction = $(this).text();
-        // console.log("Cheerio: getWPRMRecipe instruction", instruction);
+        console.log("Cheerio: getWPRMRecipe instruction", instruction);
         
         instructions.push({instruction});
     })
 
-    // console.log("Cheerio: gtWPRMRecipe instructions", instructions)
+    // console.log("Cheerio: getWPRMRecipe instructions", instructions)
     
     let parsedRecipe = {
         name: name,
@@ -139,7 +195,7 @@ function getWPRMRecipe($) {
         photo: photoLink,
     }
     
-    console.log("Cheerio: gtWPRMRecipe parsedRecipe", parsedRecipe)
+    console.log("Cheerio: getWPRMRecipe parsedRecipe", parsedRecipe)
     
     return parsedRecipe
 }
