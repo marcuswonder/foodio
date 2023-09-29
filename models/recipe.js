@@ -32,6 +32,12 @@ const recipeSchema = new Schema({
         ref: 'User',
         required: true,
     },
+    publisher: {
+        type: String,
+    },
+    link: {
+        type: String,
+    },
     ingredients: [{
         ingredient: {
             type: String}

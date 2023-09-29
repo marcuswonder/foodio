@@ -1,4 +1,4 @@
-function getWPRMRecipe($) {
+function getWPRMRecipe($, recipeLink) {
     // // photoLink
     const photoLink = $('.wprm-recipe-image img').attr('src')
     console.log("Cheerio: WPRM photoLink", photoLink)
@@ -138,6 +138,11 @@ function getWPRMRecipe($) {
     })
 
     // console.log("Cheerio: getWPRMRecipe instructions", instructions)
+
+    // Source
+    const metaTag = $('meta[property="og:site_name"]')
+    const siteName = metaTag.attr('content');
+
     
     let parsedRecipe = {
         name: name,
@@ -148,6 +153,9 @@ function getWPRMRecipe($) {
         ingredients: ingredients,
         instructions: instructions,
         photo: photoLink,
+        publisher: siteName,
+        link: recipeLink,
+
     }
     
     console.log("Cheerio: getWPRMRecipe parsedRecipe", parsedRecipe)

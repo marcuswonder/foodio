@@ -28,12 +28,12 @@ async function determineRecipeSourceAndParse(recipeLink) {
             const instructionsHtml = $('.recipe__method-steps').html()
             const $instructions = cheerio.load(instructionsHtml)
 
-            const parsedRecipe = getBbcGoodFoodRecipe($, $ingredients, $instructions)
+            const parsedRecipe = getBbcGoodFoodRecipe($, $ingredients, $instructions, recipeLink)
             return parsedRecipe
             
         } else if(WPRMElementCount > 10) {
             console.log("Cheerio: determineRecipeSource WPRM Identified")
-            const parsedRecipe = getWPRMRecipe($)
+            const parsedRecipe = getWPRMRecipe($, recipeLink)
             return parsedRecipe
             
         } else if(tastyRecipesElementCount > 10) {
