@@ -3,60 +3,51 @@
 <title><%= recipe.name %></title>
 <img src="<%= recipe.photo %>" alt="Recipe Photo">
 <h1><%= recipe.name %></h1>
-
-<!-- <h3>Recipe Info</h3>
-<table id="recipe-top-info" class="recipe-info">
-  <tr>
-    <th>Name:</th>
-    <td><%= recipe.name %></td>
-  </tr>
-  <tr>
-    <th>Description:</th>
-    <td><%= recipe.description %></td>
-  </tr>
-  <tr>
-    <th>Category:</th>
-    <td><%= recipe.category %></td>
-  </tr>
-  <tr>
-    <th>Added by:</th>
-    <td><%= recipe.userName %></td>
-  </tr>
-</table>
-<br> -->
+<div id="recipe-info-container-description" class="flex-info-container">
+  <p id="recipe-info-description"><%= recipe.description %></p>
+</div>
 
 <h3>Recipe Info</h3>
 <div id="recipe-info-top-container" class="flex-container">
-  <div id="recipe-info-container-description" class="flex-info-container">
-      <p id="recipe-info-description" class="flex-info"><%= recipe.description %></p>
-  </div>
   <div id="recipe-info-container-category" class="flex-info-container">
-      <p id="recipe-info-category" class="flex-info"><%= recipe.category %></p>
+    <p id="recipe-info-category" class="flex-info"><%= recipe.category %></p>
   </div>
   
-  <div id="recipe-info-container-category" class="flex-info-container">
-      <p id="recipe-info-added-by" class="flex-info"><%= recipe.userName %></p>
+  <% if(recipe.publisher) { %>
+    <div id="recipe-info-container-category" class="flex-info-container">
+      <p id="recipe-info-added-by" class="flex-info">
+        <a href="<%= recipe.link %>" target="_blank"><%= recipe.publisher %></a>
+      </p>
+    </div>
+
+  <% } else { %>
+    <div id="recipe-info-container-author" class="flex-info-container">
+      <p id="recipe-info-author" class="flex-info"><%= recipe.userName %></p>
+    </div>
+    
+    <% } %> 
+
+  <% if(recipe.prepTime + recipe.cookTime < 60) { %>
+    <div id="recipe-info-container-time" class="flex-info-container">
+        <p id="recipe-info-time" class="flex-info"><%= (recipe.prepTime + recipe.cookTime) + " mins" %></p>
+    </div>
+
+  <% } else { %>
+    <div id="recipe-info-container-time" class="flex-info-container">
+      <p id="recipe-info-time" class="flex-info">
+        <%= Math.floor((recipe.prepTime + recipe.cookTime) / 60) + " hrs " + ((recipe.prepTime + recipe.cookTime) - (Math.floor((recipe.prepTime + recipe.cookTime) / 60) * 60)) + " mins" %>
+      </p>  
+    </div>
+  <% } %> 
+
+  <div id="recipe-info-container-servings" class="flex-info-container">
+      <p id="recipe-info-servings" class="flex-info"><%= recipe.servings + " servings"%></p>
   </div>
-  </div>
+  
 </div>
 
 <br>
 
-<h3>Preparation Info</h3>
-<table id="recipe-second-info" class="recipe-info">
-  <tr>
-    <th>Prep Time (Mins):</th>
-    <td><%= recipe.prepTime %></td>
-  </tr>
-  <tr>
-    <th>Cook Time (mins):</th>
-    <td><%= recipe.cookTime %></td>
-  </tr>
-  <tr>
-    <th># Adult Servings:</th>
-    <td><%= recipe.servings %></td>
-  </tr>
-</table>
 
 <% if (user?._id.equals(recipe.author)) { %>
 <form action="/recipes/<%= recipe._id %>/edit" method="GET" class="button">

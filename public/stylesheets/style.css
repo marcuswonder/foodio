@@ -117,6 +117,9 @@ h1, h2, h3, h4, h5, h6 {
   padding: 3px 15px 3px 15px;
 }
 
+
+/* Recipe Cards */
+
 #recipes-container {
   display: flex;
   justify-content: center;    /* Horizontal centering */
@@ -414,14 +417,62 @@ td {
 
 
 
+/* Recipe Show Page */
+
+#recipe-info-top-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-evenly;
+  background-color: #71BAC0;
+
+  /* border: 10px black solid; */
+}
+
+/* Small Devices (Phones) */
+@media (max-width: 576px) {
+  .recipe-card-grid {
+    width: 90%;
+  }
+}
+
+@media (min-width: 576px) {
+  .recipe-card-grid {
+    width: 90%;
+  }
+}
+
+/* Medium Devices (Tablets) */
+@media (min-width: 768px) {
+  .recipe-card-grid {
+    width: 90%;
+  }
+}
+
+/* Large Devices (Laptops) */
+@media (min-width: 992px) {
+  .recipe-card-grid {
+    width: 90%;
+  }
+}
+
+/* Large Devices (Screens) */
+@media (min-width: 1200px) {
+  .recipe-card-grid {
+    width: 90%;
+  }
+}
 
 
 
 
+.flex-info {
+  color: white;
+}
 
-
-
-
+.flex-info a:link {
+  color: white;
+}
 
 
 
