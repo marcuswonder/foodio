@@ -155,7 +155,6 @@ function getWPRMRecipe($, recipeLink) {
         photo: photoLink,
         publisher: siteName,
         link: recipeLink,
-
     }
     
     console.log("Cheerio: getWPRMRecipe parsedRecipe", parsedRecipe)

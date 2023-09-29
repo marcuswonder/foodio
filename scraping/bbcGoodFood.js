@@ -71,6 +71,8 @@ async function getBbcGoodFoodRecipe($, $ingredients, $instructions, recipeLink) 
             ingredients: ingredients,
             instructions: instructions,
             photo: photoLink,
+            publisher: "BBC Good Food",
+            link: recipeLink,
         }
 
         return recipe
