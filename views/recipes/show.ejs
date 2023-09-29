@@ -4,7 +4,7 @@
 <img src="<%= recipe.photo %>" alt="Recipe Photo">
 <h1><%= recipe.name %></h1>
 
-<h3>Recipe Info</h3>
+<!-- <h3>Recipe Info</h3>
 <table id="recipe-top-info" class="recipe-info">
   <tr>
     <th>Name:</th>
@@ -23,6 +23,22 @@
     <td><%= recipe.userName %></td>
   </tr>
 </table>
+<br> -->
+
+<h3>Recipe Info</h3>
+<div id="recipe-info-top-container" class="flex-container">
+  <div id="recipe-info-container-description" class="flex-info-container">
+      <p id="recipe-info-description" class="flex-info"><%= recipe.description %></p>
+  </div>
+  <div id="recipe-info-container-category" class="flex-info-container">
+      <p id="recipe-info-category" class="flex-info"><%= recipe.category %></p>
+  </div>
+  <div id="recipe-info-container-category" class="flex-info-container">
+      <p id="recipe-info-added-by" class="flex-info"><%= recipe.userName %></p>
+  </div>
+  </div>
+</div>
+
 <br>
 
 <h3>Preparation Info</h3>
