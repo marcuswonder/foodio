@@ -1,174 +1,217 @@
 <%- include('../partials/header') %>
 
 <title><%= recipe.name %></title>
-<img src="<%= recipe.photo %>" alt="Recipe Photo">
-<h1><%= recipe.name %></h1>
-<div id="recipe-info-container-description" class="flex-info-container">
-  <p id="recipe-info-description"><%= recipe.description %></p>
-</div>
 
-<h3>Recipe Info</h3>
-<div id="recipe-info-top-container" class="flex-container">
-  <div id="recipe-info-container-category" class="flex-info-container">
-    <p id="recipe-info-category" class="flex-info"><%= recipe.category %></p>
-  </div>
-  
-  <% if(recipe.publisher) { %>
-    <div id="recipe-info-container-category" class="flex-info-container">
-      <p id="recipe-info-added-by" class="flex-info">
-        <a href="<%= recipe.link %>" target="_blank"><%= recipe.publisher %></a>
-      </p>
+<div id="recipe-show">
+  <div id="recipe-show-container">
+    <div id="recipe-show-header-container">
+      
+      <div id="recipe-show-header-photo-container">
+        <img class="recipe-show-photo" src="<%= recipe.photo %>" alt="Recipe Photo">
+      </div>
+
+      <div id="recipe-show-header-info-container">
+        
+        <div id="recipe-show-info-name-container" class="recipe-show-header-info-sub-container">
+          <h1 id="recipe-show-info-name"class="recipe-show-header-info-sub-container-content"><%= recipe.name %></h1>
+        </div>
+        
+        <div id="recipe-show-header-info-description-container" class="recipe-show-header-info-sub-container">
+          <p id="recipe-show-info-description"class="recipe-show-header-info-sub-container-content"><%= recipe.description %></p>
+        </div>
+        
+        <% if(recipe.publisher) { %>
+          <div id="recipe-show-header-info-category-container" class="recipe-show-header-info-sub-container">
+            <p id="recipe-show-header-info-added-by" class="recipe-show-header-info-sub-container-content">
+              <a href="<%= recipe.link %>" target="_blank"><%= 'by ' + recipe.publisher %></a>
+            </p>
+          </div>
+
+        <% } else { %>
+          <div id="recipe-show-header-info-author-container" class="recipe-show-header-info-sub-container">
+            <p id="recipe-show-header-info-author" class="recipe-show-header-info-sub-container-content"><%= 'by ' + recipe.userName %></p>
+          </div>
+          
+          <% } %> 
+
+        <br>
+        
+        <div id="recipe-show-header-info-details-container">
+        
+          <div id="recipe-show-header-info-details-category-container" class="recipe-show-header-info-details-sub-container">
+            <h3 class="recipe-show-header-info-details-sub-container-title">Category</h3>
+            <p id="recipe-show-info-category" class="recipe-show-header-info-details-sub-container-content">
+              <%= recipe.category %>
+            </p>
+          </div>
+
+          <div id="recipe-show-header-info-details-servings-container" class="recipe-show-header-info-details-sub-container">
+            <h3 class="recipe-show-header-info-details-sub-container-title">Servings</h3>
+            <p id="recipe-show-info-servings" class="recipe-show-header-info-details-sub-container-content"><%= recipe.servings + " servings"%></p>
+          </div>
+
+          <% if(recipe.prepTime < 60) { %>
+            <div id="recipe-show-header-info-details-prepTime-container" class="recipe-show-header-info-details-sub-container">
+              <h3 class="recipe-show-header-info-details-sub-container-title">Prep</h3>
+              <p id="recipe-show-header-info-prepTime" class="recipe-show-header-info-details-sub-container-content">
+                <%= recipe.prepTime + " mins" %>
+              </p>
+            </div>
+
+          <% } else { %>
+            <div id="recipe-show-header-info-details-prepTime-container" class="recipe-show-header-info-details-sub-container">
+              <h3 class="recipe-show-header-info-details-sub-container-title">Prep</h3>
+              <p id="recipe-show-header-info-prepTime" class="recipe-show-header-info-details-sub-container-content">
+                <%= Math.floor(recipe.prepTime / 60) + " hrs " + (recipe.prepTime - (Math.floor(recipe.prepTime / 60) * 60)) + " mins" %>
+              </p>  
+            </div>
+          <% } %> 
+          
+          <% if(recipe.cookTime < 60) { %>
+            <div id="recipe-show-header-info-details-cookTime-container" class="recipe-show-header-info-details-sub-container">
+              <h3 class="recipe-show-header-info-details-sub-container-title">Cook</h3>
+                <p id="recipe-show-header-info-cookTime" class="recipe-show-header-info-details-sub-container-content"><%= recipe.cookTime + " mins" %></p>
+            </div>
+
+          <% } else { %>
+            <div id="recipe-show-header-info-details-cookTime-container" class="recipe-show-header-info-details-sub-container">
+              <h3 class="recipe-show-header-info-details-sub-container-title">Cook</h3>
+              <p id="recipe-show-header-info-cookTime" class="recipe-show-header-info-details-sub-container-content">
+                <%= Math.floor(recipe.cookTime / 60) + " hrs " + (recipe.cookTime - (Math.floor(recipe.cookTime / 60) * 60)) + " mins" %>
+              </p>  
+            </div>
+          <% } %> 
+
+          
+
+        </div>
+      </div>
     </div>
 
-  <% } else { %>
-    <div id="recipe-info-container-author" class="flex-info-container">
-      <p id="recipe-info-author" class="flex-info"><%= recipe.userName %></p>
-    </div>
-    
-    <% } %> 
-
-  <% if(recipe.prepTime + recipe.cookTime < 60) { %>
-    <div id="recipe-info-container-time" class="flex-info-container">
-        <p id="recipe-info-time" class="flex-info"><%= (recipe.prepTime + recipe.cookTime) + " mins" %></p>
-    </div>
-
-  <% } else { %>
-    <div id="recipe-info-container-time" class="flex-info-container">
-      <p id="recipe-info-time" class="flex-info">
-        <%= Math.floor((recipe.prepTime + recipe.cookTime) / 60) + " hrs " + ((recipe.prepTime + recipe.cookTime) - (Math.floor((recipe.prepTime + recipe.cookTime) / 60) * 60)) + " mins" %>
-      </p>  
-    </div>
-  <% } %> 
-
-  <div id="recipe-info-container-servings" class="flex-info-container">
-      <p id="recipe-info-servings" class="flex-info"><%= recipe.servings + " servings"%></p>
-  </div>
-  
-</div>
-
-<br>
+    <br>
 
 
-<% if (user?._id.equals(recipe.author)) { %>
-<form action="/recipes/<%= recipe._id %>/edit" method="GET" class="button">
-  <button type="submit" class="reg-button">Edit Recipe Info</button></form>
-<br>
-<% } else { %>
-  <% } %>
-
-<h3>Ingredients</h3>
-<% if(recipe.ingredients.length > 0) { %>
-<table id="ingredients">
-  <tbody>
-    <% recipe.ingredients.forEach(function(r) { %>
-      <tr>
-          <td><%= r.ingredient %></td>
-      </tr>
-    <% }) %> 
-    </tbody>
-  </table>
     <% if (user?._id.equals(recipe.author)) { %>
-  <a href="/recipes/<%= recipe._id %>/ingredients" class="button">
-    <button type="submit" class="reg-button">Edit Recipe Ingredients</button></a>
-    <% } %>
-  <% } else { %>
-
-<% if(recipe.ingredients.length === 0 && user?._id.equals(recipe.author)) { %>
-  <h4>Add Ingredients</h4>
-  <p>There are no ingredients here yet. Use the button below to add some!</p><br>
-  <a href="/recipes/<%= recipe._id %>/ingredients" class="button">
-    <button type="submit" class="reg-button">Add Recipe Ingredients</button></a>
-
+    <form action="/recipes/<%= recipe._id %>/edit" method="GET" class="button">
+      <button type="submit" class="reg-button">Edit Recipe Info</button></form>
+    <br>
     <% } else { %>
-      <p>There are no ingredients here yet. We hope the author will be back soon to add some!</p>
+      <% } %>
+
+    <h3>Ingredients</h3>
+    <% if(recipe.ingredients.length > 0) { %>
+    <table id="ingredients">
+      <tbody>
+        <% recipe.ingredients.forEach(function(r) { %>
+          <tr>
+              <td><%= r.ingredient %></td>
+          </tr>
+        <% }) %> 
+        </tbody>
+      </table>
+        <% if (user?._id.equals(recipe.author)) { %>
+      <a href="/recipes/<%= recipe._id %>/ingredients" class="button">
+        <button type="submit" class="reg-button">Edit Recipe Ingredients</button></a>
+        <% } %>
+      <% } else { %>
+
+    <% if(recipe.ingredients.length === 0 && user?._id.equals(recipe.author)) { %>
+      <h4>Add Ingredients</h4>
+      <p>There are no ingredients here yet. Use the button below to add some!</p><br>
+      <a href="/recipes/<%= recipe._id %>/ingredients" class="button">
+        <button type="submit" class="reg-button">Add Recipe Ingredients</button></a>
+
+        <% } else { %>
+          <p>There are no ingredients here yet. We hope the author will be back soon to add some!</p>
+        <% } %>
+      <% } %> 
+        <br>
+        <br>
+
+
+
+    <h3>Instructions</h3>
+    <% if(recipe.instructions.length > 0) { %>
+    <ol>
+        <% recipe.instructions.forEach(function(i) { %>
+        <li><%= i.instruction %></li>
+    <% }); %>
+    </ol>
+    <% if (user?._id.equals(recipe.author)) { %>
+      <a href="/recipes/<%= recipe._id %>/instructions" class="button">
+        <button type="submit" class="reg-button">Edit Recipe Instructions</button></a>
     <% } %>
-  <% } %> 
-    <br>
-    <br>
+    <% } else { %>
+
+      <% if(recipe.instructions.length === 0 && user?._id.equals(recipe.author)) { %>
+        <h4>Add Instructions</h4>
+        <p>There are no instructions here yet. Use the button below to add some!</p><br>
+        <a href="/recipes/<%= recipe._id %>/instructions" class="button">
+          <button type="submit" class="reg-button">Add Recipe Instructions</button></a>
+
+          <% } else { %>
+            <p>There are no instructions here yet. We hope the author will be back soon to add some!</p>
+        <% } %>
+      <% } %>
+      <br>
+      <br>
 
 
 
-<h3>Instructions</h3>
-<% if(recipe.instructions.length > 0) { %>
-<ol>
-    <% recipe.instructions.forEach(function(i) { %>
-    <li><%= i.instruction %></li>
-<% }); %>
-</ol>
-<% if (user?._id.equals(recipe.author)) { %>
-  <a href="/recipes/<%= recipe._id %>/instructions" class="button">
-    <button type="submit" class="reg-button">Edit Recipe Instructions</button></a>
-<% } %>
-<% } else { %>
 
-  <% if(recipe.instructions.length === 0 && user?._id.equals(recipe.author)) { %>
-    <h4>Add Instructions</h4>
-    <p>There are no instructions here yet. Use the button below to add some!</p><br>
-    <a href="/recipes/<%= recipe._id %>/instructions" class="button">
-      <button type="submit" class="reg-button">Add Recipe Instructions</button></a>
+      <h3>Tags</h3>
+      <% if(recipe.tags.length > 0) { %>
+        <ul>
+          <% recipe.tags.forEach(function(t) { %>
+          <li><%= t.tag %></li>
+      <% }) %>
+      </ul>
+      <% } %>
+
+      <ul>
+        <%- recipe.tags.map(t =>
+        `<li>
+          ${t.tag} </li>`
+      ).join('') %>
+      </ul>
+
+      <% if (user?._id.equals(recipe.author)) { %>
+        <a href="/recipes/<%= recipe._id %>/tags" class="button">
+          <button type="submit" class="reg-button">Edit Recipe Tags</button></a>
+      
+      <% } else { %>
+      
+        <% if(recipe.tags.length === 0 && user?._id.equals(recipe.author)) { %>
+          <h4>Add Tags</h4>
+          <p>There are no tags here yet. Use the button below to add some!</p><br>
+          <a href="/recipes/<%= recipe._id %>/tags" class="button">
+            <button type="submit" class="reg-button">Add Recipe Tags</button></a>
+      
+            <% } else { %>
+              <p>There are no tags here yet. We hope the author will be back soon to add some!</p>
+          <% } %>
+        <% } %>
+        <br>
+        <br>
+
+
+    <h2>Add recipe to collection</h2>
+    <% if (!user) { %>
+      <p>You need to log in to add recipes to your collections</p>
 
       <% } else { %>
-        <p>There are no instructions here yet. We hope the author will be back soon to add some!</p>
-    <% } %>
-  <% } %>
-  <br>
-  <br>
-
-
-
-
-  <h3>Tags</h3>
-  <% if(recipe.tags.length > 0) { %>
-    <ul>
-      <% recipe.tags.forEach(function(t) { %>
-      <li><%= t.tag %></li>
-  <% }) %>
-  </ul>
-  <% } %>
-
-  <ul>
-    <%- recipe.tags.map(t =>
-    `<li>
-      ${t.tag} </li>`
-  ).join('') %>
-  </ul>
-
-  <% if (user?._id.equals(recipe.author)) { %>
-    <a href="/recipes/<%= recipe._id %>/tags" class="button">
-      <button type="submit" class="reg-button">Edit Recipe Tags</button></a>
-  
-  <% } else { %>
-  
-    <% if(recipe.tags.length === 0 && user?._id.equals(recipe.author)) { %>
-      <h4>Add Tags</h4>
-      <p>There are no tags here yet. Use the button below to add some!</p><br>
-      <a href="/recipes/<%= recipe._id %>/tags" class="button">
-        <button type="submit" class="reg-button">Add Recipe Tags</button></a>
-  
-        <% } else { %>
-          <p>There are no tags here yet. We hope the author will be back soon to add some!</p>
+    <form id="add-to-collection-button" action="/recipes/<%= recipe._id %>/collections" method="POST">
+      <select class="input" name="collection_id">
+          <option disabled selected value> -- Select a Collection -- </option>
+        <% for(let i = 0; i < collections.length; i++) { %>
+          <option value="<%= collections[i]._id %>"><%= collections[i].name %></option>
+        <% } %>
+      </select>
+      <button type="submit" class="reg-button">Add to Collection</button>
+      </form>
       <% } %>
-    <% } %>
-    <br>
-    <br>
-
-
-<h2>Add recipe to collection</h2>
-<% if (!user) { %>
-  <p>You need to log in to add recipes to your collections</p>
-
-  <% } else { %>
-<form id="add-to-collection-button" action="/recipes/<%= recipe._id %>/collections" method="POST">
-  <select class="input" name="collection_id">
-      <option disabled selected value> -- Select a Collection -- </option>
-    <% for(let i = 0; i < collections.length; i++) { %>
-      <option value="<%= collections[i]._id %>"><%= collections[i].name %></option>
-    <% } %>
-  </select>
-  <button type="submit" class="reg-button">Add to Collection</button>
-  </form>
-  <% } %>
-  <br>
-  <br>
-  
+      <br>
+      <br>
+  </div>
+</div>
 <%- include('../partials/footer') %>
