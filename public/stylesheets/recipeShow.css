@@ -114,7 +114,7 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     width: 100%;
 }
 
@@ -136,37 +136,47 @@
   /* Small Devices (Phones) */
 @media (min-width: 300px) {
     #recipe-show-container {
-        width: 100%;
+        width: 95%;
     }
 
     #recipe-show-header-photo-container {
-      width: 100%;
+        width: 95%;
     }
 
     #recipe-show-header-info-container {
-        width: 100%;
+        width: 95%;
       }
       
+    #recipe-show-method-container {
+        justify-content: center;
+    }
+
     .recipe-show-method-container {
-        width: 100%;
-  }
+        width: 95%;
+    }
+}
   
-  @media (min-width: 576px) {
+@media (min-width: 576px) {
     #recipe-show-container {
-        width: 100%;
+        width: 95%;
     }
-    
+
     #recipe-show-header-photo-container {
-    width: 33%;
+        width: 33%; 
     }
-  
+
     #recipe-show-header-info-container {
         width: 67%;
     }
-      
-    .recipe-show-method-container {
-        width: 100%;
+        
+    #recipe-show-method-container {
+        justify-content: center;
     }
+
+    .recipe-show-method-container {
+        width: 95%;
+    }
+}
   
   /* Medium Devices (Tablets) */
   @media (min-width: 768px) {
@@ -182,12 +192,17 @@
         width: 67%;
     }
       
+    #recipe-show-method-container {
+        justify-content: space-between;
+    }
+
     .recipe-show-method-container {
         width: 48%;
   }
+}
   
   /* Large Devices (Laptops) */
-  @media (min-width: 992px) {
+@media (min-width: 992px) {
     #recipe-show-container {
       width: 800px;
     }
@@ -200,12 +215,17 @@
       width: 67%;
     }
       
+    #recipe-show-method-container {
+        justify-content: space-between;
+    }
+
     .recipe-show-method-container {
         width: 48%;
-  }
+    }
+}
   
-  /* Large Devices (Screens) */
-  @media (min-width: 1200px) {
+/* Large Devices (Screens) */
+@media (min-width: 1200px) {
     #recipe-show-container {
       width: 1000px;
     }
@@ -218,8 +238,13 @@
       width: 67%;
     }
       
+    #recipe-show-method-container {
+        justify-content: space-between;
+    }
+
     .recipe-show-method-container {
         width: 48%;
-  }
+    }
+}
   
   
