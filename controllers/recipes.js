@@ -30,7 +30,7 @@ async function index(req, res) {
     const recipes = await Recipe.find({})
         .populate('tags')
         .exec()
-        res.render('recipes/index', { recipes })
+        res.render('recipes/index', { recipes, stylesheet: '../public/stylesheets/recipeIndex.css' })
 }
 
 
@@ -220,9 +220,8 @@ async function show(req, res) {
     .populate('tags')
     .exec()
     const collections = await Collection.find({})
-        res.render('recipes/show', { recipe, collections })
+        res.render('recipes/show', { recipe, collections, stylesheet: '../public/stylesheets/recipeShow.css' })
 }
-    
 
 
 async function deleteRecipe(req, res, next) {
