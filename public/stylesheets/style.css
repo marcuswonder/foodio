@@ -7,8 +7,7 @@ html {
 body {
   height: 100%;
   width: 100%;
-  /* background-image: url("/images/Background.png");
-  background-size: 100%; */
+  margin: 0;
   color: #222E50
 }
 
@@ -117,12 +116,12 @@ h1, h2, h3, h4, h5, h6 {
   padding: 3px 15px 3px 15px;
 }
 
-table {
+/* table {
   margin: 3px 15px 3px 15px;
   border: 1px solid;
   padding: 10px;
   align-self: center;
-}
+} */
 
 
 thead {

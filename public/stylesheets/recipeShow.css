@@ -27,11 +27,9 @@
   #recipe-show-header-photo-container {
     display: flex;
     justify-content: center;
+    align-items: start;
     overflow: hidden;
     flex-grow: 1;
-    max-width: 33%;
-    min-width: 300px
-    
   }
   
   .recipe-show-photo {
@@ -39,7 +37,7 @@
     width: auto;
     object-fit: contain;
     max-height: auto;
-    max-width: 100%;
+    width: 100%;
     display: block;
   }
   
@@ -49,7 +47,6 @@
     flex-grow: 2;
     flex-wrap: nowrap;
     justify-content: start;
-    width: 67%
   }
   
   .recipe-show-header-info-sub-container {
@@ -61,15 +58,16 @@
     padding: 0 2.5% 0 2.5%;
     margin: 1%;
     text-align: left;
-  }
-  
-  
-  
-  /* Category, Servings etc. */
-  #recipe-show-header-info-details-container {
+}
+
+
+
+    /* Category, Servings etc. */
+#recipe-show-header-info-details-container {
     display: flex;
     flex-wrap: wrap;
-    margin-left: 5%;
+    padding: 0 2.5% 0 2.5%;
+    /* margin-left: 5%; */
   }
   
   .recipe-show-header-info-details-sub-container {
@@ -98,20 +96,38 @@
   .recipe-show-header-info-details-sub-sub-container-title {
     font-weight: bold;
     flex-basis: 50%;
-    /* padding-bottom: 5px; */
-    /* margin: 0px; */
+    padding-bottom: 5px;
+    margin: 6% 0 0 0; 
   }
   
   .recipe-show-header-info-details-sub-sub-container-content {
     flex-basis: 50%;
-    /* margin: 0px;  */
+    margin: 0 0 6% 0; 
   }
 
 
 
 
 
+/* Method */
+#recipe-show-method-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
 
+.recipe-show-method-container {
+    border: 1px solid #007991;
+}
+
+.recipe-show-method-container > ul > li,
+.recipe-show-method-container > ol > li {
+    text-align: left;
+    margin: 0 5% 1em 3%;
+    padding: 0;
+}
 
 
 
@@ -119,16 +135,38 @@
 
   /* Small Devices (Phones) */
 @media (min-width: 300px) {
+    #recipe-show-container {
+        width: 100%;
+    }
+
     #recipe-show-header-photo-container {
       width: 100%;
     }
+
+    #recipe-show-header-info-container {
+        width: 100%;
+      }
+      
+    .recipe-show-method-container {
+        width: 100%;
   }
   
   @media (min-width: 576px) {
-    #recipe-show-header-photo-container {
-      width: 100%;
+    #recipe-show-container {
+        width: 100%;
     }
-  }
+    
+    #recipe-show-header-photo-container {
+    width: 33%;
+    }
+  
+    #recipe-show-header-info-container {
+        width: 67%;
+    }
+      
+    .recipe-show-method-container {
+        width: 100%;
+    }
   
   /* Medium Devices (Tablets) */
   @media (min-width: 768px) {
@@ -139,6 +177,13 @@
     #recipe-show-header-photo-container {
       width: 33%;
     }
+
+    #recipe-show-header-info-container {
+        width: 67%;
+    }
+      
+    .recipe-show-method-container {
+        width: 48%;
   }
   
   /* Large Devices (Laptops) */
@@ -150,6 +195,13 @@
     #recipe-show-header-photo-container {
       width: 33%;
     }
+    
+    #recipe-show-header-info-container {
+      width: 67%;
+    }
+      
+    .recipe-show-method-container {
+        width: 48%;
   }
   
   /* Large Devices (Screens) */
@@ -161,6 +213,13 @@
     #recipe-show-header-photo-container {
       width: 33%;
     }
+    
+    #recipe-show-header-info-container {
+      width: 67%;
+    }
+      
+    .recipe-show-method-container {
+        width: 48%;
   }
   
   

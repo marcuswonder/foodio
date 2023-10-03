@@ -53,7 +53,6 @@
           </div>
           
           <div class="recipe-show-header-info-details-sub-container">
-
             <% if(recipe.prepTime < 60) { %>
               <div id="recipe-show-header-info-details-prepTime-container" class="recipe-show-header-info-details-sub-sub-container">
                 <h3 class="recipe-show-header-info-details-sub-sub-container-title">Prep</h3>
@@ -93,75 +92,86 @@
 
     <br>
 
+    <div id="recipe-show-method-container">
+      <div id="recipe-show-method-ingredients-container" class="recipe-show-method-container">
 
-    <% if (user?._id.equals(recipe.author)) { %>
-    <form action="/recipes/<%= recipe._id %>/edit" method="GET" class="button">
-      <button type="submit" class="reg-button">Edit Recipe Info</button></form>
-    <br>
-    <% } else { %>
-      <% } %>
-
-    <h3>Ingredients</h3>
-    <% if(recipe.ingredients.length > 0) { %>
-    <table id="ingredients">
-      <tbody>
-        <% recipe.ingredients.forEach(function(r) { %>
-          <tr>
-              <td><%= r.ingredient %></td>
-          </tr>
-        <% }) %> 
-        </tbody>
-      </table>
         <% if (user?._id.equals(recipe.author)) { %>
-      <a href="/recipes/<%= recipe._id %>/ingredients" class="button">
-        <button type="submit" class="reg-button">Edit Recipe Ingredients</button></a>
-        <% } %>
-      <% } else { %>
-
-    <% if(recipe.ingredients.length === 0 && user?._id.equals(recipe.author)) { %>
-      <h4>Add Ingredients</h4>
-      <p>There are no ingredients here yet. Use the button below to add some!</p><br>
-      <a href="/recipes/<%= recipe._id %>/ingredients" class="button">
-        <button type="submit" class="reg-button">Add Recipe Ingredients</button></a>
-
+        <form action="/recipes/<%= recipe._id %>/edit" method="GET" class="button">
+          <button type="submit" class="reg-button">Edit Recipe Info</button></form>
+        <br>
         <% } else { %>
-          <p>There are no ingredients here yet. We hope the author will be back soon to add some!</p>
-        <% } %>
-      <% } %> 
-        <br>
-        <br>
+          <% } %>
 
+        <h2>Ingredients</h2>
+        <% if(recipe.ingredients.length > 0) { %>
+        <!-- <table>
+          <tbody> -->
+            <% recipe.ingredients.forEach(function(r) { %>
+              <!-- <tr> -->
+                <ul>
+                  <li><%= r.ingredient %></li>
+                </ul>
+              <!-- </tr> -->
+            <% }) %> 
+            <!-- </tbody>
+          </table> -->
 
-
-    <h3>Instructions</h3>
-    <% if(recipe.instructions.length > 0) { %>
-    <ol>
-        <% recipe.instructions.forEach(function(i) { %>
-        <li><%= i.instruction %></li>
-    <% }); %>
-    </ol>
-    <% if (user?._id.equals(recipe.author)) { %>
-      <a href="/recipes/<%= recipe._id %>/instructions" class="button">
-        <button type="submit" class="reg-button">Edit Recipe Instructions</button></a>
-    <% } %>
-    <% } else { %>
-
-      <% if(recipe.instructions.length === 0 && user?._id.equals(recipe.author)) { %>
-        <h4>Add Instructions</h4>
-        <p>There are no instructions here yet. Use the button below to add some!</p><br>
-        <a href="/recipes/<%= recipe._id %>/instructions" class="button">
-          <button type="submit" class="reg-button">Add Recipe Instructions</button></a>
-
+            <% if (user?._id.equals(recipe.author)) { %>
+          <a href="/recipes/<%= recipe._id %>/ingredients" class="button">
+            <button type="submit" class="reg-button">Edit Recipe Ingredients</button></a>
+            <% } %>
           <% } else { %>
-            <p>There are no instructions here yet. We hope the author will be back soon to add some!</p>
+
+        <% if(recipe.ingredients.length === 0 && user?._id.equals(recipe.author)) { %>
+          <h4>Add Ingredients</h4>
+          <p>There are no ingredients here yet. Use the button below to add some!</p><br>
+          <a href="/recipes/<%= recipe._id %>/ingredients" class="button">
+            <button type="submit" class="reg-button">Add Recipe Ingredients</button></a>
+
+            <% } else { %>
+              <p>There are no ingredients here yet. We hope the author will be back soon to add some!</p>
+            <% } %>
+          <% } %> 
+            <br>
+            <br>
+      </div>
+
+      <br>
+
+      <div id="recipe-show-method-instructions-container" class="recipe-show-method-container">
+
+        <h2>Instructions</h2>
+        <% if(recipe.instructions.length > 0) { %>
+        <ol>
+            <% recipe.instructions.forEach(function(i) { %>
+            <li><%= i.instruction %></li>
+        <% }); %>
+        </ol>
+        <% if (user?._id.equals(recipe.author)) { %>
+          <a href="/recipes/<%= recipe._id %>/instructions" class="button">
+            <button type="submit" class="reg-button">Edit Recipe Instructions</button></a>
         <% } %>
-      <% } %>
-      <br>
-      <br>
+        <% } else { %>
 
+          <% if(recipe.instructions.length === 0 && user?._id.equals(recipe.author)) { %>
+            <h4>Add Instructions</h4>
+            <p>There are no instructions here yet. Use the button below to add some!</p><br>
+            <a href="/recipes/<%= recipe._id %>/instructions" class="button">
+              <button type="submit" class="reg-button">Add Recipe Instructions</button></a>
 
+              <% } else { %>
+                <p>There are no instructions here yet. We hope the author will be back soon to add some!</p>
+            <% } %>
+          <% } %>
+          <br>
+          <br>
 
+      </div>
+    </div>
+    
+  </div>
 
+  <div id="recipe-show-tags">
       <h3>Tags</h3>
       <% if(recipe.tags.length > 0) { %>
         <ul>
