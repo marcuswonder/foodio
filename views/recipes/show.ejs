@@ -37,53 +37,56 @@
         <br>
         
         <div id="recipe-show-header-info-details-container">
+          <div class="recipe-show-header-info-details-sub-container">
         
-          <div id="recipe-show-header-info-details-category-container" class="recipe-show-header-info-details-sub-container">
-            <h3 class="recipe-show-header-info-details-sub-container-title">Category</h3>
-            <p id="recipe-show-info-category" class="recipe-show-header-info-details-sub-container-content">
-              <%= recipe.category %>
-            </p>
-          </div>
-
-          <div id="recipe-show-header-info-details-servings-container" class="recipe-show-header-info-details-sub-container">
-            <h3 class="recipe-show-header-info-details-sub-container-title">Servings</h3>
-            <p id="recipe-show-info-servings" class="recipe-show-header-info-details-sub-container-content"><%= recipe.servings + " servings"%></p>
-          </div>
-
-          <% if(recipe.prepTime < 60) { %>
-            <div id="recipe-show-header-info-details-prepTime-container" class="recipe-show-header-info-details-sub-container">
-              <h3 class="recipe-show-header-info-details-sub-container-title">Prep</h3>
-              <p id="recipe-show-header-info-prepTime" class="recipe-show-header-info-details-sub-container-content">
-                <%= recipe.prepTime + " mins" %>
+            <div id="recipe-show-header-info-details-category-container" class="recipe-show-header-info-details-sub-sub-container">
+              <h3 class="recipe-show-header-info-details-sub-sub-container-title">Category</h3>
+              <p id="recipe-show-info-category" class="recipe-show-header-info-details-sub-sub-container-content">
+                <%= recipe.category %>
               </p>
             </div>
 
-          <% } else { %>
-            <div id="recipe-show-header-info-details-prepTime-container" class="recipe-show-header-info-details-sub-container">
-              <h3 class="recipe-show-header-info-details-sub-container-title">Prep</h3>
-              <p id="recipe-show-header-info-prepTime" class="recipe-show-header-info-details-sub-container-content">
-                <%= Math.floor(recipe.prepTime / 60) + " hrs " + (recipe.prepTime - (Math.floor(recipe.prepTime / 60) * 60)) + " mins" %>
-              </p>  
+            <div id="recipe-show-header-info-details-servings-container" class="recipe-show-header-info-details-sub-sub-container">
+              <h3 class="recipe-show-header-info-details-sub-sub-container-title">Servings</h3>
+              <p id="recipe-show-info-servings" class="recipe-show-header-info-details-sub-sub-container-content"><%= recipe.servings + " servings"%></p>
             </div>
-          <% } %> 
+          </div>
           
-          <% if(recipe.cookTime < 60) { %>
-            <div id="recipe-show-header-info-details-cookTime-container" class="recipe-show-header-info-details-sub-container">
-              <h3 class="recipe-show-header-info-details-sub-container-title">Cook</h3>
-                <p id="recipe-show-header-info-cookTime" class="recipe-show-header-info-details-sub-container-content"><%= recipe.cookTime + " mins" %></p>
-            </div>
+          <div class="recipe-show-header-info-details-sub-container">
 
-          <% } else { %>
-            <div id="recipe-show-header-info-details-cookTime-container" class="recipe-show-header-info-details-sub-container">
-              <h3 class="recipe-show-header-info-details-sub-container-title">Cook</h3>
-              <p id="recipe-show-header-info-cookTime" class="recipe-show-header-info-details-sub-container-content">
-                <%= Math.floor(recipe.cookTime / 60) + " hrs " + (recipe.cookTime - (Math.floor(recipe.cookTime / 60) * 60)) + " mins" %>
-              </p>  
-            </div>
-          <% } %> 
+            <% if(recipe.prepTime < 60) { %>
+              <div id="recipe-show-header-info-details-prepTime-container" class="recipe-show-header-info-details-sub-sub-container">
+                <h3 class="recipe-show-header-info-details-sub-sub-container-title">Prep</h3>
+                <p id="recipe-show-header-info-prepTime" class="recipe-show-header-info-details-sub-sub-container-content">
+                  <%= recipe.prepTime + " mins" %>
+                </p>
+              </div>
 
-          
+            <% } else { %>
+              <div id="recipe-show-header-info-details-prepTime-container" class="recipe-show-header-info-details-sub-sub-container">
+                <h3 class="recipe-show-header-info-details-sub-sub-container-title">Prep</h3>
+                <p id="recipe-show-header-info-prepTime" class="recipe-show-header-info-details-sub-sub-container-content">
+                  <%= Math.floor(recipe.prepTime / 60) + " hrs " + (recipe.prepTime - (Math.floor(recipe.prepTime / 60) * 60)) + " mins" %>
+                </p>  
+              </div>
+            <% } %> 
+            
+            <% if(recipe.cookTime < 60) { %>
+              <div id="recipe-show-header-info-details-cookTime-container" class="recipe-show-header-info-details-sub-sub-container">
+                <h3 class="recipe-show-header-info-details-sub-sub-container-title">Cook</h3>
+                  <p id="recipe-show-header-info-cookTime" class="recipe-show-header-info-details-sub-sub-container-content"><%= recipe.cookTime + " mins" %></p>
+              </div>
 
+            <% } else { %>
+              <div id="recipe-show-header-info-details-cookTime-container" class="recipe-show-header-info-details-sub-sub-container">
+                <h3 class="recipe-show-header-info-details-sub-sub-container-title">Cook</h3>
+                <p id="recipe-show-header-info-cookTime" class="recipe-show-header-info-details-sub-sub-container-content">
+                  <%= Math.floor(recipe.cookTime / 60) + " hrs " + (recipe.cookTime - (Math.floor(recipe.cookTime / 60) * 60)) + " mins" %>
+                </p>  
+              </div>
+            <% } %> 
+
+          </div>
         </div>
       </div>
     </div>
