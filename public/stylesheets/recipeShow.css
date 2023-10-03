@@ -133,7 +133,7 @@
 
 
 
-  /* Small Devices (Phones) */
+/* Small Devices (Small Phones) */
 @media (min-width: 300px) {
     #recipe-show-container {
         width: 95%;
@@ -155,7 +155,8 @@
         width: 95%;
     }
 }
-  
+
+/* Handheld Devices (Phones) */
 @media (min-width: 576px) {
     #recipe-show-container {
         width: 95%;

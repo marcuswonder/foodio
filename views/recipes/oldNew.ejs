@@ -51,30 +51,6 @@
               <st>How many people will the ingredients serve?</st><br></td>
         </tr>
       </table>
-      
-      <!-- Ingredients Input -->
-        <table id="recipe-ingredients" class="recipe-info">
-          <tr>
-            <th>Ingredient: </th>
-            <td><input type="text" name="ingredient" class="med-input" autocomplete="off"></input><br></td>
-          </tr>
-        </table>
-        
-          <button type="button" class="reg-button" onclick="addIngredientField()">Add Ingredient</button>
-        <!-- </form> -->
-      
-      <!-- Instructions Input -->
-        <table id="recipe-instructions" class="recipe-info">
-          <tr>
-            <th>Instructions: </th>
-            <td><input type="text" name="instruction" class="med-input" autocomplete="off"></input><br></td>
-          </tr>
-        </table>
-        
-          <button type="button" class="reg-button" onclick="addInstructionField()">Add Instruction</button>
-        <!-- </form> -->
-      
-      
       <table id="recipe-photo" class="recipe-info">
         <tr>
           <th>Photo: </th>
@@ -90,22 +66,6 @@
 <br>
 <br>
 
-
-<script>
-    function addIngredientField() {
-        let newIngredientInput = document.createElement('input');
-        newIngredientInput.setAttribute('type', 'text');
-        newIngredientInput.setAttribute('name', 'ingredient');
-        document.getElementById('recipe-ingredients').appendChild(newIngredientInput);
-    }
-    
-    function addInstructionField() {
-        let newInstructionInput = document.createElement('input');
-        newInstructionInput.setAttribute('type', 'text');
-        newInstructionInput.setAttribute('name', 'instruction');
-        document.getElementById('recipe-instructions').appendChild(newInstructionInput);
-    }
-</script>
 
 
 <%- include('../partials/footer') %>

@@ -35,7 +35,7 @@ async function index(req, res) {
 
 
 function newAddRecipe(req, res) {
-    res.render('recipes/new')
+    res.render('recipes/new', { stylesheet: '../public/stylesheets/style.css' })
 }
 
 
