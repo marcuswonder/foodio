@@ -39,12 +39,10 @@ const recipeSchema = new Schema({
         type: String,
     },
     ingredients: [{
-        ingredient: {
-            type: String}
+        type: String
     }],
     instructions: [{
-        instruction: {
-            type: String}
+        type: String
     }],
     tags: [{
         type: Schema.Types.ObjectId,

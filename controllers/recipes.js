@@ -43,6 +43,10 @@ async function create(req, res) {
   // console.log("Controller Create Function: req.body", req.body)
   if (!req.user) return res.redirect('/auth/google');
 
+  console.log("Recipe Controller: create req.body", req.body)
+
+  // res.render('recipes/new', { stylesheet: '../public/stylesheets/style.css' })
+
   const recipe = new Recipe(req.body);
   recipe.author = req.user._id;
   recipe.userName = req.user.name;

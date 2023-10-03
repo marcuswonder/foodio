@@ -98,10 +98,10 @@
         <% if(recipe.ingredients.length > 0) { %>
         <!-- <table>
           <tbody> -->
-            <% recipe.ingredients.forEach(function(r) { %>
+            <% recipe.ingredients.forEach(function(ingredient) { %>
               <!-- <tr> -->
                 <ul>
-                  <li><%= r.ingredient %></li>
+                  <li><%= ingredient %></li>
                 </ul>
               <!-- </tr> -->
             <% }) %> 
@@ -135,8 +135,8 @@
         <h2>Instructions</h2>
         <% if(recipe.instructions.length > 0) { %>
         <ol>
-            <% recipe.instructions.forEach(function(i) { %>
-            <li><%= i.instruction %></li>
+            <% recipe.instructions.forEach(function(instruction) { %>
+            <li><%= instruction %></li>
         <% }); %>
         </ol>
         <% if (user?._id.equals(recipe.author)) { %>
