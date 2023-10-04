@@ -1,83 +1,146 @@
 <%- include('../partials/header') %>
 
-<form action="/recipes/<%= recipe._id %>/update/?_method=PUT" method="POST" id="recipe-top-info" class="recipe-info">
-  <table id="recipe-top-info" class="recipe-info">
-  <tr>
-    <th>Name:</th>
-    <td><input name="name" type="text" class="med-input" value="<%= recipe.name %>"></input></td><br>
-    <tr>
-      <th>Added by:</th>
-      <td><%= recipe.userName %></td><br>
-    </tr>
-  </tr>
-  <tr>
-    <th>Description:</th>
-    <td><textarea name="description" type="text"  class="long-input"  autocomplete="off"><%= recipe.description %></textarea></td><br>
-  </tr>
-  <tr>
-    <th>Category:</th>
-    <td><select name="category" class="input">
-      <option value="<%= recipe.category %>"><%= recipe.category %></option>
-      <option value="Snack">Snack</option>
-      <option value="Starter">Starter</option>
-      <option value="Main Course">Main Course</option>
-      <option value="Desert">Desert</option>
-      <option value="Cocktail">Cocktail</option>
-      </select></td>
-  </tr>
-  <tr>
-    <th>Prep Time (Mins):</th>
-    <td><input name="prepTime" type="number"  class="short-input" autocomplete="off" value="<%= recipe.prepTime %>"></input></td><br>
-  </tr>
-  <tr>
-    <th>Cook Time (mins):</th>
-    <td><input name="cookTime" type="number"  class="short-input" autocomplete="off" value="<%= recipe.cookTime %>"></input></td><br>
-  </tr>
-  <tr>
-    <th># Adult Servings:</th>
-    <td><input name="servings" type="number"  class="short-input" autocomplete="off" value="<%= recipe.servings %>"></input></td><br>
-  </tr>
-
-<div id="recipe-ingredients">
-  <h2>Ingredients</h2>
-  <% if(recipe.ingredients.length > 0) { %>
-    <% recipe.ingredients.forEach(function(ingredient) { %>
-      <ul>
-        <li><input name="name" type="text" class="med-input" value="<%= ingredient %>"></input></li>
-      </ul>
-    <% }) %> 
-  <% } %> 
+<div id="recipe-edit">
+  <div id="recipe-edit-container">
+    <form action="/recipes/<%= recipe._id %>/update/?_method=PUT" method="POST" id="recipe-top-info" >
     
-  <button type="button" class="reg-button" onclick="addIngredientField()">Add Ingredient</button>
+      <div id="recipe-edit-header-container">
+        
+        <div id="recipe-edit-name-container" class="recipe-edit-header-input-container">
+          <div class="recipe-edit-title">
+            <h3>Title</h3>
+          </div>
+          <div class="recipe-edit-content">
+            <textarea name="name" type="text" class="expanding-text-input" rows="1" autocomplete="off"><%= recipe.name %></textarea>
+          </div>
+        </div>
+
+        <div id="recipe-edit-description-container" class="recipe-edit-header-input-container">
+          <div class="recipe-edit-title">
+            <h3>Description</h3>
+          </div>
+          <div class="recipe-edit-content">
+            <textarea name="description" type="text" class="expanding-text-input" rows="1" autocomplete="off"><%= recipe.description %></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div id="recipe-edit-info-container">
+        <div id="recipe-edit-category-servings-container" class="recipe-edit-info-container">
+          <div id="recipe-edit-category-container" class="recipe-edit-input-container">
+            <div class="recipe-edit-title">
+              <h3>Category</h3>
+            </div>
+              <div class="recipe-edit-content">
+                <select name="category" class="input">
+                  <option value="<%= recipe.category %>"><%= recipe.category %></option>
+                  <option value="Snack">Snack</option>
+                  <option value="Starter">Starter</option>
+                  <option value="Main Course">Main Course</option>
+                  <option value="Desert">Desert</option>
+                  <option value="Cocktail">Cocktail</option>
+                </select>
+              </div>
+          </div>
+        
+          <div id="recipe-edit-cookTime-container" class="recipe-edit-input-container">
+            <div class="recipe-edit-title">
+              <h3>Adult Servings</h3>
+            </div>
+            <div class="recipe-edit-content">
+              <input name="servings" type="number"  class="short-input" autocomplete="off" value="<%= recipe.servings %>"></input>
+            </div>
+          </div>
+        </div>
+
+        <div id="recipe-edit-timings-container" class="recipe-edit-info-container">
+          <div id="recipe-edit-prepTime-container" class="recipe-edit-input-container">
+            <div class="recipe-edit-title">
+              <h3>Prep Time</h3>
+            </div>
+            <div class="recipe-edit-content">
+              <input name="prepTime" type="number"  class="short-input" autocomplete="off" value="<%= recipe.prepTime %>"></input>
+            </div>
+            <p>(mins)</p>
+          </div>
+
+          <div id="recipe-edit-cookTime-container" class="recipe-edit-input-container">
+            <div class="recipe-edit-title">
+              <h3>Cook Time</h3>
+            </div>
+            <div class="recipe-edit-content">
+              <input name="cookTime" type="number"  class="short-input" autocomplete="off" value="<%= recipe.cookTime %>"></input>
+            </div>
+            <p>(mins)</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="recipe-edit-ingredients-container">
+        <h3>Ingredients</h3>
+        <% if(recipe.ingredients.length > 0) { %>
+          <% recipe.ingredients.forEach(function(ingredient) { %>
+            <ul>
+              <li><input name="name" type="text" class="med-input" value="<%= ingredient %>"></input></li>
+            </ul>
+          <% }) %> 
+        <% } %> 
+          
+        <button type="button" class="reg-button" onclick="addIngredientField()">Add Ingredient</button>
+      </div>
+
+
+      <div id="recipe-edit-instructions-container">
+        <h3>Instructions</h3>
+        <% if(recipe.instructions.length > 0) { %>
+          <% recipe.instructions.forEach(function(instruction) { %>
+            <ul>
+              <li><input name="name" type="text" class="med-input" value="<%= instruction %>"></input></li>
+            </ul>
+          <% }) %> 
+        <% } %> 
+          
+        <button type="button" class="reg-button" onclick="addIngredientField()">Add Ingredient</button>
+      </div>
+
+      
+      
+      
+      
+      
+      
+      
+    
+      <button type="submit" class="reg-button">Save Edits to Recipe Info</button>
+    </form>
+    
+    <br>
+  </div>
 </div>
 
 
-<div id="recipe-instruction">
-  <h2>Instructions</h2>
-  <% if(recipe.instructions.length > 0) { %>
-    <% recipe.instructions.forEach(function(instruction) { %>
-      <ul>
-        <li><input name="name" type="text" class="med-input" value="<%= instruction %>"></input></li>
-      </ul>
-    <% }) %> 
-  <% } %> 
-    
-  <button type="button" class="reg-button" onclick="addIngredientField()">Add Ingredient</button>
-</div>
-
-</table>
-
-
+<script>
+  function addIngredientField() {
+      let newIngredientInput = document.createElement('input');
+      newIngredientInput.setAttribute('type', 'text');
+      newIngredientInput.setAttribute('name', 'ingredients');
+      document.getElementById('recipe-ingredients').appendChild(newIngredientInput);
+  }
+  
+  function addInstructionField() {
+      let newInstructionInput = document.createElement('input');
+      newInstructionInput.setAttribute('type', 'text');
+      newInstructionInput.setAttribute('name', 'instructions');
+      document.getElementById('recipe-instructions').appendChild(newInstructionInput);
+  }
 
 
-
-
-
-
-<br>
-    <button type="submit" class="reg-button">Save Edits to Recipe Info</button>
-</form>
-
-<br>
+  $(document).ready(function() {
+    $('.expanding-text-input').on('input', function() {
+        this.style.height = 'auto'; // Temporarily shrink the textarea to auto
+        this.style.height = (this.scrollHeight) + 'px'; // Set the height to the scrollHeight
+    });
+});
+</script>
 
 <%- include('../partials/footer') %>

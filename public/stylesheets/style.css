@@ -195,7 +195,17 @@ td {
 
 
 
+.expanding-text-input {
+  resize: none;
+  overflow-y: hidden;
+  min-height: 1em;
+  width: 100%;
+  border:#007991 solid 1px;
+}
 
+.expanding-text-input:focus {
+  transition: min-height 0.2s ease-in-out;
+}
 
 
 
