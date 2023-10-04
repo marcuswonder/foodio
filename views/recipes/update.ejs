@@ -78,29 +78,44 @@
 
       <div id="recipe-edit-ingredients-container">
         <h3>Ingredients</h3>
-        <% if(recipe.ingredients.length > 0) { %>
-          <% recipe.ingredients.forEach(function(ingredient) { %>
-            <ul>
-              <li><input name="name" type="text" class="med-input" value="<%= ingredient %>"></input></li>
-            </ul>
-          <% }) %> 
-        <% } %> 
+        <ul>
+          <% if(recipe.ingredients.length > 0) { %>
+            <% recipe.ingredients.forEach(function(ingredient) { %>
+                <li><input name="ingredients" type="text" class="med-input" value="<%= ingredient %>"></input></li>
+            <% }) %> 
+          <% } %> 
+        </ul>
           
         <button type="button" class="reg-button" onclick="addIngredientField()">Add Ingredient</button>
       </div>
 
 
+      <h3>Instructions</h3>
       <div id="recipe-edit-instructions-container">
-        <h3>Instructions</h3>
-        <% if(recipe.instructions.length > 0) { %>
-          <% recipe.instructions.forEach(function(instruction) { %>
-            <ul>
-              <li><input name="name" type="text" class="med-input" value="<%= instruction %>"></input></li>
-            </ul>
-          <% }) %> 
-        <% } %> 
+        <!-- <ul> -->
+          <% if(recipe.instructions.length > 0) { %>
+            <% recipe.instructions.forEach(function(instruction) { %>
+              <div class="recipe-edit-instruction-container">
+                <ul>
+                  <li>
+                    <input name="instruction" type="text" class="instruction" class="med-input" value="<%= instruction %>"></input>
+                  </li>
+              </ul>
+                <div class="instruction-up">
+                  <a type="button" class="instruction-up" onclick="moveInstructionUp('<%= instruction %>')"><img src="/public/icons/arrow_upward.png"></a>
+                </div>
+                <div class="instruction-down">
+                  <a type="button" class="instruction-down" onclick="moveInstructionDown()"><img src="/public/icons/arrow_downward.png"></a>
+                </div>
+                <div class="instruction-delete">
+                  <p>X</p>
+                </div>
+              </div>
+            <% }) %> 
+          <% } %> 
+        <!-- </ul> -->
           
-        <button type="button" class="reg-button" onclick="addIngredientField()">Add Ingredient</button>
+        <button type="button" class="reg-button" onclick="addInstructionField()">Add Instruction</button>
       </div>
 
       
@@ -121,19 +136,99 @@
 
 <script>
   function addIngredientField() {
-      let newIngredientInput = document.createElement('input');
-      newIngredientInput.setAttribute('type', 'text');
-      newIngredientInput.setAttribute('name', 'ingredients');
-      document.getElementById('recipe-ingredients').appendChild(newIngredientInput);
+    let container = document.getElementById('recipe-edit-ingredients-container')
+    
+    let ul = container.querySelector('ul')
+    if (!ul) {
+        ul = document.createElement('ul')
+        container.appendChild(ul)
+    }
+
+    let li = document.createElement('li')
+
+    let newIngredientInput = document.createElement('input')
+    newIngredientInput.setAttribute('type', 'text')
+    newIngredientInput.setAttribute('name', 'ingredients')
+    newIngredientInput.setAttribute('class', 'med-input')
+
+    li.appendChild(newIngredientInput)
+
+    ul.appendChild(li)
   }
   
   function addInstructionField() {
-      let newInstructionInput = document.createElement('input');
-      newInstructionInput.setAttribute('type', 'text');
-      newInstructionInput.setAttribute('name', 'instructions');
-      document.getElementById('recipe-instructions').appendChild(newInstructionInput);
+    let container = document.getElementById('recipe-edit-instructions-container')
+    
+    let ul = container.querySelector('ul')
+    if (!ul) {
+        ul = document.createElement('ul')
+        container.appendChild(ul)
+    }
+
+    let li = document.createElement('li')
+
+    let newInstructionInput = document.createElement('input')
+    newInstructionInput.setAttribute('type', 'text')
+    newInstructionInput.setAttribute('name', 'instructions')
+    newInstructionInput.setAttribute('class', 'med-input')
+
+    li.appendChild(newInstructionInput)
+
+    ul.appendChild(li)
   }
 
+  function moveInstructionUp(instructionValue) {
+    console.log("instructionValue", instructionValue)
+    
+    const instructionsHTML = document.getElementsByClassName('instruction')
+    console.log("instructionsHTML", instructionsHTML)
+
+    let instructions = []
+
+    for (let i = 0; i < instructionsHTML.length; i++) {
+      const instruction = instructionsHTML[i];
+      // console.log("instruction.value", instruction.value)
+      instructions.push(instruction.value)
+    }
+    console.log("instructions", instructions)
+    
+    const arrayIndexToMoveUp = instructions.indexOf(instructionValue)
+    console.log("arrayIndexToMoveUp", arrayIndexToMoveUp)
+    
+    const CSSindexToMoveUp = (arrayIndexToMoveUp + 1)
+    console.log("CSSindexToMoveUp", CSSindexToMoveUp)
+    
+    const CSSindexToMoveBelow = (CSSindexToMoveUp - 1)
+    console.log("CSSindexToMoveBelow", CSSindexToMoveBelow)
+
+    const elementToMoveUp = document.querySelector(`#recipe-edit-instructions-container .recipe-edit-instruction-container:nth-child(${CSSindexToMoveUp})`)
+    console.log("elementToMoveUp", elementToMoveUp)
+    
+    const elementToMoveBelow = document.querySelector(`#recipe-edit-instructions-container .recipe-edit-instruction-container:nth-child(${CSSindexToMoveBelow})`)
+    console.log("elementToMoveBelow", elementToMoveBelow)
+    
+    const recipeInstructionsContainer = document.getElementById('recipe-edit-instructions-container')
+    recipeInstructionsContainer.insertBefore(elementToMoveUp, elementToMoveBelow);
+    
+
+}
+
+
+    // const newArray = shiftArrayItemUp(instructions, index)
+    // console.log("newArray", newArray)
+
+
+        
+  // }
+
+  // function shiftArrayItemUp(array, index) {
+  //     if (index > 0 && index < array.length) {
+  //       const temp = array[index];
+  //       array[index] = array[index - 1];
+  //       array[index - 1] = temp;
+  //     }
+  //     return array
+  //   }
 
   $(document).ready(function() {
     $('.expanding-text-input').on('input', function() {
