@@ -92,13 +92,12 @@
 
       <h3>Instructions</h3>
       <div id="recipe-edit-instructions-container">
-        <!-- <ul> -->
           <% if(recipe.instructions.length > 0) { %>
             <% recipe.instructions.forEach(function(instruction) { %>
               <div class="recipe-edit-instruction-container">
                 <ul>
                   <li>
-                    <input name="instruction" type="text" class="instruction" class="med-input" value="<%= instruction %>"></input>
+                    <input name="instruction" type="text" class="instruction" value="<%= instruction %>"></input>
                   </li>
               </ul>
                 <div class="instruction-up">
@@ -107,13 +106,12 @@
                 <div class="instruction-down">
                   <a type="button" class="instruction-down" onclick="moveInstructionDown()"><img src="/public/icons/arrow_downward.png"></a>
                 </div>
-                <div class="instruction-delete">
+                <!-- <div class="instruction-delete">
                   <p>X</p>
-                </div>
+                </div> -->
               </div>
             <% }) %> 
           <% } %> 
-        <!-- </ul> -->
           
         <button type="button" class="reg-button" onclick="addInstructionField()">Add Instruction</button>
       </div>
@@ -156,25 +154,84 @@
     ul.appendChild(li)
   }
   
-  function addInstructionField() {
-    let container = document.getElementById('recipe-edit-instructions-container')
+  // function addInstructionField() {
+  //   let container = document.getElementById('recipe-edit-instructions-container')
     
-    let ul = container.querySelector('ul')
-    if (!ul) {
-        ul = document.createElement('ul')
-        container.appendChild(ul)
-    }
+  //   let ul = container.querySelector('ul')
+  //   if (!ul) {
+  //       ul = document.createElement('ul')
+  //       container.appendChild(ul)
+  //   }
 
+  //   let li = document.createElement('li')
+
+  //   let newInstructionInput = document.createElement('input')
+  //   newInstructionInput.setAttribute('type', 'text')
+  //   newInstructionInput.setAttribute('name', 'instructions')
+  //   newInstructionInput.setAttribute('class', 'med-input')
+
+  //   li.appendChild(newInstructionInput)
+
+  //   ul.appendChild(li)
+  // }
+
+  function addInstructionField() {
+    const instructionContainer = document.getElementById('recipe-edit-instructions-container')
+
+    instruction = document.createElement('div');
+    instruction.className = 'recipe-edit-instruction-container';
+
+    // Create ul and append to main container
+    let ul = document.createElement('ul');
+    instruction.appendChild(ul);
+
+    // Create li, input and append to ul
     let li = document.createElement('li')
-
-    let newInstructionInput = document.createElement('input')
-    newInstructionInput.setAttribute('type', 'text')
-    newInstructionInput.setAttribute('name', 'instructions')
-    newInstructionInput.setAttribute('class', 'med-input')
-
-    li.appendChild(newInstructionInput)
-
+    let input = document.createElement('input')
+    input.setAttribute('name', 'instruction')
+    input.setAttribute('type', 'text')
+    input.className = 'instruction'
+    li.appendChild(input)
     ul.appendChild(li)
+
+    // Create instruction-up div and append to main container
+    let instructionUp = document.createElement('div')
+    instructionUp.className = 'instruction-up'
+    let aUp = document.createElement('a')
+    aUp.setAttribute('type', 'button')
+    aUp.className = 'instruction-up'
+    aUp.setAttribute('onclick', "moveInstructionUp('')")
+
+    let imgUp = document.createElement('img')
+    imgUp.setAttribute('src', '/public/icons/arrow_upward.png')
+    aUp.appendChild(imgUp)
+    instructionUp.appendChild(aUp)
+    instruction.appendChild(instructionUp)
+
+    // Create instruction-down div and append to main container
+    let instructionDown = document.createElement('div')
+    instructionDown.className = 'instruction-down'
+    let aDown = document.createElement('a')
+    aDown.setAttribute('type', 'button')
+    aDown.className = 'instruction-down'
+    aDown.setAttribute('onclick', 'moveInstructionDown()')
+    let imgDown = document.createElement('img')
+    imgDown.setAttribute('src', '/public/icons/arrow_downward.png')
+    aDown.appendChild(imgDown)
+    instructionDown.appendChild(aDown)
+    instruction.appendChild(instructionDown)
+
+    // Create instruction-delete div and append to main container
+    let instructionDelete = document.createElement('div')
+    instructionDelete.className = 'instruction-delete'
+    let p = document.createElement('p')
+    p.textContent = 'X'
+    instructionDelete.appendChild(p)
+    instruction.appendChild(instructionDelete)
+
+    // Finally append the main container to the instructionContainer
+    instructionContainer.appendChild(instruction)
+
   }
 
   function moveInstructionUp(instructionValue) {
