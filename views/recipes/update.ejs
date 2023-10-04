@@ -4,7 +4,7 @@
   <table id="recipe-top-info" class="recipe-info">
   <tr>
     <th>Name:</th>
-    <td><input name="name" type="text"   class="med-input" value="<%= recipe.name %>"></input></td><br>
+    <td><input name="name" type="text" class="med-input" value="<%= recipe.name %>"></input></td><br>
     <tr>
       <th>Added by:</th>
       <td><%= recipe.userName %></td><br>
@@ -37,7 +37,43 @@
     <th># Adult Servings:</th>
     <td><input name="servings" type="number"  class="short-input" autocomplete="off" value="<%= recipe.servings %>"></input></td><br>
   </tr>
+
+<div id="recipe-ingredients">
+  <h2>Ingredients</h2>
+  <% if(recipe.ingredients.length > 0) { %>
+    <% recipe.ingredients.forEach(function(ingredient) { %>
+      <ul>
+        <li><input name="name" type="text" class="med-input" value="<%= ingredient %>"></input></li>
+      </ul>
+    <% }) %> 
+  <% } %> 
+    
+  <button type="button" class="reg-button" onclick="addIngredientField()">Add Ingredient</button>
+</div>
+
+
+<div id="recipe-instruction">
+  <h2>Instructions</h2>
+  <% if(recipe.instructions.length > 0) { %>
+    <% recipe.instructions.forEach(function(instruction) { %>
+      <ul>
+        <li><input name="name" type="text" class="med-input" value="<%= instruction %>"></input></li>
+      </ul>
+    <% }) %> 
+  <% } %> 
+    
+  <button type="button" class="reg-button" onclick="addIngredientField()">Add Ingredient</button>
+</div>
+
 </table>
+
+
+
+
+
+
+
+
 <br>
     <button type="submit" class="reg-button">Save Edits to Recipe Info</button>
 </form>
