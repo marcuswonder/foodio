@@ -139,9 +139,9 @@ td {
 
 .input {
   padding: 5px;
-  border: 5px;
   margin: 10px 0 10px 0;
   border: 1px #007991;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .short-input {
@@ -149,6 +149,8 @@ td {
   padding: 5px;
   border: 5px;
   margin: 10px 0 10px 0;
+  text-align: center;
+  font-family: 'Quicksand', sans-serif;
   border: solid 1px #007991;
   
 }
@@ -158,6 +160,7 @@ td {
   padding: 5px;
   border: 5px;
   margin: 10px 0 10px 0;
+  font-family: 'Quicksand', sans-serif;
   border: solid 1px #007991;
 }
 
@@ -167,6 +170,7 @@ td {
   padding: 5px;
   border: 5px;
   margin: 10px 0 10px 0;
+  font-family: 'Quicksand', sans-serif;
   border: solid 1px #007991;
 }
 
@@ -174,6 +178,7 @@ td {
   padding: 5px;
   border: 5px;
   margin: 10px 0 10px 0;
+  font-family: 'Quicksand', sans-serif;
   border: solid 1px #007991;
 }
 
@@ -200,7 +205,10 @@ td {
   overflow-y: hidden;
   min-height: 1em;
   width: 100%;
+  font-family: 'Quicksand', sans-serif;
   border:#007991 solid 1px;
+  padding: 5px;
+  margin: 10px 0 10px 0;
 }
 
 .expanding-text-input:focus {

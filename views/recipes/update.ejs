@@ -1,4 +1,6 @@
 <%- include('../partials/header') %>
+<br>
+<br>
 
 <div id="recipe-edit">
   <div id="recipe-edit-container">
@@ -24,6 +26,9 @@
           </div>
         </div>
       </div>
+
+      <br>
+      <br>
 
       <div id="recipe-edit-info-container">
         <div id="recipe-edit-category-servings-container" class="recipe-edit-info-container">
@@ -76,16 +81,23 @@
         </div>
       </div>
 
-      <!-- <div id="recipe-edit-ingredients-instructions-container"> -->
-        
-        <h3>Ingredients</h3>
-        <div id="recipe-edit-ingredients-container">
+      <br>
+      <br>
+      <br>
+
+      <div id="recipe-edit-ingredients-instructions-container">
+
+        <div id="recipe-edit-ingredients-container" class="recipe-edit-ingredients-instructions-container">
+          <div class="recipe-edit-title">
+            <h3>Ingredients</h3>
+          </div>
+          <div id="recipe-edit-ingredients">
             <% if(recipe.ingredients.length > 0) { %>
               <% recipe.ingredients.forEach(function(ingredient) { %>
                 <div class="recipe-edit-ingredient-container">
                   <ul>
                     <li>
-                      <input name="ingredient" type="text" class="ingredient" value="<%= ingredient %>"></input>
+                      <input name="ingredient" type="text" class="ingredient input" value="<%= ingredient %>"></input>
                     </li>
                 </ul>
                   <div class="ingredient-up">
@@ -100,21 +112,26 @@
                 </div>
               <% }) %> 
             <% } %> 
-            
           </div>
-          <button type="button" class="reg-button" onclick="addIngredientField()">Add Ingredient</button>
+            <div id="recipe-edit-ingredient-add" class="recipe-edit-add-buttons">
+              <button type="button" class="reg-button" onclick="addIngredientField()">Add Ingredient</button>
+            </div>
+        </div>
 
         
         
 
-        <h3>Instructions</h3>
-        <div id="recipe-edit-instructions-container">
+          <div id="recipe-edit-instructions-container" class="recipe-edit-ingredients-instructions-container">
+            <div class="recipe-edit-title">
+              <h3>Instructions</h3>
+            </div>
+            <div id="recipe-edit-instructions">
             <% if(recipe.instructions.length > 0) { %>
               <% recipe.instructions.forEach(function(instruction) { %>
                 <div class="recipe-edit-instruction-container">
                   <ul>
                     <li>
-                      <input name="instruction" type="text" class="instruction" value="<%= instruction %>"></input>
+                      <input name="instruction" type="text" class="instruction input" value="<%= instruction %>"></input>
                     </li>
                   </ul>
                   <div class="instruction-up">
@@ -131,9 +148,12 @@
             <% } %> 
             
           </div>
-          <button type="button" class="reg-button" onclick="addInstructionField()">Add Instruction</button>
+          <div id="recipe-edit-instruction-add" class="recipe-edit-add-buttons">
+            <button type="button" class="reg-button" onclick="addInstructionField()">Add Instruction</button>
+          </div>
 
-      <!-- </div> -->
+        </div>
+      </div>
       
       
       
@@ -165,7 +185,7 @@
     let input = document.createElement('input')
     input.setAttribute('name', 'ingredient')
     input.setAttribute('type', 'text')
-    input.className = 'ingredient'
+    input.className = 'ingredient input'
     li.appendChild(input)
     ul.appendChild(li)
 
@@ -235,7 +255,7 @@
     let input = document.createElement('input')
     input.setAttribute('name', 'instruction')
     input.setAttribute('type', 'text')
-    input.className = 'instruction'
+    input.className = 'instruction input'
     li.appendChild(input)
     ul.appendChild(li)
 
