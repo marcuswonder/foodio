@@ -76,63 +76,64 @@
         </div>
       </div>
 
+      <!-- <div id="recipe-edit-ingredients-instructions-container"> -->
+        
+        <h3>Ingredients</h3>
+        <div id="recipe-edit-ingredients-container">
+            <% if(recipe.ingredients.length > 0) { %>
+              <% recipe.ingredients.forEach(function(ingredient) { %>
+                <div class="recipe-edit-ingredient-container">
+                  <ul>
+                    <li>
+                      <input name="ingredient" type="text" class="ingredient" value="<%= ingredient %>"></input>
+                    </li>
+                </ul>
+                  <div class="ingredient-up">
+                    <a type="button" class="ingredient-up" onclick="moveIngredientUp('<%= ingredient %>')"><img src="/public/icons/arrow_upward.png"></a>
+                  </div>
+                  <div class="ingredient-down">
+                    <a type="button" class="ingredient-down" onclick="moveIngredientDown('<%= ingredient %>')"><img src="/public/icons/arrow_downward.png"></a>
+                  </div>
+                  <div class="ingredient-delete">
+                    <a type="button" class="ingredient-delete" onclick="deleteIngredient('<%= ingredient %>')"><img src="/public/icons/delete.png"></a>
+                  </div>
+                </div>
+              <% }) %> 
+            <% } %> 
+            
+          </div>
+          <button type="button" class="reg-button" onclick="addIngredientField()">Add Ingredient</button>
 
-      <h3>Ingredients</h3>
-      <div id="recipe-edit-ingredients-container">
-          <% if(recipe.ingredients.length > 0) { %>
-            <% recipe.ingredients.forEach(function(ingredient) { %>
-              <div class="recipe-edit-ingredient-container">
-                <ul>
-                  <li>
-                    <input name="ingredient" type="text" class="ingredient" value="<%= ingredient %>"></input>
-                  </li>
-              </ul>
-                <div class="ingredient-up">
-                  <a type="button" class="ingredient-up" onclick="moveIngredientUp('<%= ingredient %>')"><img src="/public/icons/arrow_upward.png"></a>
-                </div>
-                <div class="ingredient-down">
-                  <a type="button" class="ingredient-down" onclick="moveIngredientDown('<%= ingredient %>')"><img src="/public/icons/arrow_downward.png"></a>
-                </div>
-                <div class="ingredient-delete">
-                  <a type="button" class="ingredient-delete" onclick="deleteIngredient('<%= ingredient %>')"><img src="/public/icons/delete.png"></a>
-                </div>
-              </div>
-            <% }) %> 
-          <% } %> 
-          
-        </div>
-        <button type="button" class="reg-button" onclick="addIngredientField()">Add Ingredient</button>
+        
+        
 
-      
-      
+        <h3>Instructions</h3>
+        <div id="recipe-edit-instructions-container">
+            <% if(recipe.instructions.length > 0) { %>
+              <% recipe.instructions.forEach(function(instruction) { %>
+                <div class="recipe-edit-instruction-container">
+                  <ul>
+                    <li>
+                      <input name="instruction" type="text" class="instruction" value="<%= instruction %>"></input>
+                    </li>
+                  </ul>
+                  <div class="instruction-up">
+                    <a type="button" class="instruction-up" onclick="moveInstructionUp('<%= instruction %>')"><img src="/public/icons/arrow_upward.png"></a>
+                  </div>
+                  <div class="instruction-down">
+                    <a type="button" class="instruction-down" onclick="moveInstructionDown('<%= instruction %>')"><img src="/public/icons/arrow_downward.png"></a>
+                  </div>
+                  <div class="instruction-delete">
+                    <a type="button" class="instruction-delete" onclick="deleteInstruction('<%= instruction %>')"><img src="/public/icons/delete.png"></a>
+                  </div>
+                </div>
+              <% }) %> 
+            <% } %> 
+            
+          </div>
+          <button type="button" class="reg-button" onclick="addInstructionField()">Add Instruction</button>
 
-      <h3>Instructions</h3>
-      <div id="recipe-edit-instructions-container">
-          <% if(recipe.instructions.length > 0) { %>
-            <% recipe.instructions.forEach(function(instruction) { %>
-              <div class="recipe-edit-instruction-container">
-                <ul>
-                  <li>
-                    <input name="instruction" type="text" class="instruction" value="<%= instruction %>"></input>
-                  </li>
-              </ul>
-                <div class="instruction-up">
-                  <a type="button" class="instruction-up" onclick="moveInstructionUp('<%= instruction %>')"><img src="/public/icons/arrow_upward.png"></a>
-                </div>
-                <div class="instruction-down">
-                  <a type="button" class="instruction-down" onclick="moveInstructionDown('<%= instruction %>')"><img src="/public/icons/arrow_downward.png"></a>
-                </div>
-                <div class="instruction-delete">
-                  <a type="button" class="instruction-delete" onclick="deleteInstruction('<%= instruction %>')"><img src="/public/icons/delete.png"></a>
-                </div>
-              </div>
-            <% }) %> 
-          <% } %> 
-          
-        </div>
-        <button type="button" class="reg-button" onclick="addInstructionField()">Add Instruction</button>
-
-      
+      <!-- </div> -->
       
       
       
@@ -150,24 +151,72 @@
 
 <script>
   function addIngredientField() {
-    let container = document.getElementById('recipe-edit-ingredients-container')
-    
-    let ul = container.querySelector('ul')
-    if (!ul) {
-        ul = document.createElement('ul')
-        container.appendChild(ul)
-    }
+    const ingredientContainer = document.getElementById('recipe-edit-ingredients-container')
 
+    ingredient = document.createElement('div');
+    ingredient.className = 'recipe-edit-ingredient-container';
+
+    // Create ul and append to main container
+    let ul = document.createElement('ul');
+    ingredient.appendChild(ul);
+
+    // Create li, input and append to ul
     let li = document.createElement('li')
-
-    let newIngredientInput = document.createElement('input')
-    newIngredientInput.setAttribute('type', 'text')
-    newIngredientInput.setAttribute('name', 'ingredients')
-    newIngredientInput.setAttribute('class', 'med-input')
-
-    li.appendChild(newIngredientInput)
-
+    let input = document.createElement('input')
+    input.setAttribute('name', 'ingredient')
+    input.setAttribute('type', 'text')
+    input.className = 'ingredient'
+    li.appendChild(input)
     ul.appendChild(li)
+
+    // Create ingredient-up div and append to main container
+    let ingredientUp = document.createElement('div')
+    ingredientUp.className = 'ingredient-up'
+    let aUp = document.createElement('a')
+    aUp.setAttribute('type', 'button')
+    aUp.className = 'ingredient-up'
+    aUp.onclick = function() {
+      moveIngredientUp(input.value);
+    }
+    let imgUp = document.createElement('img')
+    imgUp.setAttribute('src', '/public/icons/arrow_upward.png')
+    aUp.appendChild(imgUp)
+    ingredientUp.appendChild(aUp)
+    ingredient.appendChild(ingredientUp)
+
+    // Create ingredient-down div and append to main container
+    let ingredientDown = document.createElement('div')
+    ingredientDown.className = 'ingredient-down'
+    let aDown = document.createElement('a')
+    aDown.setAttribute('type', 'button')
+    aDown.className = 'ingredient-down'
+    aDown.onclick = function() {
+      moveIngredientDown(input.value);
+    }
+    let imgDown = document.createElement('img')
+    imgDown.setAttribute('src', '/public/icons/arrow_downward.png')
+    aDown.appendChild(imgDown)
+    ingredientDown.appendChild(aDown)
+    ingredient.appendChild(ingredientDown)
+
+    // Create ingredient-delete div and append to main container
+    let ingredientDelete = document.createElement('div')
+    ingredientDelete.className = 'ingredient-delete'
+    let aDelete = document.createElement('a')
+    aDelete.setAttribute('type', 'button')
+    aDelete.className = 'ingredient-delete'
+    aDelete.onclick = function() {
+      deleteIngredient(input.value)
+    }
+    let imgDelete = document.createElement('img')
+    imgDelete.setAttribute('src', '/public/icons/delete.png')
+    aDelete.appendChild(imgDelete)
+    ingredientDown.appendChild(aDelete)
+    ingredient.appendChild(ingredientDown)
+
+    // Finally append the main container to the ingredientContainer
+    ingredientContainer.appendChild(ingredient)
+
   }
 
 
