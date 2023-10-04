@@ -104,10 +104,10 @@
                   <a type="button" class="instruction-up" onclick="moveInstructionUp('<%= instruction %>')"><img src="/public/icons/arrow_upward.png"></a>
                 </div>
                 <div class="instruction-down">
-                  <a type="button" class="instruction-down" onclick="moveInstructionDown()"><img src="/public/icons/arrow_downward.png"></a>
+                  <a type="button" class="instruction-down" onclick="moveInstructionDown('<%= instruction %>')"><img src="/public/icons/arrow_downward.png"></a>
                 </div>
                 <div class="instruction-delete">
-                  <a type="button" class="instruction-delete" onclick="deleteInstruction()"><img src="/public/icons/delete.png"></a>
+                  <a type="button" class="instruction-delete" onclick="deleteInstruction('<%= instruction %>')"><img src="/public/icons/delete.png"></a>
                 </div>
               </div>
             <% }) %> 
@@ -202,8 +202,7 @@
     aUp.className = 'instruction-up'
     aUp.onclick = function() {
       moveInstructionUp(input.value);
-    };
-
+    }
     let imgUp = document.createElement('img')
     imgUp.setAttribute('src', '/public/icons/arrow_upward.png')
     aUp.appendChild(imgUp)
@@ -216,7 +215,9 @@
     let aDown = document.createElement('a')
     aDown.setAttribute('type', 'button')
     aDown.className = 'instruction-down'
-    aDown.setAttribute('onclick', 'moveInstructionDown()')
+    aDown.onclick = function() {
+      moveInstructionDown(input.value);
+    }
     let imgDown = document.createElement('img')
     imgDown.setAttribute('src', '/public/icons/arrow_downward.png')
     aDown.appendChild(imgDown)
@@ -226,10 +227,17 @@
     // Create instruction-delete div and append to main container
     let instructionDelete = document.createElement('div')
     instructionDelete.className = 'instruction-delete'
-    let p = document.createElement('p')
-    p.textContent = 'X'
-    instructionDelete.appendChild(p)
-    instruction.appendChild(instructionDelete)
+    let aDelete = document.createElement('a')
+    aDelete.setAttribute('type', 'button')
+    aDelete.className = 'instruction-delete'
+    aDelete.onclick = function() {
+      deleteInstruction(input.value)
+    }
+    let imgDelete = document.createElement('img')
+    imgDelete.setAttribute('src', '/public/icons/delete.png')
+    aDelete.appendChild(imgDelete)
+    instructionDown.appendChild(aDelete)
+    instruction.appendChild(instructionDown)
 
     // Finally append the main container to the instructionContainer
     instructionContainer.appendChild(instruction)
@@ -253,6 +261,8 @@
     
     const arrayIndexToMoveUp = instructions.indexOf(instructionValue)
     console.log("arrayIndexToMoveUp", arrayIndexToMoveUp)
+
+    if(arrayIndexToMoveUp === 0) return
     
     const CSSindexToMoveUp = (arrayIndexToMoveUp + 1)
     console.log("CSSindexToMoveUp", CSSindexToMoveUp)
@@ -268,8 +278,42 @@
     
     const recipeInstructionsContainer = document.getElementById('recipe-edit-instructions-container')
     recipeInstructionsContainer.insertBefore(elementToMoveUp, elementToMoveBelow);
-    
+}
 
+  function moveInstructionDown(instructionValue) {
+    console.log("instructionValue", instructionValue)
+    
+    const instructionsHTML = document.getElementsByClassName('instruction')
+    console.log("instructionsHTML", instructionsHTML)
+
+    let instructions = []
+
+    for (let i = 0; i < instructionsHTML.length; i++) {
+      const instruction = instructionsHTML[i];
+      // console.log("instruction.value", instruction.value)
+      instructions.push(instruction.value)
+    }
+    console.log("instructions", instructions)
+    
+    const arrayIndexToMoveDown = instructions.indexOf(instructionValue)
+    console.log("arrayIndexToMoveDown", arrayIndexToMoveDown)
+
+    if(arrayIndexToMoveDown === instructions.length) return
+    
+    const CSSindexToMoveDown = (arrayIndexToMoveDown + 1)
+    console.log("CSSindexToMoveDown", CSSindexToMoveDown)
+    
+    const CSSindexToMoveAbove = (CSSindexToMoveDown + 1)
+    console.log("CSSindexToMoveAbove", CSSindexToMoveAbove)
+
+    const elementToMoveDown = document.querySelector(`#recipe-edit-instructions-container .recipe-edit-instruction-container:nth-child(${CSSindexToMoveDown})`)
+    console.log("elementToMoveDown", elementToMoveDown)
+    
+    const elementToMoveAbove = document.querySelector(`#recipe-edit-instructions-container .recipe-edit-instruction-container:nth-child(${CSSindexToMoveAbove})`)
+    console.log("elementToMoveAbove", elementToMoveAbove)
+    
+    const recipeInstructionsContainer = document.getElementById('recipe-edit-instructions-container')
+    recipeInstructionsContainer.insertBefore(elementToMoveAbove, elementToMoveDown);
 }
 
 
