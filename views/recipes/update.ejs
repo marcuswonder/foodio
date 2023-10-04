@@ -76,19 +76,6 @@
         </div>
       </div>
 
-      <!-- <div id="recipe-edit-ingredients-container">
-        <h3>Ingredients</h3>
-        <ul>
-          <% if(recipe.ingredients.length > 0) { %>
-            <% recipe.ingredients.forEach(function(ingredient) { %>
-                <li><input name="ingredients" type="text" class="med-input" value="<%= ingredient %>"></input></li>
-            <% }) %> 
-          <% } %> 
-        </ul>
-          
-        <button type="button" class="reg-button" onclick="addIngredientField()">Add Ingredient</button>
-      </div> -->
-
 
       <h3>Ingredients</h3>
       <div id="recipe-edit-ingredients-container">
@@ -298,6 +285,28 @@
     const recipeIngredientsContainer = document.getElementById('recipe-edit-ingredients-container')
     recipeIngredientsContainer.insertBefore(elementToMoveAbove, elementToMoveDown);
   }
+  
+  function deleteIngredient(ingredientValue) {
+    const ingredientsHTML = document.getElementsByClassName('ingredient')
+
+    let ingredients = []
+
+    for (let i = 0; i < ingredientsHTML.length; i++) {
+      const ingredient = ingredientsHTML[i];
+      ingredients.push(ingredient.value)
+    }
+    
+    const arrayIndexToDelete = ingredients.indexOf(ingredientValue)    
+    const CSSindexToDelete = (arrayIndexToDelete + 1)
+    console.log("CSSindexToDelete", CSSindexToDelete)
+    
+    const elementToDelete = document.querySelector(`#recipe-edit-ingredients-container .recipe-edit-ingredient-container:nth-child(${CSSindexToDelete})`)
+    console.log("elementToDelete", elementToDelete)
+    
+    const recipeIngredientsContainer = document.getElementById('recipe-edit-ingredients-container')
+    recipeIngredientsContainer.removeChild(elementToDelete);
+    
+  }
 
   function moveInstructionUp(instructionValue) {
     const instructionsHTML = document.getElementsByClassName('instruction')
@@ -344,6 +353,28 @@
     const recipeInstructionsContainer = document.getElementById('recipe-edit-instructions-container')
     recipeInstructionsContainer.insertBefore(elementToMoveAbove, elementToMoveDown);
 }
+
+function deleteInstruction(instructionValue) {
+    const instructionsHTML = document.getElementsByClassName('instruction')
+
+    let instructions = []
+
+    for (let i = 0; i < instructionsHTML.length; i++) {
+      const instruction = instructionsHTML[i];
+      instructions.push(instruction.value)
+    }
+    
+    const arrayIndexToDelete = instructions.indexOf(instructionValue)    
+    const CSSindexToDelete = (arrayIndexToDelete + 1)
+    console.log("CSSindexToDelete", CSSindexToDelete)
+    
+    const elementToDelete = document.querySelector(`#recipe-edit-instructions-container .recipe-edit-instruction-container:nth-child(${CSSindexToDelete})`)
+    console.log("elementToDelete", elementToDelete)
+    
+    const recipeInstructionsContainer = document.getElementById('recipe-edit-instructions-container')
+    recipeInstructionsContainer.removeChild(elementToDelete);
+    
+  }
 
 
   $(document).ready(function() {
