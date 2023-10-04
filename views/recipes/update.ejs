@@ -113,8 +113,8 @@
             <% }) %> 
           <% } %> 
           
+        </div>
         <button type="button" class="reg-button" onclick="addInstructionField()">Add Instruction</button>
-      </div>
 
       
       
@@ -200,7 +200,9 @@
     let aUp = document.createElement('a')
     aUp.setAttribute('type', 'button')
     aUp.className = 'instruction-up'
-    aUp.setAttribute('onclick', "moveInstructionUp('')")
+    aUp.onclick = function() {
+      moveInstructionUp(input.value);
+    };
 
     let imgUp = document.createElement('img')
     imgUp.setAttribute('src', '/public/icons/arrow_upward.png')
