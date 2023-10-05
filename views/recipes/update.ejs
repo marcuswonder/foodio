@@ -367,10 +367,10 @@
     const CSSindexToDelete = (arrayIndexToDelete + 1)
     console.log("CSSindexToDelete", CSSindexToDelete)
     
-    const elementToDelete = document.querySelector(`#recipe-edit-ingredients-container .recipe-edit-ingredient-container:nth-child(${CSSindexToDelete})`)
+    const elementToDelete = document.querySelector(`#recipe-edit-ingredients .recipe-edit-ingredient-container:nth-child(${CSSindexToDelete})`)
     console.log("elementToDelete", elementToDelete)
     
-    const recipeIngredientsContainer = document.getElementById('recipe-edit-ingredients-container')
+    const recipeIngredientsContainer = document.getElementById('recipe-edit-ingredients')
     recipeIngredientsContainer.removeChild(elementToDelete);
     
   }
@@ -436,10 +436,10 @@ function deleteInstruction(instructionValue) {
     const CSSindexToDelete = (arrayIndexToDelete + 1)
     console.log("CSSindexToDelete", CSSindexToDelete)
     
-    const elementToDelete = document.querySelector(`#recipe-edit-instructions-container .recipe-edit-instruction-container:nth-child(${CSSindexToDelete})`)
+    const elementToDelete = document.querySelector(`#recipe-edit-instructions .recipe-edit-instruction-container:nth-child(${CSSindexToDelete})`)
     console.log("elementToDelete", elementToDelete)
     
-    const recipeInstructionsContainer = document.getElementById('recipe-edit-instructions-container')
+    const recipeInstructionsContainer = document.getElementById('recipe-edit-instructions')
     recipeInstructionsContainer.removeChild(elementToDelete);
     
   }
