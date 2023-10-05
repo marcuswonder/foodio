@@ -133,6 +133,42 @@
     justify-content: center;
 }
 
+
+#recipe-edit-footer-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+#recipe-edit-photo-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+#recipe-edit-image-content {
+    display: flex;
+    justify-content: center;
+    padding: 5%;
+}
+
+#recipe-edit-image-buttons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+
+
+
+
+
+
+
 /* Small Devices (Small Phones) */
 @media (min-width: 300px) {
     #recipe-edit-container {

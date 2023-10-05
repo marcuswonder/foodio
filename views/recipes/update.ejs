@@ -153,10 +153,39 @@
         </div>
       </div>
       
+      <br>
+      <br>
+      <br>
+
+      <div id="recipe-edit-footer-container">
+        
+        <div id="recipe-edit-photo-container" class="recipe-edit-header-input-container">
+          <div class="recipe-edit-title">
+            <h3>Photo</h3>
+          </div>
+          <div id="recipe-edit-image-content">
+            <img src="<%= recipe.photo %>"></img>
+          </div>
+          <div id="recipe-edit-image-buttons">
+            <div id="recipe-edit-upload-photo-container">
+              <div id="recipe-edit-upload-photo-button">
+                <button type="submit" class="reg-button">Upload New Photo</button>
+              </div>
+              <div id="recipe-edit-upload-photo-field">
+                <input type="file" name="photo" accept="image/*"><br>
+              </div>
+            </div>
+            <div id="recipe-edit-delete-photo-button">
+              <button type="submit" class="reg-button">Delete Photo</button>
+            </div>
+          </div>
+          <p>If you don't upload a photo we'll generate an image using AI!</p>    
+              
+        </div>
       
-      
-      
-      
+        <br>
+        <br>
+        <br>
       
     
       <button type="submit" class="reg-button">Save Edits to Recipe Info</button>
