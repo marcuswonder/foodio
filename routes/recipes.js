@@ -18,6 +18,6 @@ router.get('/:id', recipesCtrl.show)
 router.delete('/:id', ensureLoggedIn, recipesCtrl.delete)
 router.post('/:id/collections', ensureLoggedIn, recipesCtrl.addToCollection)
 router.get('/:id/edit', ensureLoggedIn, recipesCtrl.editRecipe)
-router.put('/:id/update', ensureLoggedIn, recipesCtrl.updateRecipe)
+router.put('/:id/update', ensureLoggedIn, upload.single('photo'), recipesCtrl.updateRecipe)
 
 module.exports = router;

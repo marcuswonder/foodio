@@ -252,6 +252,7 @@ async function editRecipe(req, res) {
 
 async function updateRecipe(req, res) {
   console.log("Recipe Controller: updateRecipe req.body", req.body)
+  console.log("Recipe Controller: updateRecipe req.file", req.file)
   const recipe = await Recipe.findById(req.params.id);
   recipe.name = req.body.name;
   recipe.description = req.body.description;
@@ -261,6 +262,31 @@ async function updateRecipe(req, res) {
   recipe.servings = req.body.servings;
   recipe.ingredients = req.body.ingredient;
   recipe.instructions = req.body.instruction;
-  await recipe.save();
-  res.redirect(`/recipes/${req.params.id}`);
+
+  try {
+    if(req.file) {
+      const result = await uploadFile(req.file);
+      recipe.photo = result.Location;
+
+      await recipe.save().catch(err => {
+        console.log("Controller: User Image Recipe Save Error", err);
+        return res.redirect('/recipes');
+      });
+      res.redirect(`/recipes/${recipe._id}`);
+      
+    } else {
+      const aiImage = await aiImageGeneratorAndS3Upload(recipe);
+      recipe.photo = aiImage.Location;
+
+      await recipe.save().catch(err => {
+        console.log("Controller: AI Image Recipe Save Error", err);
+        return res.redirect('/recipes');
+      });
+      res.redirect(`/recipes/${recipe._id}`);
+    }
+
+  } catch (error) {
+    console.log("Controller: Recipe Catch Block Error", error)
+    return res.redirect('/recipes');
+  }
 }
