@@ -160,10 +160,39 @@
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: center;
+    align-items: center;
 }
 
+#no-image-placeholder {
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+    width: 200px;
+    /* background-color: lightgray; */
+    border: #007991 2px solid;
+    justify-content: center;
+    align-items: center;
+}
 
+#no-image-placeholder-overlay-h3,
+#no-image-placeholder-overlay-p {
+    color:#007991;
+    padding: 5%;
+}
 
+.custom-file-upload span {
+    font-size: small;
+    padding: 5px;
+    border: 5px;
+    margin: 10px 0 10px 15px;
+    border: solid 1px #007991;
+    background-color: #007991;
+    color: white;
+}
+
+.custom-file-upload input[type="file"] {
+    display: none;
+  }
 
 
 

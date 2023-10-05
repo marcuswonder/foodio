@@ -164,19 +164,28 @@
             <h3>Photo</h3>
           </div>
           <div id="recipe-edit-image-content">
-            <img src="<%= recipe.photo %>"></img>
+            <img id="recipe-edit-image" src="<%= recipe.photo %>"></img>
           </div>
           <div id="recipe-edit-image-buttons">
             <div id="recipe-edit-upload-photo-container">
-              <div id="recipe-edit-upload-photo-button">
-                <button type="submit" class="reg-button">Upload New Photo</button>
+              <label for="photo-for-upload" class="custom-file-upload">
+                <div class="button-container">
+                  <span>Choose a file</span>
+                </div>
+                <input id="photo-for-upload" type="file" name="photo" accept="image/*">
+              </label>
+
+
+
+              <!-- <div id="recipe-edit-upload-photo-button">
+                <button type="button" class="reg-button" onclick="photoUpload()">Upload New Photo</button>
               </div>
               <div id="recipe-edit-upload-photo-field">
-                <input type="file" name="photo" accept="image/*"><br>
-              </div>
+                <input id="photo-for-upload" type="file" name="photo" accept="image/*"><br>
+              </div> -->
             </div>
             <div id="recipe-edit-delete-photo-button">
-              <button type="submit" class="reg-button">Delete Photo</button>
+              <button type="button" class="reg-button" onclick="photoDelete()">Delete Photo</button>
             </div>
           </div>
           <p>If you don't upload a photo we'll generate an image using AI!</p>    
@@ -471,15 +480,97 @@ function deleteInstruction(instructionValue) {
     const recipeInstructionsContainer = document.getElementById('recipe-edit-instructions')
     recipeInstructionsContainer.removeChild(elementToDelete);
     
+}
+
+// function photoUpload() {
+  
+  const photoForUpload = document.getElementById('photo-for-upload')
+  
+  const previewImageLocation = document.getElementById('recipe-edit-image-content')
+  
+  const previewImage = document.createElement('img')
+  
+  photoForUpload.addEventListener('change', function(event) {
+    const currentPhotoElement = document.getElementById('recipe-edit-image')
+    const placeholderPhotoElement = document.getElementById('no-image-placeholder')
+
+    if(currentPhotoElement) {
+      currentPhotoElement.remove()
+    
+    } else if(placeholderPhotoElement) {
+      placeholderPhotoElement.remove()
+    }
+    
+    
+    var file = event.target.files[0]
+
+    if (file) {
+      let reader = new FileReader()
+
+      reader.onload = function(e) {
+        previewImage.id = 'recipe-edit-uploaded-image'
+        previewImage.src = e.target.result;
+        previewImage.style.display = 'block';
+      };
+
+      reader.readAsDataURL(file);
+      previewImageLocation.appendChild(previewImage)
+
+    } else {
+      previewImage.src = '';
+      previewImage.style.display = 'none';
+    }
+
+})
+
+
+
+// }
+
+function photoDelete() {
+  // const currentPhotoElement = document.getElementById('recipe-edit-image').remove()
+  
+  const currentPhotoElement = document.getElementById('recipe-edit-image')
+  const uploadedPhotoElement = document.getElementById('recipe-edit-uploaded-image')
+
+  if(currentPhotoElement) {
+    currentPhotoElement.remove()
+
+  } else if(uploadedPhotoElement) {
+    uploadedPhotoElement.remove()
   }
+
+  const photoDiv = document.getElementById('recipe-edit-image-content')
+  
+  const noImagePlaceholder = document.createElement('div')
+  noImagePlaceholder.id = 'no-image-placeholder'
+  noImagePlaceholder.classList.add('recipe-edit-image')
+  photoDiv.appendChild(noImagePlaceholder)
+  
+  const noImagePlaceholderDiv = document.getElementById('no-image-placeholder')
+  
+  const noImagePlaceholderOverlayH3 = document.createElement('h3')
+  noImagePlaceholderOverlayH3.id = 'no-image-placeholder-overlay-h3'
+  noImagePlaceholderOverlayH3.textContent = "No Photo Selected"
+  noImagePlaceholderDiv.appendChild(noImagePlaceholderOverlayH3)
+
+  const noImagePlaceholderOverlayP = document.createElement('p')
+  noImagePlaceholderOverlayP.id = 'no-image-placeholder-overlay-p'
+  noImagePlaceholderOverlayP.textContent = "We will generate something beautiful using the magic of AI!"
+  noImagePlaceholderDiv.appendChild(noImagePlaceholderOverlayP)
+
+
+
+}
+
 
 
   $(document).ready(function() {
     $('.expanding-text-input').on('input', function() {
-        this.style.height = 'auto'; // Temporarily shrink the textarea to auto
-        this.style.height = (this.scrollHeight) + 'px'; // Set the height to the scrollHeight
-    });
-});
+        this.style.height = 'auto'
+        this.style.height = (this.scrollHeight) + 'px';
+    })
+})
 </script>
 
 <%- include('../partials/footer') %>
