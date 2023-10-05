@@ -309,9 +309,9 @@
 
   function moveIngredientUp(ingredientValue) {
     const ingredientsHTML = document.getElementsByClassName('ingredient')
-
+    
     let ingredients = []
-
+    
     for (let i = 0; i < ingredientsHTML.length; i++) {
       const ingredient = ingredientsHTML[i];
       ingredients.push(ingredient.value)
@@ -323,10 +323,10 @@
     const CSSindexToMoveUp = (arrayIndexToMoveUp + 1)
     const CSSindexToMoveBelow = (CSSindexToMoveUp - 1)
 
-    const elementToMoveUp = document.querySelector(`#recipe-edit-ingredients-container .recipe-edit-ingredient-container:nth-child(${CSSindexToMoveUp})`)
-    const elementToMoveBelow = document.querySelector(`#recipe-edit-ingredients-container .recipe-edit-ingredient-container:nth-child(${CSSindexToMoveBelow})`)
+    const elementToMoveUp = document.querySelector(`#recipe-edit-ingredients .recipe-edit-ingredient-container:nth-child(${CSSindexToMoveUp})`)
+    const elementToMoveBelow = document.querySelector(`#recipe-edit-ingredients .recipe-edit-ingredient-container:nth-child(${CSSindexToMoveBelow})`)
     
-    const recipeIngredientsContainer = document.getElementById('recipe-edit-ingredients-container')
+    const recipeIngredientsContainer = document.getElementById('recipe-edit-ingredients')
     recipeIngredientsContainer.insertBefore(elementToMoveUp, elementToMoveBelow);
 }
 
@@ -341,15 +341,15 @@
     }
     
     const arrayIndexToMoveDown = ingredients.indexOf(ingredientValue)
-    if(arrayIndexToMoveDown === ingredients.length) return
     
     const CSSindexToMoveDown = (arrayIndexToMoveDown + 1)
     const CSSindexToMoveAbove = (CSSindexToMoveDown + 1)
+    if(CSSindexToMoveDown === ingredients.length) return
 
-    const elementToMoveDown = document.querySelector(`#recipe-edit-ingredients-container .recipe-edit-ingredient-container:nth-child(${CSSindexToMoveDown})`)
-    const elementToMoveAbove = document.querySelector(`#recipe-edit-ingredients-container .recipe-edit-ingredient-container:nth-child(${CSSindexToMoveAbove})`)
+    const elementToMoveDown = document.querySelector(`#recipe-edit-ingredients .recipe-edit-ingredient-container:nth-child(${CSSindexToMoveDown})`)
+    const elementToMoveAbove = document.querySelector(`#recipe-edit-ingredients .recipe-edit-ingredient-container:nth-child(${CSSindexToMoveAbove})`)
     
-    const recipeIngredientsContainer = document.getElementById('recipe-edit-ingredients-container')
+    const recipeIngredientsContainer = document.getElementById('recipe-edit-ingredients')
     recipeIngredientsContainer.insertBefore(elementToMoveAbove, elementToMoveDown);
   }
   
@@ -391,10 +391,10 @@
     const CSSindexToMoveUp = (arrayIndexToMoveUp + 1)
     const CSSindexToMoveBelow = (CSSindexToMoveUp - 1)
 
-    const elementToMoveUp = document.querySelector(`#recipe-edit-instructions-container .recipe-edit-instruction-container:nth-child(${CSSindexToMoveUp})`)
-    const elementToMoveBelow = document.querySelector(`#recipe-edit-instructions-container .recipe-edit-instruction-container:nth-child(${CSSindexToMoveBelow})`)
+    const elementToMoveUp = document.querySelector(`#recipe-edit-instructions .recipe-edit-instruction-container:nth-child(${CSSindexToMoveUp})`)
+    const elementToMoveBelow = document.querySelector(`#recipe-edit-instructions .recipe-edit-instruction-container:nth-child(${CSSindexToMoveBelow})`)
     
-    const recipeInstructionsContainer = document.getElementById('recipe-edit-instructions-container')
+    const recipeInstructionsContainer = document.getElementById('recipe-edit-instructions')
     recipeInstructionsContainer.insertBefore(elementToMoveUp, elementToMoveBelow);
 }
 
@@ -409,15 +409,16 @@
     }
     
     const arrayIndexToMoveDown = instructions.indexOf(instructionValue)
-    if(arrayIndexToMoveDown === instructions.length) return
     
     const CSSindexToMoveDown = (arrayIndexToMoveDown + 1)
     const CSSindexToMoveAbove = (CSSindexToMoveDown + 1)
 
-    const elementToMoveDown = document.querySelector(`#recipe-edit-instructions-container .recipe-edit-instruction-container:nth-child(${CSSindexToMoveDown})`)
-    const elementToMoveAbove = document.querySelector(`#recipe-edit-instructions-container .recipe-edit-instruction-container:nth-child(${CSSindexToMoveAbove})`)
+    if(CSSindexToMoveDown === instructions.length) return
+
+    const elementToMoveDown = document.querySelector(`#recipe-edit-instructions .recipe-edit-instruction-container:nth-child(${CSSindexToMoveDown})`)
+    const elementToMoveAbove = document.querySelector(`#recipe-edit-instructions .recipe-edit-instruction-container:nth-child(${CSSindexToMoveAbove})`)
     
-    const recipeInstructionsContainer = document.getElementById('recipe-edit-instructions-container')
+    const recipeInstructionsContainer = document.getElementById('recipe-edit-instructions')
     recipeInstructionsContainer.insertBefore(elementToMoveAbove, elementToMoveDown);
 }
 
