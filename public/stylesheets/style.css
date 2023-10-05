@@ -284,6 +284,10 @@ a:active {
   border: solid 1px #007991;
   background-color: #007991;
   color: white;
+  cursor: default;
+  font-size: .85rem;
+  font-weight: normal;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .reg-button:link {

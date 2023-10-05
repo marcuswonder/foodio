@@ -167,24 +167,21 @@
             <img id="recipe-edit-image" src="<%= recipe.photo %>"></img>
           </div>
           <div id="recipe-edit-image-buttons">
-            <div id="recipe-edit-upload-photo-container">
+
+
+
+            <div id="recipe-edit-upload-photo-button-container" class="recipe-edit-photo-button-containers">
               <label for="photo-for-upload" class="custom-file-upload">
                 <div class="button-container">
-                  <span>Choose a file</span>
+                  <span class="reg-button">Choose a File</span>
+                  <input id="photo-for-upload" type="file" name="photo" accept="image/*"></input>
                 </div>
-                <input id="photo-for-upload" type="file" name="photo" accept="image/*">
               </label>
-
-
-
-              <!-- <div id="recipe-edit-upload-photo-button">
-                <button type="button" class="reg-button" onclick="photoUpload()">Upload New Photo</button>
-              </div>
-              <div id="recipe-edit-upload-photo-field">
-                <input id="photo-for-upload" type="file" name="photo" accept="image/*"><br>
-              </div> -->
             </div>
-            <div id="recipe-edit-delete-photo-button">
+
+
+            
+            <div id="recipe-edit-delete-photo-button-container" class="recipe-edit-photo-button-containers">
               <button type="button" class="reg-button" onclick="photoDelete()">Delete Photo</button>
             </div>
           </div>

@@ -16,12 +16,6 @@
 
 }
 
-
-
-
-
-
-/* container pairs */
 #recipe-edit-info-container {
     display: flex;
     flex-direction: row;
@@ -30,7 +24,6 @@
     /* margin: 0 15%; */
 }
 
-/* container pair */
 .recipe-edit-info-container {
     display: flex;
     flex-direction: row;
@@ -39,15 +32,12 @@
     flex-grow: 1;
 }
 
-/* child */
 .recipe-edit-input-container {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
 }
 
-
-/* grandchild */
 .recipe-edit-title,
 .recipe-edit-content {
     width: 100%
@@ -155,20 +145,12 @@
     padding: 5%;
 }
 
-#recipe-edit-image-buttons {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-}
 
 #no-image-placeholder {
     display: flex;
     flex-direction: column;
     height: 300px;
     width: 200px;
-    /* background-color: lightgray; */
     border: #007991 2px solid;
     justify-content: center;
     align-items: center;
@@ -179,15 +161,20 @@
     color:#007991;
     padding: 5%;
 }
+#recipe-edit-image-buttons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    /* justify-content: center; */
+    align-items: center;
+}
 
-.custom-file-upload span {
-    font-size: small;
-    padding: 5px;
-    border: 5px;
-    margin: 10px 0 10px 15px;
-    border: solid 1px #007991;
-    background-color: #007991;
-    color: white;
+.recipe-edit-photo-button-containers {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
 }
 
 .custom-file-upload input[type="file"] {
