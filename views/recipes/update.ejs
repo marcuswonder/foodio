@@ -91,31 +91,31 @@
           <div class="recipe-edit-title">
             <h3>Ingredients</h3>
           </div>
-          <div id="recipe-edit-ingredients">
-            <% if(recipe.ingredients.length > 0) { %>
-              <% recipe.ingredients.forEach(function(ingredient) { %>
-                <div class="recipe-edit-ingredient-container">
-                  <ul>
-                    <li>
-                      <input name="ingredient" type="text" class="ingredient input" value="<%= ingredient %>"></input>
-                    </li>
-                </ul>
-                  <div class="ingredient-up">
-                    <a type="button" class="ingredient-up" onclick="moveIngredientUp('<%= ingredient %>')"><img src="/public/icons/arrow_upward.png"></a>
+            <div id="recipe-edit-ingredients">
+              <% if(recipe.ingredients.length > 0) { %>
+                <% recipe.ingredients.forEach(function(ingredient) { %>
+                  <div class="recipe-edit-ingredient-container">
+                    <ul>
+                      <li>
+                        <input name="ingredient" type="text" class="ingredient input" value="<%= ingredient %>"></input>
+                      </li>
+                  </ul>
+                    <div class="ingredient-up">
+                      <a type="button" class="ingredient-up" onclick="moveIngredientUp('<%= ingredient %>')"><img src="/public/icons/arrow_upward.png"></a>
+                    </div>
+                    <div class="ingredient-down">
+                      <a type="button" class="ingredient-down" onclick="moveIngredientDown('<%= ingredient %>')"><img src="/public/icons/arrow_downward.png"></a>
+                    </div>
+                    <div class="ingredient-delete">
+                      <a type="button" class="ingredient-delete" onclick="deleteIngredient('<%= ingredient %>')"><img src="/public/icons/delete.png"></a>
+                    </div>
                   </div>
-                  <div class="ingredient-down">
-                    <a type="button" class="ingredient-down" onclick="moveIngredientDown('<%= ingredient %>')"><img src="/public/icons/arrow_downward.png"></a>
-                  </div>
-                  <div class="ingredient-delete">
-                    <a type="button" class="ingredient-delete" onclick="deleteIngredient('<%= ingredient %>')"><img src="/public/icons/delete.png"></a>
-                  </div>
-                </div>
-              <% }) %> 
-            <% } %> 
-          </div>
-            <div id="recipe-edit-ingredient-add" class="recipe-edit-add-buttons">
-              <button type="button" class="reg-button" onclick="addIngredientField()">Add Ingredient</button>
+                <% }) %> 
+              <% } %> 
             </div>
+          <div id="recipe-edit-ingredient-add" class="recipe-edit-add-buttons">
+            <button type="button" class="reg-button" onclick="addIngredientField()">Add Ingredient</button>
+          </div>
         </div>
 
         
@@ -146,12 +146,10 @@
                 </div>
               <% }) %> 
             <% } %> 
-            
           </div>
           <div id="recipe-edit-instruction-add" class="recipe-edit-add-buttons">
             <button type="button" class="reg-button" onclick="addInstructionField()">Add Instruction</button>
           </div>
-
         </div>
       </div>
       
@@ -171,7 +169,7 @@
 
 <script>
   function addIngredientField() {
-    const ingredientContainer = document.getElementById('recipe-edit-ingredients-container')
+    const ingredientContainer = document.getElementById('recipe-edit-ingredients')
 
     ingredient = document.createElement('div');
     ingredient.className = 'recipe-edit-ingredient-container';
@@ -241,7 +239,7 @@
 
 
   function addInstructionField() {
-    const instructionContainer = document.getElementById('recipe-edit-instructions-container')
+    const instructionContainer = document.getElementById('recipe-edit-instructions')
 
     instruction = document.createElement('div');
     instruction.className = 'recipe-edit-instruction-container';
