@@ -51,12 +51,36 @@
               <st>How many people will the ingredients serve?</st><br></td>
         </tr>
       </table>
+      
+      <!-- Ingredients Input -->
+        <table id="recipe-ingredients" class="recipe-info">
+          <tr>
+            <th>Ingredient: </th>
+            <td><input type="text" name="ingredients" class="med-input" autocomplete="off"></input><br></td>
+          </tr>
+        </table>
+        
+          <button type="button" class="reg-button" onclick="addIngredientField()">Add Ingredient</button>
+        <!-- </form> -->
+      
+      <!-- Instructions Input -->
+        <table id="recipe-instructions" class="recipe-info">
+          <tr>
+            <th>Instructions: </th>
+            <td><input type="text" name="instructions" class="med-input" autocomplete="off"></input><br></td>
+          </tr>
+        </table>
+        
+          <button type="button" class="reg-button" onclick="addInstructionField()">Add Instruction</button>
+        <!-- </form> -->
+      
+      
       <table id="recipe-photo" class="recipe-info">
         <tr>
           <th>Photo: </th>
             <td><input type="file" name="photo" accept="image/*"><br>
               <br>
-              <st>If you do not upload a photo we will generate a suitable image using AI!</st><br>
+              <st>If you don't upload a photo we will generate an image using AI!</st><br>
             </td>
         </tr>
       </table>
@@ -66,6 +90,22 @@
 <br>
 <br>
 
+
+<script>
+    function addIngredientField() {
+        let newIngredientInput = document.createElement('input');
+        newIngredientInput.setAttribute('type', 'text');
+        newIngredientInput.setAttribute('name', 'ingredients');
+        document.getElementById('recipe-ingredients').appendChild(newIngredientInput);
+    }
+    
+    function addInstructionField() {
+        let newInstructionInput = document.createElement('input');
+        newInstructionInput.setAttribute('type', 'text');
+        newInstructionInput.setAttribute('name', 'instructions');
+        document.getElementById('recipe-instructions').appendChild(newInstructionInput);
+    }
+</script>
 
 
 <%- include('../partials/footer') %>

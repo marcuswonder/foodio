@@ -35,7 +35,7 @@ async function index(req, res) {
 
 
 function newAddRecipe(req, res) {
-    res.render('recipes/new', { stylesheet: '../public/stylesheets/style.css' })
+    res.render('recipes/new', { stylesheet: '../public/stylesheets/recipeNew.css' })
 }
 
 
@@ -51,6 +51,8 @@ async function create(req, res) {
   recipe.author = req.user._id;
   recipe.userName = req.user.name;
   recipe.gId = req.user.googleId;
+  recipe.ingredients = req.body.ingredient
+  recipe.instructions = req.body.instruction
 
   try {
     if(req.file) {

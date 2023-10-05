@@ -1,111 +1,615 @@
 <%- include('../partials/header') %>
 
-<title>New Recipe</title>
-<h1>New Recipe</h1>
+<div id="new-recipe">
+  <div id="new-recipe-container">
+    <h1>Add a Recipe</h1>
+    <form method="POST" action="/recipes" enctype="multipart/form-data">
+    
+      <div id="new-recipe-header-container">
+        
+        <div id="new-recipe-name-container" class="new-recipe-header-input-container">
+          <div class="new-recipe-title">
+            <h3>Title</h3>
+          </div>
+          <div class="new-recipe-content">
+            <textarea name="name" type="text" class="expanding-text-input" rows="1" autocomplete="off"></textarea>
+          </div>
+        </div>
 
-<div id="recipe-update">
-<h1>Recipe & Preparation Info</h1>
-<form id="add-recipe" method="POST" action="/recipes" enctype="multipart/form-data">
-    <table id="recipe-top-info" class="recipe-info">
-        <tr>
-          <th>Name: </th>
-          <td><input type="text" name="name" class="med-input" autocomplete="off"></input><br>
-          <st>Make it snappy!</st><br></td>
-        </tr>
-        <tr>
-          <th>Description: </th>
-          <td><textarea type="text" name="description" class="long-input" autocomplete="off"></textarea><br>
-            <st>Tell the world where you found this recipe, when you serve it and why you love it!</st><br></td>
-        </tr>
-        <tr>
-            <th>Category: </th>
-            <td>
+        <div id="new-recipe-description-container" class="new-recipe-header-input-container">
+          <div class="new-recipe-title">
+            <h3>Description</h3>
+          </div>
+          <div class="new-recipe-content">
+            <textarea name="description" type="text" class="expanding-text-input" rows="1" autocomplete="off"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <br>
+      <br>
+
+      <div id="new-recipe-info-container">
+        <div id="new-recipe-category-servings-container" class="new-recipe-info-container">
+          <div id="new-recipe-category-container" class="new-recipe-input-container">
+            <div class="new-recipe-title">
+              <h3>Category</h3>
+            </div>
+              <div class="new-recipe-content">
                 <select name="category" class="input">
-                <option disabled selected value> -- Select a Category -- </option>
-                <option value="Snack">Snack</option>
-                <option value="Starter">Starter</option>
-                <option value="Side">Side</option>
-                <option value="Main Course">Main Course</option>
-                <option value="Desert">Desert</option>
-                <option value="Cocktail">Cocktail</option>
+                  <option value="Snack">Snack</option>
+                  <option value="Starter">Starter</option>
+                  <option value="Main Course">Main Course</option>
+                  <option value="Desert">Desert</option>
+                  <option value="Cocktail">Cocktail</option>
                 </select>
-                <br>
-                <st>How would you categorise this recipe?</st><br></td>
-        </tr>
-      </table>
-    <br>
-    <br>
-    <table id="recipe-bottom-info" class="recipe-info">
-        <tr>
-          <th>Prep Time (mins): </th>
-          <td><input type="number" name="prepTime" class="short-input" autocomplete="off"></input><br>
-            <st>How long does it take you to prepare the ingredients for this recipe?</st><br></td>
-        </tr>
-        <tr>
-          <th>Cook Time (mins): </th>
-          <td><input type="number" name="cookTime" class="short-input" autocomplete="off"></input><br>
-            <st>How long does it take you to make this recipe?</st><br></td>
-        </tr>
-        <tr>
-            <th># Adult Servings: </th>
-            <td><input type="number" name="servings" class="short-input" autocomplete="off"></input><br>
-              <st>How many people will the ingredients serve?</st><br></td>
-        </tr>
-      </table>
-      
-      <!-- Ingredients Input -->
-        <table id="recipe-ingredients" class="recipe-info">
-          <tr>
-            <th>Ingredient: </th>
-            <td><input type="text" name="ingredients" class="med-input" autocomplete="off"></input><br></td>
-          </tr>
-        </table>
+              </div>
+          </div>
         
-          <button type="button" class="reg-button" onclick="addIngredientField()">Add Ingredient</button>
-        <!-- </form> -->
-      
-      <!-- Instructions Input -->
-        <table id="recipe-instructions" class="recipe-info">
-          <tr>
-            <th>Instructions: </th>
-            <td><input type="text" name="instructions" class="med-input" autocomplete="off"></input><br></td>
-          </tr>
-        </table>
+          <div id="new-recipe-cookTime-container" class="new-recipe-input-container">
+            <div class="new-recipe-title">
+              <h3>Servings</h3>
+            </div>
+            <div class="new-recipe-content">
+              <input name="servings" type="number"  class="short-input" autocomplete="off"></input>
+            </div>
+          </div>
+        </div>
+
+        <div id="new-recipe-timings-container" class="new-recipe-info-container">
+          <div id="new-recipe-prepTime-container" class="new-recipe-input-container">
+            <div class="new-recipe-title">
+              <h3>Prep Time</h3>
+            </div>
+            <div class="new-recipe-content">
+              <input name="prepTime" type="number"  class="short-input" autocomplete="off"></input>
+            </div>
+            <p>(mins)</p>
+          </div>
+
+          <div id="new-recipe-cookTime-container" class="new-recipe-input-container">
+            <div class="new-recipe-title">
+              <h3>Cook Time</h3>
+            </div>
+            <div class="new-recipe-content">
+              <input name="cookTime" type="number"  class="short-input" autocomplete="off"</input>
+            </div>
+            <p>(mins)</p>
+          </div>
+        </div>
+      </div>
+
+
+      <div id="new-recipe-ingredients-instructions-container">
+
+        <div id="new-recipe-ingredients-container" class="new-recipe-ingredients-instructions-container">
+          <div class="new-recipe-title">
+            <h3>Ingredients</h3>
+          </div>
+            <div id="new-recipe-ingredients">
+              <div class="new-recipe-ingredient-container">
+                <ul>
+                  <li>
+                    <input name="ingredient" type="text" class="ingredient input"></input>
+                  </li>
+                </ul>
+                <div class="ingredient-up">
+                  <a type="button" class="ingredient-up" onclick="moveIngredientUp()"><img src="/public/icons/arrow_upward.png"></a>
+                </div>
+                <div class="ingredient-down">
+                  <a type="button" class="ingredient-down" onclick="moveIngredientDown()"><img src="/public/icons/arrow_downward.png"></a>
+                </div>
+                <div class="ingredient-delete">
+                  <a type="button" class="ingredient-delete" onclick="deleteIngredient()"><img src="/public/icons/delete.png"></a>
+                </div>
+              </div>
+              <div class="new-recipe-ingredient-container">
+                <ul>
+                  <li>
+                    <input name="ingredient" type="text" class="ingredient input"></input>
+                  </li>
+                </ul>
+                <div class="ingredient-up">
+                  <a type="button" class="ingredient-up" onclick="moveIngredientUp()"><img src="/public/icons/arrow_upward.png"></a>
+                </div>
+                <div class="ingredient-down">
+                  <a type="button" class="ingredient-down" onclick="moveIngredientDown()"><img src="/public/icons/arrow_downward.png"></a>
+                </div>
+                <div class="ingredient-delete">
+                  <a type="button" class="ingredient-delete" onclick="deleteIngredient()"><img src="/public/icons/delete.png"></a>
+                </div>
+              </div>
+              <div class="new-recipe-ingredient-container">
+                <ul>
+                  <li>
+                    <input name="ingredient" type="text" class="ingredient input"></input>
+                  </li>
+                </ul>
+                <div class="ingredient-up">
+                  <a type="button" class="ingredient-up" onclick="moveIngredientUp()"><img src="/public/icons/arrow_upward.png"></a>
+                </div>
+                <div class="ingredient-down">
+                  <a type="button" class="ingredient-down" onclick="moveIngredientDown()"><img src="/public/icons/arrow_downward.png"></a>
+                </div>
+                <div class="ingredient-delete">
+                  <a type="button" class="ingredient-delete" onclick="deleteIngredient()"><img src="/public/icons/delete.png"></a>
+                </div>
+              </div>
+            </div>
+          <div id="new-recipe-ingredient-add" class="new-recipe-add-buttons">
+            <button type="button" class="reg-button" onclick="addIngredientField()">Add Ingredient</button>
+          </div>
+        </div>
+
+
+          <div id="new-recipe-instructions-container" class="new-recipe-ingredients-instructions-container">
+            <div class="new-recipe-title">
+              <h3>Instructions</h3>
+            </div>
+            <div id="new-recipe-instructions">
+              <div class="new-recipe-instruction-container">
+                <ul>
+                  <li>
+                    <input name="instruction" type="text" class="instruction input"></input>
+                  </li>
+                </ul>
+                <div class="instruction-up">
+                  <a type="button" class="instruction-up" onclick="moveInstructionUp()"><img src="/public/icons/arrow_upward.png"></a>
+                </div>
+                <div class="instruction-down">
+                  <a type="button" class="instruction-down" onclick="moveInstructionDown()"><img src="/public/icons/arrow_downward.png"></a>
+                </div>
+                <div class="instruction-delete">
+                  <a type="button" class="instruction-delete" onclick="deleteInstruction()"><img src="/public/icons/delete.png"></a>
+                </div>
+              </div>
+              <div class="new-recipe-instruction-container">
+                <ul>
+                  <li>
+                    <input name="instruction" type="text" class="instruction input"></input>
+                  </li>
+                </ul>
+                <div class="instruction-up">
+                  <a type="button" class="instruction-up" onclick="moveInstructionUp()"><img src="/public/icons/arrow_upward.png"></a>
+                </div>
+                <div class="instruction-down">
+                  <a type="button" class="instruction-down" onclick="moveInstructionDown()"><img src="/public/icons/arrow_downward.png"></a>
+                </div>
+                <div class="instruction-delete">
+                  <a type="button" class="instruction-delete" onclick="deleteInstruction()"><img src="/public/icons/delete.png"></a>
+                </div>
+              </div>
+              <div class="new-recipe-instruction-container">
+                <ul>
+                  <li>
+                    <input name="instruction" type="text" class="instruction input"></input>
+                  </li>
+                </ul>
+                <div class="instruction-up">
+                  <a type="button" class="instruction-up" onclick="moveInstructionUp()"><img src="/public/icons/arrow_upward.png"></a>
+                </div>
+                <div class="instruction-down">
+                  <a type="button" class="instruction-down" onclick="moveInstructionDown()"><img src="/public/icons/arrow_downward.png"></a>
+                </div>
+                <div class="instruction-delete">
+                  <a type="button" class="instruction-delete" onclick="deleteInstruction()"><img src="/public/icons/delete.png"></a>
+                </div>
+              </div>
+            </div>
+          <div id="new-recipe-instruction-add" class="new-recipe-add-buttons">
+            <button type="button" class="reg-button" onclick="addInstructionField()">Add Instruction</button>
+          </div>
+        </div>
+      </div>
+
+
+      <div id="new-recipe-footer-container">
         
-          <button type="button" class="reg-button" onclick="addInstructionField()">Add Instruction</button>
-        <!-- </form> -->
+        <div id="new-recipe-photo-container" class="new-recipe-header-input-container">
+          <div class="new-recipe-title">
+            <h3>Photo</h3>
+          </div>
+          <div id="new-recipe-image-content">
+          </div>
+          <div id="new-recipe-image-buttons">
+            <div id="new-recipe-upload-photo-button-container" class="new-recipe-photo-button-containers">
+              <label for="photo-for-upload" class="custom-file-upload">
+                <div class="button-container">
+                  <span class="reg-button">Choose a File</span>
+                  <input id="photo-for-upload" type="file" name="photo" accept="image/*"></input>
+                </div>
+              </label>
+            </div>
+
+
+            
+            <div id="new-recipe-delete-photo-button-container" class="new-recipe-photo-button-containers">
+              <button type="button" class="reg-button" onclick="photoDelete()">Delete Photo</button>
+            </div>
+          </div>
+          <p>If you don't upload a photo we'll generate an image using AI!</p>    
+              
+        </div>
       
+        <br>
+        <br>
+        <br>
       
-      <table id="recipe-photo" class="recipe-info">
-        <tr>
-          <th>Photo: </th>
-            <td><input type="file" name="photo" accept="image/*"><br>
-              <br>
-              <st>If you don't upload a photo we will generate an image using AI!</st><br>
-            </td>
-        </tr>
-      </table>
+    
+      <button type="submit" class="reg-button">Save Recipe</button>
+    </form>
+    
     <br>
-    <button type="submit" class="reg-button">Save Recipe Info</button>
-</form>
-<br>
-<br>
+  </div>
+</div>
 
 
 <script>
-    function addIngredientField() {
-        let newIngredientInput = document.createElement('input');
-        newIngredientInput.setAttribute('type', 'text');
-        newIngredientInput.setAttribute('name', 'ingredients');
-        document.getElementById('recipe-ingredients').appendChild(newIngredientInput);
+  function addIngredientField() {
+    const ingredientContainer = document.getElementById('new-recipe-ingredients')
+
+    ingredient = document.createElement('div');
+    ingredient.className = 'new-recipe-ingredient-container';
+
+    // Create ul and append to main container
+    let ul = document.createElement('ul');
+    ingredient.appendChild(ul);
+
+    // Create li, input and append to ul
+    let li = document.createElement('li')
+    let input = document.createElement('input')
+    input.setAttribute('name', 'ingredient')
+    input.setAttribute('type', 'text')
+    input.className = 'ingredient input'
+    li.appendChild(input)
+    ul.appendChild(li)
+
+    // Create ingredient-up div and append to main container
+    let ingredientUp = document.createElement('div')
+    ingredientUp.className = 'ingredient-up'
+    let aUp = document.createElement('a')
+    aUp.setAttribute('type', 'button')
+    aUp.className = 'ingredient-up'
+    aUp.onclick = function() {
+      moveIngredientUp(input.value);
+    }
+    let imgUp = document.createElement('img')
+    imgUp.setAttribute('src', '/public/icons/arrow_upward.png')
+    aUp.appendChild(imgUp)
+    ingredientUp.appendChild(aUp)
+    ingredient.appendChild(ingredientUp)
+
+    // Create ingredient-down div and append to main container
+    let ingredientDown = document.createElement('div')
+    ingredientDown.className = 'ingredient-down'
+    let aDown = document.createElement('a')
+    aDown.setAttribute('type', 'button')
+    aDown.className = 'ingredient-down'
+    aDown.onclick = function() {
+      moveIngredientDown(input.value);
+    }
+    let imgDown = document.createElement('img')
+    imgDown.setAttribute('src', '/public/icons/arrow_downward.png')
+    aDown.appendChild(imgDown)
+    ingredientDown.appendChild(aDown)
+    ingredient.appendChild(ingredientDown)
+
+    // Create ingredient-delete div and append to main container
+    let ingredientDelete = document.createElement('div')
+    ingredientDelete.className = 'ingredient-delete'
+    let aDelete = document.createElement('a')
+    aDelete.setAttribute('type', 'button')
+    aDelete.className = 'ingredient-delete'
+    aDelete.onclick = function() {
+      deleteIngredient(input.value)
+    }
+    let imgDelete = document.createElement('img')
+    imgDelete.setAttribute('src', '/public/icons/delete.png')
+    aDelete.appendChild(imgDelete)
+    ingredientDown.appendChild(aDelete)
+    ingredient.appendChild(ingredientDown)
+
+    // Finally append the main container to the ingredientContainer
+    ingredientContainer.appendChild(ingredient)
+
+  }
+
+
+  function addInstructionField() {
+    const instructionContainer = document.getElementById('new-recipe-instructions')
+
+    instruction = document.createElement('div');
+    instruction.className = 'new-recipe-instruction-container';
+
+    // Create ul and append to main container
+    let ul = document.createElement('ul');
+    instruction.appendChild(ul);
+
+    // Create li, input and append to ul
+    let li = document.createElement('li')
+    let input = document.createElement('input')
+    input.setAttribute('name', 'instruction')
+    input.setAttribute('type', 'text')
+    input.className = 'instruction input'
+    li.appendChild(input)
+    ul.appendChild(li)
+
+    // Create instruction-up div and append to main container
+    let instructionUp = document.createElement('div')
+    instructionUp.className = 'instruction-up'
+    let aUp = document.createElement('a')
+    aUp.setAttribute('type', 'button')
+    aUp.className = 'instruction-up'
+    aUp.onclick = function() {
+      moveInstructionUp(input.value);
+    }
+    let imgUp = document.createElement('img')
+    imgUp.setAttribute('src', '/public/icons/arrow_upward.png')
+    aUp.appendChild(imgUp)
+    instructionUp.appendChild(aUp)
+    instruction.appendChild(instructionUp)
+
+    // Create instruction-down div and append to main container
+    let instructionDown = document.createElement('div')
+    instructionDown.className = 'instruction-down'
+    let aDown = document.createElement('a')
+    aDown.setAttribute('type', 'button')
+    aDown.className = 'instruction-down'
+    aDown.onclick = function() {
+      moveInstructionDown(input.value);
+    }
+    let imgDown = document.createElement('img')
+    imgDown.setAttribute('src', '/public/icons/arrow_downward.png')
+    aDown.appendChild(imgDown)
+    instructionDown.appendChild(aDown)
+    instruction.appendChild(instructionDown)
+
+    // Create instruction-delete div and append to main container
+    let instructionDelete = document.createElement('div')
+    instructionDelete.className = 'instruction-delete'
+    let aDelete = document.createElement('a')
+    aDelete.setAttribute('type', 'button')
+    aDelete.className = 'instruction-delete'
+    aDelete.onclick = function() {
+      deleteInstruction(input.value)
+    }
+    let imgDelete = document.createElement('img')
+    imgDelete.setAttribute('src', '/public/icons/delete.png')
+    aDelete.appendChild(imgDelete)
+    instructionDown.appendChild(aDelete)
+    instruction.appendChild(instructionDown)
+
+    // Finally append the main container to the instructionContainer
+    instructionContainer.appendChild(instruction)
+
+  }
+
+  function moveIngredientUp(ingredientValue) {
+    const ingredientsHTML = document.getElementsByClassName('ingredient')
+    
+    let ingredients = []
+    
+    for (let i = 0; i < ingredientsHTML.length; i++) {
+      const ingredient = ingredientsHTML[i];
+      ingredients.push(ingredient.value)
     }
     
-    function addInstructionField() {
-        let newInstructionInput = document.createElement('input');
-        newInstructionInput.setAttribute('type', 'text');
-        newInstructionInput.setAttribute('name', 'instructions');
-        document.getElementById('recipe-instructions').appendChild(newInstructionInput);
+    const arrayIndexToMoveUp = ingredients.indexOf(ingredientValue)
+    if(arrayIndexToMoveUp === 0) return
+    
+    const CSSindexToMoveUp = (arrayIndexToMoveUp + 1)
+    const CSSindexToMoveBelow = (CSSindexToMoveUp - 1)
+
+    const elementToMoveUp = document.querySelector(`#new-recipe-ingredients .new-recipe-ingredient-container:nth-child(${CSSindexToMoveUp})`)
+    const elementToMoveBelow = document.querySelector(`#new-recipe-ingredients .new-recipe-ingredient-container:nth-child(${CSSindexToMoveBelow})`)
+    
+    const recipeIngredientsContainer = document.getElementById('new-recipe-ingredients')
+    recipeIngredientsContainer.insertBefore(elementToMoveUp, elementToMoveBelow);
+}
+
+  function moveIngredientDown(ingredientValue) {
+    const ingredientsHTML = document.getElementsByClassName('ingredient')
+
+    let ingredients = []
+
+    for (let i = 0; i < ingredientsHTML.length; i++) {
+      const ingredient = ingredientsHTML[i];
+      ingredients.push(ingredient.value)
     }
+    
+    const arrayIndexToMoveDown = ingredients.indexOf(ingredientValue)
+    
+    const CSSindexToMoveDown = (arrayIndexToMoveDown + 1)
+    const CSSindexToMoveAbove = (CSSindexToMoveDown + 1)
+    if(CSSindexToMoveDown === ingredients.length) return
+
+    const elementToMoveDown = document.querySelector(`#new-recipe-ingredients .new-recipe-ingredient-container:nth-child(${CSSindexToMoveDown})`)
+    const elementToMoveAbove = document.querySelector(`#new-recipe-ingredients .new-recipe-ingredient-container:nth-child(${CSSindexToMoveAbove})`)
+    
+    const recipeIngredientsContainer = document.getElementById('new-recipe-ingredients')
+    recipeIngredientsContainer.insertBefore(elementToMoveAbove, elementToMoveDown);
+  }
+  
+  function deleteIngredient(ingredientValue) {
+    const ingredientsHTML = document.getElementsByClassName('ingredient')
+
+    let ingredients = []
+
+    for (let i = 0; i < ingredientsHTML.length; i++) {
+      const ingredient = ingredientsHTML[i];
+      ingredients.push(ingredient.value)
+    }
+    
+    const arrayIndexToDelete = ingredients.indexOf(ingredientValue)    
+    const CSSindexToDelete = (arrayIndexToDelete + 1)
+    console.log("CSSindexToDelete", CSSindexToDelete)
+    
+    const elementToDelete = document.querySelector(`#new-recipe-ingredients .new-recipe-ingredient-container:nth-child(${CSSindexToDelete})`)
+    console.log("elementToDelete", elementToDelete)
+    
+    const recipeIngredientsContainer = document.getElementById('new-recipe-ingredients')
+    recipeIngredientsContainer.removeChild(elementToDelete);
+    
+  }
+
+  function moveInstructionUp(instructionValue) {
+    const instructionsHTML = document.getElementsByClassName('instruction')
+
+    let instructions = []
+
+    for (let i = 0; i < instructionsHTML.length; i++) {
+      const instruction = instructionsHTML[i];
+      instructions.push(instruction.value)
+    }
+    
+    const arrayIndexToMoveUp = instructions.indexOf(instructionValue)
+    if(arrayIndexToMoveUp === 0) return
+    
+    const CSSindexToMoveUp = (arrayIndexToMoveUp + 1)
+    const CSSindexToMoveBelow = (CSSindexToMoveUp - 1)
+
+    const elementToMoveUp = document.querySelector(`#new-recipe-instructions .new-recipe-instruction-container:nth-child(${CSSindexToMoveUp})`)
+    const elementToMoveBelow = document.querySelector(`#new-recipe-instructions .new-recipe-instruction-container:nth-child(${CSSindexToMoveBelow})`)
+    
+    const recipeInstructionsContainer = document.getElementById('new-recipe-instructions')
+    recipeInstructionsContainer.insertBefore(elementToMoveUp, elementToMoveBelow);
+}
+
+  function moveInstructionDown(instructionValue) {
+    const instructionsHTML = document.getElementsByClassName('instruction')
+
+    let instructions = []
+
+    for (let i = 0; i < instructionsHTML.length; i++) {
+      const instruction = instructionsHTML[i];
+      instructions.push(instruction.value)
+    }
+    
+    const arrayIndexToMoveDown = instructions.indexOf(instructionValue)
+    
+    const CSSindexToMoveDown = (arrayIndexToMoveDown + 1)
+    const CSSindexToMoveAbove = (CSSindexToMoveDown + 1)
+
+    if(CSSindexToMoveDown === instructions.length) return
+
+    const elementToMoveDown = document.querySelector(`#new-recipe-instructions .new-recipe-instruction-container:nth-child(${CSSindexToMoveDown})`)
+    const elementToMoveAbove = document.querySelector(`#new-recipe-instructions .new-recipe-instruction-container:nth-child(${CSSindexToMoveAbove})`)
+    
+    const recipeInstructionsContainer = document.getElementById('new-recipe-instructions')
+    recipeInstructionsContainer.insertBefore(elementToMoveAbove, elementToMoveDown);
+}
+
+function deleteInstruction(instructionValue) {
+    const instructionsHTML = document.getElementsByClassName('instruction')
+
+    let instructions = []
+
+    for (let i = 0; i < instructionsHTML.length; i++) {
+      const instruction = instructionsHTML[i];
+      instructions.push(instruction.value)
+    }
+    
+    const arrayIndexToDelete = instructions.indexOf(instructionValue)    
+    const CSSindexToDelete = (arrayIndexToDelete + 1)
+    console.log("CSSindexToDelete", CSSindexToDelete)
+    
+    const elementToDelete = document.querySelector(`#new-recipe-instructions .new-recipe-instruction-container:nth-child(${CSSindexToDelete})`)
+    console.log("elementToDelete", elementToDelete)
+    
+    const recipeInstructionsContainer = document.getElementById('new-recipe-instructions')
+    recipeInstructionsContainer.removeChild(elementToDelete);
+    
+}
+
+// function photoUpload() {
+  
+  const photoForUpload = document.getElementById('photo-for-upload')
+  
+  const previewImageLocation = document.getElementById('new-recipe-image-content')
+  
+  const previewImage = document.createElement('img')
+  
+  photoForUpload.addEventListener('change', function(event) {
+    const currentPhotoElement = document.getElementById('new-recipe-image')
+    const placeholderPhotoElement = document.getElementById('no-image-placeholder')
+
+    if(currentPhotoElement) {
+      currentPhotoElement.remove()
+    
+    } else if(placeholderPhotoElement) {
+      placeholderPhotoElement.remove()
+    }
+    
+    
+    var file = event.target.files[0]
+
+    if (file) {
+      let reader = new FileReader()
+
+      reader.onload = function(e) {
+        previewImage.id = 'new-recipe-uploaded-image'
+        previewImage.src = e.target.result;
+        previewImage.style.display = 'block';
+      };
+
+      reader.readAsDataURL(file);
+      previewImageLocation.appendChild(previewImage)
+
+    } else {
+      previewImage.src = '';
+      previewImage.style.display = 'none';
+    }
+
+})
+
+
+
+// }
+
+function photoDelete() {
+  // const currentPhotoElement = document.getElementById('new-recipe-image').remove()
+  
+  const currentPhotoElement = document.getElementById('new-recipe-image')
+  const uploadedPhotoElement = document.getElementById('new-recipe-uploaded-image')
+
+  if(currentPhotoElement) {
+    currentPhotoElement.remove()
+
+  } else if(uploadedPhotoElement) {
+    uploadedPhotoElement.remove()
+  }
+
+  const photoDiv = document.getElementById('new-recipe-image-content')
+  
+  const noImagePlaceholder = document.createElement('div')
+  noImagePlaceholder.id = 'no-image-placeholder'
+  noImagePlaceholder.classList.add('new-recipe-image')
+  photoDiv.appendChild(noImagePlaceholder)
+  
+  const noImagePlaceholderDiv = document.getElementById('no-image-placeholder')
+  
+  const noImagePlaceholderOverlayH3 = document.createElement('h3')
+  noImagePlaceholderOverlayH3.id = 'no-image-placeholder-overlay-h3'
+  noImagePlaceholderOverlayH3.textContent = "No Photo Selected"
+  noImagePlaceholderDiv.appendChild(noImagePlaceholderOverlayH3)
+
+  const noImagePlaceholderOverlayP = document.createElement('p')
+  noImagePlaceholderOverlayP.id = 'no-image-placeholder-overlay-p'
+  noImagePlaceholderOverlayP.textContent = "We will generate something beautiful using the magic of AI!"
+  noImagePlaceholderDiv.appendChild(noImagePlaceholderOverlayP)
+
+
+
+}
+
+
+
+  $(document).ready(function() {
+    $('.expanding-text-input').on('input', function() {
+        this.style.height = 'auto'
+        this.style.height = (this.scrollHeight) + 'px';
+    })
+})
 </script>
 
 

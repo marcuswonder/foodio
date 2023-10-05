@@ -1,10 +1,9 @@
 <%- include('../partials/header') %>
-<br>
-<br>
 
 <div id="update-recipe">
   <div id="update-recipe-container">
-    <form action="/recipes/<%= recipe._id %>/update/?_method=PUT" method="POST" id="recipe-top-info"  enctype="multipart/form-data">
+    <h1>Update Recipe</h1>
+    <form action="/recipes/<%= recipe._id %>/update/?_method=PUT" method="POST" enctype="multipart/form-data">
     
       <div id="update-recipe-header-container">
         
