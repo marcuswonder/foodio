@@ -2,26 +2,26 @@
 <br>
 <br>
 
-<div id="recipe-edit">
-  <div id="recipe-edit-container">
+<div id="recipe-update">
+  <div id="recipe-update-container">
     <form action="/recipes/<%= recipe._id %>/update/?_method=PUT" method="POST" id="recipe-top-info"  enctype="multipart/form-data">
     
-      <div id="recipe-edit-header-container">
+      <div id="recipe-update-header-container">
         
-        <div id="recipe-edit-name-container" class="recipe-edit-header-input-container">
-          <div class="recipe-edit-title">
+        <div id="recipe-update-name-container" class="recipe-update-header-input-container">
+          <div class="recipe-update-title">
             <h3>Title</h3>
           </div>
-          <div class="recipe-edit-content">
+          <div class="recipe-update-content">
             <textarea name="name" type="text" class="expanding-text-input" rows="1" autocomplete="off"><%= recipe.name %></textarea>
           </div>
         </div>
 
-        <div id="recipe-edit-description-container" class="recipe-edit-header-input-container">
-          <div class="recipe-edit-title">
+        <div id="recipe-update-description-container" class="recipe-update-header-input-container">
+          <div class="recipe-update-title">
             <h3>Description</h3>
           </div>
-          <div class="recipe-edit-content">
+          <div class="recipe-update-content">
             <textarea name="description" type="text" class="expanding-text-input" rows="1" autocomplete="off"><%= recipe.description %></textarea>
           </div>
         </div>
@@ -30,13 +30,13 @@
       <br>
       <br>
 
-      <div id="recipe-edit-info-container">
-        <div id="recipe-edit-category-servings-container" class="recipe-edit-info-container">
-          <div id="recipe-edit-category-container" class="recipe-edit-input-container">
-            <div class="recipe-edit-title">
+      <div id="recipe-update-info-container">
+        <div id="recipe-update-category-servings-container" class="recipe-update-info-container">
+          <div id="recipe-update-category-container" class="recipe-update-input-container">
+            <div class="recipe-update-title">
               <h3>Category</h3>
             </div>
-              <div class="recipe-edit-content">
+              <div class="recipe-update-content">
                 <select name="category" class="input">
                   <option value="<%= recipe.category %>"><%= recipe.category %></option>
                   <option value="Snack">Snack</option>
@@ -48,32 +48,32 @@
               </div>
           </div>
         
-          <div id="recipe-edit-cookTime-container" class="recipe-edit-input-container">
-            <div class="recipe-edit-title">
+          <div id="recipe-update-cookTime-container" class="recipe-update-input-container">
+            <div class="recipe-update-title">
               <h3>Servings</h3>
             </div>
-            <div class="recipe-edit-content">
+            <div class="recipe-update-content">
               <input name="servings" type="number"  class="short-input" autocomplete="off" value="<%= recipe.servings %>"></input>
             </div>
           </div>
         </div>
 
-        <div id="recipe-edit-timings-container" class="recipe-edit-info-container">
-          <div id="recipe-edit-prepTime-container" class="recipe-edit-input-container">
-            <div class="recipe-edit-title">
+        <div id="recipe-update-timings-container" class="recipe-update-info-container">
+          <div id="recipe-update-prepTime-container" class="recipe-update-input-container">
+            <div class="recipe-update-title">
               <h3>Prep Time</h3>
             </div>
-            <div class="recipe-edit-content">
+            <div class="recipe-update-content">
               <input name="prepTime" type="number"  class="short-input" autocomplete="off" value="<%= recipe.prepTime %>"></input>
             </div>
             <p>(mins)</p>
           </div>
 
-          <div id="recipe-edit-cookTime-container" class="recipe-edit-input-container">
-            <div class="recipe-edit-title">
+          <div id="recipe-update-cookTime-container" class="recipe-update-input-container">
+            <div class="recipe-update-title">
               <h3>Cook Time</h3>
             </div>
-            <div class="recipe-edit-content">
+            <div class="recipe-update-content">
               <input name="cookTime" type="number"  class="short-input" autocomplete="off" value="<%= recipe.cookTime %>"></input>
             </div>
             <p>(mins)</p>
@@ -82,16 +82,16 @@
       </div>
 
 
-      <div id="recipe-edit-ingredients-instructions-container">
+      <div id="recipe-update-ingredients-instructions-container">
 
-        <div id="recipe-edit-ingredients-container" class="recipe-edit-ingredients-instructions-container">
-          <div class="recipe-edit-title">
+        <div id="recipe-update-ingredients-container" class="recipe-update-ingredients-instructions-container">
+          <div class="recipe-update-title">
             <h3>Ingredients</h3>
           </div>
-            <div id="recipe-edit-ingredients">
+            <div id="recipe-update-ingredients">
               <% if(recipe.ingredients.length > 0) { %>
                 <% recipe.ingredients.forEach(function(ingredient) { %>
-                  <div class="recipe-edit-ingredient-container">
+                  <div class="recipe-update-ingredient-container">
                     <ul>
                       <li>
                         <input name="ingredient" type="text" class="ingredient input" value="<%= ingredient %>"></input>
@@ -110,20 +110,20 @@
                 <% }) %> 
               <% } %> 
             </div>
-          <div id="recipe-edit-ingredient-add" class="recipe-edit-add-buttons">
+          <div id="recipe-update-ingredient-add" class="recipe-update-add-buttons">
             <button type="button" class="reg-button" onclick="addIngredientField()">Add Ingredient</button>
           </div>
         </div>
 
 
-          <div id="recipe-edit-instructions-container" class="recipe-edit-ingredients-instructions-container">
-            <div class="recipe-edit-title">
+          <div id="recipe-update-instructions-container" class="recipe-update-ingredients-instructions-container">
+            <div class="recipe-update-title">
               <h3>Instructions</h3>
             </div>
-            <div id="recipe-edit-instructions">
+            <div id="recipe-update-instructions">
             <% if(recipe.instructions.length > 0) { %>
               <% recipe.instructions.forEach(function(instruction) { %>
-                <div class="recipe-edit-instruction-container">
+                <div class="recipe-update-instruction-container">
                   <ul>
                     <li>
                       <input name="instruction" type="text" class="instruction input" value="<%= instruction %>"></input>
@@ -142,27 +142,27 @@
               <% }) %> 
             <% } %> 
           </div>
-          <div id="recipe-edit-instruction-add" class="recipe-edit-add-buttons">
+          <div id="recipe-update-instruction-add" class="recipe-update-add-buttons">
             <button type="button" class="reg-button" onclick="addInstructionField()">Add Instruction</button>
           </div>
         </div>
       </div>
 
 
-      <div id="recipe-edit-footer-container">
+      <div id="recipe-update-footer-container">
         
-        <div id="recipe-edit-photo-container" class="recipe-edit-header-input-container">
-          <div class="recipe-edit-title">
+        <div id="recipe-update-photo-container" class="recipe-update-header-input-container">
+          <div class="recipe-update-title">
             <h3>Photo</h3>
           </div>
-          <div id="recipe-edit-image-content">
-            <img id="recipe-edit-image" src="<%= recipe.photo %>"></img>
+          <div id="recipe-update-image-content">
+            <img id="recipe-update-image" src="<%= recipe.photo %>"></img>
           </div>
-          <div id="recipe-edit-image-buttons">
+          <div id="recipe-update-image-buttons">
 
 
 
-            <div id="recipe-edit-upload-photo-button-container" class="recipe-edit-photo-button-containers">
+            <div id="recipe-update-upload-photo-button-container" class="recipe-update-photo-button-containers">
               <label for="photo-for-upload" class="custom-file-upload">
                 <div class="button-container">
                   <span class="reg-button">Choose a File</span>
@@ -173,7 +173,7 @@
 
 
             
-            <div id="recipe-edit-delete-photo-button-container" class="recipe-edit-photo-button-containers">
+            <div id="recipe-update-delete-photo-button-container" class="recipe-update-photo-button-containers">
               <button type="button" class="reg-button" onclick="photoDelete()">Delete Photo</button>
             </div>
           </div>
@@ -196,10 +196,10 @@
 
 <script>
   function addIngredientField() {
-    const ingredientContainer = document.getElementById('recipe-edit-ingredients')
+    const ingredientContainer = document.getElementById('recipe-update-ingredients')
 
     ingredient = document.createElement('div');
-    ingredient.className = 'recipe-edit-ingredient-container';
+    ingredient.className = 'recipe-update-ingredient-container';
 
     // Create ul and append to main container
     let ul = document.createElement('ul');
@@ -266,10 +266,10 @@
 
 
   function addInstructionField() {
-    const instructionContainer = document.getElementById('recipe-edit-instructions')
+    const instructionContainer = document.getElementById('recipe-update-instructions')
 
     instruction = document.createElement('div');
-    instruction.className = 'recipe-edit-instruction-container';
+    instruction.className = 'recipe-update-instruction-container';
 
     // Create ul and append to main container
     let ul = document.createElement('ul');
@@ -350,10 +350,10 @@
     const CSSindexToMoveUp = (arrayIndexToMoveUp + 1)
     const CSSindexToMoveBelow = (CSSindexToMoveUp - 1)
 
-    const elementToMoveUp = document.querySelector(`#recipe-edit-ingredients .recipe-edit-ingredient-container:nth-child(${CSSindexToMoveUp})`)
-    const elementToMoveBelow = document.querySelector(`#recipe-edit-ingredients .recipe-edit-ingredient-container:nth-child(${CSSindexToMoveBelow})`)
+    const elementToMoveUp = document.querySelector(`#recipe-update-ingredients .recipe-update-ingredient-container:nth-child(${CSSindexToMoveUp})`)
+    const elementToMoveBelow = document.querySelector(`#recipe-update-ingredients .recipe-update-ingredient-container:nth-child(${CSSindexToMoveBelow})`)
     
-    const recipeIngredientsContainer = document.getElementById('recipe-edit-ingredients')
+    const recipeIngredientsContainer = document.getElementById('recipe-update-ingredients')
     recipeIngredientsContainer.insertBefore(elementToMoveUp, elementToMoveBelow);
 }
 
@@ -373,10 +373,10 @@
     const CSSindexToMoveAbove = (CSSindexToMoveDown + 1)
     if(CSSindexToMoveDown === ingredients.length) return
 
-    const elementToMoveDown = document.querySelector(`#recipe-edit-ingredients .recipe-edit-ingredient-container:nth-child(${CSSindexToMoveDown})`)
-    const elementToMoveAbove = document.querySelector(`#recipe-edit-ingredients .recipe-edit-ingredient-container:nth-child(${CSSindexToMoveAbove})`)
+    const elementToMoveDown = document.querySelector(`#recipe-update-ingredients .recipe-update-ingredient-container:nth-child(${CSSindexToMoveDown})`)
+    const elementToMoveAbove = document.querySelector(`#recipe-update-ingredients .recipe-update-ingredient-container:nth-child(${CSSindexToMoveAbove})`)
     
-    const recipeIngredientsContainer = document.getElementById('recipe-edit-ingredients')
+    const recipeIngredientsContainer = document.getElementById('recipe-update-ingredients')
     recipeIngredientsContainer.insertBefore(elementToMoveAbove, elementToMoveDown);
   }
   
@@ -394,10 +394,10 @@
     const CSSindexToDelete = (arrayIndexToDelete + 1)
     console.log("CSSindexToDelete", CSSindexToDelete)
     
-    const elementToDelete = document.querySelector(`#recipe-edit-ingredients .recipe-edit-ingredient-container:nth-child(${CSSindexToDelete})`)
+    const elementToDelete = document.querySelector(`#recipe-update-ingredients .recipe-update-ingredient-container:nth-child(${CSSindexToDelete})`)
     console.log("elementToDelete", elementToDelete)
     
-    const recipeIngredientsContainer = document.getElementById('recipe-edit-ingredients')
+    const recipeIngredientsContainer = document.getElementById('recipe-update-ingredients')
     recipeIngredientsContainer.removeChild(elementToDelete);
     
   }
@@ -418,10 +418,10 @@
     const CSSindexToMoveUp = (arrayIndexToMoveUp + 1)
     const CSSindexToMoveBelow = (CSSindexToMoveUp - 1)
 
-    const elementToMoveUp = document.querySelector(`#recipe-edit-instructions .recipe-edit-instruction-container:nth-child(${CSSindexToMoveUp})`)
-    const elementToMoveBelow = document.querySelector(`#recipe-edit-instructions .recipe-edit-instruction-container:nth-child(${CSSindexToMoveBelow})`)
+    const elementToMoveUp = document.querySelector(`#recipe-update-instructions .recipe-update-instruction-container:nth-child(${CSSindexToMoveUp})`)
+    const elementToMoveBelow = document.querySelector(`#recipe-update-instructions .recipe-update-instruction-container:nth-child(${CSSindexToMoveBelow})`)
     
-    const recipeInstructionsContainer = document.getElementById('recipe-edit-instructions')
+    const recipeInstructionsContainer = document.getElementById('recipe-update-instructions')
     recipeInstructionsContainer.insertBefore(elementToMoveUp, elementToMoveBelow);
 }
 
@@ -442,10 +442,10 @@
 
     if(CSSindexToMoveDown === instructions.length) return
 
-    const elementToMoveDown = document.querySelector(`#recipe-edit-instructions .recipe-edit-instruction-container:nth-child(${CSSindexToMoveDown})`)
-    const elementToMoveAbove = document.querySelector(`#recipe-edit-instructions .recipe-edit-instruction-container:nth-child(${CSSindexToMoveAbove})`)
+    const elementToMoveDown = document.querySelector(`#recipe-update-instructions .recipe-update-instruction-container:nth-child(${CSSindexToMoveDown})`)
+    const elementToMoveAbove = document.querySelector(`#recipe-update-instructions .recipe-update-instruction-container:nth-child(${CSSindexToMoveAbove})`)
     
-    const recipeInstructionsContainer = document.getElementById('recipe-edit-instructions')
+    const recipeInstructionsContainer = document.getElementById('recipe-update-instructions')
     recipeInstructionsContainer.insertBefore(elementToMoveAbove, elementToMoveDown);
 }
 
@@ -463,10 +463,10 @@ function deleteInstruction(instructionValue) {
     const CSSindexToDelete = (arrayIndexToDelete + 1)
     console.log("CSSindexToDelete", CSSindexToDelete)
     
-    const elementToDelete = document.querySelector(`#recipe-edit-instructions .recipe-edit-instruction-container:nth-child(${CSSindexToDelete})`)
+    const elementToDelete = document.querySelector(`#recipe-update-instructions .recipe-update-instruction-container:nth-child(${CSSindexToDelete})`)
     console.log("elementToDelete", elementToDelete)
     
-    const recipeInstructionsContainer = document.getElementById('recipe-edit-instructions')
+    const recipeInstructionsContainer = document.getElementById('recipe-update-instructions')
     recipeInstructionsContainer.removeChild(elementToDelete);
     
 }
@@ -475,12 +475,12 @@ function deleteInstruction(instructionValue) {
   
   const photoForUpload = document.getElementById('photo-for-upload')
   
-  const previewImageLocation = document.getElementById('recipe-edit-image-content')
+  const previewImageLocation = document.getElementById('recipe-update-image-content')
   
   const previewImage = document.createElement('img')
   
   photoForUpload.addEventListener('change', function(event) {
-    const currentPhotoElement = document.getElementById('recipe-edit-image')
+    const currentPhotoElement = document.getElementById('recipe-update-image')
     const placeholderPhotoElement = document.getElementById('no-image-placeholder')
 
     if(currentPhotoElement) {
@@ -497,7 +497,7 @@ function deleteInstruction(instructionValue) {
       let reader = new FileReader()
 
       reader.onload = function(e) {
-        previewImage.id = 'recipe-edit-uploaded-image'
+        previewImage.id = 'recipe-update-uploaded-image'
         previewImage.src = e.target.result;
         previewImage.style.display = 'block';
       };
@@ -517,10 +517,10 @@ function deleteInstruction(instructionValue) {
 // }
 
 function photoDelete() {
-  // const currentPhotoElement = document.getElementById('recipe-edit-image').remove()
+  // const currentPhotoElement = document.getElementById('recipe-update-image').remove()
   
-  const currentPhotoElement = document.getElementById('recipe-edit-image')
-  const uploadedPhotoElement = document.getElementById('recipe-edit-uploaded-image')
+  const currentPhotoElement = document.getElementById('recipe-update-image')
+  const uploadedPhotoElement = document.getElementById('recipe-update-uploaded-image')
 
   if(currentPhotoElement) {
     currentPhotoElement.remove()
@@ -529,11 +529,11 @@ function photoDelete() {
     uploadedPhotoElement.remove()
   }
 
-  const photoDiv = document.getElementById('recipe-edit-image-content')
+  const photoDiv = document.getElementById('recipe-update-image-content')
   
   const noImagePlaceholder = document.createElement('div')
   noImagePlaceholder.id = 'no-image-placeholder'
-  noImagePlaceholder.classList.add('recipe-edit-image')
+  noImagePlaceholder.classList.add('recipe-update-image')
   photoDiv.appendChild(noImagePlaceholder)
   
   const noImagePlaceholderDiv = document.getElementById('no-image-placeholder')

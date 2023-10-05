@@ -247,7 +247,7 @@ async function addToCollection(req, res) {
 
 async function editRecipe(req, res) {
   const recipe = await Recipe.findById(req.params.id);
-  res.render('recipes/update', { recipe, stylesheet: '/public/stylesheets/recipeEdit.css' });
+  res.render('recipes/update', { recipe, stylesheet: '/public/stylesheets/recipeUpdate.css' });
 }
 
 async function updateRecipe(req, res) {
