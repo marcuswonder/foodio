@@ -251,6 +251,7 @@ async function editRecipe(req, res) {
 }
 
 async function updateRecipe(req, res) {
+  console.log("Recipe Controller: updateRecipe req.body", req.body)
   const recipe = await Recipe.findById(req.params.id);
   recipe.name = req.body.name;
   recipe.description = req.body.description;
@@ -258,6 +259,8 @@ async function updateRecipe(req, res) {
   recipe.cookTime = req.body.cookTime;
   recipe.category = req.body.category;
   recipe.servings = req.body.servings;
+  recipe.ingredients = req.body.ingredient;
+  recipe.instructions = req.body.instruction;
   await recipe.save();
   res.redirect(`/recipes/${req.params.id}`);
 }
