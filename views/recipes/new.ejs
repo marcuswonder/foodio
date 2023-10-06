@@ -268,7 +268,6 @@
     aUp.setAttribute('type', 'button')
     aUp.className = 'ingredient-up'
     aUp.setAttribute('onclick', 'moveIngredientUp(this)')
-
     let imgUp = document.createElement('img')
     imgUp.setAttribute('src', '/public/icons/arrow_upward.png')
     aUp.appendChild(imgUp)
@@ -333,9 +332,6 @@
     let aUp = document.createElement('a')
     aUp.setAttribute('type', 'button')
     aUp.className = 'instruction-up'
-    // aUp.onclick = function() {
-    //   moveInstructionUp();
-    // }
     aUp.setAttribute('onclick', 'moveInstructionUp(this)')
     let imgUp = document.createElement('img')
     imgUp.setAttribute('src', '/public/icons/arrow_upward.png')
@@ -349,9 +345,6 @@
     let aDown = document.createElement('a')
     aDown.setAttribute('type', 'button')
     aDown.className = 'instruction-down'
-    // aDown.onclick = function() {
-    //   moveInstructionDown();
-    // }
     aDown.setAttribute('onclick', 'moveInstructionDown(this)')
     let imgDown = document.createElement('img')
     imgDown.setAttribute('src', '/public/icons/arrow_downward.png')
@@ -366,9 +359,6 @@
     let aDelete = document.createElement('a')
     aDelete.setAttribute('type', 'button')
     aDelete.className = 'instruction-delete'
-    // aDelete.onclick = function() {
-    //   deleteInstruction()
-    // }
     aDelete.setAttribute('onclick', 'deleteInstruction(this)')
     let imgDelete = document.createElement('img')
     imgDelete.setAttribute('src', '/public/icons/delete.png')
@@ -377,7 +367,7 @@
     instructionDelete.appendChild(aDelete)
     instruction.appendChild(instructionDelete)
 
-    // Finally append the main container to the instructionContainer
+    // Append the main container to the instructionContainer
     instructionContainer.appendChild(instruction)
 
   }
