@@ -39,11 +39,12 @@
     flex-direction: column;
     flex-grow: 1;
     width: 50%;
+    margin: 10px;
 }
 
 .new-recipe-title,
 .new-recipe-content {
-    width: 100%
+    width: 100%;
 }
 
 .new-recipe-title > h3 {
