@@ -84,11 +84,41 @@
                 </p>  
               </div>
             <% } %> 
-
+          </div>
+        </div>
+        
+        <!-- New Actions Div -->
+        <div id="recipe-show-header-actions-container">
+          <div class="recipe-show-header-actions-sub-container">
+            <a type="button" id="recipe-show-actions-favourite" class="recipe-show-header-actions-sub-container-content" onclick="changeRecipeFavouriteStatus()"><span class="material-symbols-outlined">favorite</span></a>
+            <a type="button" id="recipe-show-actions-copy" class="recipe-show-header-actions-sub-container-content" onclick="copyRecipe()"><span class="material-symbols-outlined">content_copy</span></a>
+            <a type="button" id="recipe-show-header-actions-share" class="recipe-show-header-actions-sub-container-content" onclick="shareRecipe()"><span class="material-symbols-outlined">share</span></a>            
+            <a type="button" id="recipe-show-header-actions-print" class="recipe-show-header-actions-sub-container-content" onclick="printRecipe()"><span class="material-symbols-outlined">print</span></a>
+            <% if (!user) { %>
+              <div id="recipe-show-header-actions-collection" class="recipe-show-header-actions-sub-container-content">
+                <p>Log in to add recipes to your collections</p>
+              </div>
+          
+            <% } else { %>
+              <div id="recipe-show-header-actions-collection" class="recipe-show-header-actions-sub-container-content">
+                <div id="recipe-show-header-actions-collection" class="recipe-show-header-actions-sub-sub-container">
+                  <form id="add-to-collection-button" action="/recipes/<%= recipe._id %>/collections" method="POST">
+                      <select class="input" name="collection_id">
+                        <option disabled selected value> -- Select a Collection -- </option>
+                        <% for(let i = 0; i < collections.length; i++) { %>
+                          <option value="<%= collections[i]._id %>"><%= collections[i].name %></option>
+                        <% } %>
+                      </select>
+                      <button type="submit" id="recipe-show-actions-collection-button" class="reg-button">Add to Collection</button>
+                  </form>
+                </div>
+              </div>
+            <% } %>
           </div>
         </div>
       </div>
     </div>
+
 
     <br>
 
@@ -190,3 +220,22 @@
   </div>
 </div>
 <%- include('../partials/footer') %>
+
+<!-- <script>
+  document.getElementById("add-to-collection-submit").addEventListener("click", function() {
+  // Collect the form data
+  const collectionId = document.querySelector('#recipe-show-add-to-collection-form select[name="collection_id"]').value
+  const recipeId = "<%= recipe._id %>"
+
+  // Create a FormData object to send the data
+  const formData = new FormData();
+  formData.append("collectionId", collectionId);
+  formData.append("recipeId", recipeId);
+
+  // Send the form data to the server via AJAX (e.g., using fetch)
+  fetch(`/recipes/${recipeId}/collections`, {
+    method: "POST",
+    body: formData
+  })
+})
+</script> -->

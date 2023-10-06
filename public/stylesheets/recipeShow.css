@@ -106,6 +106,53 @@
   }
 
 
+  /* Actions */
+#recipe-show-header-actions-container {
+    display: flex;
+    padding:  5% 0 2.5% 2.5%;
+    justify-content: space-between;
+    /* border: 1px black solid; */
+  }
+  
+  .recipe-show-header-actions-sub-container {
+    display: flex;
+    flex-grow: 1;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+  
+  .recipe-show-header-actions-sub-container-content {
+    display: flex;
+    margin: 0 3% 0 0;
+    align-items: center;
+    justify-content: space-around;
+    /* border: 1px solid black; */
+  }
+
+  #recipe-show-actions-favourite,
+  #recipe-show-actions-copy,
+  #recipe-show-header-actions-share,
+  #recipe-show-header-actions-print {
+    flex-grow: 0
+  }
+
+  #recipe-show-header-actions-collection {
+    flex-grow: 1;
+  }
+
+  .recipe-show-header-actions-sub-sub-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+
+
+  #recipe-show-actions-collection-button {
+    margin: 0 0 0 10px;
+  }
+  
+  
+
 
 
 

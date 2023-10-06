@@ -15,7 +15,7 @@ module.exports = {
 async function index(req, res) {
     try {
         const collections = await Collection.find({});
-        res.render('collections/index', { collections });
+        res.render('collections/index', { collections,  stylesheet: '../public/stylesheets/collectionsIndex.css' });
     } catch (err) {
         console.log(err);
     }
@@ -44,7 +44,7 @@ async function show(req, res) {
     try {
         const collection = await Collection.findById(req.params.id).populate("recipes").exec();
         const recipes = await Recipe.find({ _id: { $nin: collection.recipes } });
-        res.render('collections/show', { collection, recipes });
+        res.render('collections/show', { collection, recipes, stylesheet: '../public/stylesheets/collectionShow.css' });
     } catch (err) {
         console.log(err);
     }
