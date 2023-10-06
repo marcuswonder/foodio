@@ -209,6 +209,7 @@
     let input = document.createElement('input')
     input.setAttribute('name', 'ingredient')
     input.setAttribute('type', 'text')
+    input.setAttribute('autocomplete', 'off')
     input.className = 'ingredient input'
     li.appendChild(input)
     ul.appendChild(li)
@@ -255,8 +256,8 @@
     let imgDelete = document.createElement('img')
     imgDelete.setAttribute('src', '/public/icons/delete.png')
     aDelete.appendChild(imgDelete)
-    ingredientDown.appendChild(aDelete)
-    ingredient.appendChild(ingredientDown)
+    ingredientDelete.appendChild(aDelete)
+    ingredient.appendChild(ingredientDelete)
 
     // Finally append the main container to the ingredientContainer
     ingredientContainer.appendChild(ingredient)
@@ -279,6 +280,7 @@
     let input = document.createElement('input')
     input.setAttribute('name', 'instruction')
     input.setAttribute('type', 'text')
+    input.setAttribute('autocomplete', 'off')
     input.className = 'instruction input'
     li.appendChild(input)
     ul.appendChild(li)
@@ -325,8 +327,8 @@
     let imgDelete = document.createElement('img')
     imgDelete.setAttribute('src', '/public/icons/delete.png')
     aDelete.appendChild(imgDelete)
-    instructionDown.appendChild(aDelete)
-    instruction.appendChild(instructionDown)
+    instructionDelete.appendChild(aDelete)
+    instruction.appendChild(instructionDelete)
 
     // Finally append the main container to the instructionContainer
     instructionContainer.appendChild(instruction)

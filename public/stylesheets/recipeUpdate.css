@@ -166,7 +166,6 @@
     object-fit: cover
 }
 
-
 #no-image-placeholder {
     display: flex;
     flex-direction: column;
@@ -182,6 +181,7 @@
     color:#007991;
     padding: 5%;
 }
+
 #update-recipe-image-buttons {
     display: flex;
     flex-direction: row;

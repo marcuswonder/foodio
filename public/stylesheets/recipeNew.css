@@ -151,6 +151,23 @@
     justify-content: center;
 }
 
+#new-image-placeholder {
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+    width: 200px;
+    border: #007991 2px solid;
+    justify-content: center;
+    align-items: center;
+}
+
+#new-image-placeholder-overlay-h3,
+#new-image-placeholder-overlay-p {
+    color:#007991;
+    padding: 5%;
+    text-align: center;
+}
+
 #new-recipe-image-content {
     display: flex;
     justify-content: center;
