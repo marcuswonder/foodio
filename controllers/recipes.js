@@ -122,11 +122,11 @@ async function copyRecipe(req, res) {
 }
 
 function newImportRecipe(req, res) {
-  res.render('recipes/import')
+  res.render('recipes/import', {stylesheet: '../public/stylesheets/recipeImport.css' })
 }
 
 function comingSoon(req, res) {
-  res.render('recipes/coming-soon')
+  res.render('recipes/coming-soon', {stylesheet: '../public/stylesheets/comingSoon.css' })
 }
 
 async function importRecipeWithScrapingTools(req, res) {

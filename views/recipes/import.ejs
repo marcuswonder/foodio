@@ -1,25 +1,32 @@
 <%- include('../partials/header') %>
 
 <title>Import Recipe</title>
-<h1>Use our new AI tool to import a written a recipe from anywhere on the internet</h1>
+<div id="import-recipe-page-container">
+    <h1>Import a recipe from the internet</h1>
+    <p>We support imports from a range of established publishers and bloggers, and we're working on adding more all the time!</p>
 
-<form id="copy-recipe" method="POST" action="/recipes/import">
-    <br>
-    <select name="category" class="input">
-        <st>How would you categorise this recipe?</st><br></td>
-        <option disabled selected value> -- Select a Category -- </option>
-        <option value="Snack">Snack</option>
-        <option value="Starter">Starter</option>
-        <option value="Side">Side</option>
-        <option value="Main Course">Main Course</option>
-        <option value="Desert">Desert</option>
-        <option value="Cocktail">Cocktail</option>
-        </select>
+    <form id="import-recipe-form" method="POST" action="/recipes/import">
         <br>
-    <br>
-    <input type="text" class="med-input" id="import" name="recipeLink">
-    <br>
-    <button type="submit" class="reg-button">Import Recipe</button>
-</form>
+        <div id="import-recipe-category">
+            <select name="category" class="input">
+                <st>How would you categorise this recipe?</st><br></td>
+                <option disabled selected value> -- Select a Category -- </option>
+                <option value="Snack">Snack</option>
+                <option value="Starter">Starter</option>
+                <option value="Side">Side</option>
+                <option value="Main Course">Main Course</option>
+                <option value="Desert">Desert</option>
+                <option value="Cocktail">Cocktail</option>
+            </select>
+        </div>
+        <br>
+        <div id="import-recipe-link">
+            <p class="import-recipe-link-div">Link: </p>
+            <input type="text" class="med-input import-recipe-link-div" id="import" name="recipeLink">
+            <br>
+        </div>
+        <button type="submit" class="reg-button">Import Recipe</button>
+    </form>
+</div>
 
 <%- include('../partials/footer') %>
