@@ -133,6 +133,12 @@ body {
   flex-wrap: nowrap;
 }
 
+#nav-div-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+}
 
 .nav-element-container {
   display: flex;
@@ -202,10 +208,6 @@ body {
   justify-content: space-between;
   justify-content: right;
   align-items: center;
-}
-
-#nav-user-elements-profile {
-  margin-top: 7px;
 }
 
 
