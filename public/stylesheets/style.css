@@ -11,104 +11,6 @@ body {
   color: #222E50
 }
 
-/* nav {
-  padding: 10px;
-  background: #007991;
-  position: sticky;
-  top: 0;
-  border-style: solid;
-  border-width: 2px 2px 6px 2px;
-  border-color: #71BAC0;
-  color: white;
-  display: flex;
-  justify-content:space-between;
-  flex-direction: row;
-  z-index: 9999
-  
-}
-.nav-div {
-  display: flex;
-  color: white;
-  margin: 2px;
-  font-weight: lighter;
-}
-
-.menu-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: auto;
-  padding: 0 10px 0 10px;
-  height: 100%;
-  width: 100%;
-  color: white;
-  font-size: 1.25rem;
-  font-weight: lighter;
-  cursor: pointer;
-}
-
-.nav-div:link {
-  text-decoration: none;
-  color: white
-}
-
-.nav-div:visited {
-  text-decoration: none;
-  color: white
-}
-
-.nav-div:hover {
-  background-color: #71BAC0;
-  color: white
-}
-
-.nav-div:active {
-  text-decoration: none;
-  color: white
-}
-
-.logo {
-  grid-area: lgo;
-  padding: 0 15px 0 15px;
-}
-
-.home:hover {
-  grid-area: hom;
-}
-
-.home:hover {
-  grid-area: hom;
-}
-
-.home:hover {
-  grid-area: hom;
-}
-
-.home:acive {
-  grid-area: hom;
-}
-
-#main-nav {
-  display: flex;
-  flex-direction: row;
-}
-
-#login-nav {
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row;
-}
-
-.recipe {
-  grid-area: rcp;
-}
-
-.collection {
-  grid-area: cltn;
-} */
-
-
-
 
 #nav {
   display: flex;
@@ -227,27 +129,6 @@ h1, h2, h3, h4, h5, h6 {
   padding: 3px 15px 3px 15px;
 }
 
-/* table {
-  margin: 3px 15px 3px 15px;
-  border: 1px solid;
-  padding: 10px;
-  align-self: center;
-} */
-
-
-thead {
-  font-weight: bold;
-}
-
-th {
-  text-align: left;
-}
-
-td {
-  text-align: left;
-  padding: 0 20px 0 0;
-}
-
 .input {
   padding: 5px;
   margin: 10px 0 10px 0;
@@ -293,26 +174,9 @@ td {
   border: solid 1px #007991;
 }
 
-st {
-  font-size: .75rem;
-  font-style: italic;
-}
-
-th {
-  padding: 0 3px 0 3px;
-  vertical-align: top;
-  text-align: left;
-}
-
-td {
-  vertical-align: top;
-  text-align: left;
-}
-
-
 
 .expanding-text-input {
-  resize: none;
+  resize: none !important;
   overflow-y: hidden;
   min-height: 1em;
   width: 100%;

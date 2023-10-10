@@ -22,7 +22,7 @@ async function index(req, res) {
 }
 
 function newCollection(req, res) {
-    res.render('collections/create');
+    res.render('collections/create', { stylesheet: '../public/stylesheets/collectionsCreate.css' });
 }
 
 async function create(req, res) {

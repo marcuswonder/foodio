@@ -1,0 +1,110 @@
+#create-collection {
+    display: flex;
+    justify-content: center;
+    width: 95%
+}
+
+#create-collection-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+.create-collection-title,
+.create-collection-content {
+    width: 100%;
+}
+
+.create-collection-title > h3 {
+    padding: 0;
+    margin: 0;
+    white-space: nowrap;
+}
+
+#create-collection-header-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#create-collection-form-submit {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+
+
+
+
+/* Small Devices (Small Phones) */
+@media (min-width: 300px) {
+    #create-collection-container {
+        width: 95%;
+    }
+
+    .create-collection-header-input-container {
+        width: 100%;
+    }
+
+    .create-collection-title > h3 {
+        margin-top: 1rem;
+    }
+}
+
+
+/* Handheld Devices (Phones) */
+@media (min-width: 576px) {
+    #create-collection-container {
+        width: 95%;
+    }
+
+    .create-collection-header-input-container {
+        width: 100%;
+    }
+
+    .create-collection-title > h3 {
+        margin-top: 1rem;
+    }
+}
+  
+  /* Medium Devices (Tablets) */
+  @media (min-width: 768px) {
+    #create-collection-container {
+        width: 700px;
+    }
+
+    .create-collection-header-input-container {
+        width: 40%;
+    }
+
+}
+  
+  /* Large Devices (Laptops) */
+@media (min-width: 992px) {
+    #create-collection-container {
+        width: 800px;
+    }
+
+    .create-collection-header-input-container {
+        width: 40%;
+    }
+
+}
+  
+/* Large Devices (Screens) */
+@media (min-width: 1200px) {
+    #create-collection-container {
+        width: 1000px;
+    }
+
+    .create-collection-header-input-container {
+        width: 40%;
+    }
+
+
+}
+  
+  
