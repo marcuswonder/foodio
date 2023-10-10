@@ -19,7 +19,7 @@
 <body>
     <div id="page-container">
         <div id="content-wrap">
-            <nav>
+            <!-- <nav>
                 <div id="main-nav">
                     <a href="/" class="nav-div-logo" class="home"><img src="/images/Logo.png" width="50px" href="/" class="home"></a>
 
@@ -30,8 +30,7 @@
                         <div class="menu-item">Collections</div>
                     </a>
                     <% if (user) { %>
-                    <a href="/" class="empty-nav">
-                    </a>
+                        <a href="/" class="empty-nav"></a>
                 </div>   
                 <div id="login-nav">
                     <a href="/logout" class="nav-div" class="login">
@@ -51,6 +50,105 @@
                     <div class="menu-item" class="login">Log In&nbsp;</div><img src="https://i.imgur.com/FHjYyi0.png" height=40px>
                 </a>
             <% } %>
+            </nav>  -->
+            
+            <nav>
+                <div id="nav">
+                    <div class="nav-navigation-elements">
+                        <a href="/" id="nav-div-logo"><img src="/images/Logo.png" width="50px" href="/" class="home"></a>
+                        <div id="nav-recipes-element-container" class="nav-element-container">
+                            <div id="nav-recipes-title" class="nav-element-title">Recipes</div>
+                            <div id="nav-recipes-search" class="nav-element-content-start material-symbols-outlined"><a href="/recipes" class="nav-icon-links">search</a></div>
+                            <div id="nav-recipes-add" class="nav-element-content-start material-symbols-outlined"><a href="/recipes/add" class="nav-icon-links">add_circle</a></div>
+                        </div>
+
+                        <div id="nav-collections-element-container" class="nav-element-container">
+                            <div id="nav-collections-title" class="nav-element-title">Collections</div>
+                            <div id="nav-collections-search" class="nav-element-content-start material-symbols-outlined"><a href="/collections" class="nav-icon-links">search</a></div>
+                            <div id="nav-collections-add" class="nav-element-content-start material-symbols-outlined"><a href="/collections/create" class="nav-icon-links">add_circle</a></div>
+                        </div>
+                        
+                    </div>
+
+
+                    <div id="nav-user-elements">
+                        <div id="nav-user-elements-profile">
+                            <span class="material-symbols-outlined">account_circle</span>
+                        </div>  
+                        <div id="nav-user-elements-login-logout">
+                            <% if (user) { %>
+                                <a href="/logout" id="nav-LogOut" class="nav-element" class="login">
+                                    <div class="nav-element-item" class="login">Log Out</div>
+                                </a>
+                            <% } else { %>
+                                <a href="/auth/google"  id="nav-LogOut" class="nav-element">
+                                    <div class="nav-element-item" class="login">Log In&nbsp;</div>
+                                </a>
+                            <% } %>
+                        </div>
+                    </div> 
+                </div> 
             </nav> 
             <br>    
         
+<script>
+const navRecipeTitleContainerEl = document.getElementById('nav-recipes-element-container')
+const navRecipeSearch = document.getElementById('nav-recipes-search')
+const navRecipeAdd = document.getElementById('nav-recipes-add')
+
+navRecipeTitleContainerEl.onmouseover = function() {
+    console.log("Recipes Mouse Over Hit");
+
+    if(navRecipeSearch.classList.contains('nav-element-content-start')) {
+        navRecipeSearch.classList.remove('nav-element-content-start');
+        navRecipeSearch.classList.add('nav-element-content-revealed');
+        navRecipeAdd.classList.remove('nav-element-content-start');
+        navRecipeAdd.classList.add('nav-element-content-revealed');
+    } else {
+        navRecipeSearch.classList.remove('nav-element-content-hidden');
+        navRecipeSearch.classList.add('nav-element-content-revealed');
+        navRecipeAdd.classList.remove('nav-element-content-hidden');
+        navRecipeAdd.classList.add('nav-element-content-revealed');
+    }
+}
+
+navRecipeTitleContainerEl.onmouseleave = function() {
+    console.log("Recipes Mouse Leave Hit");
+    navRecipeSearch.classList.remove('nav-element-content-revealed');
+    navRecipeSearch.classList.add('nav-element-content-hidden');
+    navRecipeAdd.classList.remove('nav-element-content-revealed');
+    navRecipeAdd.classList.add('nav-element-content-hidden');
+}
+
+
+const navCollectionTitleContainerEl = document.getElementById('nav-collections-element-container')
+const navCollectionSearch = document.getElementById('nav-collections-search')
+const navCollectionAdd = document.getElementById('nav-collections-add')
+
+navCollectionTitleContainerEl.onmouseover = function() {
+    console.log("Collections Mouse Over Hit");
+
+    if(navCollectionSearch.classList.contains('nav-element-content-start')) {
+        navCollectionSearch.classList.remove('nav-element-content-start');
+        navCollectionSearch.classList.add('nav-element-content-revealed');
+        navCollectionAdd.classList.remove('nav-element-content-start');
+        navCollectionAdd.classList.add('nav-element-content-revealed');
+    } else {
+        navCollectionSearch.classList.remove('nav-element-content-hidden');
+        navCollectionSearch.classList.add('nav-element-content-revealed');
+        navCollectionAdd.classList.remove('nav-element-content-hidden');
+        navCollectionAdd.classList.add('nav-element-content-revealed');
+    }
+}
+
+navCollectionTitleContainerEl.onmouseleave = function() {
+    console.log("Recipes Mouse Leave Hit");
+    navCollectionSearch.classList.remove('nav-element-content-revealed');
+    navCollectionSearch.classList.add('nav-element-content-hidden');
+    navCollectionAdd.classList.remove('nav-element-content-revealed');
+    navCollectionAdd.classList.add('nav-element-content-hidden');
+}
+
+
+</script>
+
