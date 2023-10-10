@@ -1,13 +1,17 @@
 #create-collection {
     display: flex;
     justify-content: center;
-    width: 95%
+    width: 95%;
+    padding: 0;
+    margin: 0;
 }
 
 #create-collection-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding: 0;
+    margin: 0;
 }
 
 

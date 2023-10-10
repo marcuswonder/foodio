@@ -19,39 +19,6 @@
 <body>
     <div id="page-container">
         <div id="content-wrap">
-            <!-- <nav>
-                <div id="main-nav">
-                    <a href="/" class="nav-div-logo" class="home"><img src="/images/Logo.png" width="50px" href="/" class="home"></a>
-
-                    <a href="/recipes" class="nav-div" class="recipe">
-                        <div class="menu-item">Recipes</div>
-                    </a>
-                    <a href="/collections" class="nav-div" class="collection">
-                        <div class="menu-item">Collections</div>
-                    </a>
-                    <% if (user) { %>
-                        <a href="/" class="empty-nav"></a>
-                </div>   
-                <div id="login-nav">
-                    <a href="/logout" class="nav-div" class="login">
-                        <div class="menu-item" class="login">Log Out</div>
-                    </a>
-                </div> 
-
-
-            <% } else { %>
-                <a href="/" class="empty-nav" class="recipe">
-                    <div></div>
-                </a>
-                <a href="/" class="empty-nav" class="collection">
-                    <div></div>
-                </a>
-                <a href="/auth/google" class="nav-div">
-                    <div class="menu-item" class="login">Log In&nbsp;</div><img src="https://i.imgur.com/FHjYyi0.png" height=40px>
-                </a>
-            <% } %>
-            </nav>  -->
-            
             <nav>
                 <div id="nav">
                     <div class="nav-navigation-elements">
@@ -78,7 +45,7 @@
 
 
                     <div id="nav-user-elements">
-                        <!-- <div id="nav-user-elements-profile" class="material-symbols-outlined">account_circle</div> -->
+                        <div id="nav-user-elements-profile" class="material-symbols-outlined">account_circle</div>
                         <div id="nav-user-elements-login-logout">
                             <% if (user) { %>
                                 <a href="/logout" id="nav-LogOut" class="nav-element" class="login">
