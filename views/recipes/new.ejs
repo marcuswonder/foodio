@@ -2,6 +2,13 @@
 
 <div id="new-recipe">
   <div id="new-recipe-container">
+    <div id="new-recipe-explainer">
+      <p>Add one of your own recipes below, or use our recipe import tool to copy one from the internet:</p>
+      <div id="new-recipe-import-button">
+        <a id="import-recipe-page-link" method="GET" href="/recipes/import"><input type="submit" value="Import a Recipe" class="reg-button"/></a>
+      </div>
+    </div>
+    <br>
     <h1>Add a Recipe</h1>
     <form method="POST" action="/recipes" enctype="multipart/form-data">
     

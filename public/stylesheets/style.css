@@ -189,7 +189,9 @@ body {
 #nav-recipes-search > a,
 #nav-collections-search > a,
 #nav-recipes-add > a,
-#nav-collections-add > a {
+#nav-collections-add > a, 
+#nav-my-kitchen-recipes > a,
+#nav-my-kitchen-collections > a {
   color: white;
 }
 

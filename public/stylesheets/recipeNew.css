@@ -9,6 +9,15 @@
     justify-content: center;
 }
 
+#new-recipe-explainer {
+    border:#007991 1px solid;
+}
+
+#new-recipe-import-button {
+    display: flex;
+    justify-content: center;
+}
+
 #new-recipe-header-container {
     display: flex;
     flex-direction: row;
