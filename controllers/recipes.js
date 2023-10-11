@@ -239,6 +239,8 @@ async function show(req, res) {
 
 
 async function deleteRecipe(req, res, next) {
+  console.log("Recipe Controller: deleteRecipe Hit")
+  console.log("Recipe Controller: deleteRecipe req.body", req.body)
   try {
       await Recipe.deleteOne({'_id': req.params.id})
       res.redirect('/recipes')

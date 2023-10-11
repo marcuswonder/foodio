@@ -140,7 +140,6 @@
       <br>
 
       <div id="recipe-show-method-instructions-container" class="recipe-show-method-container">
-
         <h2>Instructions</h2>
         <% if(recipe.instructions.length > 0) { %>
           <ol>
@@ -156,14 +155,25 @@
     </div>
     
     <% if (user?._id.equals(recipe.author)) { %>
-      <form action="/recipes/<%= recipe._id %>/edit" method="GET" class="button">
-        <button type="submit" class="reg-button">Edit Recipe Info</button></form>
-      <br>
+      <div id="recipe-show-navigation">
+        <div id="recipe-show-navigation-container">
+          <div class="recipe-show-navigation-button-container">
+            <form action="/recipes/<%= recipe._id %>/edit" method="GET" class="button">
+              <button type="submit" class="reg-button">Edit Recipe Info</button>
+            </form>
+          </div>
+          <div class="recipe-show-navigation-button-container">
+            <form action="/recipes/<%= recipe._id %>?_method=DELETE" method="POST" class="button">
+              <button type="submit" class="reg-button">Delete Recipe</button>
+            </form>
+          </div>
+        </div>
+      </div>
     <% } %>
     
   </div>
 
-  <div id="recipe-show-tags">
+  <!-- <div id="recipe-show-tags">
       <h3>Tags</h3>
       <% if(recipe.tags.length > 0) { %>
         <ul>
@@ -198,3 +208,4 @@
         <% } %>
         <br>
         <br>
+    </div> -->

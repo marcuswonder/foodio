@@ -177,6 +177,22 @@
 }
 
 
+#recipe-show-navigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%
+}
+
+#recipe-show-navigation-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap
+}
+
+.recipe-show-navigation-button-container {
+  margin: 10px 20px;
+}
 
 
 

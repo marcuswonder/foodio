@@ -15,12 +15,12 @@
   <div id="recipes-index-recipes-container">
     <div class="recipes-index-recipe-card-grid">
       <% recipes.forEach(function(r) { %>
-        <a href="/recipes/<%= r._id %>" class="recipes-index-recipe-card-container">
+        <div class="recipes-index-recipe-card-container">
           <div class="recipes-index-recipe-image">
             <img src="<%= r.photo %>" alt="Recipe Image">
           </div>
           <div class="recipes-index-recipe-title">
-            <h2><%= r.name %></h2>
+            <a href="/recipes/<%= r._id %>"><h2><%= r.name %></h2></a>
           </div>
           <div class="recipes-index-recipe-author">
             <p><%= r.userName %></p>
@@ -53,7 +53,7 @@
               </div>
             </div>
           </div>
-        </a>
+        </div>
       <% }) %>
     </div>
   </div>

@@ -1,88 +1,13 @@
 <%- include('../partials/header') %>
 <title><%= collection.name %></title>
-<h1><%= collection.name %></h1>
 
-<!-- <table id="collection-table" >
-  <tr>
-    <th>Name:</th>
-    <td><%= collection.name %></td>
-  </tr>
-  <tr>
-    <th>Description:</th>
-    <td><%= collection.description %></td>
-  </tr>
-  <tr>
-    <th>Created by:</th>
-    <td><%= collection.userName %></td>
-  </tr>
-  <tr>
-    <th># Recipes:</th>
-    <td><%= collection.recipes.length %></td>
-  </tr>
-</table>
-<br>
-
-<% if (collection.recipes.length > 0) { %>
-  <table id="collection-list">
-    <thead>
-      <tr>
-        <th>Recipes</th>
-        <th>Authors</th>
-        <th>Categories</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% collection.recipes.forEach(function(cr) { %>
-        <tr>
-          <td><a href="/recipes/<%= cr._id %>"><%= cr.name %></a></td>
-          <td><%= cr.userName %></td>
-          <td><%= cr.category %></td>
-          <td>
-            <% if (user?._id.equals(collection.author)) { %> 
-              <form action="/collections/<%= collection._id %>/recipes/<%= cr._id %>?_method=PUT" method="POST" class="remove">
-                <button type="submit" class="delete-button">X</button>
-              </form>
-            <% } %>
-          </td>
-        </tr>
-      <% }) %>
-    </tbody>
-  </table>
-<% } else { %>
-  <% if (user) { %>
-    <p>There are no recipes here! You can add some from the recipe pages.</p>
-    <a href="'/recipes"><button class="reg-button">Recipes</button></a>
-  <% } else { %>
-    <p>The author of this collection hasn't added any recipes yet.</p>
-  <% } %>
-<% } %>
-
-<h3>Tags</h3>
-  <% if(collection.tags.length > 0) { %>
-    <ul>
-      <% collection.tags.forEach(function(t) { %>
-      <li><%= t.tag %></li>
-  <% }) %>
-  </ul>
-  <% } %>
-
-  <ul>
-    <%- collection.tags.map(t =>
-    `<li>
-      ${t.tag} </li>`
-  ).join('') %>
-  </ul>
-  <br>
-  <br>
-  <h4>Add Tags</h4>
-  <a href="/collections/<%= collection._id %>/tags" class="button">
-    <button type="submit" class="reg-button">Add Collection Tags</button></a>
-
-</form> -->
-
-
-
+<div id="collections-show-about">
+  <div id="collections-show-about-container">
+    <h1><%= collection.name %></h1>
+    <h3><%= collection.description %></h3>
+    <p><%= collection.recipes.length %> recipes</p>
+  </div>
+</div>
 
 <% if (collection.recipes.length === 0) { %>
   <div id="collections-show-navigation">
@@ -97,12 +22,12 @@
   <div id="collections-show-recipes-container">
     <div class="collections-show-recipe-card-grid">
       <% collection.recipes.forEach(function(r) { %>
-        <a href="/recipes/<%= r._id %>" class="collections-show-recipe-card-container">
+         <div class="collections-show-recipe-card-container">
           <div class="collections-show-recipe-image">
             <img src="<%= r.photo %>" alt="Recipe Image">
           </div>
           <div class="collections-show-recipe-title">
-            <h2><%= r.name %></h2>
+            <a href="/recipes/<%= r._id %>"><h2><%= r.name %></h2></a>
           </div>
           <div class="collections-show-recipe-author">
             <p><%= r.userName %></p>
@@ -135,7 +60,11 @@
               </div>
             </div>
           </div>
-        </a>
+          <div id="collections-show-actions-container">
+            
+          </div>
+          <!-- </a> -->
+        </div>
       <% }) %>
     </div>
   </div>

@@ -1,15 +1,21 @@
+#collections-show-about {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 #collections-show-recipes-container {
     display: flex;
-    justify-content: center;    /* Horizontal centering */
+    flex-direction: column;
+    align-items: center;
   }
-  
+
+
   .collections-show-recipe-card-grid {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-evenly;
-  
-    /* border: 10px black solid; */
   }
   
   .collections-show-recipe-card-container {
@@ -19,7 +25,7 @@
     align-items: center;
     justify-content: flex-start;
     overflow: hidden;
-    border: solid 1px black;
+    border: solid 1px #007991;
     margin: 2%;
     transition: transform 0.3s
   }
@@ -82,7 +88,7 @@
     flex-wrap: nowrap;
     justify-content: space-evenly;
     min-width: 100%;
-    margin-top: 5%
+    margin: 5% 0;
   }
   
   
@@ -115,7 +121,7 @@
     margin-top: 0;
   }
   
-  #collections-show-recipe-about-servings-value > p {
+  .collections-show-recipe-about-servings-value > p {
     padding: 0;
     margin-top: 0;
   }
