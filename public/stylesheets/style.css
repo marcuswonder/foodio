@@ -61,34 +61,41 @@ body {
   margin: 0 5px;
 }
 
-.nav-element-content-start {
+/* .nav-element-content-hidden {
   color: white;
   margin: 0 5px;
   opacity: 0;
   overflow: hidden;
   position: absolute;
-  transform: translateX(-100%) scaleY(0);
-  transition: transform .3s ease, opacity .5s ease;
+  transform: translateX(-100%), opacity(0);
+  transition: transform .5s ease, opacity .2s ease-in;
 }
 
 .nav-element-content-revealed {
   color: white;
   margin: 0 5px;
   opacity: 1;
-  transform: translateX(0) scaleY(1);
-  transition: transform .3s ease, opacity .5s ease;
-}
+  transform: translateX(0), opacity(1);
+  transition: transform .2s ease, opacity .5s ease;
+} */
 
 .nav-element-content-hidden {
   color: white;
   margin: 0 5px;
-  opacity: 0;
+  scale: 0;
   overflow: hidden;
   position: absolute;
-  transform: translateX(-100%) scaleY(0);
-  /* transition: transform .1s ease, opacity .3s ease-in; */
+  transform: translateX(-100%);
+  transition: transform .3s ease;
 }
 
+
+.nav-element-content-revealed {
+  color: white;
+  margin: 0 5px;
+  transform: translateX(0);
+  transition: transform .3s ease;
+}
 
 #nav-recipes-search > a,
 #nav-collections-search > a,
@@ -157,27 +164,8 @@ body {
   margin: 10px;
 }
 
-
-/* .burger-nav-element-content-revealed {
-  justify-content: flex-start;
-  margin: 10px;
-  opacity: 1;
-  transform: translateX(0);
-  transition: transform .3s ease, opacity .5s ease;
-}
-
-.burger-nav-element-content-hidden {
-  justify-content: flex-start;
-  margin: 10px;
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-  transform: translateX(-100%);
-} */
-
 .burger-nav-element-content-revealed {
   justify-content: flex-start;
-  /* margin: 10px; */
   opacity: 1;
   transform: translateX(0);
   transition: transform .3s ease, opacity .5s ease;
@@ -243,6 +231,7 @@ body {
   #burger-nav {
     display: none;
   }
+}
 
 
 
@@ -354,25 +343,8 @@ a:hover {
 
 a:active {
   text-decoration: none;
-  color: #007991
+  color: #007991;
 }
-
-/* .login {
-  grid-area: lgin;
-  display: flex;
-  align-self: flex-end;
-  align-content:flex-end;
-  align-content: right;
-} */
-
-/* .login img {
-  grid-area: lgin;
-  display:flexbox;
-  height: 15px;
-  /* display: flex; */
-  justify-content: right;
-  align-items: right;
-} */
 
 .delete {
   text-align: center;
@@ -460,7 +432,7 @@ a:active {
 }
 
 #content-wrap {
-  padding-bottom: 0 0 2.5rem 0;    /* Footer height */
+  padding-bottom: 0 0 2.5rem 0;
 }
 
 textarea {

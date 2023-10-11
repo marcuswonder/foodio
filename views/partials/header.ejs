@@ -25,21 +25,21 @@
                         <a href="/" id="nav-div-logo"><img src="/images/Logo.png" width="50px" href="/" class="home"></a>
                         <div id="nav-recipes-element-container" class="nav-element-container">
                             <div id="nav-recipes-title" class="nav-element-title">Recipes</div>
-                            <div id="nav-recipes-search" class="nav-element-content-start material-symbols-outlined"><a href="/recipes" class="nav-icon-links" title="Browse Recipes">search</a></div>
-                            <div id="nav-recipes-add" class="nav-element-content-start material-symbols-outlined"><a href="/recipes/add" class="nav-icon-links" title="Add a Recipe">add_circle</a></div>
+                            <div id="nav-recipes-search" class="nav-element-sub-content nav-element-recipes-sub-content nav-element-content-hidden material-symbols-outlined"><a href="/recipes" class="nav-icon-links" title="Browse Recipes">search</a></div>
+                            <div id="nav-recipes-add" class="nav-element-sub-content nav-element-recipes-sub-content nav-element-content-hidden material-symbols-outlined"><a href="/recipes/add" class="nav-icon-links" title="Add a Recipe">add_circle</a></div>
                         </div>
 
                         <div id="nav-collections-element-container" class="nav-element-container">
                             <div id="nav-collections-title" class="nav-element-title">Collections</div>
-                            <div id="nav-collections-search" class="nav-element-content-start material-symbols-outlined"><a href="/collections" class="nav-icon-links" title="Browse Collections">search</a></div>
-                            <div id="nav-collections-add" class="nav-element-content-start material-symbols-outlined"><a href="/collections/create" class="nav-icon-links" title="Create a Collection">add_circle</a></div>
+                            <div id="nav-collections-search" class="nav-element-sub-content nav-element-collections-sub-content nav-element-content-hidden material-symbols-outlined"><a href="/collections" class="nav-icon-links" title="Browse Collections">search</a></div>
+                            <div id="nav-collections-add" class="nav-element-sub-content nav-element-collections-sub-content nav-element-content-hidden material-symbols-outlined"><a href="/collections/create" class="nav-icon-links" title="Create a Collection">add_circle</a></div>
                         </div>
 
                         <% if (user) { %>
                         <div id="nav-my-kitchen-element-container" class="nav-element-container">
                             <div id="nav-my-kitchen-title" class="nav-element-title">My Kitchen</div>
-                            <div id="nav-my-kitchen-recipes" class="nav-element-content-start material-symbols-outlined"><a href="/my-recipes" class="nav-icon-links" title="My Recipes">article</a></div>
-                            <div id="nav-my-kitchen-collections" class="nav-element-content-start material-symbols-outlined"><a href="/my-collections" class="nav-icon-links" title="My Collections">menu_book</a></div>
+                            <div id="nav-my-kitchen-recipes" class="nav-element-sub-content nav-element-my-kitchen-sub-content nav-element-content-hidden material-symbols-outlined"><a href="/my-recipes" class="nav-icon-links" title="My Recipes">article</a></div>
+                            <div id="nav-my-kitchen-collections" class="nav-element-sub-content nav-element-my-kitchen-sub-content nav-element-content-hidden material-symbols-outlined"><a href="/my-collections" class="nav-icon-links" title="My Collections">menu_book</a></div>
                         </div>
                         <% } %>
                         
@@ -113,23 +113,13 @@ const navRecipeSearch = document.getElementById('nav-recipes-search')
 const navRecipeAdd = document.getElementById('nav-recipes-add')
 
 navRecipeTitleContainerEl.onmouseover = function() {
-    console.log("Recipes Mouse Over Hit");
-
-    if(navRecipeSearch.classList.contains('nav-element-content-start')) {
-        navRecipeSearch.classList.remove('nav-element-content-start');
-        navRecipeSearch.classList.add('nav-element-content-revealed');
-        navRecipeAdd.classList.remove('nav-element-content-start');
-        navRecipeAdd.classList.add('nav-element-content-revealed');
-    } else {
-        navRecipeSearch.classList.remove('nav-element-content-hidden');
-        navRecipeSearch.classList.add('nav-element-content-revealed');
-        navRecipeAdd.classList.remove('nav-element-content-hidden');
-        navRecipeAdd.classList.add('nav-element-content-revealed');
-    }
+    navRecipeSearch.classList.remove('nav-element-content-hidden');
+    navRecipeSearch.classList.add('nav-element-content-revealed');
+    navRecipeAdd.classList.remove('nav-element-content-hidden');
+    navRecipeAdd.classList.add('nav-element-content-revealed');
 }
 
 navRecipeTitleContainerEl.onmouseleave = function() {
-    console.log("Recipes Mouse Leave Hit");
     navRecipeSearch.classList.remove('nav-element-content-revealed');
     navRecipeSearch.classList.add('nav-element-content-hidden');
     navRecipeAdd.classList.remove('nav-element-content-revealed');
@@ -142,28 +132,20 @@ const navCollectionSearch = document.getElementById('nav-collections-search')
 const navCollectionAdd = document.getElementById('nav-collections-add')
 
 navCollectionTitleContainerEl.onmouseover = function() {
-    console.log("Collections Mouse Over Hit");
-
-    if(navCollectionSearch.classList.contains('nav-element-content-start')) {
-        navCollectionSearch.classList.remove('nav-element-content-start');
-        navCollectionSearch.classList.add('nav-element-content-revealed');
-        navCollectionAdd.classList.remove('nav-element-content-start');
-        navCollectionAdd.classList.add('nav-element-content-revealed');
-    } else {
-        navCollectionSearch.classList.remove('nav-element-content-hidden');
-        navCollectionSearch.classList.add('nav-element-content-revealed');
-        navCollectionAdd.classList.remove('nav-element-content-hidden');
-        navCollectionAdd.classList.add('nav-element-content-revealed');
-    }
+    navCollectionSearch.classList.remove('nav-element-content-hidden');
+    navCollectionSearch.classList.add('nav-element-content-revealed');
+    navCollectionAdd.classList.remove('nav-element-content-hidden');
+    navCollectionAdd.classList.add('nav-element-content-revealed');
 }
 
 navCollectionTitleContainerEl.onmouseleave = function() {
-    console.log("Recipes Mouse Leave Hit");
     navCollectionSearch.classList.remove('nav-element-content-revealed');
     navCollectionSearch.classList.add('nav-element-content-hidden');
     navCollectionAdd.classList.remove('nav-element-content-revealed');
     navCollectionAdd.classList.add('nav-element-content-hidden');
 }
+
+
 
 const navMyKitchenTitleContainerEl = document.getElementById('nav-my-kitchen-element-container')
 const navMyKitchenRecipes = document.getElementById('nav-my-kitchen-recipes')
@@ -171,25 +153,15 @@ const navMyKitchenCollections = document.getElementById('nav-my-kitchen-collecti
 
 if(navMyKitchenRecipes) {
     navMyKitchenTitleContainerEl.onmouseover = function() {
-    console.log("My Kitchen Mouse Over Hit");
-
-        if(navMyKitchenRecipes.classList.contains('nav-element-content-start')) {
-            navMyKitchenRecipes.classList.remove('nav-element-content-start');
-            navMyKitchenRecipes.classList.add('nav-element-content-revealed');
-            navMyKitchenCollections.classList.remove('nav-element-content-start');
-            navMyKitchenCollections.classList.add('nav-element-content-revealed');
-        } else {
-            navMyKitchenRecipes.classList.remove('nav-element-content-hidden');
-            navMyKitchenRecipes.classList.add('nav-element-content-revealed');
-            navMyKitchenCollections.classList.remove('nav-element-content-hidden');
-            navMyKitchenCollections.classList.add('nav-element-content-revealed');
-        }
+        navMyKitchenRecipes.classList.remove('nav-element-content-hidden');
+        navMyKitchenRecipes.classList.add('nav-element-content-revealed');
+        navMyKitchenCollections.classList.remove('nav-element-content-hidden');
+        navMyKitchenCollections.classList.add('nav-element-content-revealed');
     }
 }
 
 if(navMyKitchenRecipes) {
     navMyKitchenTitleContainerEl.onmouseleave = function() {
-        console.log("Recipes Mouse Leave Hit");
         navMyKitchenRecipes.classList.remove('nav-element-content-revealed');
         navMyKitchenRecipes.classList.add('nav-element-content-hidden');
         navMyKitchenCollections.classList.remove('nav-element-content-revealed');
@@ -199,9 +171,7 @@ if(navMyKitchenRecipes) {
 
 
 
-
 // Burger Nav Script
-
 const burgerNavMenu = document.getElementById('burger-nav-menu')
 const burgerNavMenuClose = document.getElementById('burger-nav-menu-close')
 const burgerNavContentEls = document.getElementsByClassName('burger-nav-element-content')
