@@ -5,6 +5,7 @@ const collectionsCtrl = require('../controllers/collections')
 const ensureLoggedIn = require('../config/ensureLoggedIn');
 
 router.get('/', collectionsCtrl.index)
+router.get('/my-collections', ensureLoggedIn, collectionsCtrl.userIndex)
 router.get('/create', ensureLoggedIn, collectionsCtrl.new)
 router.post('/', ensureLoggedIn, collectionsCtrl.create)
 router.get('/:id', collectionsCtrl.show)

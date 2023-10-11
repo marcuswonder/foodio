@@ -35,8 +35,6 @@ async function index(req, res) {
 }
 
 async function userIndex(req, res) {
-  console.log("Controller: userIndex Hit")
-  console.log("Controller: userIndex req.user", req.user)
     const recipes = await Recipe.find({ 'author': req.user._id })
         .populate('tags')
         .exec()

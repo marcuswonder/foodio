@@ -7,7 +7,7 @@ const recipesCtrl = require('../controllers/recipes')
 const ensureLoggedIn = require('../config/ensureLoggedIn')
 
 router.get('/', recipesCtrl.index)
-router.get('/my-recipes', recipesCtrl.userIndex)
+router.get('/my-recipes', ensureLoggedIn, recipesCtrl.userIndex)
 router.get('/add', ensureLoggedIn, recipesCtrl.new)
 router.post('/', ensureLoggedIn, upload.single('photo'), recipesCtrl.create)
 router.get('/copy', ensureLoggedIn, recipesCtrl.newCopyRecipe)

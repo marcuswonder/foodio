@@ -4,12 +4,38 @@ const Recipe = require('../models/recipe')
 
 module.exports = {
     index,
+    userIndex,
     new: newCollection,
     create,
     show,
     delete: deleteCollection,
     removeRecipeFromCollection,
     
+}
+
+async function index(req, res) {
+    try {
+        const collections = await Collection.find({});
+        res.render('collections/index', { collections,  stylesheet: '../public/stylesheets/collectionsIndex.css' });
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+async function userIndex(req, res) {
+    console.log("Collection Controller: userIndex Hit")
+    console.log("Collection Controller: userIndex req.user", req.user)
+    console.log("Collection Controller: userIndex req.user._id", req.user._id)
+    try {
+        const collections = await Collection.find({ 'author': req.user._id });
+        res.render('collections/index', { collections,  stylesheet: '../public/stylesheets/collectionsIndex.css' });
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+function newCollection(req, res) {
+    res.render('collections/create', { stylesheet: '../public/stylesheets/collectionsCreate.css' });
 }
 
 async function index(req, res) {
