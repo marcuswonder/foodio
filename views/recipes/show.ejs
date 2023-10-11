@@ -207,5 +207,98 @@
           <% } %>
         <% } %>
         <br>
-        <br>
-    </div> -->
+        <br> -->
+</div>  
+        
+<div id="share-modal" class="modal">
+  <div class="share-modal-content">
+    <div id="share-modal-logo-container">
+      <img src="/public/images/Logo.png" alt="Foodio Logo">
+    </div>
+
+    <div id="share-modal-link-container">
+      <h2>Share this recipe</h2>
+      <p><%= recipe.name %></p>
+      <input type="text" id="shareLink" class="share-modal-link-input" readonly>
+    </div>
+    
+    <h3>Share via:</h3>
+    <div id="share-button-container">
+      <button id="share-modal-email" class="share-modal-button-containers" onclick=shareViaEmail() ><img src="/public/icons/email_icon.png" alt="Share with Email"></button>
+      <button id="share-modal-instagram" class="share-modal-button-containers" onclick=shareViaWhatsApp()><img src="/public/icons/instagram_icon.png" alt="Share with Instagram"></button>
+      <button id="share-modal-whatsapp" class="share-modal-button-containers"><img src="/public/icons/whatsapp_icon.png" alt="Share with WhatsApp"></button>
+      <button id="share-modal-imessage" class="share-modal-button-containers"><img src="/public/icons/imessage_icon.png" alt="Share with iMessage"></button>
+      <button id="share-modal-facebook" class="share-modal-button-containers"><img src="/public/icons/facebook_icon.png" alt="Share with Facebook"></button>
+    </div>
+
+    <span id="share-modal-close" class="reg-button">Close</span>
+  </div>
+</div>
+
+  <script>
+    // Populate share link
+    const currentUrl = window.location.href
+    const shareLink = document.getElementById('shareLink')
+    shareLink.value = currentUrl
+
+    // Get the page
+    const showPage = document.getElementById('recipe-show');
+    
+    // Get the nav
+    const nav = document.getElementById('nav');
+    
+    // Get the recipe name
+    const recipeNameEl = document.getElementById('recipe-show-info-name');
+    const recipeName = recipeNameEl.innerText
+
+    // Get the modal
+    const modal = document.getElementById('share-modal');
+
+    // Get the button that opens the modal
+    const shareButton = document.getElementById('recipe-show-header-actions-share');
+
+    // Get the <span> element that closes the modal
+    const closeBtn = document.getElementById('share-modal-close');
+
+    // When the user clicks the share button, open the modal
+    shareButton.onclick = function() {
+      nav.style.display = 'none';
+      modal.style.display = 'flex';
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    closeBtn.onclick = function() {
+      modal.style.display = 'none';
+      nav.style.display = 'flex';
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = 'none';
+        nav.style.display = 'flex';
+      }
+    }
+
+    // Function to share via email
+    function shareViaEmail() {
+      window.location.href = `mailto:?subject=Check out this recipe on Foodio!&body=I love this recipe for ${recipeName}! Check out it out on Foodio: ${currentUrl}`;
+    };
+
+    // // Function to share via WhatsApp
+
+    function shareViaWhatsApp() {
+      window.location.href = `https://wa.me/?text=urlencodedtext`
+    }
+    // const shareViaWhatsApp = () => {
+    //   const link = document.getElementById('shareLink').value;
+    //   window.location.href = `whatsapp://send?text=Check out this link: ${link}`;
+    // };
+
+    // // Add event listeners to share buttons
+    // document.getElementById('shareEmail').addEventListener('click', shareViaEmail);
+    // document.getElementById('shareWhatsApp').addEventListener('click', shareViaWhatsApp);
+
+  </script>
+
+  

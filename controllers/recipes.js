@@ -157,13 +157,18 @@ async function importRecipeWithScrapingTools(req, res) {
   const parsedRecipe = await determineRecipeSourceAndParse(recipeLink)
   console.log("Recipe Controller: importRecipeWithScrapingTool parsedRecipe", parsedRecipe)
 
-  const isValidPhotoUrl = validator.isURL(parsedRecipe.photo, {
-    require_protocol: true,
-  })
+  try {
+    const isValidPhotoUrl = validator.isURL(parsedRecipe.photo, {
+      require_protocol: true,
+    })
 
-  if (!isValidPhotoUrl) {
-    const photoLink = await aiImageGeneratorAndS3Upload(parsedRecipe)
-    parsedRecipe.photo = photoLink.Location
+    if (!isValidPhotoUrl) {
+      const photoLink = await aiImageGeneratorAndS3Upload(parsedRecipe)
+      parsedRecipe.photo = photoLink.Location
+    }
+  } catch {
+      const photoLink = await aiImageGeneratorAndS3Upload(parsedRecipe)
+      parsedRecipe.photo = photoLink.Location
   }
 
   parsedRecipe.author = req.user._id

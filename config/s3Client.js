@@ -27,6 +27,7 @@ const uploadFile = async (file) => {
 
   } catch (err) {
     console.log('Error occurred while trying to upload to S3 bucket', err);
+    return
   }
 };
 
