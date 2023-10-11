@@ -23,15 +23,19 @@
     <div class="collections-show-recipe-card-grid">
       <% collection.recipes.forEach(function(r) { %>
          <div class="collections-show-recipe-card-container">
+          
           <div class="collections-show-recipe-image">
             <img src="<%= r.photo %>" alt="Recipe Image">
           </div>
+          
           <div class="collections-show-recipe-title">
             <a href="/recipes/<%= r._id %>"><h2><%= r.name %></h2></a>
           </div>
+          
           <div class="collections-show-recipe-author">
             <p><%= r.userName %></p>
           </div>
+          
           <div class="collections-show-recipe-about-container">
             <div class="collections-show-recipe-about-time-container">
               <div class="collections-show-recipe-about-time-icon">
@@ -60,11 +64,16 @@
               </div>
             </div>
           </div>
+          
           <div id="collections-show-actions-container">
-            
+            <div id="collections-show-navigation-container">
+              <form action="/collections/<%= collection._id %>/recipes/<%= r._id %>?_method=PUT" method="POST">
+                <button type="submit" class="reg-button">Remove from Collection</button>
+              </form>
+            </div>
           </div>
-          <!-- </a> -->
-        </div>
+          </div>
+        <!-- </div> -->
       <% }) %>
     </div>
   </div>

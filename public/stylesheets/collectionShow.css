@@ -137,7 +137,16 @@
     justify-content: space-evenly;
     flex-wrap: wrap
   }
+
+  #collections-show-actions-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+  }
   
+  #collections-show-navigation-container {
+    display: flex;
+  }
   
 
 
