@@ -2,45 +2,6 @@
 <title>Collections</title>
 <h1>Collections</h1>
 
-<!-- <% if (collections.length === 0) { %>
-
-  <p>There are no collections yet!</p>
-
-  <p>Create one below:</p>
-
-<% } else { %>
-
-<table id="collections-list">
-    <thead>
-      <tr>
-        <th>Collection</th>
-        <th>Author</th>
-        <th>Decription</th>
-        <th></th>
-      </tr>
-    </thead>
-      <tbody>
-        <% collections.forEach(function(c) { %>
-        <tr>
-          <td><a href="/collections/<%= c._id %>"><%= c.name %></td></a>
-          <td><%= c.userName %></td>
-          <td><%= c.description %></td>
-          <td>
-            <% if (user?._id.equals(c.author)) { %>
-              <form action="/collections/<%= c._id %>?_method=DELETE" method="POST">
-                <button type="submit" class="delete-button">X</button>
-              </form>
-            <% } %>
-          </td>
-        </tr>
-        <% }); %>
-      </tbody>
-  </table>
-<% } %>
-<a id="create-collection-page-link" method="GET" 
-  href="collections/create"><input type="submit" value="Create Collection" class="reg-button"/>
-</a> -->
-
 <% if (collections.length === 0) { %>
   <div id="collections-index-navigation">
     <div id="collections-index-navigation-container">

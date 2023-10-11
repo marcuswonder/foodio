@@ -2,7 +2,7 @@
 <title><%= collection.name %></title>
 <h1><%= collection.name %></h1>
 
-<table id="collection-table" >
+<!-- <table id="collection-table" >
   <tr>
     <th>Name:</th>
     <td><%= collection.name %></td>
@@ -79,7 +79,74 @@
   <a href="/collections/<%= collection._id %>/tags" class="button">
     <button type="submit" class="reg-button">Add Collection Tags</button></a>
 
-</form>
+</form> -->
+
+
+
+
+<% if (collection.recipes.length === 0) { %>
+  <div id="collections-show-navigation">
+    <div id="collections-show-navigation-container">
+      <p>There are no recipes here!</p>
+      <a id="add-recipe-page-link" method="GET" href="recipes/add"><input type="submit" value="Add a Recipe" class="reg-button"/></a>
+      <a id="import-recipe-page-link" method="GET" href="recipes/import"><input type="submit" value="Import a Recipe" class="reg-button"/></a>
+    </div>
+  </div>
+
+<% } else { %>  
+  <div id="collections-show-recipes-container">
+    <div class="collections-show-recipe-card-grid">
+      <% collection.recipes.forEach(function(r) { %>
+        <a href="/recipes/<%= r._id %>" class="collections-show-recipe-card-container">
+          <div class="collections-show-recipe-image">
+            <img src="<%= r.photo %>" alt="Recipe Image">
+          </div>
+          <div class="collections-show-recipe-title">
+            <h2><%= r.name %></h2>
+          </div>
+          <div class="collections-show-recipe-author">
+            <p><%= r.userName %></p>
+          </div>
+          <div class="collections-show-recipe-about-container">
+            <div class="collections-show-recipe-about-time-container">
+              <div class="collections-show-recipe-about-time-icon">
+                <img src="/public/icons/times.png" alt="time icon">
+              </div>
+              <div class="collections-show-recipe-about-time-value">             
+                <% if ((r.prepTime + r.cookTime) > 60) { %>
+                  <% if (((r.prepTime + r.cookTime) / 60) > 2) { %>
+                    <p><%= Math.floor((r.prepTime + r.cookTime) / 60) %> hrs</p>
+                  <% } else { %>    
+                    <p><%= Math.floor((r.prepTime + r.cookTime) / 60) %> hr <%= ((r.prepTime + r.cookTime) - (Math.floor((r.prepTime + r.cookTime) / 60) * 60)) %> mins</p>
+                  <% } %>
+                <% } else { %>
+                  <p><%= r.prepTime + r.cookTime %> mins</p>
+                <% } %>
+
+              </div>
+            </div>
+            
+            <div class="collections-show-recipe-about-servings-container">
+              <div class="collections-show-recipe-about-servings-icon">
+                <img src="../../public/icons/servings.png" alt="servings icon">
+              </div>
+              <div class="collections-show-recipe-about-servings-value">
+                <p><%= r.servings %></p>
+              </div>
+            </div>
+          </div>
+        </a>
+      <% }) %>
+    </div>
+  </div>
+
+  <% } %>
+
+  <br>
+  <br>
+  
+
+
 <br>
 <br>
 
