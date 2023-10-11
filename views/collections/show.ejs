@@ -9,10 +9,10 @@
   </div>
 </div>
 
-<% if (collection.recipes.length === 0) { %>
+<% if (collection.recipes.length === 0 && user?._id.equals(collection.author)) { %>
   <div id="collections-show-navigation">
+    <p>There are no recipes here!</p>
     <div id="collections-show-navigation-container">
-      <p>There are no recipes here!</p>
       <a id="add-recipe-page-link" method="GET" href="recipes/add"><input type="submit" value="Add a Recipe" class="reg-button"/></a>
       <a id="import-recipe-page-link" method="GET" href="recipes/import"><input type="submit" value="Import a Recipe" class="reg-button"/></a>
     </div>
@@ -73,7 +73,6 @@
             </div>
           </div>
           </div>
-        <!-- </div> -->
       <% }) %>
     </div>
   </div>

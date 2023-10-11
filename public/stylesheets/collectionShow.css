@@ -1,3 +1,16 @@
+#collections-show-navigation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%
+}
+
+#collections-show-navigation-container {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap
+}
+
 #collections-show-about {
   display: flex;
   flex-direction: column;
@@ -124,18 +137,6 @@
   .collections-show-recipe-about-servings-value > p {
     padding: 0;
     margin-top: 0;
-  }
-  
-  #collections-show-navigation {
-    display: flex;
-    justify-content: center;
-    width: 100%
-  }
- 
-  #collections-show-navigation-container {
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap
   }
 
   #collections-show-actions-container {
