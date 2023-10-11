@@ -38,12 +38,20 @@ const recipeSchema = new Schema({
     link: {
         type: String,
     },
-    ingredients: [{
-        type: String
-    }],
-    instructions: [{
-        type: String
-    }],
+    ingredients: [
+        {
+          ingredient: {
+            type: String,
+            }
+        }
+    ],
+      instructions: [
+        {
+          instruction: {
+            type: String,
+          }
+        }
+      ],
     tags: [{
         type: Schema.Types.ObjectId,
         ref: 'Tag'
