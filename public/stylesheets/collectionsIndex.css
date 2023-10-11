@@ -1,0 +1,192 @@
+#collections-index-recipes-container {
+    display: flex;
+    justify-content: center;    /* Horizontal centering */
+  }
+  
+  .collections-index-collection-card-grid {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-evenly;
+  
+    /* border: 10px black solid; */
+  }
+  
+  .collections-index-collection-card-container {
+    display: flex;
+    flex-direction: column;
+    flex-basis: auto;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+    border: solid 1px black;
+    margin: 2%;
+    transition: transform 0.3s
+  }
+  
+  .collections-index-collection-card-container:hover {
+      transform: scale(1.05)
+  }
+  
+  .collections-index-collection-card-container:hover > h1, 
+  .collections-index-collection-card-container:hover > h2, 
+  .collections-index-collection-card-container:hover > p {
+    cursor: pointer;
+    color: #007991;
+  }
+  
+  
+  .collections-index-collection-image {
+    width: 100%;
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    margin: 0%;
+    border: 0%;
+    padding: 0%;
+  }
+  
+  .collections-index-collection-image > img {
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    margin: 0%;
+    border: 0%;
+    padding: 0%;
+  }
+  
+  .collections-index-collection-title {
+    padding: 5%;
+  }
+  
+  .collections-index-collection-title > h2 {
+    padding: 0%;
+    margin: 0%;
+  }
+  
+  
+  .collections-index-collection-author {
+    padding-bottom: 2%;
+  }
+  
+  .collections-index-collection-author > p {
+    margin: 0%;
+  }
+  
+  .collections-index-collection-about-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    min-width: 100%;
+    margin: 0 0 5% 0;
+  }
+  
+  #collections-index-navigation {
+    display: flex;
+    justify-content: center;
+    width: 100%
+  }
+ 
+  #collections-index-navigation-container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap
+  }
+  
+  
+
+
+ /* Small Devices (Phones) */
+  @media (max-width: 576px) {
+    .collections-index-collection-card-grid {
+      width: 90%;
+    }
+
+    .collections-index-collection-card-container {
+      flex: 1 1 90%;
+      margin: 4%;
+    }
+
+    #collections-index-navigation-container {
+      width: 90%
+    }
+  }
+  
+  @media (min-width: 576px) {
+    .collections-index-collection-card-grid {
+      width: 90%;
+    }
+
+    .collections-index-collection-card-container {
+      flex: 1 1 90%;
+      /* margin: 4%; */
+    }
+
+    #collections-index-navigation-container {
+      width: 90%
+    }
+  }
+  
+  /* Medium Devices (Tablets) */
+  @media (min-width: 768px) {
+    .collections-index-collection-card-grid {
+      width: 90%;
+    }
+
+    .collections-index-collection-card-container {
+      flex: 1 1 40%;
+    }
+
+    #collections-index-navigation-container {
+      width: 90%
+    }
+  }
+  
+  /* Large Devices (Laptops) */
+  @media (min-width: 992px) {
+    .collections-index-collection-card-grid {
+      width: 90%;
+    }
+
+    .collections-index-collection-card-container {
+      flex: 1 1 30%;
+    }
+
+    #collections-index-navigation-container {
+      width: 60%
+    }
+  }
+  
+  /* Large Devices (Screens) */
+  @media (min-width: 1200px) {
+    .collections-index-collection-card-grid {
+      width: 90%;
+    }
+
+    .collections-index-collection-card-container {
+      flex: 1 1 25%;
+    }
+
+    #collections-index-navigation-container {
+      width: 40%
+    }
+  }
+  
+  /* Large Devices (Screens) */
+  @media (min-width: 1500px) {
+    .collections-index-collection-card-grid {
+      width: 60%;
+    }
+
+    .collections-index-collection-card-container {
+      flex: 1 1 25%;
+    }
+
+    #collections-index-navigation-container {
+      width: 40%
+    }
+  }

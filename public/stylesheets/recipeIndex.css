@@ -74,16 +74,7 @@
   
   .recipes-index-recipe-author > p {
     margin: 0%;
-  }
-  
-  .recipes-index-recipe-description {
-    margin: 5%;
-  }
-  
-  .recipes-index-recipe-description > p {
-    margin: 0%;
-  }
-  
+  }  
   
   .recipes-index-recipe-about-container {
     display: flex;
@@ -129,7 +120,7 @@
     margin-top: 0;
   }
   
-  #recipes-index-navigation-container {
+  #recipes-index-navigation {
     display: flex;
     justify-content: center;
     width: 100%

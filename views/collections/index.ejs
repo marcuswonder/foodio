@@ -41,57 +41,30 @@
   href="collections/create"><input type="submit" value="Create Collection" class="reg-button"/>
 </a> -->
 
-
-<% if (recipes.length === 0) { %>
-  <div id="collection-index-navigation">
-    <div id="collection-index-navigation-container">
-      <p>There are no recipes here!</p>
-      <a id="add-recipe-page-link" method="GET" href="recipes/add"><input type="submit" value="Add a Recipe" class="reg-button"/></a>
-      <a id="import-recipe-page-link" method="GET" href="recipes/import"><input type="submit" value="Import a Recipe" class="reg-button"/></a>
+<% if (collections.length === 0) { %>
+  <div id="collections-index-navigation">
+    <div id="collections-index-navigation-container">
+      <p>There are no collections here!</p>
+      <a id="add-collection-page-link" method="GET" href="collections/add"><input type="submit" value="Add a collection" class="reg-button"/></a>
     </div>
   </div>
 
 <% } else { %>  
-  <div id="collection-index-recipes-container">
-    <div class="collection-index-recipe-card-grid">
-      <% recipes.forEach(function(r) { %>
-        <a href="/recipes/<%= r._id %>" class="collection-index-recipe-card-container">
-          <div class="collection-index-recipe-image">
-            <img src="<%= r.photo %>" alt="Recipe Image">
+  <div id="collections-index-recipes-container">
+    <div class="collections-index-collection-card-grid">
+      <% collections.forEach(function(c) { %>
+        <a href="/collections/<%= c._id %>" class="collections-index-collection-card-container">
+          <div class="collections-index-collection-image">
+            <img src="<%= c.photo %>" alt="collection Image">
           </div>
-          <div class="collection-index-recipe-title">
-            <h2><%= r.name %></h2>
+          <div class="collections-index-collection-title">
+            <h2><%= c.name %></h2>
           </div>
-          <div class="collection-index-recipe-author">
-            <p><%= r.userName %></p>
+          <div class="collections-index-collection-author">
+            <p><%= c.userName %></p>
           </div>
-          <div class="collection-index-recipe-about-container">
-            <div class="collection-index-recipe-about-time-container">
-              <div class="collection-index-recipe-about-time-icon">
-                <img src="/public/icons/times.png" alt="time icon">
-              </div>
-              <div class="collection-index-recipe-about-time-value">             
-                <% if ((r.prepTime + r.cookTime) > 60) { %>
-                  <% if (((r.prepTime + r.cookTime) / 60) > 2) { %>
-                    <p><%= Math.floor((r.prepTime + r.cookTime) / 60) %> hrs</p>
-                  <% } else { %>    
-                    <p><%= Math.floor((r.prepTime + r.cookTime) / 60) %> hr <%= ((r.prepTime + r.cookTime) - (Math.floor((r.prepTime + r.cookTime) / 60) * 60)) %> mins</p>
-                  <% } %>
-                <% } else { %>
-                  <p><%= r.prepTime + r.cookTime %> mins</p>
-                <% } %>
-
-              </div>
-            </div>
-            
-            <div class="collection-index-recipe-about-servings-container">
-              <div class="collection-index-recipe-about-servings-icon">
-                <img src="../../public/icons/servings.png" alt="servings icon">
-              </div>
-              <div class="collection-index-recipe-about-servings-value">
-                <p><%= r.servings %></p>
-              </div>
-            </div>
+          <div class="collections-index-collection-about-container">
+            <p><%= c.description %></p>
           </div>
         </a>
       <% }) %>
@@ -100,23 +73,13 @@
 
   <% } %>
   
-  <div id="collection-index-navigation">
-    <div id="collection-index-navigation-container">
-      <a id="add-recipe-page-link" method="GET" href="recipes/add"><input type="submit" value="Add a Recipe" class="reg-button"/></a>
-      <a id="import-recipe-page-link" method="GET" href="recipes/import"><input type="submit" value="Import a Recipe" class="reg-button"/></a>
+  <div id="collections-index-navigation">
+    <div id="collections-index-navigation-container">
+      <a id="add-collection-page-link" method="GET" href="recipes/add"><input type="submit" value="Add a collection" class="reg-button"/></a>
     </div>
   </div>
 
   <br>
   <br>
-
-
-
-
-
-
-</form>
-<br>
-<br>
-<br>
+  
 <%- include('../partials/footer') %>
