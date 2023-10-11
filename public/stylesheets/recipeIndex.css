@@ -1,9 +1,9 @@
-#recipe-index-recipes-container {
+#recipes-index-recipes-container {
     display: flex;
     justify-content: center;    /* Horizontal centering */
   }
   
-  .recipe-index-recipe-card-grid {
+  .recipes-index-recipe-card-grid {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -12,7 +12,7 @@
     /* border: 10px black solid; */
   }
   
-  .recipe-index-recipe-card-container {
+  .recipes-index-recipe-card-container {
     display: flex;
     flex-direction: column;
     flex-basis: auto;
@@ -24,62 +24,19 @@
     transition: transform 0.3s
   }
   
-  .recipe-index-recipe-card-container:hover {
+  .recipes-index-recipe-card-container:hover {
       transform: scale(1.05)
   }
   
-  .recipe-index-recipe-card-container:hover > h1, 
-  .recipe-index-recipe-card-container:hover > h2, 
-  .recipe-index-recipe-card-container:hover > p {
+  .recipes-index-recipe-card-container:hover > h1, 
+  .recipes-index-recipe-card-container:hover > h2, 
+  .recipes-index-recipe-card-container:hover > p {
     cursor: pointer;
     color: #007991;
   }
   
-  /* Small Devices (Phones) */
-  @media (max-width: 576px) {
-    .recipe-index-recipe-card-container {
-      flex: 1 1 90%;
-      margin: 4%;
-    }
-  }
   
-  @media (min-width: 576px) {
-    .recipe-index-recipe-card-container {
-      flex: 1 1 90%;
-      /* margin: 4%; */
-    }
-  }
-  
-  /* Medium Devices (Tablets) */
-  @media (min-width: 768px) {
-    .recipe-index-recipe-card-container {
-      flex: 1 1 40%;
-    }
-  }
-  
-  /* Large Devices (Laptops) */
-  @media (min-width: 992px) {
-    .recipe-index-recipe-card-container {
-      flex: 1 1 30%;
-    }
-  }
-  
-  /* Large Devices (Screens) */
-  @media (min-width: 1200px) {
-    .recipe-index-recipe-card-container {
-      flex: 1 1 25%;
-    }
-  }
-  
-  /* Large Devices (XL Screens) */
-  @media (min-width: 1500px) {
-    .recipe-index-recipe-card-container {
-      flex: 1 1 25%;
-    }
-  }
-  
-  
-  .recipe-index-recipe-image {
+  .recipes-index-recipe-image {
     width: 100%;
     height: 300px;
     background-size: cover;
@@ -91,7 +48,7 @@
     padding: 0%;
   }
   
-  .recipe-index-recipe-image > img {
+  .recipes-index-recipe-image > img {
     justify-content: flex-start;
     width: 100%;
     height: 100%;
@@ -101,34 +58,34 @@
     padding: 0%;
   }
   
-  .recipe-index-recipe-title {
+  .recipes-index-recipe-title {
     padding: 5%;
   }
   
-  .recipe-index-recipe-title > h2 {
+  .recipes-index-recipe-title > h2 {
     padding: 0%;
     margin: 0%;
   }
   
   
-  .recipe-index-recipe-author {
+  .recipes-index-recipe-author {
     padding-bottom: 5%;
   }
   
-  .recipe-index-recipe-author > p {
+  .recipes-index-recipe-author > p {
     margin: 0%;
   }
   
-  .recipe-index-recipe-description {
+  .recipes-index-recipe-description {
     margin: 5%;
   }
   
-  .recipe-index-recipe-description > p {
+  .recipes-index-recipe-description > p {
     margin: 0%;
   }
   
   
-  .recipe-index-recipe-about-container {
+  .recipes-index-recipe-about-container {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -138,113 +95,142 @@
   }
   
   
-  .recipe-index-recipe-about-time-container {
+  .recipes-index-recipe-about-time-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
   
-  .recipe-index-recipe-about-time-icon > p {
+  .recipes-index-recipe-about-time-icon > p {
     padding: 0;
     margin-top: 0;
   }
   
-  .recipe-index-recipe-about-time-value > p {
+  .recipes-index-recipe-about-time-value > p {
     padding: 0;
     margin-top: 0;
   }
   
   
-  .recipe-index-recipe-about-servings-container {
+  .recipes-index-recipe-about-servings-container {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
   
-  .recipe-index-recipe-about-servings-icon > p {
+  .recipes-index-recipe-about-servings-icon > p {
     padding: 0;
     margin-top: 0;
   }
   
-  #recipe-index-recipe-about-servings-value > p {
+  #recipes-index-recipe-about-servings-value > p {
     padding: 0;
     margin-top: 0;
   }
-
-
-
+  
+  #recipes-index-navigation-container {
+    display: flex;
+    justify-content: center;
+    width: 100%
+  }
+ 
+  #recipes-index-navigation-container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap
+  }
+  
+  
 
 
  /* Small Devices (Phones) */
   @media (max-width: 576px) {
-    .recipe-index-recipe-card-grid {
+    .recipes-index-recipe-card-grid {
       width: 90%;
+    }
+
+    .recipes-index-recipe-card-container {
+      flex: 1 1 90%;
+      margin: 4%;
+    }
+
+    #recipes-index-navigation-container {
+      width: 90%
     }
   }
   
   @media (min-width: 576px) {
-    .recipe-index-recipe-card-grid {
+    .recipes-index-recipe-card-grid {
       width: 90%;
     }
 
-    #recipe-index-navigation-container {
+    .recipes-index-recipe-card-container {
+      flex: 1 1 90%;
+      /* margin: 4%; */
+    }
+
+    #recipes-index-navigation-container {
       width: 90%
     }
   }
   
   /* Medium Devices (Tablets) */
   @media (min-width: 768px) {
-    .recipe-index-recipe-card-grid {
+    .recipes-index-recipe-card-grid {
       width: 90%;
     }
 
-    #recipe-index-navigation-container {
+    .recipes-index-recipe-card-container {
+      flex: 1 1 40%;
+    }
+
+    #recipes-index-navigation-container {
       width: 90%
     }
   }
   
   /* Large Devices (Laptops) */
   @media (min-width: 992px) {
-    .recipe-index-recipe-card-grid {
+    .recipes-index-recipe-card-grid {
       width: 90%;
     }
 
-    #recipe-index-navigation-container {
+    .recipes-index-recipe-card-container {
+      flex: 1 1 30%;
+    }
+
+    #recipes-index-navigation-container {
       width: 60%
     }
   }
   
   /* Large Devices (Screens) */
   @media (min-width: 1200px) {
-    .recipe-index-recipe-card-grid {
+    .recipes-index-recipe-card-grid {
       width: 90%;
     }
 
-    #recipe-index-navigation-container {
+    .recipes-index-recipe-card-container {
+      flex: 1 1 25%;
+    }
+
+    #recipes-index-navigation-container {
       width: 40%
     }
   }
   
   /* Large Devices (Screens) */
   @media (min-width: 1500px) {
-    .recipe-index-recipe-card-grid {
+    .recipes-index-recipe-card-grid {
       width: 60%;
     }
 
-    #recipe-index-navigation-container {
+    .recipes-index-recipe-card-container {
+      flex: 1 1 25%;
+    }
+
+    #recipes-index-navigation-container {
       width: 40%
     }
-  }
-  
-  #recipe-index-navigation-container {
-    display: flex;
-    justify-content: center;
-    width: 100%
-  }
-
-  #recipe-index-navigation-container {
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap
   }

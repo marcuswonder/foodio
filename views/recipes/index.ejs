@@ -3,33 +3,34 @@
 <h1>Recipes</h1>
 
 <% if (recipes.length === 0) { %>
-
-  <div id="recipe-index-navigation-container">
-    <p>There are no recipes here!</p>
-    <a id="add-recipe-page-link" method="GET" href="recipes/add"><input type="submit" value="Add a Recipe" class="reg-button"/></a>
-    <a id="import-recipe-page-link" method="GET" href="recipes/import"><input type="submit" value="Import a Recipe" class="reg-button"/></a>
+  <div id="recipes-index-navigation">
+    <div id="recipes-index-navigation-container">
+      <p>There are no recipes here!</p>
+      <a id="add-recipe-page-link" method="GET" href="recipes/add"><input type="submit" value="Add a Recipe" class="reg-button"/></a>
+      <a id="import-recipe-page-link" method="GET" href="recipes/import"><input type="submit" value="Import a Recipe" class="reg-button"/></a>
+    </div>
   </div>
 
 <% } else { %>  
-  <div id="recipe-index-recipes-container">
-    <div class="recipe-index-recipe-card-grid">
+  <div id="recipes-index-recipes-container">
+    <div class="recipes-index-recipe-card-grid">
       <% recipes.forEach(function(r) { %>
-        <a href="/recipes/<%= r._id %>" class="recipe-index-recipe-card-container">
-          <div class="recipe-index-recipe-image">
+        <a href="/recipes/<%= r._id %>" class="recipes-index-recipe-card-container">
+          <div class="recipes-index-recipe-image">
             <img src="<%= r.photo %>" alt="Recipe Image">
           </div>
-          <div class="recipe-index-recipe-title">
+          <div class="recipes-index-recipe-title">
             <h2><%= r.name %></h2>
           </div>
-          <div class="recipe-index-recipe-author">
+          <div class="recipes-index-recipe-author">
             <p><%= r.userName %></p>
           </div>
-          <div class="recipe-index-recipe-about-container">
-            <div class="recipe-index-recipe-about-time-container">
-              <div class="recipe-index-recipe-about-time-icon">
+          <div class="recipes-index-recipe-about-container">
+            <div class="recipes-index-recipe-about-time-container">
+              <div class="recipes-index-recipe-about-time-icon">
                 <img src="/public/icons/times.png" alt="time icon">
               </div>
-              <div class="recipe-index-recipe-about-time-value">             
+              <div class="recipes-index-recipe-about-time-value">             
                 <% if ((r.prepTime + r.cookTime) > 60) { %>
                   <% if (((r.prepTime + r.cookTime) / 60) > 2) { %>
                     <p><%= Math.floor((r.prepTime + r.cookTime) / 60) %> hrs</p>
@@ -43,11 +44,11 @@
               </div>
             </div>
             
-            <div class="recipe-index-recipe-about-servings-container">
-              <div class="recipe-index-recipe-about-servings-icon">
+            <div class="recipes-index-recipe-about-servings-container">
+              <div class="recipes-index-recipe-about-servings-icon">
                 <img src="../../public/icons/servings.png" alt="servings icon">
               </div>
-              <div class="recipe-index-recipe-about-servings-value">
+              <div class="recipes-index-recipe-about-servings-value">
                 <p><%= r.servings %></p>
               </div>
             </div>
@@ -59,8 +60,8 @@
 
   <% } %>
   
-  <div id="recipe-index-navigation">
-    <div id="recipe-index-navigation-container">
+  <div id="recipes-index-navigation">
+    <div id="recipes-index-navigation-container">
       <a id="add-recipe-page-link" method="GET" href="recipes/add"><input type="submit" value="Add a Recipe" class="reg-button"/></a>
       <a id="import-recipe-page-link" method="GET" href="recipes/import"><input type="submit" value="Import a Recipe" class="reg-button"/></a>
     </div>
