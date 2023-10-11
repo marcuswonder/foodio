@@ -10,6 +10,7 @@ const { getBbcGoodFoodRecipe, determineRecipeSourceAndParse } = require("../conf
 
 module.exports = {
     index,
+    userIndex,
     new: newAddRecipe,
     create,
     newCopyRecipe,
@@ -28,6 +29,15 @@ module.exports = {
 
 async function index(req, res) {
     const recipes = await Recipe.find({})
+        .populate('tags')
+        .exec()
+        res.render('recipes/index', { recipes, stylesheet: '../public/stylesheets/recipeIndex.css' })
+}
+
+async function userIndex(req, res) {
+  console.log("Controller: userIndex Hit")
+  console.log("Controller: userIndex req.user", req.user)
+    const recipes = await Recipe.find({ 'author': req.user._id })
         .populate('tags')
         .exec()
         res.render('recipes/index', { recipes, stylesheet: '../public/stylesheets/recipeIndex.css' })
