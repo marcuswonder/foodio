@@ -4,8 +4,8 @@
 
 <% if (collections.length === 0) { %>
   <div id="collections-index-navigation">
+    <p>There are no collections here!</p>
     <div id="collections-index-navigation-container">
-      <p>There are no collections here!</p>
       <a id="add-collection-page-link" method="GET" href="collections/add"><input type="submit" value="Add a collection" class="reg-button"/></a>
     </div>
   </div>
@@ -34,11 +34,13 @@
 
   <% } %>
   
-  <div id="collections-index-navigation">
-    <div id="collections-index-navigation-container">
-      <a id="add-collection-page-link" method="GET" href="recipes/add"><input type="submit" value="Add a collection" class="reg-button"/></a>
+  <% if (collections.length) { %>
+    <div id="collections-index-navigation">
+      <div id="collections-index-navigation-container">
+        <a id="add-collection-page-link" method="GET" href="recipes/add"><input type="submit" value="Add a collection" class="reg-button"/></a>
+      </div>
     </div>
-  </div>
+  <% } %>
 
   <br>
   <br>
