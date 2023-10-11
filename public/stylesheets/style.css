@@ -61,24 +61,6 @@ body {
   margin: 0 5px;
 }
 
-/* .nav-element-content-hidden {
-  color: white;
-  margin: 0 5px;
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-  transform: translateX(-100%), opacity(0);
-  transition: transform .5s ease, opacity .2s ease-in;
-}
-
-.nav-element-content-revealed {
-  color: white;
-  margin: 0 5px;
-  opacity: 1;
-  transform: translateX(0), opacity(1);
-  transition: transform .2s ease, opacity .5s ease;
-} */
-
 .nav-element-content-hidden {
   color: white;
   margin: 0 5px;
@@ -156,7 +138,6 @@ body {
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  /* margin: 10px 0 0 10px; */
 }
 
 .burger-nav-element-content {
@@ -173,12 +154,11 @@ body {
 
 .burger-nav-element-content-hidden {
   justify-content: flex-start;
-  /* margin: 10px; */
   opacity: 0;
   transform: translateX(-1000%);
   transition: transform .3s ease, opacity .5s ease;
-  overflow: hidden; /* Hide overflowing content */
-  white-space: nowrap; /* Prevent text from wrapping */
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 #burger-nav-recipes-search > a,
@@ -306,8 +286,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-
-
+.foot {
+  margin: 10px 0 0 10px;
+}
 
 .flex-info {
   color: white;
