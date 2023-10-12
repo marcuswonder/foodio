@@ -17,6 +17,7 @@ module.exports = {
     copy: copyRecipe,
     newImportRecipe,
     import: importRecipeWithScrapingTools,
+    duplicate,
     show,
     delete: deleteRecipe,
     addToCollection,
@@ -233,6 +234,35 @@ async function importRecipeWithScrapingTools(req, res) {
 //   }
 // }
 
+async function duplicate(req, res) {
+  const recipeToDuplicate = await Recipe.findById(req.params.id)
+
+  const recipeObj = recipeToDuplicate.toObject()
+  delete recipeObj._id;
+  
+  const recipe = new Recipe(recipeObj)
+
+  if(recipeToDuplicate.publisher || recipeToDuplicate.author !== req.user._id) {  
+    recipe.photo = ''
+    recipe.description = ''
+    recipe.link = ''
+    recipe.publisher = ''
+    
+  }
+  recipe.author = req.user._id;
+  recipe.userName = req.user.name;
+  recipe.gId = req.user.googleId;
+
+  try {
+    await recipe.save()
+    console.log("Recipe Controller: Duplicate Recipe Save Complete")
+    return res.redirect(`/recipes/${recipe._id}/edit`)
+    
+  } catch(err) {
+    console.log("Recipe Controller: Duplicate Recipe Save Error", err);
+    return res.redirect(`/recipes/${recipeToDuplicate._id}`);
+  }
+}
 
 async function show(req, res) {
     const recipe = await Recipe.findById(req.params.id)

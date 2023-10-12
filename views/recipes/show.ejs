@@ -91,7 +91,8 @@
         <div id="recipe-show-header-actions-container">
           <div class="recipe-show-header-actions-sub-container">
             <a type="button" id="recipe-show-actions-favourite" class="recipe-show-header-actions-sub-container-content" onclick="changeRecipeFavouriteStatus()"><span class="material-symbols-outlined">favorite</span></a>
-            <a type="button" id="recipe-show-actions-copy" class="recipe-show-header-actions-sub-container-content" onclick="copyRecipe()"><span class="material-symbols-outlined">content_copy</span></a>
+            
+            <a type="button" id="recipe-show-actions-duplicate" class="recipe-show-header-actions-sub-container-content" onclick="duplicateRecipe()"><span class="material-symbols-outlined">content_copy</span></a>
             <a type="button" id="recipe-show-header-actions-share" class="recipe-show-header-actions-sub-container-content" onclick="shareRecipe()"><span class="material-symbols-outlined">share</span></a>            
             <a type="button" id="recipe-show-header-actions-print" class="recipe-show-header-actions-sub-container-content" onclick="printRecipe()"><span class="material-symbols-outlined">print</span></a>
             <% if (!user) { %>
@@ -170,6 +171,12 @@
         </div>
       </div>
     <% } %>
+
+    <div class="recipe-show-hidden">
+      <form action="/recipes/<%= recipe._id %>/duplicate" method="POST" class="recipe-show-hidden">
+        <button id="recipe-show-hidden-button" type="submit" class="recipe-show-hidden">Duplicate Recipe</button>
+      </form>
+    </div>
     
   </div>
 
@@ -373,6 +380,13 @@
         window.print();
     })
   }
+
+
+  // Duplicate Recipe
+  function duplicateRecipe() {
+    const hiddenButton = document.getElementById('recipe-show-hidden-button')
+    hiddenButton.click()
+}
 
 </script>
 

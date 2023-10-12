@@ -130,10 +130,16 @@
 }
 
 #recipe-show-actions-favourite,
-#recipe-show-actions-copy,
+#recipe-show-actions-duplicate,
 #recipe-show-header-actions-share,
 #recipe-show-header-actions-print {
   flex-grow: 0
+}
+
+#recipe-show-header-actions-duplicate > button {
+  border: none;
+  /* background-color: none; */
+  color: none;
 }
 
 #recipe-show-header-actions-collection {
@@ -189,7 +195,11 @@
     padding: 0;
 }
 
-
+.recipe-show-hidden {
+  display: none;
+  max-height: 0;
+  max-width: 0;
+}
 
 
 
