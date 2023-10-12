@@ -15,9 +15,11 @@
     <div class="collections-index-collection-card-grid">
       <% collections.forEach(function(c) { %>
         <div class="collections-index-collection-card-container">
+          <% if (c.photo) { %>
           <div class="collections-index-collection-image">
             <img src="<%= c.photo %>" alt="collection Image">
           </div>
+          <% } %>
           <div class="collections-index-collection-title">
             <a href="/collections/<%= c._id %>"><h2><%= c.name %></h2></a>
           </div>
