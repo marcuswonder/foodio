@@ -363,6 +363,17 @@
   }
 
 
+
+  // Print Functionality
+  function printRecipe() {
+    const printButton = document.getElementById('recipe-show-header-actions-print')
+
+    printButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.print();
+    })
+  }
+
 </script>
 
   

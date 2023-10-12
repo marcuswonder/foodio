@@ -409,3 +409,33 @@
   margin: 1% 0;
   /* padding: 1% 0; */
 }
+
+@media print {
+  #nav,
+  #burger-nav,
+  #recipe-show-header-photo-container,
+  #recipe-show-header-actions-container,
+  .reg-button {
+    display: none;
+  }
+
+  body {
+    filter: grayscale(100%);
+  }
+
+  #body,
+  #page-container {
+    width: 100%
+  }
+
+  #recipe-show-method-container {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%
+  }
+
+  #recipe-show-method-ingredients-container,
+  #recipe-show-method-instructions-container {
+    max-width: 49%
+  }
+}
