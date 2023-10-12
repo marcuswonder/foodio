@@ -289,6 +289,9 @@ async function deleteRecipe(req, res, next) {
   if(recipe.photo) {
     if(recipe.photo.includes('s3.amazonaws.com')) {
       await deleteImageFromS3(recipe.photo)
+
+      await Recipe.deleteOne({'_id': req.params.id})
+      res.redirect('/recipes')
     }
   } else {
     
