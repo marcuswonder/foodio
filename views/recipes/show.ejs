@@ -155,18 +155,46 @@
       </div>
     </div>
     
-    <% if (user?._id.equals(recipe.author)) { %>
+    <!-- <% if (user?._id.equals(recipe.author)) { %>
       <div id="recipe-show-navigation">
         <div id="recipe-show-navigation-container">
+
           <div class="recipe-show-navigation-button-container">
             <form action="/recipes/<%= recipe._id %>/edit" method="GET" class="button">
               <button type="submit" class="reg-button">Edit Recipe</button>
             </form>
           </div>
+          
           <div class="recipe-show-navigation-button-container">
             <form action="/recipes/<%= recipe._id %>?_method=DELETE" method="POST" class="button">
               <button type="submit" class="reg-button">Delete Recipe</button>
             </form>
+          </div>
+        </div>
+      </div>
+    <% } %> -->
+    <% if (user?._id.equals(recipe.author) && !recipe.publisher) { %>
+      <div id="recipe-show-navigation">
+        <div id="recipe-show-navigation-container">
+
+          <div class="recipe-show-navigation-button-container">
+            <form action="/recipes/<%= recipe._id %>/edit" method="GET" class="button">
+              <button type="submit" class="reg-button">Edit Recipe</button>
+            </form>
+          </div>
+          
+          <div class="recipe-show-navigation-button-container">
+            <form action="/recipes/<%= recipe._id %>?_method=DELETE" method="POST" class="button">
+              <button type="submit" class="reg-button">Delete Recipe</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    <% } else if(user?._id.equals(recipe.author) && recipe.publisher) { %>
+      <div id="recipe-show-navigation">
+        <div id="recipe-show-navigation-container">
+          <div class="recipe-show-navigation-button-container">
+              <button type="submit" class="reg-button" onclick="duplicateRecipe()">Duplicate & Edit Recipe</button>
           </div>
         </div>
       </div>

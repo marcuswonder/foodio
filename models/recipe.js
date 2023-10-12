@@ -35,6 +35,9 @@ const recipeSchema = new Schema({
     publisher: {
         type: String,
     },
+    publisherId: {
+        type: String,
+    },
     link: {
         type: String,
     },

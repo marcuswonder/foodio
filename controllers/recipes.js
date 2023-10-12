@@ -66,6 +66,8 @@ async function create(req, res) {
   recipe.gId = req.user.googleId;
   recipe.ingredients = ingredients
   recipe.instructions = instructions
+  recipe.publisher = req.user.name
+  recipe.publisherId = req.user._id
 
   try {
     if(req.file) {
@@ -284,13 +286,16 @@ async function deleteRecipe(req, res, next) {
     const recipe = await Recipe.findById(req.params.id)
     console.log("Recipe Controller: deleteRecipe recipe", recipe)
 
+  if(recipe.photo) {
     if(recipe.photo.includes('s3.amazonaws.com')) {
       await deleteImageFromS3(recipe.photo)
     }
+  } else {
     
     await Recipe.deleteOne({'_id': req.params.id})
       res.redirect('/recipes')
-      
+  }
+
   } catch(err) {
       console.log(err)
       return next(err)
