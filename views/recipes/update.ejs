@@ -93,17 +93,17 @@
                   <div class="update-recipe-ingredient-container">
                     <ul>
                       <li>
-                        <input name="ingredient" type="text" class="ingredient input" value="<%= ingredient %>"></input>
+                        <input name="ingredient" type="text" class="ingredient input" value="<%= ingredient.ingredient %>"></input>
                       </li>
                   </ul>
                     <div class="ingredient-up">
-                      <a type="button" class="ingredient-up" onclick="moveIngredientUp('<%= ingredient %>')"><img src="/public/icons/arrow_upward.png"></a>
+                      <a type="button" class="ingredient-up" onclick="moveIngredientUp('<%= ingredient.ingredient %>')"><img src="/public/icons/arrow_upward.png"></a>
                     </div>
                     <div class="ingredient-down">
-                      <a type="button" class="ingredient-down" onclick="moveIngredientDown('<%= ingredient %>')"><img src="/public/icons/arrow_downward.png"></a>
+                      <a type="button" class="ingredient-down" onclick="moveIngredientDown('<%= ingredient.ingredient %>')"><img src="/public/icons/arrow_downward.png"></a>
                     </div>
                     <div class="ingredient-delete">
-                      <a type="button" class="ingredient-delete" onclick="deleteIngredient('<%= ingredient %>')"><img src="/public/icons/delete.png"></a>
+                      <a type="button" class="ingredient-delete" onclick="deleteIngredient('<%= ingredient.ingredient %>')"><img src="/public/icons/delete.png"></a>
                     </div>
                   </div>
                 <% }) %> 
@@ -127,17 +127,17 @@
                 <div class="update-recipe-instruction-container">
                   <ul>
                     <li>
-                      <input name="instruction" type="text" class="instruction input" value="<%= instruction %>"></input>
+                      <input name="instruction" type="text" class="instruction input" value="<%= instruction.instruction %>"></input>
                     </li>
                   </ul>
                   <div class="instruction-up">
-                    <a type="button" class="instruction-up" onclick="moveInstructionUp('<%= instruction %>')"><img src="/public/icons/arrow_upward.png"></a>
+                    <a type="button" class="instruction-up" onclick="moveInstructionUp('<%= instruction.instruction %>')"><img src="/public/icons/arrow_upward.png"></a>
                   </div>
                   <div class="instruction-down">
-                    <a type="button" class="instruction-down" onclick="moveInstructionDown('<%= instruction %>')"><img src="/public/icons/arrow_downward.png"></a>
+                    <a type="button" class="instruction-down" onclick="moveInstructionDown('<%= instruction.instruction %>')"><img src="/public/icons/arrow_downward.png"></a>
                   </div>
                   <div class="instruction-delete">
-                    <a type="button" class="instruction-delete" onclick="deleteInstruction('<%= instruction %>')"><img src="/public/icons/delete.png"></a>
+                    <a type="button" class="instruction-delete" onclick="deleteInstruction('<%= instruction.instruction %>')"><img src="/public/icons/delete.png"></a>
                   </div>
                 </div>
               <% }) %> 
@@ -158,13 +158,11 @@
           <div class="update-recipe-title">
             <h3>Photo</h3>
           </div>
+          
           <div id="update-recipe-image-content">
             <img id="update-recipe-image" src="<%= recipe.photo %>"></img>
           </div>
           <div id="update-recipe-image-buttons">
-
-
-
             <div id="update-recipe-upload-photo-button-container" class="update-recipe-photo-button-containers">
               <label for="photo-for-upload" class="custom-file-upload">
                 <div class="button-container">
@@ -173,9 +171,6 @@
                 </div>
               </label>
             </div>
-
-
-            
             <div id="update-recipe-delete-photo-button-container" class="update-recipe-photo-button-containers">
               <button type="button" class="reg-button" onclick="photoDelete()">Delete Photo</button>
             </div>
@@ -517,12 +512,32 @@ function deleteInstruction(instructionValue) {
 
 })
 
+// Handle event of no photo
+document.addEventListener('DOMContentLoaded', function() {
+  let photoElement = document.getElementById('update-recipe-image')
+
+  if (photoElement) {
+      let srcValue = photoElement.getAttribute('src')
+      console.log("srcValue", srcValue)
+
+      if (srcValue) {
+        return
+
+      } else {
+        photoDelete()
 
 
-// }
+
+      }
+  }
+})
 
 function photoDelete() {
-  // const currentPhotoElement = document.getElementById('update-recipe-image').remove()
+  const noImagePlaceholderCheck = document.getElementById('no-image-placeholder')
+
+  if(noImagePlaceholderCheck) {
+    return
+  }
   
   const currentPhotoElement = document.getElementById('update-recipe-image')
   const uploadedPhotoElement = document.getElementById('update-recipe-uploaded-image')
