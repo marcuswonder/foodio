@@ -220,85 +220,149 @@
       <h2>Share this recipe</h2>
       <p><%= recipe.name %></p>
       <input type="text" id="shareLink" class="share-modal-link-input" readonly>
+      <button id="share-modal-link-copy" class="reg-button" onclick=copyLink()>Copy Link</button>
+      <div id="share-modal-link-clipboard-notice" class="share-modal-clipboard-notice"></div>
     </div>
     
-    <h3>Share via:</h3>
-    <div id="share-button-container">
-      <button id="share-modal-email" class="share-modal-button-containers" onclick=shareViaEmail() ><img src="/public/icons/email_icon.png" alt="Share with Email"></button>
-      <button id="share-modal-instagram" class="share-modal-button-containers" onclick=shareViaWhatsApp()><img src="/public/icons/instagram_icon.png" alt="Share with Instagram"></button>
-      <button id="share-modal-whatsapp" class="share-modal-button-containers"><img src="/public/icons/whatsapp_icon.png" alt="Share with WhatsApp"></button>
-      <button id="share-modal-imessage" class="share-modal-button-containers"><img src="/public/icons/imessage_icon.png" alt="Share with iMessage"></button>
-      <button id="share-modal-facebook" class="share-modal-button-containers"><img src="/public/icons/facebook_icon.png" alt="Share with Facebook"></button>
+    <h3 id="share-modal-subtitle">Share via:</h3>
+    <div id="share-modal-button-container">
+      <button id="share-modal-email" class="share-modal-button-containers" onclick=shareViaEmail()><img src="/public/icons/email_icon.png" alt="Share with Email"></button>
+      <button id="share-modal-whatsapp" class="share-modal-button-containers" onclick=shareViaWhatsApp()><img src="/public/icons/whatsapp_icon.png" alt="Share with WhatsApp"></button>
+      <button id="share-modal-instagram" class="share-modal-button-containers" onclick=shareViaInstagram()><img src="/public/icons/instagram_icon.png" alt="Share with Instagram"></button>
+      <button id="share-modal-facebook" class="share-modal-button-containers" onclick=shareViaFacebook()><img src="/public/icons/facebook_icon.png" alt="Share with Facebook"></button>
+      <!-- <button id="share-modal-imessage" class="share-modal-button-containers" target="blank"><img src="/public/icons/imessage_icon.png" alt="Share with iMessage"></button> -->
     </div>
 
+    <p id="share-modal-clipboard-notice" class="share-modal-clipboard-notice"></p>
     <span id="share-modal-close" class="reg-button">Close</span>
   </div>
 </div>
 
-  <script>
-    // Populate share link
-    const currentUrl = window.location.href
-    const shareLink = document.getElementById('shareLink')
-    shareLink.value = currentUrl
+<script>
+  // Populate share link
+  const currentUrl = window.location.href.toString()
+  const shareLink = document.getElementById('shareLink')
+  shareLink.value = currentUrl
 
-    // Get the page
-    const showPage = document.getElementById('recipe-show');
-    
-    // Get the nav
-    const nav = document.getElementById('nav');
-    
-    // Get the recipe name
-    const recipeNameEl = document.getElementById('recipe-show-info-name');
-    const recipeName = recipeNameEl.innerText
+  // Get the page
+  const showPage = document.getElementById('recipe-show');
+  
+  // Get the nav
+  const nav = document.getElementById('nav');
+  
+  // Get the recipe name
+  const recipeNameEl = document.getElementById('recipe-show-info-name');
+  const recipeName = recipeNameEl.innerText.toString()
 
-    // Get the modal
-    const modal = document.getElementById('share-modal');
+  // Get the modal
+  const modal = document.getElementById('share-modal');
 
-    // Get the button that opens the modal
-    const shareButton = document.getElementById('recipe-show-header-actions-share');
+  // Get the button that opens the modal
+  const shareButton = document.getElementById('recipe-show-header-actions-share');
 
-    // Get the <span> element that closes the modal
-    const closeBtn = document.getElementById('share-modal-close');
+  // Get the <span> element that closes the modal
+  const closeBtn = document.getElementById('share-modal-close');
 
-    // When the user clicks the share button, open the modal
-    shareButton.onclick = function() {
-      nav.style.display = 'none';
-      modal.style.display = 'flex';
-    }
+  // When the user clicks the share button, open the modal
+  shareButton.onclick = function() {
+    nav.style.display = 'none';
+    modal.style.display = 'flex';
+  }
 
-    // When the user clicks on <span> (x), close the modal
-    closeBtn.onclick = function() {
+  // When the user clicks on <span> (x), close the modal
+  closeBtn.onclick = function() {
+    modal.style.display = 'none';
+    nav.style.display = 'flex';
+  }
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
       modal.style.display = 'none';
       nav.style.display = 'flex';
     }
+  }
 
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-      if (event.target == modal) {
-        modal.style.display = 'none';
-        nav.style.display = 'flex';
-      }
+  // Get the copy Link to Clipboard Notice element
+  const copyLinkclipboardNotice = document.getElementById('share-modal-link-clipboard-notice')
+  
+  
+  // Get the copy Link to Clipboard for sharing Notice element
+  const clipboardNotice = document.getElementById('share-modal-clipboard-notice')
+
+  function copyLink() {
+
+    if (navigator.clipboard) {
+    const message = `${currentUrl}`
+    navigator.clipboard.writeText(message)
+        .then(() => {
+          copyLinkclipboardNotice.innerText = 'Message copied to clipboard!'
+        })
+        .catch(err => {
+          copyLinkclipboardNotice.innerText = 'Oops, something went wrong...'
+          console.log('Error in copying message: ', err)
+        });
+
+        setTimeout(() => {
+          copyLinkclipboardNotice.innerText = ''
+        }, 2000);
     }
+  }
 
-    // Function to share via email
-    function shareViaEmail() {
-      window.location.href = `mailto:?subject=Check out this recipe on Foodio!&body=I love this recipe for ${recipeName}! Check out it out on Foodio: ${currentUrl}`;
-    };
+  // Email
+  function shareViaEmail() {
+    window.location.href = `mailto:?subject=Check out this recipe on Foodio!&body=I love this recipe for ${recipeName}! Check out it out on Foodio: ${currentUrl}`;
+  };
+  
+  
+  // WhatsApp
+  function shareViaWhatsApp() {
+    whatsAppLink = `https://api.whatsapp.com/send?text=Check%20out%20this%20recipe%20on%20Foodio!%20${recipeName}:%20${currentUrl}`
+    window.open(whatsAppLink, '_blank');
+  }
+  
+  // Instagram
+  function shareViaInstagram() {
+    if (navigator.clipboard) {
+    const message = `Check out this recipe on Foodio! ${recipeName}: ${currentUrl}`
 
-    // // Function to share via WhatsApp
+    navigator.clipboard.writeText(message)
+        .then(() => {
+          clipboardNotice.innerText = 'Message copied to clipboard!'
+        })
+        .catch(err => {
+          clipboardNotice.innerText = 'Oops, something went wrong...'
+          console.log('Error in copying message: ', err)
+        });
 
-    function shareViaWhatsApp() {
-      window.location.href = `https://wa.me/?text=urlencodedtext`
+        setTimeout(() => {
+          clipboardNotice.innerText = ''
+          window.open('https://www.instagram.com', '_blank');
+        }, 2000);
     }
-    // const shareViaWhatsApp = () => {
-    //   const link = document.getElementById('shareLink').value;
-    //   window.location.href = `whatsapp://send?text=Check out this link: ${link}`;
-    // };
+  }
 
-    // // Add event listeners to share buttons
-    // document.getElementById('shareEmail').addEventListener('click', shareViaEmail);
-    // document.getElementById('shareWhatsApp').addEventListener('click', shareViaWhatsApp);
+  function shareViaFacebook() {
+    if (navigator.clipboard) {
+    const message = `Check out this recipe on Foodio! ${recipeName}: ${currentUrl}`
 
-  </script>
+    navigator.clipboard.writeText(message)
+        .then(() => {
+          clipboardNotice.innerText = 'Message copied to clipboard!'
+        })
+        .catch(err => {
+          clipboardNotice.innerText = 'Oops, something went wrong...'
+          console.log('Error in copying message: ', err)
+        });
+
+        setTimeout(() => {
+          clipboardNotice.innerText = ''
+          window.open('https://www.facebook.com', '_blank');
+        }, 2000);
+    }
+  }
+
+
+</script>
 
   
