@@ -49,19 +49,23 @@ function newAddRecipe(req, res) {
 
 
 async function create(req, res) {
-  // console.log("Controller Create Function: req.body", req.body)
   if (!req.user) return res.redirect('/auth/google');
+  
+  const ingredients = req.body.ingredient.map(function(item, index) {
+    return { ingredient: item }
+  })
 
-  console.log("Recipe Controller: create req.body", req.body)
+  const instructions = req.body.instruction.map(function(item, index) {
+    return { instruction: item }
+  })
 
-  // res.render('recipes/new', { stylesheet: '../public/stylesheets/style.css' })
 
   const recipe = new Recipe(req.body);
   recipe.author = req.user._id;
   recipe.userName = req.user.name;
   recipe.gId = req.user.googleId;
-  recipe.ingredients = req.body.ingredient
-  recipe.instructions = req.body.instruction
+  recipe.ingredients = ingredients
+  recipe.instructions = instructions
 
   try {
     if(req.file) {
@@ -299,16 +303,28 @@ async function editRecipe(req, res) {
 
 async function updateRecipe(req, res) {
   console.log("Recipe Controller: updateRecipe req.body", req.body)
-  console.log("Recipe Controller: updateRecipe req.file", req.file)
+  
   const recipe = await Recipe.findById(req.params.id);
+
+  const ingredients = req.body.ingredient.map(function(item, index) {
+    return { ingredient: item }
+  })
+
+  const instructions = req.body.instruction.map(function(item, index) {
+    return { instruction: item }
+  })
+
+
   recipe.name = req.body.name;
   recipe.description = req.body.description;
   recipe.prepTime = req.body.prepTime;
   recipe.cookTime = req.body.cookTime;
   recipe.category = req.body.category;
   recipe.servings = req.body.servings;
-  recipe.ingredients = req.body.ingredient;
-  recipe.instructions = req.body.instruction;
+  recipe.ingredients = ingredients;
+  recipe.instructions = instructions;
+
+  console.log("Recipe Controller: updateRecipe req.file", req.file)
 
   try {
     if(req.file) {
@@ -316,20 +332,28 @@ async function updateRecipe(req, res) {
       recipe.photo = result.Location;
 
       await recipe.save().catch(err => {
-        console.log("Controller: User Image Recipe Save Error", err);
-        return res.redirect('/recipes');
+        console.log("Recipe Controller: updateRecipe User Image Recipe Save Error", err)
+        return res.redirect('/recipes')
       });
-      res.redirect(`/recipes/${recipe._id}`);
-      
-    } else {
+      res.redirect(`/recipes/${recipe._id}`)
+
+    } else if(req.body.generateAi === 'on') {
       const aiImage = await aiImageGeneratorAndS3Upload(recipe);
       recipe.photo = aiImage.Location;
 
       await recipe.save().catch(err => {
-        console.log("Controller: AI Image Recipe Save Error", err);
+        console.log("Recipe Controller: updateRecipe AI Image Recipe Save Error", err);
         return res.redirect('/recipes');
       });
-      res.redirect(`/recipes/${recipe._id}`);
+      res.redirect(`/recipes/${recipe._id}`)
+    
+    } else {
+      await recipe.save().catch(err => {
+        console.log("Recipe Controller: updateRecipe Existing Image Recipe Save Error", err);
+        return res.redirect('/recipes');
+      });
+      res.redirect(`/recipes/${recipe._id}`)
+
     }
 
   } catch (error) {

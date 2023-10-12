@@ -93,7 +93,7 @@
                   <div class="update-recipe-ingredient-container">
                     <ul>
                       <li>
-                        <input name="ingredient" type="text" class="ingredient input" value="<%= ingredient.ingredient %>"></input>
+                        <input name="ingredient" type="text" class="ingredient input" autocomplete="off" value="<%= ingredient.ingredient %>"></input>
                       </li>
                   </ul>
                     <div class="ingredient-up">
@@ -127,7 +127,7 @@
                 <div class="update-recipe-instruction-container">
                   <ul>
                     <li>
-                      <input name="instruction" type="text" class="instruction input" value="<%= instruction.instruction %>"></input>
+                      <input name="instruction" type="text" class="instruction input" autocomplete="off" value="<%= instruction.instruction %>"></input>
                     </li>
                   </ul>
                   <div class="instruction-up">
@@ -152,38 +152,34 @@
       </div>
 
 
-      <div id="update-recipe-footer-container">
-        
-        <div id="update-recipe-photo-container" class="update-recipe-header-input-container">
+      <div id="update-recipe-photo-edit-container">
+        <div id="update-recipe-photo-container" class="update-recipe-header-photo-container">
           <div class="update-recipe-title">
             <h3>Photo</h3>
-          </div>
-          
-          <div id="update-recipe-image-content">
-            <img id="update-recipe-image" src="<%= recipe.photo %>"></img>
+            <p>Your current photo is shown below</p>
           </div>
           <div id="update-recipe-image-buttons">
             <div id="update-recipe-upload-photo-button-container" class="update-recipe-photo-button-containers">
               <label for="photo-for-upload" class="custom-file-upload">
                 <div class="button-container">
-                  <span class="reg-button">Choose a File</span>
+                  <span class="reg-button">Choose a New Photo</span>
                   <input id="photo-for-upload" type="file" name="photo" accept="image/*"></input>
                 </div>
               </label>
             </div>
             <div id="update-recipe-delete-photo-button-container" class="update-recipe-photo-button-containers">
-              <button type="button" class="reg-button" onclick="photoDelete()">Delete Photo</button>
+              <button type="button" id="update-recipe-generate-ai-photo-button" class="reg-button" onclick="removePhotoAndGenerateWithAi()">Generate with AI</button>
             </div>
           </div>
-          <p>If you don't upload a photo we'll generate an image using AI!</p>    
-              
+          
+          <div id="update-recipe-image-content">
+            <img id="update-recipe-image" src="<%= recipe.photo %>"></img>
+          </div>    
+
+          <div id="update-recipe-ai-form-container" class="hidden-element">
+            <input type="checkbox" id="generateAi"  class="hidden-element" name="generateAi">
+          </div>             
         </div>
-      
-        <br>
-        <br>
-        <br>
-      
-    
       <button type="submit" class="reg-button">Save Recipe</button>
     </form>
     
@@ -472,12 +468,18 @@ function deleteInstruction(instructionValue) {
 }
 
 // function photoUpload() {
-  
+  const noImagePlaceholderCheck = document.getElementById('no-image-placeholder')
   const photoForUpload = document.getElementById('photo-for-upload')
-  
   const previewImageLocation = document.getElementById('update-recipe-image-content')
-  
   const previewImage = document.createElement('img')
+  const generateImageWithAiCheckbox = document.getElementById('generateAi')
+
+  if(noImagePlaceholderCheck) {
+    console.log("photoUpload Placeholder present")
+    noImagePlaceholderCheck.remove()
+  }
+    
+    
   
   photoForUpload.addEventListener('change', function(event) {
     const currentPhotoElement = document.getElementById('update-recipe-image')
@@ -491,19 +493,20 @@ function deleteInstruction(instructionValue) {
     }
     
     
-    var file = event.target.files[0]
+    let file = event.target.files[0]
 
     if (file) {
       let reader = new FileReader()
 
       reader.onload = function(e) {
         previewImage.id = 'update-recipe-uploaded-image'
-        previewImage.src = e.target.result;
-        previewImage.style.display = 'block';
+        previewImage.src = e.target.result
+        previewImage.style.display = 'block'
       };
 
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(file)
       previewImageLocation.appendChild(previewImage)
+      generateImageWithAiCheckbox.checked = false
 
     } else {
       previewImage.src = '';
@@ -524,7 +527,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return
 
       } else {
-        photoDelete()
+        removePhotoAndGenerateWithAi()
 
 
 
@@ -532,45 +535,94 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 })
 
-function photoDelete() {
-  const noImagePlaceholderCheck = document.getElementById('no-image-placeholder')
 
-  if(noImagePlaceholderCheck) {
-    return
-  }
-  
+
+function removePhotoAndGenerateWithAi() {
   const currentPhotoElement = document.getElementById('update-recipe-image')
   const uploadedPhotoElement = document.getElementById('update-recipe-uploaded-image')
-
-  if(currentPhotoElement) {
-    currentPhotoElement.remove()
-
-  } else if(uploadedPhotoElement) {
-    uploadedPhotoElement.remove()
-  }
-
+  const noImagePlaceholderCheck = document.getElementById('no-image-placeholder')
+  const generateImageWithAiCheckbox = document.getElementById('generateAi')
+  const generateImageWithAiBtn = document.getElementById('update-recipe-generate-ai-photo-button')
   const photoDiv = document.getElementById('update-recipe-image-content')
   
-  const noImagePlaceholder = document.createElement('div')
-  noImagePlaceholder.id = 'no-image-placeholder'
-  noImagePlaceholder.classList.add('update-recipe-image')
-  photoDiv.appendChild(noImagePlaceholder)
   
-  const noImagePlaceholderDiv = document.getElementById('no-image-placeholder')
-  
-  const noImagePlaceholderOverlayH3 = document.createElement('h3')
-  noImagePlaceholderOverlayH3.id = 'no-image-placeholder-overlay-h3'
-  noImagePlaceholderOverlayH3.textContent = "No Photo Selected"
-  noImagePlaceholderDiv.appendChild(noImagePlaceholderOverlayH3)
 
-  const noImagePlaceholderOverlayP = document.createElement('p')
-  noImagePlaceholderOverlayP.id = 'no-image-placeholder-overlay-p'
-  noImagePlaceholderOverlayP.textContent = "We will generate something beautiful using the magic of AI!"
-  noImagePlaceholderDiv.appendChild(noImagePlaceholderOverlayP)
+  if(noImagePlaceholderCheck && (currentPhotoElement || uploadedPhotoElement)) {
+    console.log("First if hit")
+    generateImageWithAiCheckbox.checked = true
+    
+  } else if(!noImagePlaceholderCheck && (currentPhotoElement || uploadedPhotoElement)) {
+    console.log("Else if hit")
+    if(currentPhotoElement) {
+      currentPhotoElement.remove()
 
+    } else if(uploadedPhotoElement) {
+      uploadedPhotoElement.remove()
+    }
 
+    const noImagePlaceholder = document.createElement('div')
+    noImagePlaceholder.id = 'no-image-placeholder'
+    noImagePlaceholder.classList.add('update-recipe-image')
+    photoDiv.appendChild(noImagePlaceholder)
+    
+    const noImagePlaceholderDiv = document.getElementById('no-image-placeholder')
 
+    const noImagePlaceholderOverlayH3 = document.createElement('h3')
+    noImagePlaceholderOverlayH3.id = 'no-image-placeholder-overlay-h3'
+    noImagePlaceholderOverlayH3.textContent = "No Photo Selected"
+    noImagePlaceholderDiv.appendChild(noImagePlaceholderOverlayH3)
+
+    const noImagePlaceholderOverlayP = document.createElement('p')
+    noImagePlaceholderOverlayP.id = 'no-image-placeholder-overlay-p'
+    noImagePlaceholderOverlayP.textContent = "We will generate something beautiful using the magic of AI!"
+    noImagePlaceholderDiv.appendChild(noImagePlaceholderOverlayP)
+
+    generateImageWithAiCheckbox.checked = true
+  }
 }
+
+
+
+
+// function removePhoto() {
+//   const noImagePlaceholderCheck = document.getElementById('no-image-placeholder')
+
+//   if(noImagePlaceholderCheck) {
+//     return
+//   }
+  
+//   const currentPhotoElement = document.getElementById('update-recipe-image')
+//   const uploadedPhotoElement = document.getElementById('update-recipe-uploaded-image')
+
+//   if(currentPhotoElement) {
+//     currentPhotoElement.remove()
+
+//   } else if(uploadedPhotoElement) {
+//     uploadedPhotoElement.remove()
+//   }
+
+//   const photoDiv = document.getElementById('update-recipe-image-content')
+  
+//   const noImagePlaceholder = document.createElement('div')
+//   noImagePlaceholder.id = 'no-image-placeholder'
+//   noImagePlaceholder.classList.add('update-recipe-image')
+//   photoDiv.appendChild(noImagePlaceholder)
+  
+//   const noImagePlaceholderDiv = document.getElementById('no-image-placeholder')
+  
+//   const noImagePlaceholderOverlayH3 = document.createElement('h3')
+//   noImagePlaceholderOverlayH3.id = 'no-image-placeholder-overlay-h3'
+//   noImagePlaceholderOverlayH3.textContent = "No Photo Selected"
+//   noImagePlaceholderDiv.appendChild(noImagePlaceholderOverlayH3)
+
+//   const noImagePlaceholderOverlayP = document.createElement('p')
+//   noImagePlaceholderOverlayP.id = 'no-image-placeholder-overlay-p'
+//   noImagePlaceholderOverlayP.textContent = "We will generate something beautiful using the magic of AI!"
+//   noImagePlaceholderDiv.appendChild(noImagePlaceholderOverlayP)
+
+
+
+// }
 
 
 
