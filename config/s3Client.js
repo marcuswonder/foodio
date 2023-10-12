@@ -1,4 +1,4 @@
-const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
+const { S3Client, PutObjectCommand, DeleteObjectCommand } = require("@aws-sdk/client-s3");
 const https = require('https');
 const fs = require('fs');
 
@@ -59,4 +59,25 @@ async function downloadImage(image_url) {
   });
 }
 
-module.exports = { s3Client, uploadFile, manuallyUploadFile }
+async function deleteImageFromS3(photoLink) {
+  console.log("S3: deleteImageFromS3 photoLink", photoLink)
+
+  const photoKey = new URL(photoLink).pathname.substring(1)
+  console.log(photoKey)
+
+  const params = {
+      Bucket: process.env.S3_BUCKET,
+      Key: photoKey
+  };
+
+  const deleteObjectCommand = new DeleteObjectCommand(params);
+
+  try {
+    const data = await s3Client.send(deleteObjectCommand);
+    console.log("Successfully deleted the photo from S3.", data);
+  } catch (err) {
+    console.error("Error deleting the photo:", err);
+  } 
+}
+
+module.exports = { s3Client, uploadFile, manuallyUploadFile, deleteImageFromS3 }

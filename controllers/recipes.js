@@ -1,6 +1,6 @@
 const Recipe = require('../models/recipe')
 const Collection = require('../models/collection')
-const { uploadFile } = require("../config/s3Client");
+const { uploadFile, deleteImageFromS3 } = require("../config/s3Client");
 const { aiImageGeneratorAndS3Upload, chatGPTQuery } = require("../config/openAi");
 // const multer = require('multer');
 // const upload = multer();
@@ -279,9 +279,14 @@ async function show(req, res) {
 
 async function deleteRecipe(req, res, next) {
   console.log("Recipe Controller: deleteRecipe Hit")
-  console.log("Recipe Controller: deleteRecipe req.body", req.body)
+
   try {
-      await Recipe.deleteOne({'_id': req.params.id})
+    const recipe = await Recipe.findById(req.params.id)
+    console.log("Recipe Controller: deleteRecipe recipe", recipe)
+    
+    await deleteImageFromS3(recipe.photo)
+    
+    await Recipe.deleteOne({'_id': req.params.id})
       res.redirect('/recipes')
   } catch(err) {
       console.log(err)
