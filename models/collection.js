@@ -22,7 +22,8 @@ const collectionsSchema = new Schema({
     recipes: [{
         type: Schema.Types.ObjectId,
         ref: 'Recipe'
-    }]
+    }],
+    photo: String,
 }, {
     timestamps: true
 })

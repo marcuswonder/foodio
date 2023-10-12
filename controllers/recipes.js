@@ -306,7 +306,13 @@ async function deleteRecipe(req, res, next) {
 }
 
 async function addToCollection(req, res) {
-  const collection = await Collection.findById(req.body.collection_id);
+  const recipe = await Recipe.findById(req.params.id)
+  
+  const collection = await Collection.findById(req.body.collection_id)
+  console.log("Recipes Controller: addToCollection collection", collection)
+
+  collection.photo = recipe.photo
+
   collection.recipes.push(req.params.id);
   await collection.save();
   res.redirect(`/recipes/${req.params.id}`);
