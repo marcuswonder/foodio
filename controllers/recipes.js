@@ -283,11 +283,14 @@ async function deleteRecipe(req, res, next) {
   try {
     const recipe = await Recipe.findById(req.params.id)
     console.log("Recipe Controller: deleteRecipe recipe", recipe)
-    
-    await deleteImageFromS3(recipe.photo)
+
+    if(recipe.photo.includes('s3.amazonaws.com')) {
+      await deleteImageFromS3(recipe.photo)
+    }
     
     await Recipe.deleteOne({'_id': req.params.id})
       res.redirect('/recipes')
+      
   } catch(err) {
       console.log(err)
       return next(err)
