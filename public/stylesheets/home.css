@@ -50,6 +50,10 @@
     text-wrap: nowrap;
 }
 
+.home-actions-action-button {
+    background-color: none;
+}
+
 #home-more-to-come-container {
     display: flex;
 }
