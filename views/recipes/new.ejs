@@ -239,10 +239,25 @@
         <br>
       
     
-      <button type="submit" class="reg-button">Save Recipe</button>
+      <button id="new-recipe-save-button" type="submit" class="reg-button">Save Recipe</button>
     </form>
     
     <br>
+  </div>
+</div>
+
+<div id="new-recipe-modal" class="modal">
+  <div class="new-recipe-modal-content">
+    <div id="new-recipe-modal-logo-container">
+      <img id="new-recipe-modal-logo" class="spin" src="/public/images/Logo.png" alt="Foodio Logo">
+    </div>
+
+    <div id="new-recipe-modal-link-container">
+      <h2>Saving your recipe</h2>
+      <h4>Hang tight!</h4>
+      <p>There's magic happening in this kitchen...</p>
+    </div>
+    
   </div>
 </div>
 
@@ -649,6 +664,43 @@ function photoDelete() {
         this.style.height = (this.scrollHeight) + 'px';
     })
 })
+
+
+
+
+
+
+  // Get the page
+  const showPage = document.getElementById('new-recipe');
+  
+  // Get the nav
+  const nav = document.getElementById('nav');
+
+  // Get the modal
+  const modal = document.getElementById('new-recipe-modal');
+
+  // Get the button that opens the modal
+  const saveButton = document.getElementById('new-recipe-save-button');
+
+  // When the user clicks the save button, open the modal
+  saveButton.onclick = function() {
+    nav.style.display = 'none';
+    modal.style.display = 'flex';
+  }
+
+  // When the user clicks on <span> (x), close the modal
+  closeBtn.onclick = function() {
+    modal.style.display = 'none';
+    nav.style.display = 'flex';
+  }
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = 'none';
+      nav.style.display = 'flex';
+    }
+  }
 </script>
 
 

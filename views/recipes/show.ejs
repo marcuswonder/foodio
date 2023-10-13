@@ -173,7 +173,12 @@
         </div>
       </div>
     <% } %> -->
-    <% if (user?._id.equals(recipe.author) && !recipe.publisher) { %>
+    
+    <% if (!user) { %>
+      <br>
+      <p>Log in to edit, duplicate or delete this recipe.</p>
+    
+      <% } else if (user?._id.equals(recipe.author) && user?._id.equals(recipe.publisherId)) { %>
       <div id="recipe-show-navigation">
         <div id="recipe-show-navigation-container">
 

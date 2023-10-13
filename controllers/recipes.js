@@ -249,10 +249,11 @@ async function duplicate(req, res) {
   const recipe = new Recipe(recipeObj)
 
   if(recipeToDuplicate.publisher || recipeToDuplicate.author !== req.user._id) {  
-    recipe.photo = null
-    recipe.description = null
-    recipe.link = null
-    recipe.publisher = null
+    recipe.photo = undefined
+    recipe.description = undefined
+    recipe.link = undefined
+    recipe.publisher = req.user.name
+    recipe.publisherId = req.user._id
     
   }
   recipe.author = req.user._id;

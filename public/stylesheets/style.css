@@ -430,10 +430,3 @@ a:active {
 textarea {
   font-family: 'Quicksand', sans-serif;
 }
-
-option {
-  background-color: white;
-  font-family: 'Quicksand', sans-serif;
-  border: #007991 1px solid;
-  
-}

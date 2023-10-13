@@ -180,10 +180,25 @@
             <input type="checkbox" id="generateAi"  class="hidden-element" name="generateAi">
           </div>             
         </div>
-      <button type="submit" class="reg-button">Save Recipe</button>
+      <button id="update-recipe-save-button" type="submit" class="reg-button">Save Recipe</button>
     </form>
     
     <br>
+  </div>
+</div>
+
+<div id="update-recipe-modal" class="modal">
+  <div class="update-recipe-modal-content">
+    <div id="update-recipe-modal-logo-container">
+      <img id="update-recipe-modal-logo" class="spin" src="/public/images/Logo.png" alt="Foodio Logo">
+    </div>
+
+    <div id="update-recipe-modal-link-container">
+      <h2>Saving your recipe</h2>
+      <h4>Hang tight!</h4>
+      <p>There's magic happening in this kitchen...</p>
+    </div>
+    
   </div>
 </div>
 
@@ -582,56 +597,45 @@ function removePhotoAndGenerateWithAi() {
 }
 
 
-
-
-// function removePhoto() {
-//   const noImagePlaceholderCheck = document.getElementById('no-image-placeholder')
-
-//   if(noImagePlaceholderCheck) {
-//     return
-//   }
-  
-//   const currentPhotoElement = document.getElementById('update-recipe-image')
-//   const uploadedPhotoElement = document.getElementById('update-recipe-uploaded-image')
-
-//   if(currentPhotoElement) {
-//     currentPhotoElement.remove()
-
-//   } else if(uploadedPhotoElement) {
-//     uploadedPhotoElement.remove()
-//   }
-
-//   const photoDiv = document.getElementById('update-recipe-image-content')
-  
-//   const noImagePlaceholder = document.createElement('div')
-//   noImagePlaceholder.id = 'no-image-placeholder'
-//   noImagePlaceholder.classList.add('update-recipe-image')
-//   photoDiv.appendChild(noImagePlaceholder)
-  
-//   const noImagePlaceholderDiv = document.getElementById('no-image-placeholder')
-  
-//   const noImagePlaceholderOverlayH3 = document.createElement('h3')
-//   noImagePlaceholderOverlayH3.id = 'no-image-placeholder-overlay-h3'
-//   noImagePlaceholderOverlayH3.textContent = "No Photo Selected"
-//   noImagePlaceholderDiv.appendChild(noImagePlaceholderOverlayH3)
-
-//   const noImagePlaceholderOverlayP = document.createElement('p')
-//   noImagePlaceholderOverlayP.id = 'no-image-placeholder-overlay-p'
-//   noImagePlaceholderOverlayP.textContent = "We will generate something beautiful using the magic of AI!"
-//   noImagePlaceholderDiv.appendChild(noImagePlaceholderOverlayP)
-
-
-
-// }
-
-
-
   $(document).ready(function() {
     $('.expanding-text-input').on('input', function() {
         this.style.height = 'auto'
         this.style.height = (this.scrollHeight) + 'px';
     })
 })
+
+
+// Get the page
+const showPage = document.getElementById('update-recipe');
+  
+// Get the nav
+const nav = document.getElementById('nav');
+
+// Get the modal
+const modal = document.getElementById('update-recipe-modal');
+
+// Get the button that opens the modal
+const saveButton = document.getElementById('update-recipe-save-button');
+
+// When the user clicks the save button, open the modal
+saveButton.onclick = function() {
+  nav.style.display = 'none';
+  modal.style.display = 'flex';
+}
+
+// When the user clicks on <span> (x), close the modal
+closeBtn.onclick = function() {
+  modal.style.display = 'none';
+  nav.style.display = 'flex';
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = 'none';
+    nav.style.display = 'flex';
+  }
+}
 </script>
 
 <%- include('../partials/footer') %>
