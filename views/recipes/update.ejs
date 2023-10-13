@@ -97,13 +97,13 @@
                       </li>
                   </ul>
                     <div class="ingredient-up">
-                      <a type="button" class="ingredient-up" onclick="moveIngredientUp('<%= ingredient.ingredient %>')"><img src="/public/icons/arrow_upward.png"></a>
+                      <a type="button" class="ingredient-up" onclick="moveIngredientUp('<%= ingredient.ingredient %>')"><span class="material-symbols-outlined">arrow_upward</span></a>
                     </div>
                     <div class="ingredient-down">
-                      <a type="button" class="ingredient-down" onclick="moveIngredientDown('<%= ingredient.ingredient %>')"><img src="/public/icons/arrow_downward.png"></a>
+                      <a type="button" class="ingredient-down" onclick="moveIngredientDown('<%= ingredient.ingredient %>')"><span class="material-symbols-outlined">arrow_downward</span></a>
                     </div>
                     <div class="ingredient-delete">
-                      <a type="button" class="ingredient-delete" onclick="deleteIngredient('<%= ingredient.ingredient %>')"><img src="/public/icons/delete.png"></a>
+                      <a type="button" class="ingredient-delete" onclick="deleteIngredient('<%= ingredient.ingredient %>')"><span class="material-symbols-outlined">delete</span></a>
                     </div>
                   </div>
                 <% }) %> 
@@ -131,13 +131,13 @@
                     </li>
                   </ul>
                   <div class="instruction-up">
-                    <a type="button" class="instruction-up" onclick="moveInstructionUp('<%= instruction.instruction %>')"><img src="/public/icons/arrow_upward.png"></a>
+                    <a type="button" class="instruction-up" onclick="moveInstructionUp('<%= instruction.instruction %>')"><span class="material-symbols-outlined">arrow_upward</span></a>
                   </div>
                   <div class="instruction-down">
-                    <a type="button" class="instruction-down" onclick="moveInstructionDown('<%= instruction.instruction %>')"><img src="/public/icons/arrow_downward.png"></a>
+                    <a type="button" class="instruction-down" onclick="moveInstructionDown('<%= instruction.instruction %>')"><span class="material-symbols-outlined">arrow_downward</span></a>
                   </div>
                   <div class="instruction-delete">
-                    <a type="button" class="instruction-delete" onclick="deleteInstruction('<%= instruction.instruction %>')"><img src="/public/icons/delete.png"></a>
+                    <a type="button" class="instruction-delete" onclick="deleteInstruction('<%= instruction.instruction %>')"><span class="material-symbols-outlined">delete</span></a>
                   </div>
                 </div>
               <% }) %> 
@@ -233,9 +233,10 @@
     aUp.onclick = function() {
       moveIngredientUp(input.value);
     }
-    let imgUp = document.createElement('img')
-    imgUp.setAttribute('src', '/public/icons/arrow_upward.png')
-    aUp.appendChild(imgUp)
+    let spanUp = document.createElement('span')
+    spanUp.classList.add('material-symbols-outlined')
+    spanUp.innerText = 'arrow_upward'
+    aUp.appendChild(spanUp)
     ingredientUp.appendChild(aUp)
     ingredient.appendChild(ingredientUp)
 
@@ -248,9 +249,10 @@
     aDown.onclick = function() {
       moveIngredientDown(input.value);
     }
-    let imgDown = document.createElement('img')
-    imgDown.setAttribute('src', '/public/icons/arrow_downward.png')
-    aDown.appendChild(imgDown)
+    let spanDown = document.createElement('span')
+    spanDown.classList.add('material-symbols-outlined')
+    spanDown.innerText = 'arrow_downward'
+    aDown.appendChild(spanDown)
     ingredientDown.appendChild(aDown)
     ingredient.appendChild(ingredientDown)
 
@@ -263,9 +265,10 @@
     aDelete.onclick = function() {
       deleteIngredient(input.value)
     }
-    let imgDelete = document.createElement('img')
-    imgDelete.setAttribute('src', '/public/icons/delete.png')
-    aDelete.appendChild(imgDelete)
+    let spanDelete = document.createElement('span')
+    spanDelete.classList.add('material-symbols-outlined')
+    spanDelete.innerText = 'delete'
+    aDelete.appendChild(spanDelete)
     ingredientDelete.appendChild(aDelete)
     ingredient.appendChild(ingredientDelete)
 
@@ -304,9 +307,10 @@
     aUp.onclick = function() {
       moveInstructionUp(input.value);
     }
-    let imgUp = document.createElement('img')
-    imgUp.setAttribute('src', '/public/icons/arrow_upward.png')
-    aUp.appendChild(imgUp)
+    let spanUp = document.createElement('span')
+    spanUp.classList.add('material-symbols-outlined')
+    spanUp.innerText = 'arrow_upward'
+    aUp.appendChild(spanUp)
     instructionUp.appendChild(aUp)
     instruction.appendChild(instructionUp)
 
@@ -319,9 +323,10 @@
     aDown.onclick = function() {
       moveInstructionDown(input.value);
     }
-    let imgDown = document.createElement('img')
-    imgDown.setAttribute('src', '/public/icons/arrow_downward.png')
-    aDown.appendChild(imgDown)
+    let spanDown = document.createElement('span')
+    spanDown.classList.add('material-symbols-outlined')
+    spanDown.innerText = 'arrow_downward'
+    aDown.appendChild(spanDown)
     instructionDown.appendChild(aDown)
     instruction.appendChild(instructionDown)
 
@@ -334,9 +339,10 @@
     aDelete.onclick = function() {
       deleteInstruction(input.value)
     }
-    let imgDelete = document.createElement('img')
-    imgDelete.setAttribute('src', '/public/icons/delete.png')
-    aDelete.appendChild(imgDelete)
+    let spanDelete = document.createElement('span')
+    spanDelete.classList.add('material-symbols-outlined')
+    spanDelete.innerText = 'delete'
+    aDelete.appendChild(spanDelete)
     instructionDelete.appendChild(aDelete)
     instruction.appendChild(instructionDelete)
 
