@@ -1,18 +1,101 @@
 <%- include('./partials/header') %>
 
-    <h1><%= title %></h1>
+<h1><%= title %></h1>
 
-    <h3> Foodio is the place to save, share and print your favourite recipes - from big publishers, small bloggers, or your own family favourites!</h3><br>
+<div id="home-page">
+  <div id="home-page-container">
+    <div id="home-header-container">
+      <div id="home-header-title">
+        <h2> Foodio is the place to save, share and print your favourite recipes.</h2>
+        <h3>Discover and keep recipes from big publishers, small bloggers, or your own family favourites all in one place!</h3>
+      </div>
+    </div>
+
+    <div id="home-actions-container">
+      
+      <div id="home-actions-add-recipes-container" class="home-actions-action-container">
+        <div id="home-actions-add-recipes" class="home-actions-action">
+          <h2 id="home-actions-add-recipes-title" class="home-actions-action-title">Add Recipes</h2>
+          <p id="home-actions-add-recipes-explanation" class="home-actions-action-explanation">With Foodio, you can save your own recipes in the app, forever! <br><br> Imagine getting all of your family favourites - your nan's scraps of scrawled on paper, and your dad's oil-smeared A4 print outs - into a readable, shareable, and printable format. <br><br> Save your favourites for posterity, sharing, and easy-printing forever with Foodio!</p>
+          <button id="home-actions-add-recipes-button" class="home-actions-action-button reg-button" href="recipes/add">Add a Recipe</button>
+        </div>
+      </div>
+      
+      <div id="home-actions-import-recipe-container" class="home-actions-action-container">
+        <div id="home-actions-import-recipes" class="home-actions-action">
+          <h2 id="home-actions-import-recipes-title" class="home-actions-action-title">Import Recipes</h2>
+          <p id="home-actions-import-recipes-explanation" class="home-actions-action-explanation">You can import recipes from a range of publishers, from major magazines to your favourite food bloggers. <br><br> You no longer have to scrounge around lists of random links to find your favourites (and then read a 3,000 word essay on why yoghurt was pivotal in somebody's upbringing). <br><br> Foodio's import tool enables you to capture only what you need!</p>
+          <button id="home-actions-import-recipe-button" class="home-actions-action-button reg-button">Import a Recipe</button>
+        </div>
+      </div>
+
+      <div id="home-actions-browse-recipes-container" class="home-actions-action-container">
+        <div id="home-actions-browse-recipes" class="home-actions-action">
+          <h2 id="home-actions-browse-recipes-title" class="home-actions-action-title">Browse Recipes</h2>
+          <p id="home-actions-browse-recipes-explanation" class="home-actions-action-explanation">Find new recipes that others have saved into Foodio! <br><br>  Browse through all of the recipes that have been posted on Foodio for interest, inspiration and guidance. <br><br> Soon we will introduce our tags feature which will allow you to find recipes that really suit your fancy!</p>
+          <button id="home-actions-browse-recipe-button" class="home-actions-action-button reg-button" href="/recipes">Browse Recipes</button>
+        </div>
+      </div>
+      
+      <div id="home-actions-collections-container" class="home-actions-action-container">
+        <div id="home-actions-collections" class="home-actions-action">
+          <h2 id="home-actions-collections-title" class="home-actions-action-title">Create Collections</h2>
+          <p id="home-actions-collections-explanation" class="home-actions-action-explanation">Create collections of recipes that you love. <br><br> Have you ever gone on holiday and eaten so much delicious food that you want to create at home? Well, a collection would be the perfect place to save them. <br><br> Collect recipes according to whatever theme you like - a trip, a season, your mum's favourites - and have access to the whole lot in one place!</p>
+          <button id="home-actions-collections-button" class="home-actions-action-button reg-button" href="/recipes">Browse Recipes</button>
+        </div>
+      </div>
+      
+      <div id="home-actions-duplicate-recipe-container" class="home-actions-action-container">
+        <div id="home-actions-duplicate-recipe" class="home-actions-action">
+          <h2 id="home-actions-duplicate-recipe-title" class="home-actions-action-title">Duplicate & Edit Recipes</h2>
+          <p id="home-actions-duplicate-recipes-explanation" class="home-actions-action-explanation">Have you ever scrawled notes on a recipe? <br><br> Finding recipes is just the start, but don't you hate when a recipe is nearly right but you want to make some edits... <br> <br> Well, with our duplicate and edit feature you can duplicate someone else's recipe and make it your own!</p>
+          <!-- <button id="home-actions-duplicate-recipe-button" class="home-actions-action-button reg-button" href="/recipes">Show me How</button> -->
+        </div>
+      </div>
+
+      <div id="home-actions-print-recipe-container" class="home-actions-action-container">
+        <div id="home-actions-print-recipe" class="home-actions-action">
+          <h2 id="home-actions-print-recipe-title" class="home-actions-action-title">Print Recipes</h2>
+          <p id="home-actions-print-recipes-explanation" class="home-actions-action-explanation">Print your recipes - simple, clean and disposable! <br><br> The flour-bombed phone screen isn't a good look when you get into work the next day, so our printing feature makes it a breeze, with only the necessary information included!<br><br> Soon we'll be introducing a way for you to print entire collections in glossy annotated books - perfect for memories and gifts!</p>
+          <!-- <button id="home-actions-print-recipe-button" class="home-actions-action-button reg-button" href="/recipes">Show me How</button> -->
+        </div>
+      </div>
+    </div>
+
+    <div id="home-more-to-come-container">
+      <div id="home-more-to-come">
+        <h2 id="home-more-to-come-title">Lots more to Come!</h2>
+        <h4 id="home-more-to-come-subtitle">Here are some of our planned features:</h4>
+        <div id="home-more-to-come-content-container">
+          <div class="home-more-to-come-content">
+            <h3 class="home-more-to-come-content-header">Social</h3>
+            <p class="home-more-to-come-content-content">Soon other users will be able to find you, your recipes, and be able to leave comments!  <br><br>  You can build a community by following your friends and have others follow you!</p>
+          </div>
+          <div class="home-more-to-come-content">
+            <h3 class="home-more-to-come-content-header">Recipe book printing</h3>
+            <p class="home-more-to-come-content-content">Soon you will be able to print all your favourite new recipes of the season, or capturing memories and recipes from a trip with your favourite people in a beautiful, glossy recipe book.</p>
+          </div>
+          <div class="home-more-to-come-content">
+            <h3 class="home-more-to-come-content-header">Improved browsing</h3>
+            <p class="home-more-to-come-content-content">Soon you will be able to add tags to your recipes. You, and other foodies will then be able to find recipes you really fancy!</p>
+          </div>
+          <div class="home-more-to-come-content">
+            <h3 class="home-more-to-come-content-header">Sharing Settings</h3>
+            <p class="home-more-to-come-content-content">Soon you will be able to mark recipes and collections as private, ensuring that those special recipes remain safe from prying eyes!</p>
+          </div>
+          <div class="home-more-to-come-content">
+            <h3 class="home-more-to-come-content-header">Video</h3>
+            <p class="home-more-to-come-content-content">Soon your will be able to save videos to your own recipes, and to those that you have imported - it's sometimes nice to have a video explainer for the challenging bits!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+<br>
   
-    <br>
-    <br>
-    <h3>Get Started</h3>
-    <p> Getting started is simple! Just follow these easy steps</p> 
-    <ol>
-      <li>Add some of your own recipes, or copy them from major publishers</li>
-      <li>Add your recipes to a collection - it could be seasonal, themed, trip-related, or any other collection you want! </li>
-      <li>Browse yours, and others' recipes, and add them to your collection</li>
-      <li>Share and print your recipe collection directly from the app!</li>
-    </ol>
+    
+
     </p>
     <%- include('./partials/footer') %>

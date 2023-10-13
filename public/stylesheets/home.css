@@ -1,0 +1,139 @@
+#home-page {
+    display: flex;
+    justify-content: center;
+}
+
+#home-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 95%;
+}
+
+#home-header-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#home-header-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#home-actions-container {
+    display: flex;
+    flex-direction: row;
+    /* align-items: center; */
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.home-actions-action-container {
+    border: #007991 1px solid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2%;
+}
+
+.home-actions-action {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2% 4%;
+}
+
+.home-actions-action > h2 {
+    text-wrap: nowrap;
+}
+
+#home-more-to-come-container {
+    display: flex;
+}
+
+#home-more-to-come {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#home-more-to-come-content-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.home-more-to-come-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: #007991 1px solid;
+    margin: 1%;
+    padding: 1%;
+    width: 25%;
+}
+
+.home-more-to-come-content-header {
+    padding: 2% 0;
+    margin: 0;
+}
+
+
+/* Small Devices (Small Phones) */
+@media (min-width: 300px) {
+    #home-header-container {
+        width: 95%;
+    }
+
+    .home-actions-action-container {
+        width: 95%
+    }
+}
+
+/* Handheld Devices (Phones) */
+@media (min-width: 576px) {
+    #home-header-container {
+        width: 95%;
+    }
+
+    .home-actions-action-container {
+        width: 95%
+    }
+}
+  
+  /* Medium Devices (Tablets) */
+  @media (min-width: 768px) {
+    #home-header-container {
+      width: 700px;
+    }
+
+    .home-actions-action-container {
+        width: 50%
+    }
+}
+  
+  /* Large Devices (Laptops) */
+@media (min-width: 992px) {
+    #home-header-container {
+      width: 800px;
+    }
+
+    .home-actions-action-container {
+        width: 40%
+    }
+}
+  
+/* Large Devices (Screens) */
+@media (min-width: 1200px) {
+    #home-header-container {
+      width: 1000px;
+    }
+
+    .home-actions-action-container {
+        width: 40%
+    }
+}

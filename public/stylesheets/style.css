@@ -61,6 +61,10 @@ body {
   margin: 0 5px;
 }
 
+.nav-element-title > a > p {
+  color: white
+}
+
 .nav-element-content-hidden {
   color: white;
   margin: 0 5px;
@@ -68,7 +72,7 @@ body {
   overflow: hidden;
   position: absolute;
   transform: translateX(-100%);
-  transition: transform .3s ease;
+  transition: transform 1s ease;
 }
 
 
@@ -76,7 +80,7 @@ body {
   color: white;
   margin: 0 5px;
   transform: translateX(0);
-  transition: transform .3s ease;
+  transition: transform .4s ease;
 }
 
 #nav-recipes-search > a,
@@ -425,4 +429,11 @@ a:active {
 
 textarea {
   font-family: 'Quicksand', sans-serif;
+}
+
+option {
+  background-color: white;
+  font-family: 'Quicksand', sans-serif;
+  border: #007991 1px solid;
+  
 }
