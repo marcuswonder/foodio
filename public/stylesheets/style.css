@@ -98,6 +98,12 @@ body {
   color: white;
 }
 
+.nav-element-item > p{
+  display: flex;
+  margin: 5px 10px;
+  color: white;
+}
+
 #nav-user-elements {
   display: flex;
   justify-content: space-between;
