@@ -48,7 +48,7 @@
 
                     <div id="nav-user-elements">
                         <% if (user) { %>
-                        <div id="nav-user-elements-profile" class="material-symbols-outlined">account_circle</div>
+                        <!-- <div id="nav-user-elements-profile" class="material-symbols-outlined">account_circle</div> -->
                         <% } %>
                         <div id="nav-user-elements-login-logout">
                             <% if (user) { %>
@@ -75,26 +75,26 @@
                         <div id="burger-nav-recipes-element-container" class="burger-nav-element-container">
                             <div id="burger-nav-recipes-add" class="burger-nav-element-sub-content burger-nav-element-recipes-sub-content burger-nav-element-content-hidden material-symbols-outlined"><a href="/recipes/add" class="burger-nav-element-content burger-nav-icon-links" title="Add a Recipe">add_circle</a></div>
                             <div id="burger-nav-recipes-search" class="burger-nav-element-sub-content burger-nav-element-recipes-sub-content burger-nav-element-content-hidden material-symbols-outlined"><a href="/recipes" class="burger-nav-element-content burger-nav-icon-links" title="Browse Recipes">search</a></div>
-                            <div id="burger-nav-recipes-title" class="burger-nav-element-content">Recipes</div>
+                            <div id="burger-nav-recipes-title" class="burger-nav-element-content"><p>Recipes</p></div>
                         </div>
 
                         <div id="burger-nav-collections-element-container" class="burger-nav-element-container">
                             <div id="burger-nav-collections-add" class="burger-nav-element-sub-content burger-nav-element-collections-sub-content burger-nav-element-content-hidden material-symbols-outlined"><a href="/collections/create" class="burger-nav-element-content burger-nav-icon-links" title="Create a Collection">add_circle</a></div>
                             <div id="burger-nav-collections-search" class="burger-nav-element-sub-content burger-nav-element-collections-sub-content burger-nav-element-content-hidden material-symbols-outlined"><a href="/collections" class="burger-nav-element-content burger-nav-icon-links" title="Browse Collections">search</a></div>
-                            <div id="burger-nav-collections-title" class="burger-nav-element-content">Collections</div>
+                            <div id="burger-nav-collections-title" class="burger-nav-element-content"><p>Collections</p></div>
                         </div>
                         
                         <% if (user) { %>
                             <div id="burger-nav-my-kitchen-element-container" class="burger-nav-element-container">
                                 <div id="burger-nav-my-kitchen-collections" class="burger-nav-element-sub-content burger-nav-element-my-kitchen-sub-content burger-nav-element-content-hidden material-symbols-outlined"><a href="/collections/my-collections" class="burger-nav-element-content burger-nav-icon-links" title="My Collections">menu_book</a></div>
                                 <div id="burger-nav-my-kitchen-recipes" class="burger-nav-element-sub-content burger-nav-element-my-kitchen-sub-content burger-nav-element-content-hidden material-symbols-outlined"><a href="/recipes/my-recipes" class="burger-nav-element-content burger-nav-icon-links" title="My Recipes">article</a></div>
-                                <div id="burger-nav-my-kitchen-title" class="burger-nav-element-content">My Kitchen</div>
+                                <div id="burger-nav-my-kitchen-title" class="burger-nav-element-content"><p>My Kitchen</p></div>
                             </div>
                        
                             <div id="burger-nav-account-element-container" class="burger-nav-element-container">
                                 <div id="burger-nav-account-LogOut" class="burger-nav-element-sub-content burger-nav-element-account-sub-content burger-nav-element-content-hidden material-symbols-outlined"><a href="/logout"  class="burger-nav-element-content burger-nav-element logout">Log Out</a></div>
-                                <div id="burger-nav-account-profile" class="burger-nav-element-sub-content burger-nav-element-account-sub-content burger-nav-element-content-hidden material-symbols-outlined"><a href="/profile" class="burger-nav-element-content burger-nav-icon-links" title="Profile">account_circle</a></div>
-                                <div id="burger-nav-account-title" class="burger-nav-element-content">Account</div>
+                                <!-- <div id="burger-nav-account-profile" class="burger-nav-element-sub-content burger-nav-element-account-sub-content burger-nav-element-content-hidden material-symbols-outlined"><a href="/profile" class="burger-nav-element-content burger-nav-icon-links" title="Profile">account_circle</a></div> -->
+                                <div id="burger-nav-account-title" class="burger-nav-element-content"><p>Account</p></div>
                             </div>
                         
                         <% } else { %>
@@ -253,7 +253,7 @@ const burgerNavAccountLogOut = document.getElementById('burger-nav-account-LogOu
 
 if(burgerNavAccountTitle) {
     burgerNavAccountTitle.onclick = function() {
-        if(burgerNavAccountProfile.classList.contains('burger-nav-element-content-hidden') ) {
+        if(burgerNavAccountLogOut.classList.contains('burger-nav-element-content-hidden') ) {
             setBurgerNavSubElsToHidden()
             setSpecificSubElsToRevealed(burgerNavAccountSubContentEls)
         } else {
