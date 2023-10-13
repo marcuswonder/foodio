@@ -87,7 +87,6 @@
           </div>
         </div>
         
-        <!-- New Actions Div -->
         <div id="recipe-show-header-actions-container">
           <div class="recipe-show-header-actions-sub-container">
             <!-- <a type="button" id="recipe-show-actions-favourite" class="recipe-show-header-actions-sub-container-content" onclick="changeRecipeFavouriteStatus()"><span class="material-symbols-outlined">favorite</span></a> -->
@@ -195,7 +194,7 @@
           </div>
         </div>
       </div>
-    <% } else if(user?._id.equals(recipe.author) && recipe.publisher) { %>
+    <% } else { %>
       <div id="recipe-show-navigation">
         <div id="recipe-show-navigation-container">
           <div class="recipe-show-navigation-button-container">
