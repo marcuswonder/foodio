@@ -38,11 +38,13 @@ async function determineRecipeSourceAndParse(recipeLink) {
             
         } else if(tastyRecipesElementCount > 10) {
             console.log("Cheerio: determineRecipeSource Tasty Recipes Identified")
+            return
             // const parsedRecipe = getTastyRecipesRecipe($)
             // return parsedRecipe
             
         } else {
             console.log("Cheerio: determineRecipeSource Generic Website Identified")
+            return
             // const parsedRecipe = await genericScrapeTool($)
             // return parsedRecipe
         }    

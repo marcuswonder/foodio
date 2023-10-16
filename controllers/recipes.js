@@ -5,7 +5,7 @@ const { aiImageGeneratorAndS3Upload, chatGPTQuery } = require("../config/openAi"
 // const multer = require('multer');
 // const upload = multer();
 const validator = require('validator');
-const { getBbcGoodFoodRecipe, determineRecipeSourceAndParse } = require("../config/cheerio")
+const { determineRecipeSourceAndParse } = require("../config/cheerio")
 
 
 module.exports = {
@@ -13,8 +13,6 @@ module.exports = {
     userIndex,
     new: newAddRecipe,
     create,
-    newCopyRecipe,
-    copy: copyRecipe,
     newImportRecipe,
     import: importRecipeWithScrapingTools,
     duplicate,
@@ -24,8 +22,6 @@ module.exports = {
     editRecipe,
     updateRecipe,
     comingSoon,
-    // editRecipeIngredients,
-    // editRecipeInstructions,
 }
 
 async function index(req, res) {
@@ -97,44 +93,44 @@ async function create(req, res) {
   }
 }
 
-async function newCopyRecipe(req, res) {
-  res.render('recipes/copy')
-}
+// async function newCopyRecipe(req, res) {
+//   res.render('recipes/copy')
+// }
 
-async function copyRecipe(req, res) {
-  console.log("Controller: Copy function hit")
-  console.log("Controller Copy Function: req.body", req.body)
-  console.log("Controller Copy Function: req.user", req.user)
+// async function copyRecipe(req, res) {
+//   console.log("Controller: Copy function hit")
+//   console.log("Controller Copy Function: req.body", req.body)
+//   console.log("Controller Copy Function: req.user", req.user)
 
-  const recipeLink = req.body.recipeLink
+//   const recipeLink = req.body.recipeLink
   
-  const isValidUrl = validator.isURL(recipeLink, {
-    require_protocol: true,
-  });
+//   const isValidUrl = validator.isURL(recipeLink, {
+//     require_protocol: true,
+//   });
   
-  if (!isValidUrl) {
-    console.log("Recipe Controller: Value is not a valid URL")
-  }
+//   if (!isValidUrl) {
+//     console.log("Recipe Controller: Value is not a valid URL")
+//   }
   
-  const bbcRecipe = await getBbcGoodFoodRecipe(recipeLink)
+//   const bbcRecipe = await getBbcGoodFoodRecipe(recipeLink)
 
-  if (!req.user) return res.redirect('/auth/google');
+//   if (!req.user) return res.redirect('/auth/google');
   
-  bbcRecipe.author = req.user._id
-  bbcRecipe.userName = req.user.name
-  bbcRecipe.gId = req.user.googleId
-  bbcRecipe.category = req.body.category
+//   bbcRecipe.author = req.user._id
+//   bbcRecipe.userName = req.user.name
+//   bbcRecipe.gId = req.user.googleId
+//   bbcRecipe.category = req.body.category
 
-  console.log("Controller: bbcRecipe", bbcRecipe)
+//   console.log("Controller: bbcRecipe", bbcRecipe)
 
-  const recipe = new Recipe(bbcRecipe);
+//   const recipe = new Recipe(bbcRecipe);
   
-  await recipe.save().catch(err => {
-    console.log("Controller: BBC Scrape Recipe Save Error", err);
-    return res.redirect('/recipes');
-  });
-  res.redirect(`/recipes/${recipe._id}`);
-}
+//   await recipe.save().catch(err => {
+//     console.log("Controller: BBC Scrape Recipe Save Error", err);
+//     return res.redirect('/recipes');
+//   });
+//   res.redirect(`/recipes/${recipe._id}`);
+// }
 
 function newImportRecipe(req, res) {
   res.render('recipes/import', {stylesheet: '../public/stylesheets/recipeImport.css' })
@@ -145,10 +141,6 @@ function comingSoon(req, res) {
 }
 
 async function importRecipeWithScrapingTools(req, res) {
-  console.log("Recipe Controller: Import function hit")
-  console.log("Recipe Controller Import Function: req.body", req.body)
-  console.log("Recipe Controller Import Function: req.user", req.user)
-
   if (!req.user) return res.redirect('/auth/google')
 
   const recipeLink = req.body.recipeLink
@@ -162,7 +154,11 @@ async function importRecipeWithScrapingTools(req, res) {
   }
   
   const parsedRecipe = await determineRecipeSourceAndParse(recipeLink)
-  console.log("Recipe Controller: importRecipeWithScrapingTool parsedRecipe", parsedRecipe)
+
+  if(!parsedRecipe) {
+    res.redirect('/recipes/coming-soon')
+    return
+  }
 
   try {
     const isValidPhotoUrl = validator.isURL(parsedRecipe.photo, {
