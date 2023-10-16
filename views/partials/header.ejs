@@ -47,9 +47,9 @@
 
 
                     <div id="nav-user-elements">
-                        <% if (user) { %>
+                        <!-- <% if (user) { %> -->
                         <!-- <div id="nav-user-elements-profile" class="material-symbols-outlined">account_circle</div> -->
-                        <% } %>
+                        <!-- <% } %> -->
                         <div id="nav-user-elements-login-logout">
                             <% if (user) { %>
                                 <a href="/logout" id="nav-LogOut" class="nav-element" class="login">
@@ -92,14 +92,14 @@
                             </div>
                        
                             <div id="burger-nav-account-element-container" class="burger-nav-element-container">
-                                <div id="burger-nav-account-LogOut" class="burger-nav-element-sub-content burger-nav-element-account-sub-content burger-nav-element-content-hidden material-symbols-outlined"><a href="/logout"  class="burger-nav-element-content burger-nav-element logout">Log Out</a></div>
+                                <div id="burger-nav-account-LogOut" class="burger-nav-element-sub-content burger-nav-element-account-sub-content burger-nav-element-content-hidden material-symbols-outlined"><a href="/logout"  class="burger-nav-element-content burger-nav-element logout"><p>Log Out</p></a></div>
                                 <!-- <div id="burger-nav-account-profile" class="burger-nav-element-sub-content burger-nav-element-account-sub-content burger-nav-element-content-hidden material-symbols-outlined"><a href="/profile" class="burger-nav-element-content burger-nav-icon-links" title="Profile">account_circle</a></div> -->
                                 <div id="burger-nav-account-title" class="burger-nav-element-content"><p>Account</p></div>
                             </div>
                         
                         <% } else { %>
-                            <div id="burger-nav-account-element-container" class="burger-nav-element-container"></div>
-                                <div id="burger-nav-account-LogIn" class="burger-nav-element-content material-symbols-outlined"><a href="/auth/google"  class="burger-nav-element-content login"><p>Log In</p></div>
+                            <div id="burger-nav-account-element-container" class="burger-nav-element-container">
+                                <div id="burger-nav-account-LogIn" class="burger-nav-element-content material-symbols-outlined"><a href="/auth/google"  class="burger-nav-element-content login"><p>Log In</p></a></div>
                             </div>
                         <% } %>
                     </div>
@@ -113,7 +113,7 @@ const navRecipeSearch = document.getElementById('nav-recipes-search')
 const navRecipeAdd = document.getElementById('nav-recipes-add')
 
 navRecipeTitleContainerEl.onmouseover = function() {
-    console.log("Recipes Nav Bitton Moused Over")
+    console.log("Recipes Nav Button Moused Over")
     // navRecipeSearch.classList.remove('nav-element-content-hidden');
     // navRecipeSearch.classList.add('nav-element-content-revealed');
     navRecipeAdd.classList.remove('nav-element-content-hidden');

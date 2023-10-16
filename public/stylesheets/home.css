@@ -47,11 +47,11 @@
 }
 
 .home-actions-action > h2 {
-    text-wrap: nowrap;
+    white-space: nowrap;
 }
 
 .home-actions-action-button {
-    background-color: none;
+    /* background-color: none; */
 }
 
 #home-more-to-come-container {
