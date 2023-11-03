@@ -2,6 +2,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const { getBbcGoodFoodRecipe } = require('../scraping/bbcGoodFood')
 const { getWPRMRecipe } = require('../scraping/WPRM')
+const { getTastyRecipesRecipe } = require('../scraping/tastyRecipes')
 
 // const { chatGPTQuery } = require("./openAi");
 // const { generateChatGPTPrompt } = require("./openAiIngredientPrompt")
@@ -38,9 +39,8 @@ async function determineRecipeSourceAndParse(recipeLink) {
             
         } else if(tastyRecipesElementCount > 10) {
             console.log("Cheerio: determineRecipeSource Tasty Recipes Identified")
-            return
-            // const parsedRecipe = getTastyRecipesRecipe($)
-            // return parsedRecipe
+            const parsedRecipe = getTastyRecipesRecipe($)
+            return parsedRecipe
             
         } else {
             console.log("Cheerio: determineRecipeSource Generic Website Identified")
